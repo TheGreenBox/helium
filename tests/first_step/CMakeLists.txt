@@ -1,20 +1,20 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
 
-PROJECT( expFirstLib )
+PROJECT( firstStepTest )
 
 
-SET( firstModuleSRC  ${CMAKE_SOURCE_DIR}/modules/firstModule)
+SET( firstStepTest ${CMAKE_SOURCE_DIR}/tests/first_step)
 
-SET( EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin/modules )
+SET( EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin/tests )
 SET( exp_outoput_dir ${CMAKE_BINARY_DIR}/Release )
 
-INCLUDE_DIRECTORIES(${firstModuleSRC}/include)
+INCLUDE_DIRECTORIES(${firstStepTest}/include)
 
-SET( expFirstLib_SRCS
-     ${firstModuleSRC}/src/firstLib.cpp )
+SET( firstStepTest_SRCS
+     ${firstStepTest}/src/main.cpp )
 
-SET( expFirstLib_HDRS
-     ${firstModuleSRC}/include/firstLib.h )
+SET( firstStepTest_HDRS
+     ${firstStepTest}/include/firstStepTest.h )
 
-ADD_LIBRARY( expFirstLib SHARED ${expFirstLib_SRCS} )
+ADD_EXECUTABLE( firstStepTest ${firstStepTest_SRCS} )
 

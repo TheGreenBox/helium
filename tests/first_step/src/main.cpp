@@ -9,7 +9,7 @@
  */
 
 
-int main (int argsNum, char* argAr)
+int main (int argsNum, char** argAr)
 {
     return 0;
 }
