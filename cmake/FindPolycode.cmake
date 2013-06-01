@@ -1,9 +1,13 @@
+MESSAGE(STATUS "start polycode finder module")
 
 SET ( POLYCODE_SEARCH_PATHS
 	  ${CMAKE_HOME_DIRECTORY}/../polycode/Polycode/Release/${CMAKE_SYSTEM_NAME}/Framework/Core/lib
 	  ${CMAKE_HOME_DIRECTORY}/../polycode/Polycode/Release/${CMAKE_SYSTEM_NAME}/Framework/Core/include
 	  ${CMAKE_HOME_DIRECTORY}/../polycode/Polycode/Release/${CMAKE_SYSTEM_NAME}/Framework/Modules/lib
 	  ${CMAKE_HOME_DIRECTORY}/../polycode/Polycode/Release/${CMAKE_SYSTEM_NAME}/Framework/Modules/include )
+
+MESSAGE(STATUS "Let,s find polycode in this directories :")
+MESSAGE(STATUS ${POLYCODE_SEARCH_PATHS})
 
 # - Try to find Polycode
 # Once done this will define
@@ -51,7 +55,9 @@ FIND_PATH ( POLYCODE_CORE_INCLUDE_DIR NAMES PolyCore.h
 	        CMAKE_FIND_FRAMEWORK NEVER
 	        PATHS ${POLYCODE_SEARCH_PATHS} )
 
-FIND_LIBRARY  ( LIB_POLYCODE_CORE NAME "libPolycore"
+MESSAGE(STATUS ${POLYCODE_CORE_INCLUDE_DIR})
+
+FIND_LIBRARY  ( LIB_POLYCODE_CORE NAME "libPolycore.a"
 	            HINTS
                 NO_DEFAULT_PATH
                 NO_CMAKE_ENVIRONMENT_PATH
@@ -64,7 +70,9 @@ FIND_LIBRARY  ( LIB_POLYCODE_CORE NAME "libPolycore"
                 PATH_SUFFIXES lib lib64 win32/Dynamic_Release "Win32/${MSVC_YEAR_NAME}/x64/Release" "Win32/${MSVC_YEAR_NAME}/Win32/Release"
                 PATHS ${POLYCODE_SEARCH_PATHS} )
 
-FIND_LIBRARY  ( LIB_POLYCODE_CORE_DEBUG NAME "libPolycore_d"
+MESSAGE(STATUS ${LIB_POLYCODE_CORE})
+
+FIND_LIBRARY  ( LIB_POLYCODE_CORE_DEBUG NAME "libPolycore_d.a"
 	            HINTS
                 NO_DEFAULT_PATH
                 NO_CMAKE_ENVIRONMENT_PATH
@@ -76,6 +84,8 @@ FIND_LIBRARY  ( LIB_POLYCODE_CORE_DEBUG NAME "libPolycore_d"
                 $ENV{POLYCODE_PATH}
                 PATH_SUFFIXES lib lib64 win32/Dynamic_Release "Win32/${MSVC_YEAR_NAME}/x64/Release" "Win32/${MSVC_YEAR_NAME}/Win32/Release"
                 PATHS ${POLYCODE_SEARCH_PATHS} )
+
+MESSAGE(STATUS ${LIB_POLYCODE_CORE_DEBUG})
 
 # found polycode lib modules
 FIND_PATH ( POLYCODE_MODULES_INCLUDE_DIR NAMES Polycode3DPhysics.h
@@ -88,8 +98,10 @@ FIND_PATH ( POLYCODE_MODULES_INCLUDE_DIR NAMES Polycode3DPhysics.h
 	        CMAKE_FIND_FRAMEWORK NEVER
 	        PATHS ${POLYCODE_SEARCH_PATHS} )
 
+MESSAGE(STATUS ${POLYCODE_MODULES_INCLUDE_DIR})
+
 # founding Polycode 3D Physics module
-FIND_LIBRARY  ( LIB_POLYCODE_3D_PHYSICS NAME "libPolycode3DPhysics"
+FIND_LIBRARY  ( LIB_POLYCODE_3D_PHYSICS NAME "libPolycode3DPhysics.a"
 	            HINTS
                 NO_DEFAULT_PATH
                 NO_CMAKE_ENVIRONMENT_PATH
@@ -102,7 +114,9 @@ FIND_LIBRARY  ( LIB_POLYCODE_3D_PHYSICS NAME "libPolycode3DPhysics"
                 PATH_SUFFIXES lib lib64 win32/Dynamic_Release "Win32/${MSVC_YEAR_NAME}/x64/Release" "Win32/${MSVC_YEAR_NAME}/Win32/Release"
                 PATHS ${POLYCODE_SEARCH_PATHS} )
 
-FIND_LIBRARY  ( LIB_POLYCODE_3D_PHYSICS_DEBUG NAME "libPolycode3DPhysics_d"
+MESSAGE(STATUS ${LIB_POLYCODE_3D_PHYSICS})
+
+FIND_LIBRARY  ( LIB_POLYCODE_3D_PHYSICS_DEBUG NAME "libPolycode3DPhysics_d.a"
 	            HINTS
                 NO_DEFAULT_PATH
                 NO_CMAKE_ENVIRONMENT_PATH
@@ -114,6 +128,8 @@ FIND_LIBRARY  ( LIB_POLYCODE_3D_PHYSICS_DEBUG NAME "libPolycode3DPhysics_d"
                 $ENV{POLYCODE_PATH}
                 PATH_SUFFIXES lib lib64 win32/Dynamic_Release "Win32/${MSVC_YEAR_NAME}/x64/Release" "Win32/${MSVC_YEAR_NAME}/Win32/Release"
                 PATHS ${POLYCODE_SEARCH_PATHS} )
+
+MESSAGE(STATUS ${LIB_POLYCODE_3D_PHYSICS_DEBUG})
 
 IF(POLYCODE_CORE_INCLUDE_DIR AND LIB_POLYCODE_CORE AND LIB_POLYCODE_CORE_DEBUG)
   SET(POLYCODE_CORE_FOUND TRUE)

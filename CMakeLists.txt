@@ -3,7 +3,7 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
 PROJECT( helium )
 
 SET(CMAKE_MODULE_PATH ${helium_SOURCE_DIR}/cmake/)
-
+MESSAGE(STATUS ${CMAKE_MODULE_PATH})
 SET(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
 
 INCLUDE(heliumIncludes)
@@ -28,6 +28,8 @@ SET( helium_HDRS
 
 ADD_EXECUTABLE( helium ${helium_SRCS} )
 
-#TARGET_LINK_LIBRARIES( helium 
-#                       helium_mainMenu )
+MESSAGE(STATUS "let's build helium")
+MESSAGE(STATUS ${LIB_POLYCODE_CORE})
+TARGET_LINK_LIBRARIES( helium 
+                       ${LIB_POLYCODE_CORE} )
 
