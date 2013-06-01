@@ -19,12 +19,9 @@ int main (int argsNum, char** argAr)
     {
         std::cout << i << " : " << argAr[i] << "\n";
     }
-	ScreenImage *image;
-	Core core;
-	core = new POLYCODE_CORE(view, 640,480,false,false,0,0,90);
-	Number elapsed = core->getElapsed();
-	Screen *screen = new Screen();			
-	image = new ScreenImage("Resources/polycode_logo.png");
-	screen->addChild(image);	
+    
+	Polycode::ScreenImage *image;
+	//Polycode::Core core;
+    
     return 0;
 }
