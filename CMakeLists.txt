@@ -30,6 +30,7 @@ ADD_EXECUTABLE( helium ${helium_SRCS} )
 
 MESSAGE(STATUS "let's build helium")
 MESSAGE(STATUS ${LIB_POLYCODE_CORE})
-TARGET_LINK_LIBRARIES( helium 
-                       ${LIB_POLYCODE_CORE} )
+TARGET_LINK_LIBRARIES ( helium 
+                        ${LIB_POLYCODE_CORE}
+                      )
 

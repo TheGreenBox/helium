@@ -9,8 +9,7 @@
  */
 
 #include <iostream> 
-
-#include <Polycode.h>
+#include "Polycode.h"
 #include "PolycodeView.h"
 
 int main (int argsNum, char** argAr)

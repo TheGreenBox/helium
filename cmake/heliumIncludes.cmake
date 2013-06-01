@@ -1,10 +1,13 @@
-MESSAGE(STATUS "start helium includes")
+MESSAGE(STATUS "start helium includes cmake module")
 
 FIND_PACKAGE(Polycode REQUIRED)
 
-INCLUDE_DIRECTORIES(
-    ${CMAKE_SOURCE_DIR}/core/contents/include
-    ${CMAKE_SOURCE_DIR}/gameMap/contents/include
-    ${CMAKE_SOURCE_DIR}/mainMenu/contents/include
-    ${POLYCODE_CORE_INCLUDE_DIR}
-)
+INCLUDE_DIRECTORIES ( ${CMAKE_SOURCE_DIR}/core/include
+                      ${CMAKE_SOURCE_DIR}/gameMap/include
+                      ${CMAKE_SOURCE_DIR}/mainMenu/include
+                      ${POLYCODE_CORE_INCLUDE_DIR}
+                    )
+
+GET_PROPERTY(inc_dirs DIRECTORY PROPERTY INCLUDE_DIRECTORIES)
+message("inc_dirs = ${inc_dirs}")
+
