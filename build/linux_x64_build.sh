@@ -4,7 +4,7 @@ echo ------------------------------------------------------
 echo generate makefiles
 echo ------------------------------------------------------
 
-sh clean_generate.sh
+sh linux_clean.sh
 
 echo create product directory
 mkdir product/
