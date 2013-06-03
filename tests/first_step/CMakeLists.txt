@@ -5,15 +5,19 @@ PROJECT( firstStepTest )
 SET(CMAKE_MODULE_PATH ${helium_SOURCE_DIR}/cmake/)
 INCLUDE(heliumIncludes)
 
-SET( firstStepTest ${CMAKE_SOURCE_DIR}/tests/first_step)
+SET( FIRST_STEP_TEST_DIR ${CMAKE_SOURCE_DIR}/tests/first_step)
+INCLUDE_DIRECTORIES ( ${FIRST_STEP_TEST_DIR}/include )
 
 SET( EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin/tests )
 
-SET( firstStepTest_SRCS
-     ${firstStepTest}/src/main.cpp )
+SET ( firstStepTest_SRCS
+      ${FIRST_STEP_TEST_DIR}/src/main.cpp 
+      ${FIRST_STEP_TEST_DIR}/src/firstTestClass.cpp 
+    )
 
-SET( firstStepTest_HDRS
-     ${firstStepTest}/include/firstStepTest.h )
+SET ( firstStepTest_HDRS
+      ${FIRST_STEP_TEST_DIR}/include/firstTestClass.h 
+    )
 
 ADD_EXECUTABLE ( firstStepTest
                  ${firstStepTest_SRCS}   
