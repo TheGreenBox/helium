@@ -1,17 +1,17 @@
 MESSAGE(STATUS "start polycode finder module")
 
 SET ( POLYCODE_SEARCH_PATHS
-	  ${CMAKE_HOME_DIRECTORY}/../polycode/Polycode/Release/${CMAKE_SYSTEM_NAME}/Framework/Core/lib
+	  ${CMAKE_HOME_DIRECTORY}/../polycode/Release/${CMAKE_SYSTEM_NAME}/Framework/Core/lib
 	  
-      ${CMAKE_HOME_DIRECTORY}/../polycode/Polycode/Release/${CMAKE_SYSTEM_NAME}/Framework/Core/include
-	  ${CMAKE_HOME_DIRECTORY}/../polycode/Polycode/Release/${CMAKE_SYSTEM_NAME}/Framework/Core/Dependencies/include
-	  ${CMAKE_HOME_DIRECTORY}/../polycode/Polycode/Release/${CMAKE_SYSTEM_NAME}/Framework/Core/Dependencies/include/AL
+      ${CMAKE_HOME_DIRECTORY}/../polycode/Release/${CMAKE_SYSTEM_NAME}/Framework/Core/include
+	  ${CMAKE_HOME_DIRECTORY}/../polycode/Release/${CMAKE_SYSTEM_NAME}/Framework/Core/Dependencies/include
+	  ${CMAKE_HOME_DIRECTORY}/../polycode/Release/${CMAKE_SYSTEM_NAME}/Framework/Core/Dependencies/include/AL
 	  
-      ${CMAKE_HOME_DIRECTORY}/../polycode/Polycode/Release/${CMAKE_SYSTEM_NAME}/Framework/Modules/lib
-	  
-      ${CMAKE_HOME_DIRECTORY}/../polycode/Polycode/Release/${CMAKE_SYSTEM_NAME}/Framework/Modules/include 
-	  ${CMAKE_HOME_DIRECTORY}/../polycode/Polycode/Release/${CMAKE_SYSTEM_NAME}/Framework/Modules/Dependencies/include/Box2D 
-	  ${CMAKE_HOME_DIRECTORY}/../polycode/Polycode/Release/${CMAKE_SYSTEM_NAME}/Framework/Modules/Dependencies/include/bullet
+      ${CMAKE_HOME_DIRECTORY}/../polycode/Release/${CMAKE_SYSTEM_NAME}/Framework/Modules/lib
+	
+      ${CMAKE_HOME_DIRECTORY}/../polycode/Release/${CMAKE_SYSTEM_NAME}/Framework/Modules/include 
+	  ${CMAKE_HOME_DIRECTORY}/../polycode/Release/${CMAKE_SYSTEM_NAME}/Framework/Modules/Dependencies/include/Box2D 
+	  ${CMAKE_HOME_DIRECTORY}/../polycode/Release/${CMAKE_SYSTEM_NAME}/Framework/Modules/Dependencies/include/bullet
     )
 
 MESSAGE(STATUS "Let,s find polycode in this directories :")
