@@ -8,10 +8,11 @@
  * ========================================================
  */
 #include "firstTestClass.h"
+#include "PolySDLCore.h"
 
 FirstStepTest::FirstStepTest(PolycodeView *view) 
 {
-//	core = new POLYCODE_CORE(view, 640,480,false,false,0,0,90);
+	core = new SDLCore(view, 640,480,false,false,0,0,90);
 	  
 //	CoreServices::getInstance()->getResourceManager()->addArchive("Resources/default.pak");
 //	CoreServices::getInstance()->getResourceManager()->addDirResource("default", false);

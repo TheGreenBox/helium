@@ -11,6 +11,9 @@
 #include <iostream> 
 #include "firstTestClass.h"
 
+PolycodeView *view = new PolycodeView("first test");
+FirstStepTest firstTest(PolycodeView *view);
+
 int main (int argsNum, char** argAr)
 {
     std::cout << "The arguments to " << argAr[0] <<  "are:\n";

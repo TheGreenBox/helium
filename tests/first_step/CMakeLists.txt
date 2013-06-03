@@ -24,6 +24,9 @@ ADD_EXECUTABLE ( firstStepTest
                  ${firstStepTest_HDRS}
                )
 
+MESSAGE(STATUS "LIB_POLYCODE_CORE : ")
+MESSAGE(STATUS ${LIB_POLYCODE_CORE})
+
 TARGET_LINK_LIBRARIES ( firstStepTest
                         ${LIB_POLYCODE_CORE}
                       )

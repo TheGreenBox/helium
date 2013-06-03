@@ -17,7 +17,7 @@ public:
  	FirstStepTest(PolycodeView *view);
  	~FirstStepTest();
     
-//	bool Update();
+	bool Update();
     
 private:
 
