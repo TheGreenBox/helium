@@ -7,7 +7,7 @@
  * Author:  AKindyakov 
  * ========================================================
  */
-#includ <Polycode.h>
+#include <Polycode.h>
 #include "PolycodeView.h"
 
 using namespace Polycode;
@@ -17,7 +17,7 @@ public:
  	FirstStepTest(PolycodeView *view);
  	~FirstStepTest();
     
-	bool Update();
+//	bool Update();
     
 private:
 

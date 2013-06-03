@@ -9,8 +9,7 @@
  */
 
 #include <iostream> 
-#include "Polycode.h"
-#include "PolycodeView.h"
+#include "firstTestClass.h"
 
 int main (int argsNum, char** argAr)
 {
@@ -19,9 +18,6 @@ int main (int argsNum, char** argAr)
     {
         std::cout << i << " : " << argAr[i] << "\n";
     }
-    
-	Polycode::ScreenImage *image;
-	//Polycode::Core core;
     
     return 0;
 }

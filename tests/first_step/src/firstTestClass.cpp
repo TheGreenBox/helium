@@ -9,23 +9,24 @@
  */
 #include "firstTestClass.h"
 
-FirstStepTest::FirstStepTest(PolycodeView *view) {
-
-	core = new POLYCODE_CORE(view, 640,480,false,false,0,0,90);
+FirstStepTest::FirstStepTest(PolycodeView *view) 
+{
+//	core = new POLYCODE_CORE(view, 640,480,false,false,0,0,90);
 	  
-	CoreServices::getInstance()->getResourceManager()->addArchive("Resources/default.pak");
-	CoreServices::getInstance()->getResourceManager()->addDirResource("default", false);
+//	CoreServices::getInstance()->getResourceManager()->addArchive("Resources/default.pak");
+//	CoreServices::getInstance()->getResourceManager()->addDirResource("default", false);
 
-	Screen *screen = new Screen();			
-	image = new ScreenImage("Resources/polycode_logo.png");
-	screen->addChild(image);	
+//	Screen *screen = new Screen();			
+//	image = new ScreenImage("Resources/polycode_logo.png");
+//	screen->addChild(image);	
 }
 
-FirstStepTest::~FirstStepTest() {
-}
+FirstStepTest::~FirstStepTest() 
+{}
 
-bool FirstStepTest::Update() {
-	Number elapsed = core->getElapsed();
-	image->setRotation(image->getRotation()+(elapsed*100));
-    return core->updateAndRender();
-}
+//bool FirstStepTest::Update()
+//{
+//	Number elapsed = core->getElapsed();
+//	image->setRotation(image->getRotation()+(elapsed*100));
+//  return core->updateAndRender();
+//}
