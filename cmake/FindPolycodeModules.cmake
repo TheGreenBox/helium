@@ -1,138 +1,43 @@
-MESSAGE(STATUS "start polycode finder module")
+SET ( POLYCODE_FRAMEWORK_DIR ${CMAKE_HOME_DIRECTORY}/../polycode/Release/${CMAKE_SYSTEM_NAME}/Framework )
 
 SET ( POLYCODE_SEARCH_PATHS
-	  ${CMAKE_HOME_DIRECTORY}/../polycode/Release/${CMAKE_SYSTEM_NAME}/Framework/Core/lib
-	  
-      ${CMAKE_HOME_DIRECTORY}/../polycode/Release/${CMAKE_SYSTEM_NAME}/Framework/Core/include
-	  ${CMAKE_HOME_DIRECTORY}/../polycode/Release/${CMAKE_SYSTEM_NAME}/Framework/Core/Dependencies/include
-	  ${CMAKE_HOME_DIRECTORY}/../polycode/Release/${CMAKE_SYSTEM_NAME}/Framework/Core/Dependencies/include/AL
-	  
-      ${CMAKE_HOME_DIRECTORY}/../polycode/Release/${CMAKE_SYSTEM_NAME}/Framework/Modules/lib
+      ${POLYCODE_FRAMEWORK_DIR}/Modules/lib
+      ${POLYCODE_FRAMEWORK_DIR}/Modules/Dependencies/lib
 	
-      ${CMAKE_HOME_DIRECTORY}/../polycode/Release/${CMAKE_SYSTEM_NAME}/Framework/Modules/include 
-	  ${CMAKE_HOME_DIRECTORY}/../polycode/Release/${CMAKE_SYSTEM_NAME}/Framework/Modules/Dependencies/include/Box2D 
-	  ${CMAKE_HOME_DIRECTORY}/../polycode/Release/${CMAKE_SYSTEM_NAME}/Framework/Modules/Dependencies/include/bullet
+      ${POLYCODE_FRAMEWORK_DIR}/Modules/include 
+	  ${POLYCODE_FRAMEWORK_DIR}/Modules/Dependencies/include/Box2D 
+	  ${POLYCODE_FRAMEWORK_DIR}/Modules/Dependencies/include/bullet
     )
 
-#MESSAGE(STATUS "Let,s find polycode in this directories :")
-#MESSAGE(STATUS ${POLYCODE_SEARCH_PATHS})
+SET ( POLYCODE_MODULES_LIB_NAMES
+      "Polycode2DPhysics"
+      "Polycode3DPhysics"
+      "PolycodeTUIO"
+      "PolycodeUI"
 
-# - Try to find Polycode
-# Once done this will define
-#
-#  POLYCODE_FOUND - system has Polycode
-#  POLYCODE_INCLUDE_DIR - the POLYCODE include directory
-#  POLYCODE_LIBRARIES - Link these to use Collada DOM
-#
+      "Box2D"
+      "BulletDynamics"
+      "BulletCollision"
+      "LinearMath"
+    )
 
-# POLYCODE_CORE_INCLUDE_DIR
-# LIB_POLYCODE_CORE
+SET ( POLYCODE_MODULES_LIB_DEBUG_NAMES
+      "Polycode2DPhysics_d"
+      "Polycode3DPhysics_d"
+      "PolycodeTUIO_d"
+      "PolycodeUI_d"
 
-# list of polycode modules
+      "Box2D_d"
+      "BulletDynamics_d"
+      "BulletCollision_d"
+      "LinearMath_d"
+    )
 
-# POLYCODE_MODULES_INCLUDE_DIR
-#
-# LIB_POLYCODE_2D_PHYSICS
-# LIB_POLYCODE_2D_PHYSICS_D
-# LIB_POLYCODE_3D_PHYSICS
-# LIB_POLYCODE_3D_PHYSICS_D
-# LIB_POLYCODE_TUIO
-# LIB_POLYCODE_TUIO_D
-# LIB_POLYCODE_UI
-# LIB_POLYCODE_UI_D
 
-#libPolycore.a
-#libPolycore_d.a
-
-#libPolycode2DPhysics.a
-#libPolycode2DPhysics_d.a
-#libPolycode3DPhysics.a
-#libPolycode3DPhysics_d.a
-#libPolycodeTUIO.a
-#libPolycodeTUIO_d.a
-#libPolycodeUI.a
-#libPolycodeUI_d.a
-
-#../../Core/Dependencies/include 
-#../../Core/Dependencies/include/AL 
-#../../Core/include 
 #../../Modules/include 
 #../../Modules/Dependencies/include 
 #../../Modules/Dependencies/include/bullet
 
-FIND_PATH ( POLYCODE_CORE_CORE_INCLUDE_DIR NAMES PolyCore.h
-	        HINTS
-	        NO_DEFAULT_PATH
-    	    NO_CMAKE_ENVIRONMENT_PATH
-	        NO_CMAKE_SYSTEM_PATH
-	        NO_SYSTEM_ENVIRONMENT_PATH
-	        NO_CMAKE_PATH
-	        CMAKE_FIND_FRAMEWORK NEVER
-	        PATHS ${POLYCODE_SEARCH_PATHS} 
-          )
-MESSAGE(STATUS ${POLYCODE_CORE_CORE_INCLUDE_DIR})
-
-FIND_PATH ( POLYCODE_CORE_DEPEND_INCLUDE_DIR NAMES pnglibconf.h
-	        HINTS
-	        NO_DEFAULT_PATH
-    	    NO_CMAKE_ENVIRONMENT_PATH
-	        NO_CMAKE_SYSTEM_PATH
-	        NO_SYSTEM_ENVIRONMENT_PATH
-	        NO_CMAKE_PATH
-	        CMAKE_FIND_FRAMEWORK NEVER
-	        PATHS ${POLYCODE_SEARCH_PATHS} 
-          )
-MESSAGE(STATUS ${POLYCODE_CORE_DEPEND_INCLUDE_DIR})
-
-FIND_PATH ( POLYCODE_CORE_DEPEND_AL_INCLUDE_DIR NAMES efx-creative.h
-	        HINTS
-	        NO_DEFAULT_PATH
-    	    NO_CMAKE_ENVIRONMENT_PATH
-	        NO_CMAKE_SYSTEM_PATH
-	        NO_SYSTEM_ENVIRONMENT_PATH
-	        NO_CMAKE_PATH
-	        CMAKE_FIND_FRAMEWORK NEVER
-	        PATHS ${POLYCODE_SEARCH_PATHS} 
-          )
-MESSAGE(STATUS ${POLYCODE_CORE_DEPEND_AL_INCLUDE_DIR})
-
-SET ( POLYCODE_CORE_INCLUDE_DIR
-      ${POLYCODE_CORE_CORE_INCLUDE_DIR}
-      ${POLYCODE_CORE_DEPEND_INCLUDE_DIR}
-      ${POLYCODE_CORE_DEPEND_AL_INCLUDE_DIR} 
-    )
-
-FIND_LIBRARY  ( LIB_POLYCODE_CORE NAME "Polycore"
-	            HINTS
-                NO_DEFAULT_PATH
-                NO_CMAKE_ENVIRONMENT_PATH
-                NO_CMAKE_SYSTEM_PATH
-                NO_SYSTEM_ENVIRONMENT_PATH
-                NO_CMAKE_PATH
-                CMAKE_FIND_FRAMEWORK NEVER
-                $ENV{POLYCODEDIR}
-                $ENV{POLYCODE_PATH}
-                PATH_SUFFIXES lib 
-                PATHS ${POLYCODE_SEARCH_PATHS} 
-              )
-MESSAGE(STATUS ${LIB_POLYCODE_CORE})
-
-FIND_LIBRARY  ( LIB_POLYCODE_CORE_DEBUG NAME "Polycore_d"
-	            HINTS
-                NO_DEFAULT_PATH
-                NO_CMAKE_ENVIRONMENT_PATH
-                NO_CMAKE_SYSTEM_PATH
-                NO_SYSTEM_ENVIRONMENT_PATH
-                NO_CMAKE_PATH
-                CMAKE_FIND_FRAMEWORK NEVER
-                $ENV{POLYCODEDIR}
-                $ENV{POLYCODE_PATH}
-                PATH_SUFFIXES lib lib64 
-                PATHS ${POLYCODE_SEARCH_PATHS}
-              )
-MESSAGE(STATUS ${LIB_POLYCODE_CORE_DEBUG})
-
-# found polycode lib modules
 FIND_PATH ( POLYCODE_MODULES_COMMON_INCLUDE_DIR NAMES Polycode3DPhysics.h
 	        HINTS
 	        NO_DEFAULT_PATH
@@ -143,7 +48,7 @@ FIND_PATH ( POLYCODE_MODULES_COMMON_INCLUDE_DIR NAMES Polycode3DPhysics.h
 	        CMAKE_FIND_FRAMEWORK NEVER
 	        PATHS ${POLYCODE_SEARCH_PATHS} 
           )
-MESSAGE(STATUS ${POLYCODE_MODULES_COMMON_INCLUDE_DIR})
+#MESSAGE(STATUS ${POLYCODE_MODULES_COMMON_INCLUDE_DIR})
 
 FIND_PATH ( POLYCODE_MODULES_DEPEND_INCLUDE_DIR NAMES Box2D.h
 	        HINTS
@@ -155,7 +60,7 @@ FIND_PATH ( POLYCODE_MODULES_DEPEND_INCLUDE_DIR NAMES Box2D.h
 	        CMAKE_FIND_FRAMEWORK NEVER
 	        PATHS ${POLYCODE_SEARCH_PATHS} 
           )
-MESSAGE(STATUS ${POLYCODE_MODULES_DEPEND_INCLUDE_DIR})
+#MESSAGE(STATUS ${POLYCODE_MODULES_DEPEND_INCLUDE_DIR})
 
 FIND_PATH ( POLYCODE_MODULES_DEPEND_BULLET_INCLUDE_DIR NAMES btBulletCollisionCommon.h
 	        HINTS
@@ -167,7 +72,7 @@ FIND_PATH ( POLYCODE_MODULES_DEPEND_BULLET_INCLUDE_DIR NAMES btBulletCollisionCo
 	        CMAKE_FIND_FRAMEWORK NEVER
 	        PATHS ${POLYCODE_SEARCH_PATHS} 
           )
-MESSAGE(STATUS ${POLYCODE_MODULES_DEPEND_BULLET_INCLUDE_DIR})
+#MESSAGE(STATUS ${POLYCODE_MODULES_DEPEND_BULLET_INCLUDE_DIR})
 
 SET ( POLYCODE_MODULES_INCLUDE_DIR
       ${POLYCODE_MODULES_COMMON_INCLUDE_DIR}
@@ -175,43 +80,62 @@ SET ( POLYCODE_MODULES_INCLUDE_DIR
       ${POLYCODE_MODULES_DEPEND_BULLET_INCLUDE_DIR}
     )
 
-# founding Polycode 3D Physics module
-FIND_LIBRARY  ( LIB_POLYCODE_3D_PHYSICS NAME "Polycode3DPhysics"
-	            HINTS
-                NO_DEFAULT_PATH
-                NO_CMAKE_ENVIRONMENT_PATH
-                NO_CMAKE_SYSTEM_PATH
-                NO_SYSTEM_ENVIRONMENT_PATH
-                NO_CMAKE_PATH
-                CMAKE_FIND_FRAMEWORK NEVER
-                $ENV{POLYCODEDIR}
-                $ENV{POLYCODE_PATH}
-                PATH_SUFFIXES lib lib64 
-                PATHS ${POLYCODE_SEARCH_PATHS} )
+FOREACH( LIBRARY ${POLYCODE_MODULES_LIB_NAMES} )
+    
+#    MESSAGE(STATUS ${LIBRARY})
+    FIND_LIBRARY  ( LIB_${LIBRARY} NAME ${LIBRARY}
+                    HINTS
+                    NO_DEFAULT_PATH
+                    NO_CMAKE_ENVIRONMENT_PATH
+                    NO_CMAKE_SYSTEM_PATH
+                    NO_SYSTEM_ENVIRONMENT_PATH
+                    NO_CMAKE_PATH
+                    CMAKE_FIND_FRAMEWORK NEVER
+                    $ENV{POLYCODEDIR}
+                    $ENV{POLYCODE_PATH}
+                    PATH_SUFFIXES lib 
+                    PATHS ${POLYCODE_SEARCH_PATHS} 
+                  )
+    
+#    MESSAGE(STATUS ${LIB_${LIBRARY}})
+    
+    set ( LIB_POLYCODE_MODULES 
+          ${LIB_POLYCODE_MODULES}
+          ${LIB_${LIBRARY}}
+        )
 
-MESSAGE(STATUS ${LIB_POLYCODE_3D_PHYSICS})
+ENDFOREACH( LIBRARY ${POLYCODE_MODULES_LIB_NAMES} )
 
-FIND_LIBRARY  ( LIB_POLYCODE_3D_PHYSICS_DEBUG NAME "Polycode3DPhysics_d"
-	            HINTS
-                NO_DEFAULT_PATH
-                NO_CMAKE_ENVIRONMENT_PATH
-                NO_CMAKE_SYSTEM_PATH
-                NO_SYSTEM_ENVIRONMENT_PATH
-                NO_CMAKE_PATH
-                CMAKE_FIND_FRAMEWORK NEVER
-                $ENV{POLYCODEDIR}
-                $ENV{POLYCODE_PATH}
-                PATH_SUFFIXES lib lib64 
-                PATHS ${POLYCODE_SEARCH_PATHS} )
 
-MESSAGE(STATUS ${LIB_POLYCODE_3D_PHYSICS_DEBUG})
+FOREACH( LIBRARY ${POLYCODE_MODULES_LIB_DEBUG_NAMES} )
+    
+#    MESSAGE(STATUS ${LIBRARY})
+    FIND_LIBRARY  ( LIB_${LIBRARY} NAME ${LIBRARY}
+                    HINTS
+                    NO_DEFAULT_PATH
+                    NO_CMAKE_ENVIRONMENT_PATH
+                    NO_CMAKE_SYSTEM_PATH
+                    NO_SYSTEM_ENVIRONMENT_PATH
+                    NO_CMAKE_PATH
+                    CMAKE_FIND_FRAMEWORK NEVER
+                    $ENV{POLYCODEDIR}
+                    $ENV{POLYCODE_PATH}
+                    PATH_SUFFIXES lib 
+                    PATHS ${POLYCODE_SEARCH_PATHS} 
+                  )
+    
+#    MESSAGE(STATUS ${LIB_${LIBRARY}})
+    
+    set ( LIB_POLYCODE_MODULES_DEBUG 
+          ${LIB_POLYCODE_MODULES_DEBUG}
+          ${LIB_${LIBRARY}}
+        )
 
-#IF(POLYCODE_CORE_INCLUDE_DIR AND LIB_POLYCODE_CORE AND LIB_POLYCODE_CORE_DEBUG)
-#  SET(POLYCODE_CORE_FOUND TRUE)
-#ENDIF(POLYCODE_CORE_INCLUDE_DIR AND LIB_POLYCODE_CORE AND LIB_POLYCODE_CORE_DEBUG)
+ENDFOREACH( LIBRARY ${POLYCODE_MODULES_LIB_DEBUG_NAMES} )
 
-# show the POLYCODE_INCLUDE_DIR and POLYCODE_LIBRARIES variables only in the advanced view
-#IF(POLYCODE_CORE_FOUND)
-#  MESSAGE ("POLYCODE found (${POLYCODE_CORE_INCLUDE_DIR}))")
-#ENDIF(POLYCODE_CORE_FOUND)
+
+IF ( POLYCODE_MODULES_INCLUDE_DIR AND LIB_POLYCODE_MODULES AND LIB_POLYCODE_MODULES_DEBUG )
+    SET(POLYCODE_MODULES_FOUND TRUE)
+    MESSAGE(STATUS "POLYCODE MODULES LIBS WERE FOUND")
+ENDIF()
 

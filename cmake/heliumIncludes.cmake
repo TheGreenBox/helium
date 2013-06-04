@@ -1,12 +1,31 @@
-MESSAGE(STATUS "start helium includes cmake module")
+FIND_PACKAGE( PolyCore REQUIRED)
+FIND_PACKAGE( PolycodeModules REQUIRED)
+FIND_PACKAGE( SDL REQUIRED)
+FIND_PACKAGE( OpenGL REQUIRED)
+FIND_PACKAGE( SDL REQUIRED)
 
-FIND_PACKAGE(PolyCore REQUIRED)
-#FIND_PACKAGE(PolycodeModules REQUIRED)
+SET ( LIB_POLYCODE 
+      ${LIB_POLYCODE_CORE}
+      ${LIB_POLYCODE_MODULES}
+      ${SDL_LIBRARY}
+      ${OPENGL_LIBRARIES} # GL and GLU
+    )
+
+SET ( LIB_POLYCODE_DEBUG
+      ${LIB_POLYCODE_CORE_DEBUG}
+      ${LIB_POLYCODE_MODULES_DEBUG}
+      ${SDL_LIBRARY}
+      ${OPENGL_LIBRARIES} # GL and GLU
+    )
+
 
 INCLUDE_DIRECTORIES ( ${CMAKE_SOURCE_DIR}/core/include
                       ${CMAKE_SOURCE_DIR}/gameMap/include
                       ${CMAKE_SOURCE_DIR}/mainMenu/include
                       ${POLYCODE_CORE_INCLUDE_DIR}
+                      ${POLYCODE_MODULES_INCLUDE_DIR}
+                      ${SDL_INCLUDE_DIR}
+                      ${OPENGL_INCLUDE_DIR}
                     )
 
 # GET_PROPERTY(inc_dirs DIRECTORY PROPERTY INCLUDE_DIRECTORIES)

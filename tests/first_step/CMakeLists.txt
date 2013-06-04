@@ -1,5 +1,7 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
 
+MESSAGE(STATUS "FIRST TEST GENERATING")
+
 PROJECT( firstStepTest )
 
 SET(CMAKE_MODULE_PATH ${helium_SOURCE_DIR}/cmake/)
@@ -24,9 +26,6 @@ ADD_EXECUTABLE ( firstStepTest
                  ${firstStepTest_HDRS}
                )
 
-MESSAGE(STATUS "LIB_POLYCODE_CORE : ")
-MESSAGE(STATUS ${LIB_POLYCODE_CORE})
-
 TARGET_LINK_LIBRARIES ( firstStepTest
-                        ${LIB_POLYCODE_CORE}
+                        ${LIB_POLYCODE}
                       )
