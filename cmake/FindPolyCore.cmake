@@ -3,12 +3,12 @@
 #../../Core/include 
 
 SET ( POLYCODE_SEARCH_PATHS
-	  ${CMAKE_HOME_DIRECTORY}/../polycode/Release/${CMAKE_SYSTEM_NAME}/Framework/Core/lib
-	  ${CMAKE_HOME_DIRECTORY}/../polycode/Release/${CMAKE_SYSTEM_NAME}/Framework/Core/Dependencies/lib
-	  
+      ${CMAKE_HOME_DIRECTORY}/../polycode/Release/${CMAKE_SYSTEM_NAME}/Framework/Core/lib
+      ${CMAKE_HOME_DIRECTORY}/../polycode/Release/${CMAKE_SYSTEM_NAME}/Framework/Core/Dependencies/lib
+      
       ${CMAKE_HOME_DIRECTORY}/../polycode/Release/${CMAKE_SYSTEM_NAME}/Framework/Core/include
-	  ${CMAKE_HOME_DIRECTORY}/../polycode/Release/${CMAKE_SYSTEM_NAME}/Framework/Core/Dependencies/include
-	  ${CMAKE_HOME_DIRECTORY}/../polycode/Release/${CMAKE_SYSTEM_NAME}/Framework/Core/Dependencies/include/AL
+      ${CMAKE_HOME_DIRECTORY}/../polycode/Release/${CMAKE_SYSTEM_NAME}/Framework/Core/Dependencies/include
+      ${CMAKE_HOME_DIRECTORY}/../polycode/Release/${CMAKE_SYSTEM_NAME}/Framework/Core/Dependencies/include/AL
     )
 
 #MESSAGE(STATUS "Let,s find polycode in this directories :")
@@ -43,38 +43,38 @@ SET ( POLLYCORE_LIB_DEBUG_NAMES
 
 
 FIND_PATH ( POLYCODE_CORE_CORE_INCLUDE_DIR NAMES PolyCore.h
-	        HINTS
-	        NO_DEFAULT_PATH
-    	    NO_CMAKE_ENVIRONMENT_PATH
-	        NO_CMAKE_SYSTEM_PATH
-	        NO_SYSTEM_ENVIRONMENT_PATH
-	        NO_CMAKE_PATH
-	        CMAKE_FIND_FRAMEWORK NEVER
-	        PATHS ${POLYCODE_SEARCH_PATHS} 
+            HINTS
+            NO_DEFAULT_PATH
+            NO_CMAKE_ENVIRONMENT_PATH
+            NO_CMAKE_SYSTEM_PATH
+            NO_SYSTEM_ENVIRONMENT_PATH
+            NO_CMAKE_PATH
+            CMAKE_FIND_FRAMEWORK NEVER
+            PATHS ${POLYCODE_SEARCH_PATHS} 
           )
 #MESSAGE(STATUS ${POLYCODE_CORE_CORE_INCLUDE_DIR})
 
 FIND_PATH ( POLYCODE_CORE_DEPEND_INCLUDE_DIR NAMES pnglibconf.h
-	        HINTS
-	        NO_DEFAULT_PATH
-    	    NO_CMAKE_ENVIRONMENT_PATH
-	        NO_CMAKE_SYSTEM_PATH
-	        NO_SYSTEM_ENVIRONMENT_PATH
-	        NO_CMAKE_PATH
-	        CMAKE_FIND_FRAMEWORK NEVER
-	        PATHS ${POLYCODE_SEARCH_PATHS} 
+            HINTS
+            NO_DEFAULT_PATH
+            NO_CMAKE_ENVIRONMENT_PATH
+            NO_CMAKE_SYSTEM_PATH
+            NO_SYSTEM_ENVIRONMENT_PATH
+            NO_CMAKE_PATH
+            CMAKE_FIND_FRAMEWORK NEVER
+            PATHS ${POLYCODE_SEARCH_PATHS} 
           )
 #MESSAGE(STATUS ${POLYCODE_CORE_DEPEND_INCLUDE_DIR})
 
 FIND_PATH ( POLYCODE_CORE_DEPEND_AL_INCLUDE_DIR NAMES efx-creative.h
-	        HINTS
-	        NO_DEFAULT_PATH
-    	    NO_CMAKE_ENVIRONMENT_PATH
-	        NO_CMAKE_SYSTEM_PATH
-	        NO_SYSTEM_ENVIRONMENT_PATH
-	        NO_CMAKE_PATH
-	        CMAKE_FIND_FRAMEWORK NEVER
-	        PATHS ${POLYCODE_SEARCH_PATHS} 
+            HINTS
+            NO_DEFAULT_PATH
+            NO_CMAKE_ENVIRONMENT_PATH
+            NO_CMAKE_SYSTEM_PATH
+            NO_SYSTEM_ENVIRONMENT_PATH
+            NO_CMAKE_PATH
+            CMAKE_FIND_FRAMEWORK NEVER
+            PATHS ${POLYCODE_SEARCH_PATHS} 
           )
 #MESSAGE(STATUS ${POLYCODE_CORE_DEPEND_AL_INCLUDE_DIR})
 
