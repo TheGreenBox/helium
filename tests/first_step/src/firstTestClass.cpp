@@ -12,13 +12,13 @@
 
 FirstStepTest::FirstStepTest(PolycodeView *view) 
 {
-	core = new SDLCore(view, 640,480,false,false,0,0,90);
+	core = new SDLCore(view, 600,600,false,false,0,0,90);
 	  
 //	CoreServices::getInstance()->getResourceManager()->addArchive("Resources/default.pak");
 	CoreServices::getInstance()->getResourceManager()->addDirResource("default", false);
 
 	Screen *screen = new Screen();			
-	image = new ScreenImage("Resources/polycode_logo.png");
+	image = new ScreenImage("../helium_resource/ChrisGerrard_tooth_steampunk_gear.png");
 	screen->addChild(image);	
 }
 
