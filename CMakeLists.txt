@@ -7,7 +7,8 @@ SET(CMAKE_MODULE_PATH ${helium_SOURCE_DIR}/cmake/)
 
 SET(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
 
-INCLUDE(heliumIncludes)
+INCLUDE( heliumIncludes )
+INCLUDE( heliumResourceIncludes )
 
 
 ## ADD_SUBDIRECTORY(modules/gameMap)
