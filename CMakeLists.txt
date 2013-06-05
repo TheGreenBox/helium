@@ -18,6 +18,7 @@ INCLUDE( heliumResourceIncludes )
 # ------ test building -------
 
 ADD_SUBDIRECTORY(${helium_SOURCE_DIR}/tests/first_step)
+ADD_SUBDIRECTORY(${helium_SOURCE_DIR}/tests/first3D_step)
 
 # ------ no more test building -------
 # -------------------------------------------------------------------
