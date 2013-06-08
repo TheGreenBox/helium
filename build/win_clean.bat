@@ -3,5 +3,12 @@
 @echo . . .
 @echo . .
 @echo .
-@rmdir /s /q %CD%\product
-@echo All done!
+
+@set folderToDelete=..\product
+
+@if Exist "%folderToDelete%\*.*" (
+    @rmdir /s /q ..\product
+    @echo All done!
+) Else (
+    @Echo Folder %folderToDelete% does not exist, nothing to clean!
+)
