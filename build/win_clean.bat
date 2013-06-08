@@ -1,8 +1,7 @@
-@title helium for Win: removing script
-@echo Removing /product directory...
-@echo . . .
-@echo . .
-@echo .
+@echo ------------------------------------------------------
+@echo Removing ../product directory
+@echo ------------------------------------------------------
+@echo.
 
 @set folderToDelete=..\product
 
