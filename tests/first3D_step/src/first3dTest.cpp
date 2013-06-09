@@ -9,7 +9,7 @@ First3DTest::First3DTest(PolycodeView *view)
 	//CoreServices::getInstance()->getResourceManager()->addDirResource("default", false);
 
 	Scene *scene = new Scene();
-	ScenePrimitive *ground = new ScenePrimitive(ScenePrimitive::TYPE_PLANE, 5,5);
+	ScenePrimitive *ground = new ScenePrimitive(ScenePrimitive::TYPE_PLANE, 25,25);
 	ground->loadTexture("../helium_resource/sand_big.png");
 	scene->addEntity(ground);
 
@@ -18,13 +18,41 @@ First3DTest::First3DTest(PolycodeView *view)
 	box->setPosition(0.0, 0.5, 0.0);
 	scene->addEntity(box);
 	
-	scene->getDefaultCamera()->setPosition(7,7,7);
-	scene->getDefaultCamera()->lookAt(Vector3(0,0,0));
+    scene->getDefaultCamera()->setPosition(10,10,10);
+	scene->getDefaultCamera()->lookAt(Vector3(0,-2,0));
 
+	Screen *screen = new Screen();			
+    cursor = new ScreenImage("../helium_resource/cursor.png");
+	cursor->setPositionMode(ScreenEntity::POSITION_CENTER);
+	screen->addChild(cursor);	
+	
+//	core->getInput()->addEventListener(this, InputEvent::EVENT_MOUSEMOVE);
+//	core->getInput()->addEventListener(this, InputEvent::EVENT_MOUSEDOWN);
+//	core->getInput()->addEventListener(this, InputEvent::EVENT_MOUSEUP);
 }
 
 First3DTest::~First3DTest() 
 { }
+
+void First3DTest::handleEvent(Event *e) {
+	
+	if(e->getDispatcher() == core->getInput()) {
+		InputEvent *inputEvent = (InputEvent*)e;
+		switch(e->getEventCode()) {
+			case InputEvent::EVENT_MOUSEMOVE:
+				cursor->setPosition(inputEvent->mousePosition.x,
+						   inputEvent->mousePosition.y);
+			break;
+			case InputEvent::EVENT_MOUSEDOWN:
+				cursor->setColor(1,0,0,1);
+			break;			
+			case InputEvent::EVENT_MOUSEUP:
+				cursor->setColor(1,1,1,1);	
+			break;						
+		}
+	}
+	
+}
 
 bool First3DTest::Update() 
 {

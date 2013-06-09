@@ -24,8 +24,7 @@ int main (int argsNum, char** argAr)
     
     First3DTest* test = new First3DTest(view);
 
-   
-	while(test->Update()) 
-    {}
+	while(test->Update()) {}
+    
     return 0;
 }
