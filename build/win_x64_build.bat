@@ -1,5 +1,5 @@
 @title helium for Win: bulding script
-type ..\readme.txt
+type ..\readme.md
 
 call win_clean.bat
 
