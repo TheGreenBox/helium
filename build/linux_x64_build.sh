@@ -12,10 +12,11 @@ mkdir product/debug/
 
 cd product/debug/
 
-cmake ../../../
+cmake -G "Unix Makefiles" ../../../ 
 
 echo ------------------------------------------------------
 echo building 
 echo ------------------------------------------------------
 
 make
+
