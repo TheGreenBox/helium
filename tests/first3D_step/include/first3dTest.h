@@ -3,7 +3,7 @@
 
 using namespace Polycode;
 
-class First3DTest {
+class First3DTest : public EventHandler {
 public:
     First3DTest(PolycodeView *view);
     ~First3DTest();

@@ -26,9 +26,9 @@ First3DTest::First3DTest(PolycodeView *view)
 	cursor->setPositionMode(ScreenEntity::POSITION_CENTER);
 	screen->addChild(cursor);	
 	
-//	core->getInput()->addEventListener(this, InputEvent::EVENT_MOUSEMOVE);
-//	core->getInput()->addEventListener(this, InputEvent::EVENT_MOUSEDOWN);
-//	core->getInput()->addEventListener(this, InputEvent::EVENT_MOUSEUP);
+	core->getInput()->addEventListener(this, InputEvent::EVENT_MOUSEMOVE);
+	core->getInput()->addEventListener(this, InputEvent::EVENT_MOUSEDOWN);
+	core->getInput()->addEventListener(this, InputEvent::EVENT_MOUSEUP);
 }
 
 First3DTest::~First3DTest() 
