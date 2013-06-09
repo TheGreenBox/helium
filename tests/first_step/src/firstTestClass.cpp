@@ -12,7 +12,7 @@
 
 FirstStepTest::FirstStepTest(PolycodeView *view) 
 {
-	core = new SDLCore(view, 600,600,false,false,0,0,90);
+	core = new POLYCODE_CORE(view, 600,600,false,false,0,0,90);
 	  
 //	CoreServices::getInstance()->getResourceManager()->addArchive("Resources/default.pak");
 	CoreServices::getInstance()->getResourceManager()->addDirResource("default", false);
