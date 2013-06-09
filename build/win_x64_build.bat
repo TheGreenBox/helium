@@ -15,7 +15,7 @@ call win_clean.bat
 @cd debug
 @echo.
 
-cmake ../../
+cmake -G "Visual Studio 11" ../../
 @echo.
 
 @echo ------------------------------------------------------
