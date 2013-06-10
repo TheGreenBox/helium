@@ -12,6 +12,7 @@
 #include "first3dTest.h"
 
 #ifdef OS_WIN32
+   // #include <string>
     #include "windows.h"
 #endif
 
@@ -31,7 +32,8 @@ int main (int argsNum, char** argAr)
 #elif OS_WIN32
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
-	PolycodeView *view = new PolycodeView(hInstance, nCmdShow, _T("Polycode Example)");
+    //std::wstring FilePath = L"C:\\Documents and Settings\\whatever"; 
+	PolycodeView *view = new PolycodeView(hInstance, nCmdShow, _T("Polycode Example"));
 #endif
 
     First3DTest* test = new First3DTest(view);
