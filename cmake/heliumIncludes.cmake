@@ -31,6 +31,14 @@ INCLUDE_DIRECTORIES ( ${CMAKE_SOURCE_DIR}/core/include
                       ${OPENGL_INCLUDE_DIR}
                     )
 
+IF(UNIX)
+    ADD_DEFINITIONS(-DOS_LINUX) 
+ENDIF(UNIX)
+
+IF(WIN32)
+    ADD_DEFINITIONS(-DOS_WIN32)
+ENDIF(WIN32)
+
 # GET_PROPERTY(inc_dirs DIRECTORY PROPERTY INCLUDE_DIRECTORIES)
 # message("inc_dirs = ${inc_dirs}")
 
