@@ -13,6 +13,7 @@
 
 #ifdef OS_WIN32
     #include "windows.h"
+    #include "tchar.h"
 #endif
 
 #ifdef OS_LINUX

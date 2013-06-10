@@ -12,8 +12,9 @@
 #include "first3dTest.h"
 
 #ifdef OS_WIN32
-   // #include <string>
+    //#include <string>
     #include "windows.h"
+    #include "tchar.h"
 #endif
 
 
