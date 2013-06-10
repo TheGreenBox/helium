@@ -13,10 +13,9 @@
 
 int main (int argsNum, char** argAr)
 {
-
     std::cout << "The arguments to " << argAr[0] <<  "are:\n";
-    for (int i = 1; i < argsNum; i++)
-    {
+    
+    for (int i = 1; i < argsNum; i++) {
         std::cout << i << " : " << argAr[i] << "\n";
     }
     
@@ -24,7 +23,7 @@ int main (int argsNum, char** argAr)
     
     First3DTest* test = new First3DTest(view);
 
-	while(test->Update()) {}
+	while( test->Update() ) {}
     
     return 0;
 }
