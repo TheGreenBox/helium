@@ -11,19 +11,30 @@
 #include <iostream> 
 #include "firstTestClass.h"
 
-int main (int argsNum, char** argAr)
-{
+#ifdef OS_WIN32
+    #include "windows.h"
+#endif
 
+#ifdef OS_LINUX
+int main (int argsNum, char** argAr)
+#elif OS_WIN32
+int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
+#endif
+
+{
+#ifdef OS_LINUX
     std::cout << "The arguments to " << argAr[0] <<  "are:\n";
     for (int i = 1; i < argsNum; i++)
     {
         std::cout << i << " : " << argAr[i] << "\n";
     }
-    
-    PolycodeView *view = new PolycodeView("first test");
-    
-    FirstStepTest* test = new FirstStepTest(view);
 
+    PolycodeView *view = new PolycodeView("first test");
+#elif OS_WIN32
+	PolycodeView *view = new PolycodeView(hInstance, nCmdShow, L"Polycode Example");
+#endif
+
+    FirstStepTest* test = new FirstStepTest(view);
    
 	while(test->Update()) 
     {}
