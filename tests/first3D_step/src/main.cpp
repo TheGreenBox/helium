@@ -20,12 +20,7 @@
 
 #ifdef OS_LINUX
 int main (int argsNum, char** argAr)
-#elif OS_WIN32
-int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
-#endif
-
 {
-#ifdef OS_LINUX
     std::cout << "The arguments to " << argAr[0] <<  "are:\n";
     for (int i = 1; i < argsNum; i++)
     {
@@ -34,10 +29,11 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 
     PolycodeView *view = new PolycodeView("first test");
 #elif OS_WIN32
-	PolycodeView *view = new PolycodeView(hInstance, nCmdShow, L"Polycode Example");
+int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
+{
+	PolycodeView *view = new PolycodeView(hInstance, nCmdShow, _T("Polycode Example)");
 #endif
 
-   
     First3DTest* test = new First3DTest(view);
 
 	while( test->Update() ) {}
