@@ -22,6 +22,6 @@ cmake -G "Visual Studio 11" ../../
 @echo Building
 @echo ------------------------------------------------------
 
-@make
+@%SYSTEMROOT%\Microsoft.NET\Framework\v4.0.30319\msbuild.exe ALL_BUILD.vcxproj /t:Rebuild /p:Configuration=Debug /p:Platform=Win32 /nologo /fl /flp:logfile=helium_build.txt;verbosity=minimal
 
 @pause
