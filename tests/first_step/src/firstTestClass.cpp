@@ -8,7 +8,7 @@
  * ========================================================
  */
 #include "firstTestClass.h"
-#include "PolySDLCore.h"
+//#include "PolySDLCore.h"
 
 FirstStepTest::FirstStepTest(PolycodeView *view) 
 {
