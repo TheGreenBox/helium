@@ -22,9 +22,10 @@ SET ( LIB_POLYCODE_DEBUG
     )
 
 
-INCLUDE_DIRECTORIES ( ${CMAKE_SOURCE_DIR}/core/include
-                      ${CMAKE_SOURCE_DIR}/gameMap/include
-                      ${CMAKE_SOURCE_DIR}/mainMenu/include
+INCLUDE_DIRECTORIES ( ${CMAKE_SOURCE_DIR}/modules/core/include
+                      ${CMAKE_SOURCE_DIR}/modules/gameMap/include
+                      ${CMAKE_SOURCE_DIR}/modules/mainMenu/include
+                      ${CMAKE_SOURCE_DIR}/modules/mainLoop/include
                       ${POLYCODE_CORE_INCLUDE_DIR}
                       ${POLYCODE_MODULES_INCLUDE_DIR}
                       ${SDL_INCLUDE_DIR}

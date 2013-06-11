@@ -8,8 +8,9 @@
  * ========================================================
  */
 
+#include "mainLoop.h"
 
-int main (int argsNum, char** argAr)
+APP_MAIN_FINCTION
 {
     return 0;
 }
