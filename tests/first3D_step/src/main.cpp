@@ -34,7 +34,7 @@ int main (int argsNum, char** argAr)
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
     //std::wstring FilePath = L"C:\\Documents and Settings\\whatever"; 
-	PolycodeView *view = new PolycodeView(hInstance, nCmdShow, _T("Polycode Example"));
+	PolycodeView *view = new PolycodeView( hInstance, nCmdShow, static_cast<LPSTR>(_T("Polycode Example")) );
 #endif
 
     First3DTest* test = new First3DTest(view);

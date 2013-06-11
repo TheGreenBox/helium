@@ -32,7 +32,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 
     PolycodeView *view = new PolycodeView("first test");
 #elif OS_WIN32
-	PolycodeView *view = new PolycodeView(hInstance, nCmdShow, _T("Polycode Example"));
+	PolycodeView *view = new PolycodeView( hInstance, nCmdShow, static_cast<LPSTR>(_T("Polycode Example")) );
 #endif
 
     FirstStepTest* test = new FirstStepTest(view);
