@@ -2,9 +2,9 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
 
 MESSAGE(STATUS "HELIUM MODULE: ")
 
-INCLUDE( heliumIncludes )
-
 PROJECT( heliumGameCore )
+
+INCLUDE( heliumIncludes )
 
 SET ( heliumGameCore_SRCS
         ${HELIUM_MODULES_DIR}/heliumGameCore/src/heliumGameCore.cpp

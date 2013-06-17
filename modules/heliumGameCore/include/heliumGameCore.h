@@ -8,6 +8,9 @@
  * ========================================================
  */
 
+#ifndef _HELIUM_GAME_CORE_INCLUDED_
+#define _HELIUM_GAME_CORE_INCLUDED_
+
 #include <Polycode.h>
 #include "PolycodeView.h"
 
@@ -22,3 +25,4 @@ private:
 	Polycode::Core* engineCore;
 };
 
+#endif // _HELIUM_GAME_CORE_INCLUDED_

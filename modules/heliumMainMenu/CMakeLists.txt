@@ -2,9 +2,9 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
 
 MESSAGE(STATUS "HELIUM MODULE: MAIN MENU")
 
-INCLUDE( heliumIncludes )
-
 PROJECT( heliumMainMenu )
+
+INCLUDE( heliumIncludes )
 
 SET ( heliumMainMenu_SRCS
         ${HELIUM_MODULES_DIR}/heliumMainMenu/src/heliumMainMenu.cpp

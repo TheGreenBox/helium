@@ -2,44 +2,22 @@
  * Organization: The Green Box
  * 
  * Project name: Helium
- * File name:  heliumCore.h 
+ * File name:  commonGameLoop.h 
  * Description:
  * Author:  AKindyakov 
  * ========================================================
  */
 
+#ifndef _HELIUM_COMMON_GAME_LOOP_
+#define _HELIUM_COMMON_GAME_LOOP_
 
 #include <Polycode.h>
 #include "PolycodeView.h"
 
 #include "heliumGameCore.h"
+#include "heliumMainMenu.h"
 
-class I_HeliumCore
-{
-public:
-    
-    /**
-    * Constructor
-    * @param nil
-    */
-    virtual I_HeliumCore( Polycode::PolycodeView* view );
-    
-    /**
-    * Destructor
-    * @param nil
-    */
-    virtual ~I_HeliumCore();
-    
-    /**
-    * 
-    * @param nil
-    */
-    virtual void loop()=0;
-
-};
-
-
-class HeliumCore : public I_HeliumCore
+class HeliumCore
 {
 public:
     
@@ -53,7 +31,7 @@ public:
     * Destructor
     * @param nil
     */
-    ~HeliumCore();
+    virtual ~HeliumCore();
     
     void loop();
     
@@ -63,4 +41,6 @@ private:
     I_HeliumMainMenu* menu;    
     HeliumGameCore* gameCore;
 };
+
+#endif // _HELIUM_COMMON_GAME_LOOP_
 
