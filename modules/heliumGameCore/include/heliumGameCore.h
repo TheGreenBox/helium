@@ -8,12 +8,14 @@
  * ========================================================
  */
 
+#include <Polycode.h>
+#include "PolycodeView.h"
 
 class HeliumGameCore
 {
 public:    
-    HeliumGameCore(Polycode::Core* )
-    virtual ~HeliumGameCore(){};
+    HeliumGameCore(Polycode::Core* );
+    virtual ~HeliumGameCore();
     int game();
     
 private:

@@ -14,7 +14,7 @@ SET ( heliumGameCore_HDRS
         ${HELIUM_MODULES_DIR}/heliumGameCore/include/heliumGameCore.h
     ) 
 
-ADD_EXECUTABLE ( heliumGameCore 
+ADD_LIBRARY ( heliumGameCore STATIC
                     ${heliumGameCore_SRCS}
                     ${heliumGameCore_HDRS} 
                )
