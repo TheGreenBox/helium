@@ -2,20 +2,8 @@
  * Organization: The Green Box
  * 
  * Project name: Helium
- * File name:  first_step_main.cpp 
+ * File name:  heliumMainMenu.cpp 
  * Description:
  * Author:  AKindyakov 
  * ========================================================
  */
-
-#include <iostream> 
-
-#include <Polycode.h>
-#include "PolycodeView.h"
-
-#include "mainLoop.h"
-APP_MAIN_FINCTION
-{
-    std::cout << "template test"; 
-    return 0;
-}

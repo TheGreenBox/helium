@@ -9,7 +9,7 @@
  */
 
 
-#include "heliumCore.h"
+#include "commonGameLoop.h"
     
 HeliumCore::HeliumCore( Polycode::PolycodeView *view )
 {

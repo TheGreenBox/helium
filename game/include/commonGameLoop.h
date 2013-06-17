@@ -12,6 +12,8 @@
 #include <Polycode.h>
 #include "PolycodeView.h"
 
+#include "heliumGameCore.h"
+
 class I_HeliumCore
 {
 public:

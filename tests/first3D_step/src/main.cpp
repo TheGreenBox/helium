@@ -12,7 +12,7 @@
 #include "first3dTest.h"
 
 
-#include "mainLoop.h"
+#include "mainMacro.h"
 
 APP_MAIN_FINCTION
 {

@@ -8,7 +8,8 @@
  * ========================================================
  */
 
-#include "mainLoop.h"
+#include "mainMacro.h"
+#include "heliumGameCore.h"
 
 APP_MAIN_FINCTION
 {

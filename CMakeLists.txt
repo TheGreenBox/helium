@@ -13,7 +13,7 @@ INCLUDE( heliumResourceIncludes )
 # ------ modules building -------
 
 ADD_SUBDIRECTORY ( ${HELIUM_MODULES_DIR}/heliumGameCore)
-ADD_SUBDIRECTORY ( ${HELIUM_MODULES_DIR}/mainMenu)
+ADD_SUBDIRECTORY ( ${HELIUM_MODULES_DIR}/heliumMainMenu)
 
 # -------------------------------------------------------------------
 

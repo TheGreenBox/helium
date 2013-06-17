@@ -11,7 +11,7 @@
 #include <iostream> 
 #include "firstTestClass.h"
 
-#include "mainLoop.h"
+#include "mainMacro.h"
 
 APP_MAIN_FINCTION
 {
