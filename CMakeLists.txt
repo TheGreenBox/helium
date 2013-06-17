@@ -1,7 +1,6 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
 
-MESSAGE(STATUS "START GENERATING")
-PROJECT( helium )
+MESSAGE(STATUS "START HELIUM GENERATING")
 
 SET(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/)
 
@@ -10,29 +9,26 @@ SET(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
 INCLUDE( heliumIncludes )
 INCLUDE( heliumResourceIncludes )
 
+# -------------------------------------------------------------------
+# ------ modules building -------
 
-## ADD_SUBDIRECTORY(modules/gameMap)
-## INCLUDE_DIRECTORIES(modules/gameMap/include)
+ADD_SUBDIRECTORY ( ${HELIUM_MODULES_DIR}/heliumGameCore)
+ADD_SUBDIRECTORY ( ${HELIUM_MODULES_DIR}/mainMenu)
+
+# -------------------------------------------------------------------
 
 # -------------------------------------------------------------------
 # ------ test building -------
 
-ADD_SUBDIRECTORY(${CMAKE_SOURCE_DIR}/tests/first_step)
-ADD_SUBDIRECTORY(${CMAKE_SOURCE_DIR}/tests/first3D_step)
+ADD_SUBDIRECTORY ( ${CMAKE_SOURCE_DIR}/tests/first_step)
+ADD_SUBDIRECTORY ( ${CMAKE_SOURCE_DIR}/tests/first3D_step)
 
 # template test - not for real build
 #ADD_SUBDIRECTORY(${CMAKE_SOURCE_DIR}/tests/template_test)
 
-# ------ no more test building -------
 # -------------------------------------------------------------------
 
-SET( helium_SRCS
-     ${CMAKE_SOURCE_DIR}/game/main.cpp )
+ADD_SUBDIRECTORY ( ${CMAKE_SOURCE_DIR}/game)
 
-SET( helium_HDRS
-     ) ## same_header.h )
-
-ADD_EXECUTABLE( helium ${helium_SRCS} )
-
-TARGET_LINK_LIBRARIES ( helium )
+MESSAGE(STATUS "END HELIUM GENERATING")
 

@@ -2,21 +2,24 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
 
 MESSAGE(STATUS "HELIUM MODULE: ")
 
-
 INCLUDE( heliumIncludes )
 
-PROJECT( heliumCore )
+PROJECT( heliumGameCore )
 
-SET ( heliumCore_SRCS
-        ${HELIUM_MODULES_DIR}/heliumCore/src/heliumCore.cpp 
-        ${HELIUM_MODULES_DIR}/heliumCore/src/heliumGameCore.cpp
+SET ( heliumGameCore_SRCS
+        ${HELIUM_MODULES_DIR}/heliumGameCore/src/heliumGameCore.cpp
     )
 
-SET ( heliumCore_HDRS
-        ${HELIUM_MODULES_DIR}/heliumCore/include/heliumCore.h 
-        ${HELIUM_MODULES_DIR}/heliumCore/include/heliumGameCore.h
+SET ( heliumGameCore_HDRS
+        ${HELIUM_MODULES_DIR}/heliumGameCore/include/heliumGameCore.h
     ) 
 
-ADD_EXECUTABLE( heliumCore ${heliumCore_SRCS} ${heliumCore_HDRS} )
+ADD_EXECUTABLE ( heliumGameCore 
+                    ${heliumGameCore_SRCS}
+                    ${heliumGameCore_HDRS} 
+               )
 
-TARGET_LINK_LIBRARIES ( )
+TARGET_LINK_LIBRARIES ( heliumGameCore
+                            ${LIB_POLYCODE}
+                      )
+

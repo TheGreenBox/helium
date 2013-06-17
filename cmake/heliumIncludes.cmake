@@ -7,6 +7,8 @@ IF(UNIX AND NOT APPLE)
     FIND_PACKAGE( SDL REQUIRED)
 ENDIF(UNIX AND NOT APPLE)
 
+SET ( HELIUM_MODULES_DIR ${CMAKE_SOURCE_DIR}/modules)
+
 SET ( LIB_POLYCODE 
       ${LIB_POLYCODE_CORE}
       ${LIB_POLYCODE_MODULES}
@@ -21,16 +23,17 @@ SET ( LIB_POLYCODE_DEBUG
       ${OPENGL_LIBRARIES} # GL and GLU
     )
 
-
-INCLUDE_DIRECTORIES ( ${CMAKE_SOURCE_DIR}/modules/core/include
-                      ${CMAKE_SOURCE_DIR}/modules/gameMap/include
-                      ${CMAKE_SOURCE_DIR}/modules/mainMenu/include
-                      ${CMAKE_SOURCE_DIR}/modules/mainLoop/include
+INCLUDE_DIRECTORIES ( ${HELIUM_MODULES_DIR}/heliumGameCore/include
+                      ${HELIUM_MODULES_DIR}/mainMenu/include
+                      ${HELIUM_MODULES_DIR}/util
                       ${POLYCODE_CORE_INCLUDE_DIR}
                       ${POLYCODE_MODULES_INCLUDE_DIR}
                       ${SDL_INCLUDE_DIR}
                       ${OPENGL_INCLUDE_DIR}
                     )
+
+LINK_DIRECTORIES ( ${HELIUM_MODULES_DIR}/heliumGameCore )
+LINK_DIRECTORIES ( ${HELIUM_MODULES_DIR}/mainMenu )
 
 IF(UNIX)
     ADD_DEFINITIONS(-DOS_LINUX) 
