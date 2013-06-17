@@ -9,10 +9,14 @@
  */
 
 
-class HeliumgameCore
+class HeliumGameCore
 {
 public:    
-    HeliumgameCore(){};
-    virtual ~HeliumgameCore(){};
-    int game(){ return 0; };
+    HeliumGameCore(Polycode::Core* )
+    virtual ~HeliumGameCore(){};
+    int game();
+    
+private:
+	Polycode::Core* engineCore;
 };
+

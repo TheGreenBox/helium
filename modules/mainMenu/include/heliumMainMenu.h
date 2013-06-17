@@ -22,7 +22,13 @@ class HeliumMainMenu : public I_HeliumMainMenu
 {
 
 public:    
-    HeliumMainMenu(){};
+    HeliumMainMenu(Polycode::Core* engineCore){};
     ~I_HeliumMainMenu(){};
-    int load(){ return 0; };
+    
+    int load( HeliumGemaCore* game ) {
+        return 0; 
+    };
+
+private:
+    Polycode::Core* engineCore;
 };

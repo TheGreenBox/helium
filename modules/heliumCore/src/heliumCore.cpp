@@ -27,7 +27,8 @@ HeliumCore::HeliumCore( Polycode::PolycodeView *view )
     int frameRate = 90;
 	
     engineCore = new POLYCODE_CORE(view, xRes, yRes, fullScreen, vSync, aaLevel, anisotropyLevel, frameRate);
-    I_HeliumMainMenu *menu = HeliumMainMenu(engineCore);
+    
+    I_HeliumMainMenu *menu = new HeliumMainMenu(engineCore);
 }
 
 HeliumCore::~HeliumCore()
@@ -35,16 +36,14 @@ HeliumCore::~HeliumCore()
 
 void HeliumCore::loop()
 {
-    while(1)
-    {
-        menu->load();    
-        
-        //if (gameState) 
-        //{
-        HeliumGameCore *gameCore = new  HeliumGameCore();
-        gameCore->game();
-        //} 
-        return;
+
+    // if user choose the Exit load return 0
+    while( menu->load(engineCore, gameCore) ) {
+    
+        if (gameCore) {
+            gameCore->game();
+        }
     }
+    
     return;
 }

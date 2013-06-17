@@ -20,7 +20,7 @@ public:
     * Constructor
     * @param nil
     */
-    virtual I_HeliumCore( Polycode::PolycodeView *view );
+    virtual I_HeliumCore( Polycode::PolycodeView* view );
     
     /**
     * Destructor
@@ -45,7 +45,7 @@ public:
     * Constructor
     * @param nil
     */
-    HeliumCore( Polycode::PolycodeView *view );
+    HeliumCore( Polycode::PolycodeView* view );
     
     /**
     * Destructor
@@ -56,8 +56,9 @@ public:
     void loop();
     
 private:
-	Polycode::Core *engineCore;
+	Polycode::Core* engineCore;
     
-    I_HeliumMainMenu *menu;    
+    I_HeliumMainMenu* menu;    
+    HeliumGameCore* gameCore;
 };
 
