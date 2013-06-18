@@ -19,7 +19,7 @@ class HeliumGameCore
 public:    
     HeliumGameCore(Polycode::Core* );
     virtual ~HeliumGameCore();
-    int game();
+    void game();
     
 private:
 	Polycode::Core* engineCore;
