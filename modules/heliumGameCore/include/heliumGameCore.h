@@ -22,7 +22,16 @@ public:
     void game();
     
 private:
-	Polycode::Core* engineCore;
+    
+	Polycode::Core*     engineCore;
+    
+//	IPhysicsHandler*      physics;
+//  ICollisionsDetector*  collisions;
+    IWorldObjects*        physObjects;
 };
 
+// physicsUpdate();
+// stuckDetector();
+// gameObjectsBehavior();
+// 
 #endif // _HELIUM_GAME_CORE_INCLUDED_
