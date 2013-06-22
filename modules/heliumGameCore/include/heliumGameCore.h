@@ -14,6 +14,8 @@
 #include <Polycode.h>
 #include "PolycodeView.h"
 
+#include "heliumSceneObjects.h"
+
 class HeliumGameCore
 {
 public:    
@@ -27,7 +29,7 @@ private:
     
 //	IPhysicsHandler*      physics;
 //  ICollisionsDetector*  collisions;
-    IWorldObjects*        physObjects;
+    WorldObjects*        physObjects;
 };
 
 // physicsUpdate();
