@@ -12,16 +12,17 @@ INCLUDE( heliumResourceIncludes )
 # -------------------------------------------------------------------
 # ------ modules building -------
 
-ADD_SUBDIRECTORY ( ${HELIUM_MODULES_DIR}/heliumGameCore)
-ADD_SUBDIRECTORY ( ${HELIUM_MODULES_DIR}/heliumMainMenu)
+ADD_SUBDIRECTORY ( ${HELIUM_MODULES_DIR}/heliumSceneObjects )
+ADD_SUBDIRECTORY ( ${HELIUM_MODULES_DIR}/heliumGameCore     )
+ADD_SUBDIRECTORY ( ${HELIUM_MODULES_DIR}/heliumMainMenu     )
 
 # -------------------------------------------------------------------
 
 # -------------------------------------------------------------------
 # ------ test building -------
 
-ADD_SUBDIRECTORY ( ${CMAKE_SOURCE_DIR}/tests/first_step)
-ADD_SUBDIRECTORY ( ${CMAKE_SOURCE_DIR}/tests/first3D_step)
+ADD_SUBDIRECTORY ( ${CMAKE_SOURCE_DIR}/tests/first_step    )
+ADD_SUBDIRECTORY ( ${CMAKE_SOURCE_DIR}/tests/first3D_step  )
 
 # template test - not for real build
 #ADD_SUBDIRECTORY(${CMAKE_SOURCE_DIR}/tests/template_test)

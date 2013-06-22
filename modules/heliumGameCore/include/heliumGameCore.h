@@ -14,6 +14,8 @@
 #include <Polycode.h>
 #include "PolycodeView.h"
 
+#include "heliumSceneObjects.h"
+
 class HeliumGameCore
 {
 public:    

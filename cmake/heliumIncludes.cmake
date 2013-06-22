@@ -25,6 +25,7 @@ SET ( LIB_POLYCODE_DEBUG
 
 INCLUDE_DIRECTORIES ( ${HELIUM_MODULES_DIR}/heliumGameCore/include
                       ${HELIUM_MODULES_DIR}/heliumMainMenu/include
+                      ${HELIUM_MODULES_DIR}/heliumSceneObjects/include
                       ${HELIUM_MODULES_DIR}/util
                       ${POLYCODE_CORE_INCLUDE_DIR}
                       ${POLYCODE_MODULES_INCLUDE_DIR}
@@ -34,6 +35,7 @@ INCLUDE_DIRECTORIES ( ${HELIUM_MODULES_DIR}/heliumGameCore/include
 
 LINK_DIRECTORIES ( ${HELIUM_MODULES_DIR}/heliumGameCore )
 LINK_DIRECTORIES ( ${HELIUM_MODULES_DIR}/heliumMainMenu )
+LINK_DIRECTORIES ( ${HELIUM_MODULES_DIR}/heliumSceneObjects )
 
 IF(UNIX)
     ADD_DEFINITIONS(-DOS_LINUX) 
