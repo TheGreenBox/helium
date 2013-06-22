@@ -29,7 +29,7 @@ private:
     
 //	IPhysicsHandler*      physics;
 //  ICollisionsDetector*  collisions;
-    IWorldObjects*        physObjects;
+    WorldObjects*        physObjects;
 };
 
 // physicsUpdate();

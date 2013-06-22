@@ -22,7 +22,7 @@ class Sentient;
 class SentientDynamicObject;
 class SentientStaticObject;
 
-class IWorldObjects;
+class WorldObjects;
 class CommonWorldObjects;
 
 // ------
@@ -117,14 +117,14 @@ public:
 private:
 };
 
-class IWorldObjects
+class WorldObjects
 {
 public:    
-    IWorldObjects(){};
-    virtual ~IWorldObjects(){};
+    WorldObjects(){};
+    virtual ~WorldObjects(){};
 };
 
-class CommonWorldObjects : public IWorldObjects
+class CommonWorldObjects : public WorldObjects
 {
 public:    
     CommonWorldObjects(){};
