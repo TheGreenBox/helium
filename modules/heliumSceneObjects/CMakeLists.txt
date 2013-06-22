@@ -17,7 +17,7 @@ SET ( heliumSceneObjects_HDRS
 ADD_LIBRARY ( heliumSceneObjects STATIC
                     ${heliumSceneObjects_SRCS}
                     ${heliumSceneObjects_HDRS} 
-               )
+            )
 
 TARGET_LINK_LIBRARIES ( heliumSceneObjects
                             ${LIB_POLYCODE}

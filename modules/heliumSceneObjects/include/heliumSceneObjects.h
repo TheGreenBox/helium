@@ -11,6 +11,8 @@
 #ifndef _HELIUM_SCENE_OBJECTS_INCLUDED_
 #define _HELIUM_SCENE_OBJECTS_INCLUDED_
 
+#include <list>
+
 class Object;
 class DynamicObject;
 class StaticObjec;
@@ -36,6 +38,15 @@ private:
     // face etc
 };
 
+class NonPhysicalObject : public Object
+{
+public:
+    NonPhysicalObject(){};
+    virtual ~NonPhysicalObject(){};
+
+private:
+};
+
 class DynamicObject : public Object
 {
 public:    
@@ -47,7 +58,7 @@ private:
     // damage ?
 };
 
-class StaticObjec : public Objectt
+class StaticObject : public Object
 {
 public:    
     StaticObject(){};
@@ -57,11 +68,11 @@ private:
     // damage ?
 };
 
-class DeadDynamycObject : public DynamicObject 
+class DeadDynamicObject : public DynamicObject 
 {
 public:    
     DeadDynamicObject(){};
-    virtual ~DeadObject(){};
+    virtual ~DeadDynamicObject(){};
 
 private:
 };
@@ -80,7 +91,7 @@ class Sentient
 {
 public:
     Sentient(){};
-    virtual ~Sentient{}();
+    virtual ~Sentient(){};
 private:
 };
 
@@ -124,7 +135,8 @@ private:
     std::list< Object* >            pAllObjects;
     
     std::list< DynamicObject* >     pDynamic; 
-    std::list< TempObject* >        pTempObjects;
+    //std::list< TempObject* >        pTempObjects;
+    // for iterate by behavior
     std::list< Sentient* >          pSentient;
 };
 
