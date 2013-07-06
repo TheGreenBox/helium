@@ -26,6 +26,10 @@ ADD_EXECUTABLE ( firstStepTest
                  ${firstStepTest_HDRS}
                )
 
+IF(WIN32)
+   SET_TARGET_PROPERTIES( firstStepTest PROPERTIES LINK_FLAGS_MINSIZEREL "/SUBSYSTEM:WINDOWS")
+ENDIF(WIN32)
+
 TARGET_LINK_LIBRARIES ( firstStepTest
                         ${LIB_POLYCODE}
                       )

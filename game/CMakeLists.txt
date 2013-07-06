@@ -23,6 +23,10 @@ SET ( helium_HDRS
 
 ADD_EXECUTABLE( helium ${helium_SRCS} ${helium_HDRS} )
 
+if(WIN32)
+   set_target_properties(helium PROPERTIES LINK_FLAGS_MINSIZEREL "/SUBSYSTEM:WINDOWS")
+endif(WIN32)
+
 TARGET_LINK_LIBRARIES ( helium 
                             heliumGameCore 
                             heliumMainMenu 

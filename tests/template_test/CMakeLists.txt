@@ -42,6 +42,10 @@ ADD_EXECUTABLE ( ${TEST_NAME}
                  ${${TEST_NAME}_HDRS}
                )
 
+IF(WIN32)
+   SET_TARGET_PROPERTIES( ${TEST_NAME} PROPERTIES LINK_FLAGS_MINSIZEREL "/SUBSYSTEM:WINDOWS")
+ENDIF(WIN32)
+
 TARGET_LINK_LIBRARIES ( ${TEST_NAME}
                         ${LIB_POLYCODE}
                       )
