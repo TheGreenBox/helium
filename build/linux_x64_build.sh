@@ -12,7 +12,7 @@ mkdir product/debug/
 
 cd product/debug/
 
-cmake -G "Unix Makefiles" ../../../ 
+cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug ../../../ 
 
 echo ------------------------------------------------------
 echo building 
