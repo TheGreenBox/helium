@@ -22,12 +22,14 @@ SET ( LIB_PNG_POSIBLE_NAMES
         "png"
         "png15"
         "png15_static" 
+        "libpng15_static" 
     )
 
 SET ( LIB_PNG_POSIBLE_DEBUG_NAMES 
         "pngd"
         "png15d"
         "png15_staticd" 
+        "libpng15_staticd" 
     )
 
 #// posible names for zpng 
