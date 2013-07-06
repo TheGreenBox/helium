@@ -13,7 +13,6 @@
 
 #include <list>
 
-class Object;
 class DynamicObject;
 class StaticObjec;
 class DeadDynamycObject;
@@ -26,19 +25,7 @@ class WorldObjects;
 class CommonWorldObjects;
 
 // ------
-class Object
-{
-public:
-    Object(){};
-    virtual ~Object(){};
-
-private:
-    // shape
-    // color
-    // face etc
-};
-
-class NonPhysicalObject : public Object
+class NonPhysicalObject
 {
 public:
     NonPhysicalObject(){};
@@ -47,7 +34,7 @@ public:
 private:
 };
 
-class DynamicObject : public Object
+class DynamicObject
 {
 public:    
     DynamicObject(){};
@@ -58,7 +45,7 @@ private:
     // damage ?
 };
 
-class StaticObject : public Object
+class StaticObject
 {
 public:    
     StaticObject(){};
@@ -132,10 +119,7 @@ public:
 
 private:
     
-    std::list< Object* >            pAllObjects;
-    
     std::list< DynamicObject* >     pDynamic; 
-    //std::list< TempObject* >        pTempObjects;
     // for iterate by behavior
     std::list< Sentient* >          pSentient;
 };
