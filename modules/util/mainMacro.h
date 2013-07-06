@@ -13,9 +13,6 @@
 // Main app function macros
 
 #define __WIN32_MAIN_FUNCTION                       \
-    #include "windows.h"                            \
-    #include "tchar.h"                              \
-                                                    \
     int APIENTRY WinMain( HINSTANCE hInstance,      \
                           HINSTANCE hPrevInstance,  \
                           LPSTR lpCmdLine,          \

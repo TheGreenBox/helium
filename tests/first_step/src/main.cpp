@@ -13,6 +13,11 @@
 
 #include "mainMacro.h"
 
+#ifdef OS_WIN32
+   #include "windows.h"
+   #include "tchar.h"
+#endif
+
 APP_MAIN_FINCTION
 {
 	PolycodeView *view = new POLYCODE_VIEW_CREATOR("first step test");

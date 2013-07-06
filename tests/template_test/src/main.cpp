@@ -14,6 +14,12 @@
 #include "PolycodeView.h"
 
 #include "mainLoop.h"
+
+#ifdef OS_WIN32
+   #include "windows.h"
+   #include "tchar.h"
+#endif
+
 APP_MAIN_FINCTION
 {
     std::cout << "template test"; 

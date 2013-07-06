@@ -11,8 +11,12 @@
 #include <iostream> 
 #include "first3dTest.h"
 
-
 #include "mainMacro.h"
+
+#ifdef OS_WIN32
+   #include "windows.h"
+   #include "tchar.h"
+#endif
 
 APP_MAIN_FINCTION
 {
