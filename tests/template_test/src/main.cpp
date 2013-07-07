@@ -13,7 +13,7 @@
 #include <Polycode.h>
 #include "PolycodeView.h"
 
-#include "mainLoop.h"
+#include "mainMacro.h"
 
 #ifdef OS_WIN32
    #include "windows.h"

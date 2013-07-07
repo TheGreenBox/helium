@@ -9,8 +9,10 @@
  */
 
 #include <list>
+#include <map>
 
 #include <Polycode.h>
+#include "PolycodeView.h"
 #include "Polycode3DPhysics.h"
 
 class ListOfAllObjects
@@ -36,6 +38,8 @@ public:
     void addChar( Polycode::PhysicsCharacter ){};
 
 private:
+    std::list< Polycode::ScenePrimitive* >     graphObj;
+    
     std::list< Polycode::PhysicsSceneEntity* > allObj;
 	std::list< Polycode::PhysicsSceneEntity >  commonObj;
     std::list< Polycode::PhysicsCharacter >    charObj;
@@ -43,25 +47,48 @@ private:
     
 };
 
+struct ProHeliumGameState
+{
+    std::list<Polycode::PolyKEY> clampedKeys; 
+    std::list<Polycode::PhysicsSceneEntity*> highlightingObjects; 
+    ListOfAllObjects *worldobjects;
+};
+
+
 class KeyboardUserInput
 {
 public:
-    KeyboardUserInput( ListOfAllObjects* ){};
+    KeyboardUserInput( Polycode::Core *engCore,
+                       ListOfAllObjects*   pallObj,
+                       ProHeliumGameState* pGameState ){};
     virtual ~KeyboardUserInput(){};
+     
+    void handleEvent(Polycode::Event *e);
     
 private:
+    void mouseKeyUP(Polycode::InputEvent*);
+    void mouseKeyDOWN(Polycode::InputEvent*);
+    void keyUP(Polycode::InputEvent*);
+    void keyDOWN(Polycode::InputEvent*);
+    
+	Polycode::Core *core;
     ListOfAllObjects* worldObjects;
 };
 
 class ProGameobject
 {
 public:
-    ProGameobject()
-        : keysHandler(&worldobjects) {};
-    virtual ~ProGameobject(){};
+    ProGameobject( Polycode::PolycodeView* );
+    virtual ~ProGameobject();
+    int Update(){};
     
 private:
+	Polycode::Core *core;
+	Polycode::PhysicsScene *scene;
+    
     ListOfAllObjects worldobjects;
     KeyboardUserInput keysHandler;
+    ProHeliumGameState gameState;
+
 };
 
