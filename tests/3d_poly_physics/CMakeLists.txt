@@ -30,10 +30,12 @@ INCLUDE_DIRECTORIES ( ${3D_POLY_PHYS_TEST_DIR}/include )
 
 SET ( ${TEST_NAME}_SRCS
       ${3D_POLY_PHYS_TEST_DIR}/src/main.cpp 
+      ${3D_POLY_PHYS_TEST_DIR}/src/wrapClasses.cpp 
       # end other cpp test files if it exist
     )
 
 SET ( ${TEST_NAME}_HDRS
+      ${3D_POLY_PHYS_TEST_DIR}/src/wrapClasses.h 
       # headers test files if it exist
     )
 
