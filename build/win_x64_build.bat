@@ -8,7 +8,7 @@ call win_clean.bat
 @echo ------------------------------------------------------
 @echo Creating product directory...
 
-@cd ../
+::@cd ../
 @md product
 @cd product
 @md debug
