@@ -13,7 +13,7 @@
 // Main app function macros
 
 #define __WIN32_MAIN_FUNCTION                       \
-    int APIENTRY WinMain( HINSTANCE hInstance,      \
+    int WINAPI WinMain( HINSTANCE hInstance,      \
                           HINSTANCE hPrevInstance,  \
                           LPSTR lpCmdLine,          \
                           int nCmdShow )
