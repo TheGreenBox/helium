@@ -29,8 +29,9 @@ ELSE()
 ENDIF()
 
 IF( WIN32 )
-    SET ( LIB_POLYCODE ${LIB_POLYCODE} ws2_32 winmm glu32 )
+    SET ( LIB_POLYCODE ${LIB_POLYCODE} ws2_32 Winmm )
 ENDIF( WIN32 )
+
 INCLUDE_DIRECTORIES ( ${HELIUM_MODULES_DIR}/heliumGameCore/include
                       ${HELIUM_MODULES_DIR}/heliumMainMenu/include
                       ${HELIUM_MODULES_DIR}/heliumSceneObjects/include
