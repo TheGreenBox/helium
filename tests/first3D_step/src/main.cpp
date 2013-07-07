@@ -9,8 +9,11 @@
  */
 
 #include <iostream> 
-#include "first3dTest.h"
 
+#include <Polycode.h>
+#include "PolycodeView.h"
+
+#include "first3dTest.h"
 #include "mainMacro.h"
 
 #ifdef OS_WIN32

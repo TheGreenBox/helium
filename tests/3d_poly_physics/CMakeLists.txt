@@ -1,26 +1,13 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
 
-
-#---------------------------------------
-# please set test name
-# replce template for your name 
+MESSAGE(STATUS "#D_POLY_PHYSICS TEST GENERATING")
 
 SET( TEST_NAME "3d_poly_physics" )
 
-#---------------------------------------
-
-
-# test speach to building log
-MESSAGE(STATUS "TEMPLATE TEST GENERATING")
-
-# test name
 PROJECT( ${TEST_NAME} )
 
-#set place where will live test executable file 
 SET( EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin/tests )
-# set helium cmake modules directory
 SET(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/)
-# include helium common include files and library
 INCLUDE(heliumIncludes)
 
 
@@ -44,9 +31,14 @@ ADD_EXECUTABLE ( ${TEST_NAME}
                  ${${TEST_NAME}_HDRS}
                )
 # ----- Do you realy need it ? -----
-#IF(WIN32)
-#   SET_TARGET_PROPERTIES( ${TEST_NAME} PROPERTIES LINK_FLAGS_MINSIZEREL "/SUBSYSTEM:WINDOWS")
-#ENDIF(WIN32)
+IF(WIN32)
+    set_target_properties(helium PROPERTIES LINK_FLAGS_DEBUG "/SUBSYSTEM:windows") 
+    set_target_properties(helium PROPERTIES COMPILE_DEFINITIONS_DEBUG "_CONSOLE")
+    set_target_properties(helium PROPERTIES LINK_FLAGS_RELWITHDEBINFO "/SUBSYSTEM:windows")
+    set_target_properties(helium PROPERTIES COMPILE_DEFINITIONS_RELWITHDEBINFO "_CONSOLE")
+    set_target_properties(helium PROPERTIES LINK_FLAGS_RELEASE "/SUBSYSTEM:windows")
+    set_target_properties(helium PROPERTIES LINK_FLAGS_MINSIZEREL "/SUBSYSTEM:windows")
+ENDIF(WIN32)
 # ----- ??? -----
 
 TARGET_LINK_LIBRARIES ( ${TEST_NAME}

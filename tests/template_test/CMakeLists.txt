@@ -42,9 +42,14 @@ ADD_EXECUTABLE ( ${TEST_NAME}
                  ${${TEST_NAME}_HDRS}
                )
 
-#IF(WIN32)
-#   SET_TARGET_PROPERTIES( ${TEST_NAME} PROPERTIES LINK_FLAGS_MINSIZEREL "/SUBSYSTEM:WINDOWS")
-#ENDIF(WIN32)
+IF(WIN32)
+    set_target_properties(helium PROPERTIES LINK_FLAGS_DEBUG "/SUBSYSTEM:windows") 
+    set_target_properties(helium PROPERTIES COMPILE_DEFINITIONS_DEBUG "_CONSOLE")
+    set_target_properties(helium PROPERTIES LINK_FLAGS_RELWITHDEBINFO "/SUBSYSTEM:windows")
+    set_target_properties(helium PROPERTIES COMPILE_DEFINITIONS_RELWITHDEBINFO "_CONSOLE")
+    set_target_properties(helium PROPERTIES LINK_FLAGS_RELEASE "/SUBSYSTEM:windows")
+    set_target_properties(helium PROPERTIES LINK_FLAGS_MINSIZEREL "/SUBSYSTEM:windows")
+ENDIF(WIN32)
 
 TARGET_LINK_LIBRARIES ( ${TEST_NAME}
                         ${LIB_POLYCODE}
