@@ -32,6 +32,15 @@ if(WIN32)
     set_target_properties(helium PROPERTIES LINK_FLAGS_MINSIZEREL "/SUBSYSTEM:windows")
 endif(WIN32)
 
+if(WIN32)
+    set_target_properties(helium PROPERTIES LINK_FLAGS_DEBUG "/SUBSYSTEM:console") 
+    set_target_properties(helium PROPERTIES COMPILE_DEFINITIONS_DEBUG "_CONSOLE")
+    set_target_properties(helium PROPERTIES LINK_FLAGS_RELWITHDEBINFO "/SUBSYSTEM:console")
+    set_target_properties(helium PROPERTIES COMPILE_DEFINITIONS_RELWITHDEBINFO "_CONSOLE")
+    set_target_properties(helium PROPERTIES LINK_FLAGS_RELEASE "/SUBSYSTEM:console")
+    set_target_properties(helium PROPERTIES LINK_FLAGS_MINSIZEREL "/SUBSYSTEM:console")
+endif(WIN32)
+
 TARGET_LINK_LIBRARIES ( helium 
                             heliumGameCore 
                             heliumMainMenu 
