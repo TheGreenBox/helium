@@ -15,6 +15,7 @@ INCLUDE_DIRECTORIES ( ${COMMON_GAME_SRC_DIR}/include )
 SET ( helium_SRCS
         ${COMMON_GAME_SRC_DIR}/src/main.cpp 
         ${COMMON_GAME_SRC_DIR}/src/commonGameLoop.cpp 
+        ${POLYCODE_VIEW_DIR}/PolycodeView.cpp
     )
 
 SET ( helium_HDRS
