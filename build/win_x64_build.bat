@@ -15,13 +15,13 @@ call win_clean.bat
 @cd debug
 @echo.
 
-cmake -G "Visual Studio 11" -DCMAKE_BUILD_TYPE=Debug ../../
+cmake -G "Visual Studio 11" -DCMAKE_BUILD_TYPE=Debug ../../../ >> cmake_log.txt
 @echo.
 
 @echo ------------------------------------------------------
 @echo Building
 @echo ------------------------------------------------------
 
-@%SYSTEMROOT%\Microsoft.NET\Framework\v4.0.30319\msbuild.exe ALL_BUILD.vcxproj /t:Rebuild /p:Configuration=Debug /p:Platform=Win32 /nologo /fl /flp:logfile=helium_build.txt;verbosity=minimal
+@%SYSTEMROOT%\Microsoft.NET\Framework\v4.0.30319\msbuild.exe ALL_BUILD.vcxproj /t:Rebuild /p:Configuration=Debug /p:Platform=Win32 /nologo /fl /flp:logfile=helium_build_log.txt;verbosity=minimal
 
 @pause
