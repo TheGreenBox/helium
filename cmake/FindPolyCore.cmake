@@ -7,6 +7,7 @@ SET ( POLYCODE_SEARCH_PATHS
       ${CMAKE_HOME_DIRECTORY}/../polycode/Release/${CMAKE_SYSTEM_NAME}/Framework/Core/Dependencies/lib
       
       ${CMAKE_HOME_DIRECTORY}/../polycode/Release/${CMAKE_SYSTEM_NAME}/Framework/Core/include
+      ${CMAKE_HOME_DIRECTORY}/../polycode/Release/${CMAKE_SYSTEM_NAME}/Framework/Core/PolycodeView
       ${CMAKE_HOME_DIRECTORY}/../polycode/Release/${CMAKE_SYSTEM_NAME}/Framework/Core/Dependencies/include
       ${CMAKE_HOME_DIRECTORY}/../polycode/Release/${CMAKE_SYSTEM_NAME}/Framework/Core/Dependencies/include/AL
     )
@@ -90,6 +91,18 @@ FIND_PATH ( POLYCODE_CORE_CORE_INCLUDE_DIR NAMES PolyCore.h
           )
 #MESSAGE(STATUS ${POLYCODE_CORE_CORE_INCLUDE_DIR})
 
+FIND_PATH ( POLYCODE_VIEW_INCLUDE_DIR NAMES PolycodeView.cpp
+            HINTS
+            NO_DEFAULT_PATH
+            NO_CMAKE_ENVIRONMENT_PATH
+            NO_CMAKE_SYSTEM_PATH
+            NO_SYSTEM_ENVIRONMENT_PATH
+            NO_CMAKE_PATH
+            CMAKE_FIND_FRAMEWORK NEVER
+            PATHS ${POLYCODE_SEARCH_PATHS} 
+          )
+MESSAGE(STATUS ${POLYCODE_VIEW_INCLUDE_DIR})
+
 FIND_PATH ( POLYCODE_CORE_DEPEND_INCLUDE_DIR NAMES pnglibconf.h
             HINTS
             NO_DEFAULT_PATH
@@ -118,7 +131,12 @@ SET ( POLYCODE_CORE_INCLUDE_DIR
       ${POLYCODE_CORE_CORE_INCLUDE_DIR}
       ${POLYCODE_CORE_DEPEND_INCLUDE_DIR}
       ${POLYCODE_CORE_DEPEND_AL_INCLUDE_DIR} 
+      ${POLYCODE_VIEW_INCLUDE_DIR}
     )
+
+
+MESSAGE (STATUS "--------------------------------------") 
+MESSAGE (STATUS ${POLYCODE_CORE_INCLUDE_DIR})
 
 FOREACH( LIBRARY ${POLLYCORE_LIB_NAMES} )
     
