@@ -46,12 +46,12 @@ SET ( LIB_Z_POSIBLE_DEBUG_NAMES
 #// posible names for OpenAL 
 SET ( LIB_OPENAL_POSIBLE_NAMES 
         "openal"
-        "OpenAL32d"
+        "OpenAL32"
     )
 
 SET ( LIB_OPENAL_POSIBLE_DEBUG_NAMES 
         "openald"
-        "OpenAL32"
+        "OpenAL32d"
     )
 
 SET ( POLLYCORE_LIB_NAMES
