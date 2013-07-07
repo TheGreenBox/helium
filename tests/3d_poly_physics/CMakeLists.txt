@@ -32,12 +32,12 @@ ADD_EXECUTABLE ( ${TEST_NAME}
                )
 # ----- Do you realy need it ? -----
 IF(WIN32)
-    set_target_properties(helium PROPERTIES LINK_FLAGS_DEBUG "/SUBSYSTEM:windows") 
-    set_target_properties(helium PROPERTIES COMPILE_DEFINITIONS_DEBUG "_CONSOLE")
-    set_target_properties(helium PROPERTIES LINK_FLAGS_RELWITHDEBINFO "/SUBSYSTEM:windows")
-    set_target_properties(helium PROPERTIES COMPILE_DEFINITIONS_RELWITHDEBINFO "_CONSOLE")
-    set_target_properties(helium PROPERTIES LINK_FLAGS_RELEASE "/SUBSYSTEM:windows")
-    set_target_properties(helium PROPERTIES LINK_FLAGS_MINSIZEREL "/SUBSYSTEM:windows")
+    set_target_properties( ${TEST_NAME} PROPERTIES LINK_FLAGS_DEBUG "/SUBSYSTEM:windows") 
+    set_target_properties( ${TEST_NAME} PROPERTIES COMPILE_DEFINITIONS_DEBUG "_WINDOWS")
+    set_target_properties( ${TEST_NAME} PROPERTIES LINK_FLAGS_RELWITHDEBINFO "/SUBSYSTEM:windows")
+    set_target_properties( ${TEST_NAME} PROPERTIES COMPILE_DEFINITIONS_RELWITHDEBINFO "_WINDOWS")
+    set_target_properties( ${TEST_NAME} PROPERTIES LINK_FLAGS_RELEASE "/SUBSYSTEM:windows")
+    set_target_properties( ${TEST_NAME} PROPERTIES LINK_FLAGS_MINSIZEREL "/SUBSYSTEM:windows")
 ENDIF(WIN32)
 # ----- ??? -----
 
