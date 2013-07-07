@@ -12,6 +12,39 @@
 
 namespace P = Polycode;
 
+ListOfAllObjects::~ListOfAllObjects() {
+    std::list< Polycode::ScenePrimitive* >::iterator 
+                    grIt = graphObj.begin();;
+    for (; grIt != graphObj.end(); ++grIt ) {
+        delete *grIt;
+    }
+    
+    std::list< Polycode::PhysicsSceneEntity* >::iterator 
+                    phIt = phObj.begin();
+    for (; phIt != phObj.end(); ++phIt ) {
+        delete *phIt;
+    }
+}
+
+void ListOfAllObjects::addCommon(P::PhysicsSceneEntity* physEnt) {
+
+}
+
+void ListOfAllObjects::addChar(P::PhysicsCharacter* physChar){
+
+}
+
+void ListOfAllObjects::addGraphObj(P::ScenePrimitive* primitive) {
+
+}
+
+KeyboardUserInput::KeyboardUserInput( Polycode::Core *engCore,
+                   ListOfAllObjects*   pallObj,
+                   ProHeliumGameState* pGameState )
+        : core(engCore),
+          worldObjects(pallObj),
+          gameState(pGameState) {}
+ 
 void KeyboardUserInput::handleEvent(Polycode::Event *e) {
     if(e->getDispatcher() == core->getInput()) {
         switch(e->getEventCode()) {
@@ -50,8 +83,11 @@ ProGameobject::ProGameobject( P::PolycodeView* view )
         : keysHandler(core, &worldobjects, &gameState) {
     using namespace P; // fucking macros !
 	core = new POLYCODE_CORE(view, 640,480,false,false,0,0,90);
-};
+}
 
 ProGameobject::~ProGameobject(){
-};
+}
 
+int ProGameobject::update() {
+    return 0;
+}

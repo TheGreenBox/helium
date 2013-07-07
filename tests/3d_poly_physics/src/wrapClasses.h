@@ -20,30 +20,19 @@ class ListOfAllObjects
 public:
 	
     ListOfAllObjects(){};
-    virtual ~ListOfAllObjects(){};
-    
-    void addCommon( Polycode::SceneEntity *entity, 
-                    Number mass, 
-                    Number friction, 
-                    Number stepSize ){};
-    
-    void addChar( Polycode::SceneEntity *entity,
-                  int type, 
-                  Number mass, 
-                  Number friction, 
-                  Number restitution, 
-                  bool compoundChildren = false ){};
-    
-	void addCommon( Polycode::PhysicsSceneEntity ){};
-    void addChar( Polycode::PhysicsCharacter ){};
+    virtual ~ListOfAllObjects();
+   
+	void addCommon( Polycode::PhysicsSceneEntity* );
+    void addChar( Polycode::PhysicsCharacter* );
 
+    void addGraphObj( Polycode::ScenePrimitive*);
 private:
     std::list< Polycode::ScenePrimitive* >     graphObj;
     
-    std::list< Polycode::PhysicsSceneEntity* > allObj;
-	std::list< Polycode::PhysicsSceneEntity >  commonObj;
-    std::list< Polycode::PhysicsCharacter >    charObj;
-	std::list< Polycode::PhysicsVehicle >      vehiclesObj; 
+    std::list< Polycode::PhysicsSceneEntity* > phObj;
+	std::list< Polycode::PhysicsSceneEntity* > commonObj;
+    std::list< Polycode::PhysicsCharacter* >   charObj;
+	std::list< Polycode::PhysicsVehicle* >     vehiclesObj; 
     
 };
 
@@ -54,13 +43,12 @@ struct ProHeliumGameState
     ListOfAllObjects *worldobjects;
 };
 
-
 class KeyboardUserInput
 {
 public:
     KeyboardUserInput( Polycode::Core *engCore,
                        ListOfAllObjects*   pallObj,
-                       ProHeliumGameState* pGameState ){};
+                       ProHeliumGameState* pGameState );
     virtual ~KeyboardUserInput(){};
      
     void handleEvent(Polycode::Event *e);
@@ -73,6 +61,7 @@ private:
     
 	Polycode::Core *core;
     ListOfAllObjects* worldObjects;
+    ProHeliumGameState* gameState;
 };
 
 class ProGameobject
@@ -80,7 +69,7 @@ class ProGameobject
 public:
     ProGameobject( Polycode::PolycodeView* );
     virtual ~ProGameobject();
-    int Update(){};
+    int update();
     
 private:
 	Polycode::Core *core;
