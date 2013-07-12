@@ -17,6 +17,10 @@ IF( CMAKE_BUILD_TYPE STREQUAL Release )
           ${OPENGL_LIBRARIES} # GL and GLU
         )
 
+    SET ( SRC_STATIC_LIB 
+            ${LIB_POLYVIEW_SRC} 
+        )
+
 ELSEIF( CMAKE_BUILD_TYPE STREQUAL Debug )
     SET ( LIB_POLYCODE
           ${LIB_POLYCODE_CORE_DEBUG}
@@ -24,6 +28,11 @@ ELSEIF( CMAKE_BUILD_TYPE STREQUAL Debug )
           ${SDL_LIBRARY}
           ${OPENGL_LIBRARIES} # GL and GLU
         )
+
+    SET ( SRC_STATIC_LIB 
+            ${LIB_POLYVIEW_SRC} 
+        )
+
 ELSE()
     MESSAGE (ERROR "CMAKE_BUILD_TYPE must be defined")
 ENDIF()
@@ -31,6 +40,7 @@ ENDIF()
 IF( WIN32 )
     SET ( LIB_POLYCODE ${LIB_POLYCODE} ws2_32 Winmm )
 ENDIF( WIN32 )
+
 
 INCLUDE_DIRECTORIES ( ${HELIUM_MODULES_DIR}/heliumGameCore/include
                       ${HELIUM_MODULES_DIR}/heliumMainMenu/include
@@ -54,6 +64,4 @@ IF(WIN32)
     ADD_DEFINITIONS(-DOS_WIN32)
 ENDIF(WIN32)
 
-# GET_PROPERTY(inc_dirs DIRECTORY PROPERTY INCLUDE_DIRECTORIES)
-# message("inc_dirs = ${inc_dirs}")
 
