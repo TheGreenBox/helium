@@ -27,7 +27,12 @@ ADD_EXECUTABLE ( firstStepTest
                )
 
 IF(WIN32)
-   SET_TARGET_PROPERTIES( firstStepTest PROPERTIES LINK_FLAGS_MINSIZEREL "/SUBSYSTEM:WINDOWS")
+    set_target_properties( firstStepTest PROPERTIES LINK_FLAGS_DEBUG "/SUBSYSTEM:windows") 
+    set_target_properties( firstStepTest PROPERTIES COMPILE_DEFINITIONS_DEBUG "_CONSOLE")
+    set_target_properties( firstStepTest PROPERTIES LINK_FLAGS_RELWITHDEBINFO "/SUBSYSTEM:windows")
+    set_target_properties( firstStepTest PROPERTIES COMPILE_DEFINITIONS_RELWITHDEBINFO "_CONSOLE")
+    set_target_properties( firstStepTest PROPERTIES LINK_FLAGS_RELEASE "/SUBSYSTEM:windows")
+    set_target_properties( firstStepTest PROPERTIES LINK_FLAGS_MINSIZEREL "/SUBSYSTEM:windows")
 ENDIF(WIN32)
 
 TARGET_LINK_LIBRARIES ( firstStepTest
