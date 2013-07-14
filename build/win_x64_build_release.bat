@@ -11,8 +11,8 @@ call win_clean.bat
 ::@cd ../
 @md product
 @cd product
-@md debug
-@cd debug
+@md release
+@cd release
 @echo.
 
 @echo ------------------------------------------------------
