@@ -30,6 +30,7 @@ INCLUDE_DIRECTORIES ( ${${TEST_NAME}_TEST_DIR}/include )
 
 SET ( ${TEST_NAME}_SRCS
       ${${TEST_NAME}_TEST_DIR}/src/main.cpp 
+      ${SRC_STATIC_LIB}
       # end other cpp test files if it exist
     )
 

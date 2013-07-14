@@ -15,6 +15,7 @@ SET( EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin/tests )
 SET ( first3DTest_SRCS
       ${FIRST_3D_TEST_DIR}/src/main.cpp 
       ${FIRST_3D_TEST_DIR}/src/first3dTest.cpp 
+      ${SRC_STATIC_LIB}
     )
 
 SET ( first3DTest_HDRS

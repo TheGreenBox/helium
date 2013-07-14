@@ -15,6 +15,7 @@ SET( EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin/tests )
 SET ( firstStepTest_SRCS
       ${FIRST_STEP_TEST_DIR}/src/main.cpp 
       ${FIRST_STEP_TEST_DIR}/src/firstTestClass.cpp 
+      ${SRC_STATIC_LIB}
     )
 
 SET ( firstStepTest_HDRS

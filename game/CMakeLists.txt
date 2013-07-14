@@ -16,6 +16,7 @@ SET ( helium_SRCS
         ${COMMON_GAME_SRC_DIR}/src/main.cpp 
         ${COMMON_GAME_SRC_DIR}/src/commonGameLoop.cpp 
         ${POLYCODE_VIEW_DIR}/PolycodeView.cpp
+        ${SRC_STATIC_LIB}
     )
 
 SET ( helium_HDRS
