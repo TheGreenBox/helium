@@ -30,7 +30,7 @@ ADD_EXECUTABLE ( ${TEST_NAME}
                  ${${TEST_NAME}_SRCS}   
                  ${${TEST_NAME}_HDRS}
                )
-# ----- Do you realy need it ? -----
+
 IF(WIN32)
     set_target_properties( ${TEST_NAME} PROPERTIES LINK_FLAGS_DEBUG "/SUBSYSTEM:windows") 
     set_target_properties( ${TEST_NAME} PROPERTIES COMPILE_DEFINITIONS_DEBUG "_WINDOWS")
@@ -38,9 +38,8 @@ IF(WIN32)
     set_target_properties( ${TEST_NAME} PROPERTIES COMPILE_DEFINITIONS_RELWITHDEBINFO "_WINDOWS")
     set_target_properties( ${TEST_NAME} PROPERTIES LINK_FLAGS_RELEASE "/SUBSYSTEM:windows")
     set_target_properties( ${TEST_NAME} PROPERTIES LINK_FLAGS_MINSIZEREL "/SUBSYSTEM:windows")
-    SET_TARGET_PROPERTIES( ${TEST_NAME} PROPERTIES COMPILE_DEFINITIONS _UNICODE, UNICODE)
+    SET_TARGET_PROPERTIES( ${TEST_NAME} PROPERTIES COMPILE_DEFINITIONS _UNICODE,UNICODE)
 ENDIF(WIN32)
-# ----- ??? -----
 
 TARGET_LINK_LIBRARIES ( ${TEST_NAME}
                         ${LIB_POLYCODE}
