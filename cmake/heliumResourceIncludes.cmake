@@ -3,6 +3,9 @@ SET ( HELIUM_RESOURCE_SEARCH_PATHS
       ${CMAKE_HOME_DIRECTORY}/../helium_resource
       ${CMAKE_HOME_DIRECTORY}/../Helium_resource
       ${CMAKE_HOME_DIRECTORY}/../HeliumResource
+      ~/Dropbox/game_project/helium_resource
+      ~/Dropbox/game_project/Helium_resource
+      ~/Dropbox/game_project/HeliumResource
     )
 
 #SET( HELIUM_RESOURCE_OUT_DIR ${EXECUTABLE_OUTPUT_PATH}/helium_resource)
