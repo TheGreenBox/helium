@@ -3,9 +3,9 @@ SET ( HELIUM_RESOURCE_SEARCH_PATHS
       ${CMAKE_HOME_DIRECTORY}/../helium_resource
       ${CMAKE_HOME_DIRECTORY}/../Helium_resource
       ${CMAKE_HOME_DIRECTORY}/../HeliumResource
-      ~/Dropbox/game_project/helium_resource
-      ~/Dropbox/game_project/Helium_resource
-      ~/Dropbox/game_project/HeliumResource
+      ~/Dropbox/game_project/helium_resource/art
+      ~/Dropbox/game_project/Helium_resource/art
+      ~/Dropbox/game_project/HeliumResource/art
     )
 
 #SET( HELIUM_RESOURCE_OUT_DIR ${EXECUTABLE_OUTPUT_PATH}/helium_resource)
@@ -24,8 +24,8 @@ FIND_PATH ( HELIUM_RESOURCE_SRC_DIR NAME helium_resource.txt
 MESSAGE( STATUS "HELIUM resource directory :")
 MESSAGE( STATUS ${HELIUM_RESOURCE_SRC_DIR} )
 
-FILE ( INSTALL ${HELIUM_RESOURCE_SRC_DIR}
-       DESTINATION ${EXECUTABLE_OUTPUT_PATH} 
+FILE ( COPY ${HELIUM_RESOURCE_SRC_DIR}/
+       DESTINATION ${EXECUTABLE_OUTPUT_PATH}/helium_resources
      )
 
 
