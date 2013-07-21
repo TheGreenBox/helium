@@ -5,9 +5,12 @@
 
 @set folderToDelete=product
 
+:while1
 @if Exist "%folderToDelete%\*.*" (
-    @rd /s /q product
-    @echo All done!
+	@rd /s /q product
+    @echo Deleting "%folderToDelete%" folder, please wait...
+	@sleep 2
+	@goto :while1
 ) Else (
-    @Echo Folder %folderToDelete% does not exist, nothing to clean!
+    @Echo "%folderToDelete%" folder was successfully deleted!
 )
