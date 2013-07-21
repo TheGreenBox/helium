@@ -9,7 +9,7 @@
 @if Exist "%folderToDelete%\*.*" (
 	@rd /s /q product
     @echo Deleting "%folderToDelete%" folder, please wait...
-	@sleep 2
+	@timeout /T 2 /NOBREAK
 	@goto :while1
 ) Else (
     @Echo "%folderToDelete%" folder was successfully deleted!
