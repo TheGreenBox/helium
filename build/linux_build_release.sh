@@ -1,14 +1,14 @@
 cat ../README.md
 
 echo ------------------------------------------------------
-echo generate makefiles
+echo Generate makefiles
 echo ------------------------------------------------------
 
 #sh linux_clean.sh
-echo remove product directiry
+echo Remove product/release directiry
 rm -r product/release
 
-echo create product directory
+echo Create product/release directory
 mkdir product
 mkdir product/release
 
@@ -17,8 +17,15 @@ cd product/release
 cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release ../../../ 
 
 echo ------------------------------------------------------
-echo building 
+echo Building 
 echo ------------------------------------------------------
-
 make
+
+echo ------------------------------------------------------
+echo Installing
+echo ------------------------------------------------------
+make install
+
+echo Finished
+echo ------------------------------------------------------
 
