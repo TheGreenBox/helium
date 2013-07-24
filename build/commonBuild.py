@@ -1,11 +1,20 @@
 #-*- utf-8 -*-
 #!/bin/env python
 
-
+#---------------------------------------
+import os
 import sys
 import string
+import shutil
+#---------------------------------------
 
-argLen = len(sys.argv)
+rootScriptName = os.path.abspath(os.path.dirname(__file__))
+buildToolsDir = os.path.normpath(rootScriptName+'/../tools/buildTools/python')
+print(sys.path)
+if buildToolsDir not in sys.path:
+    sys.path.append(buildToolsDir)
+import heliumbuildtools
+#---------------------------------------
 
 buildType = 'Debug'
 cmakeGenerator = ''
@@ -32,14 +41,33 @@ for arg in sys.argv:
     elif arg == 'x32' or arg == 'x64' or arg == 'X32' or arg == 'X64':
         targetPlatform = arg.lower()
 
-
 if cmakeGenerator == '':
     if sys.platform == 'linux2':
         cmakeGenerator = '-GUnix Makefiles'
     elif sys.platform == 'win32':
         cmakeGenerator = '-GVisual Studio 11'
-  
-print( 'buildType:', buildType )
-print( 'cmakeGenerator:', cmakeGenerator )
-print( 'platform:', targetPlatform )
+ 
+print( 'Helium buld : buildType      : '+ buildType     )
+print( 'Helium buld : cmakeGenerator : '+ cmakeGenerator)
+print( 'Helium buld : platform       : '+ targetPlatform)
 
+sandboxDir = rootScriptName + '/product'
+
+if not os.path.isdir(sandboxDir):
+    os.mkdir(sandboxDir)
+
+buildDir = sandboxDir + '/' + buildType
+
+if os.path.isdir(buildDir):
+    shutil.rmtree(buildDir)
+os.mkdir(buildDir)
+
+log_file = open(buildDir+'/Heluim_'+buildType+'_build.log', 'w')
+
+os.chdir(buildDir)
+
+heliumbuildtools.cmakeGenerate( buildType, cmakeGenerator, '../../..',[''], log_file )
+heliumbuildtools.buildProject( buildType, log_file )
+log_file.close()
+
+os.chdir(rootScriptName)

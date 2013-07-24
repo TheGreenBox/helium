@@ -40,4 +40,6 @@ TARGET_LINK_LIBRARIES ( helium
                             heliumMainMenu 
                             ${LIB_POLYCODE}
                       )
-
+INSTALL ( TARGETS helium
+            DESTINATION ${OUTCOME_PATH}
+        )

@@ -40,3 +40,8 @@ ENDIF(WIN32)
 TARGET_LINK_LIBRARIES ( firstStepTest
                         ${LIB_POLYCODE}
                       )
+
+INSTALL ( TARGETS firstStepTest
+            DESTINATION ${OUTCOME_PATH}/tests
+        )
+

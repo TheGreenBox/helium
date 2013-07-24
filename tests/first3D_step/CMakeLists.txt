@@ -40,3 +40,8 @@ ENDIF(WIN32)
 TARGET_LINK_LIBRARIES ( first3dTest
                         ${LIB_POLYCODE}
                       )
+
+INSTALL ( TARGETS first3dTest
+            DESTINATION ${OUTCOME_PATH}/tests
+        )
+

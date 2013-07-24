@@ -56,3 +56,8 @@ ENDIF(WIN32)
 TARGET_LINK_LIBRARIES ( ${TEST_NAME}
                         ${LIB_POLYCODE}
                       )
+
+INSTALL ( TARGETS ${TEST_NAME}
+            DESTINATION ${OUTCOME_PATH}/tests
+        )
+
