@@ -10,7 +10,7 @@ import shutil
 
 rootScriptName = os.path.abspath(os.path.dirname(__file__))
 buildToolsDir = os.path.normpath(rootScriptName+'/../tools/buildTools/python')
-print(sys.path)
+
 if buildToolsDir not in sys.path:
     sys.path.append(buildToolsDir)
 import heliumbuildtools
@@ -71,3 +71,4 @@ heliumbuildtools.buildProject( buildType, log_file )
 log_file.close()
 
 os.chdir(rootScriptName)
+

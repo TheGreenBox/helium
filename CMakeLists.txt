@@ -23,9 +23,10 @@ ADD_SUBDIRECTORY ( ${HELIUM_MODULES_DIR}/heliumMainMenu     )
 # -------------------------------------------------------------------
 # ------ test building -------
 
-ADD_SUBDIRECTORY ( ${CMAKE_SOURCE_DIR}/tests/first_step    )
-ADD_SUBDIRECTORY ( ${CMAKE_SOURCE_DIR}/tests/first3D_step  )
-ADD_SUBDIRECTORY ( ${CMAKE_SOURCE_DIR}/tests/3d_poly_physics  )
+ADD_SUBDIRECTORY ( ${CMAKE_SOURCE_DIR}/tests/first_step      )
+ADD_SUBDIRECTORY ( ${CMAKE_SOURCE_DIR}/tests/first3D_step    )
+ADD_SUBDIRECTORY ( ${CMAKE_SOURCE_DIR}/tests/first3DModel    )
+ADD_SUBDIRECTORY ( ${CMAKE_SOURCE_DIR}/tests/firstKeyControl )
 
 # template test - not for real build
 #ADD_SUBDIRECTORY(${CMAKE_SOURCE_DIR}/tests/template_test)
