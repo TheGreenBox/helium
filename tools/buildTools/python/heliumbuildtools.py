@@ -4,7 +4,7 @@ import sys
 import subprocess
 
 def runCmd( cmd, logFile ):
-    cmakeProc = subprocess.Popen(cmd, stdout=subprocess.PIPE)
+    cmakeProc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     log, logEr = cmakeProc.communicate()
     
     if log:
@@ -16,6 +16,7 @@ def runCmd( cmd, logFile ):
         logFile.write(logEr)
         print("Error out:\n")
         print(logEr)
+        raise Exception("Cmd error "+' '.join(cmd))
     return
 
 def cmakeGenerate( buildType, cmakeGenerator, srcDir, otherOpt, log_file ):

@@ -8,8 +8,6 @@ SET ( HELIUM_RESOURCE_SEARCH_PATHS
       ~/Dropbox/game_project/HeliumResource/art
     )
 
-#SET( HELIUM_RESOURCE_OUT_DIR ${EXECUTABLE_OUTPUT_PATH}/helium_resource)
-
 FIND_PATH ( HELIUM_RESOURCE_SRC_DIR NAME helium_resource.txt 
             HINTS
             NO_DEFAULT_PATH
@@ -23,9 +21,4 @@ FIND_PATH ( HELIUM_RESOURCE_SRC_DIR NAME helium_resource.txt
 
 MESSAGE( STATUS "HELIUM resource directory :")
 MESSAGE( STATUS ${HELIUM_RESOURCE_SRC_DIR} )
-
-#FILE ( COPY ${HELIUM_RESOURCE_SRC_DIR}/
-#       DESTINATION ${EXECUTABLE_OUTPUT_PATH}/helium_resource
-#    )
-
 
