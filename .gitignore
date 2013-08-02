@@ -1,4 +1,14 @@
 *.swp
 *.swo
+*.pyc
+*.o
+
 build/product
+build/log
+
+thirdparty/builds/product
+thirdparty/builds/build
+thirdparty/builds/log
+thirdparty/lua/build
+thirdparty/lua/lua-5*
 
