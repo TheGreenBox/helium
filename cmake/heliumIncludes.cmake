@@ -37,9 +37,17 @@ ELSE()
     MESSAGE (ERROR "CMAKE_BUILD_TYPE must be defined")
 ENDIF()
 
-IF( WIN32 )
-    SET ( LIB_POLYCODE ${LIB_POLYCODE} ws2_32 Winmm )
-ENDIF( WIN32 )
+IF( UNIX )
+    SET ( LIB_POLYCODE 
+            ${LIB_POLYCODE} 
+            -ldl 
+        )
+ELSEIF( WIN32 )
+    SET ( LIB_POLYCODE 
+            ${LIB_POLYCODE} 
+            ws2_32 Winmm 
+        )
+ENDIF( )
 
 
 INCLUDE_DIRECTORIES ( ${HELIUM_MODULES_DIR}/heliumGameCore/include
