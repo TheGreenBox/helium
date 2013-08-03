@@ -27,7 +27,7 @@
 APP_MAIN_FINCTION
 {
     std::cout << "Hello! 3D Model learning test.\n";
-    Polycode::String mesh_path(HELIUM_RESOURCE_PATH_FROM_TEST);
+    Polycode::String mesh_path(HELIUM_RESOURCE_PATH);
     mesh_path += "/polycode_smpl.mesh";
     std::cout << "Path to 3d model: " << mesh_path.c_str() << '\n';
     

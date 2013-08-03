@@ -42,6 +42,6 @@ TARGET_LINK_LIBRARIES ( firstStepTest
                       )
 
 INSTALL ( TARGETS firstStepTest
-            DESTINATION ${OUTCOME_PATH}/tests
+            DESTINATION ${OUTCOME_PATH}
         )
 

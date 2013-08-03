@@ -44,6 +44,6 @@ TARGET_LINK_LIBRARIES ( first3DModel
                       )
 
 INSTALL ( TARGETS first3DModel
-            DESTINATION ${OUTCOME_PATH}/tests
+            DESTINATION ${OUTCOME_PATH}
         )
 

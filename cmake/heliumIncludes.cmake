@@ -26,7 +26,9 @@ ELSEIF( CMAKE_BUILD_TYPE STREQUAL Debug )
           ${LIB_POLYCODE_CORE_DEBUG}
           ${LIB_POLYCODE_MODULES_DEBUG}
           ${SDL_LIBRARY}
-          ${OPENGL_LIBRARIES} # GL and GLU
+#          ${OPENGL_LIBRARIES} # GL and GLU
+          ${OPENGL_gl_LIBRARY} # GL and GLU
+          ${OPENGL_glu_LIBRARY} # GL and GLU
         )
 
     SET ( SRC_STATIC_LIB 

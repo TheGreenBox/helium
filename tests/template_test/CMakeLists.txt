@@ -58,6 +58,6 @@ TARGET_LINK_LIBRARIES ( ${TEST_NAME}
                       )
 
 INSTALL ( TARGETS ${TEST_NAME}
-            DESTINATION ${OUTCOME_PATH}/tests
+            DESTINATION ${OUTCOME_PATH}
         )
 

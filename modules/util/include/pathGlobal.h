@@ -9,5 +9,4 @@
  */
 
 extern const char* HELIUM_RESOURCE_PATH;
-extern const char* HELIUM_RESOURCE_PATH_FROM_TEST;
 
