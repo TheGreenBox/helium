@@ -13,28 +13,46 @@
 
 #include <list>
 
-class DynamicObject;
-class StaticObjec;
-class DeadDynamycObject;
-class DeadStaticObject;
-class Sentient;
-class SentientDynamicObject;
-class SentientStaticObject;
-
 class WorldObjects;
 class CommonWorldObjects;
 
-class NonPhysicalObject
-{
+class ObjectBehavior {
 public:
-    NonPhysicalObject(){};
-    virtual ~NonPhysicalObject(){};
+    ObjectBehavior(){};
+    virtual ~ObjectBehavior(){};
+    void thinkAndDo();
+private:
+    
+};
+
+class ImmaterialObject {
+public:    
+    ImmaterialObject(){};
+    virtual ~ImmaterialObject(){};
 
 private:
 };
 
-class DynamicObject
-{
+class ImmaterialIntellectualObject {
+public:
+    ImmaterialIntellectualObject(){};
+    virtual ~ImmaterialIntellectualObject(){};
+
+private:
+    ObjectBehavior behavior;
+};
+
+
+class StaticIntellectualObject {
+public:    
+    StaticIntellectualObject(){};
+    virtual ~StaticIntellectualObject(){};
+
+private:
+    long int damage;
+};
+
+class DynamicObject {
 public:    
     DynamicObject(){};
     virtual ~DynamicObject(){};
@@ -43,36 +61,28 @@ private:
     long int damage;
 };
 
-class StaticObject
-{
+class DynamicIntellectualObject {
 public:    
-    StaticObject(){};
-    virtual ~StaticObject(){};
+    DynamicIntellectualObject(){};
+    virtual ~DynamicIntellectualObject(){};
 
 private:
     long int damage;
 };
 
-class WorldObjects
-{
+class WorldObjects {
 public:    
     WorldObjects(){};
     virtual ~WorldObjects(){};
 };
 
-class CommonWorldObjects : public WorldObjects
-{
+class CommonWorldObjects : public WorldObjects {
 public:    
     CommonWorldObjects(){};
     virtual ~CommonWorldObjects(){};
 
 private:
-    
-    std::list< DynamicObject* >     pDynamic; 
-    // for iterate by behavior
-    std::list< Sentient* >          pSentient;
 };
 
 #endif // _HELIUM_SCENE_OBJECTS_INCLUDED_
-
 
