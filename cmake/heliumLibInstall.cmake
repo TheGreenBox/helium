@@ -10,7 +10,7 @@ IF ( WIN32 )
         )
 
     FOREACH( LIB_NAME ${LIB_OPENAL_POSIBLE_NAMES} )
-        FIND_FILE( FINDED_FILE
+        FIND_FILE( FINDED_${LIB_NAME}
                      NAME  ${LIB_NAME}
                      PATHS ${POLYCODE_SEARCH_PATHS}
                      NO_DEFAULT_PATH
@@ -20,13 +20,13 @@ IF ( WIN32 )
                      NO_CMAKE_SYSTEM_PATH
                      NO_CMAKE_FIND_ROOT_PATH
                 )
-        IF( FINDED_FILE )   
-            MESSAGE (STATUS ${FINDED_FILE} " was found!" )
+        IF( FINDED_${LIB_NAME} )   
+            MESSAGE (STATUS ${LIB_NAME} " was found" )
             SET ( LIB_OPENAL_FILES
                     ${LIB_OPENAL_FILES}
-                    ${FINDED_FILE}
+                    FINDED_${LIB_NAME}
                 )
-        ENDIF( FINDED_FILE )
+        ENDIF( FINDED_${LIB_NAME} )
     ENDFOREACH( LIB_NAME ${LIB_OPENAL_POSIBLE_NAMES} )
 
     INSTALL ( FILES ${LIB_OPENAL_FILES}

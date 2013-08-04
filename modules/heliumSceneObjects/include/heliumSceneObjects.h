@@ -24,7 +24,6 @@ class SentientStaticObject;
 class WorldObjects;
 class CommonWorldObjects;
 
-// ------
 class NonPhysicalObject
 {
 public:
@@ -41,8 +40,7 @@ public:
     virtual ~DynamicObject(){};
 
 private:
-    int mass;
-    // damage ?
+    long int damage;
 };
 
 class StaticObject
@@ -52,56 +50,7 @@ public:
     virtual ~StaticObject(){};
 
 private:
-    // damage ?
-};
-
-class DeadDynamicObject : public DynamicObject 
-{
-public:    
-    DeadDynamicObject(){};
-    virtual ~DeadDynamicObject(){};
-
-private:
-};
-
-class DeadStaticObject : public StaticObject 
-{
-public:
-    
-    DeadStaticObject(){};
-    virtual ~DeadStaticObject(){};
-
-private:
-};
-
-class Sentient
-{
-public:
-    Sentient(){};
-    virtual ~Sentient(){};
-private:
-};
-
-class SentientDynamicObject 
-                : public DynamicObject, 
-                  public Sentient
-{
-public:    
-    SentientDynamicObject(){};
-    virtual ~SentientDynamicObject(){};
-
-private:
-};
-
-class SentientStaticObject
-                : public StaticObject,
-                  public Sentient 
-{
-public:    
-    SentientStaticObject(){};
-    virtual ~SentientStaticObject(){};
-
-private:
+    long int damage;
 };
 
 class WorldObjects
