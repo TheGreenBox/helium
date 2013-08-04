@@ -1,7 +1,3 @@
-#./../Core/Dependencies/include 
-#../../Core/Dependencies/include/AL 
-#../../Core/include 
-
 SET ( POLYCODE_SEARCH_PATHS
       ${CMAKE_HOME_DIRECTORY}/../polycode/Release/${CMAKE_SYSTEM_NAME}/Framework/Core/lib
       ${CMAKE_HOME_DIRECTORY}/../polycode/Release/${CMAKE_SYSTEM_NAME}/Framework/Core/Dependencies/lib
@@ -12,13 +8,6 @@ SET ( POLYCODE_SEARCH_PATHS
       ${CMAKE_HOME_DIRECTORY}/../polycode/Release/${CMAKE_SYSTEM_NAME}/Framework/Core/Dependencies/include/AL
     )
 
-#MESSAGE(STATUS "Let,s find polycode in this directories :")
-#MESSAGE(STATUS ${POLYCODE_SEARCH_PATHS})
-
-# - Try to find Polycode
-# Once done this will define
-
-#// posible names for libpng 
 SET ( LIB_PNG_POSIBLE_NAMES 
         "png"
         "png15"
@@ -33,7 +22,7 @@ SET ( LIB_PNG_POSIBLE_DEBUG_NAMES
         "libpng15_staticd" 
     )
 
-#// posible names for zpng 
+# posible names for zpng 
 SET ( LIB_Z_POSIBLE_NAMES 
         "z"
         "zlib"
@@ -44,7 +33,7 @@ SET ( LIB_Z_POSIBLE_DEBUG_NAMES
         "zlibd"
     )
 
-#// posible names for OpenAL 
+# posible names for OpenAL 
 SET ( LIB_OPENAL_POSIBLE_NAMES 
         "openal"
         "OpenAL32"
@@ -89,7 +78,6 @@ FIND_PATH ( POLYCODE_CORE_CORE_INCLUDE_DIR NAMES PolyCore.h
             CMAKE_FIND_FRAMEWORK NEVER
             PATHS ${POLYCODE_SEARCH_PATHS} 
           )
-#MESSAGE(STATUS ${POLYCODE_CORE_CORE_INCLUDE_DIR})
 
 FIND_PATH ( POLYCODE_VIEW_DIR NAMES PolycodeView.cpp
             HINTS
@@ -101,7 +89,6 @@ FIND_PATH ( POLYCODE_VIEW_DIR NAMES PolycodeView.cpp
             CMAKE_FIND_FRAMEWORK NEVER
             PATHS ${POLYCODE_SEARCH_PATHS} 
           )
-#MESSAGE(STATUS ${POLYCODE_VIEW_INCLUDE_DIR})
 
 SET ( LIB_POLYVIEW_SRC 
        ${POLYCODE_VIEW_DIR}/PolycodeView.cpp
@@ -117,7 +104,6 @@ FIND_PATH ( POLYCODE_CORE_DEPEND_INCLUDE_DIR NAMES pnglibconf.h
             CMAKE_FIND_FRAMEWORK NEVER
             PATHS ${POLYCODE_SEARCH_PATHS} 
           )
-#MESSAGE(STATUS ${POLYCODE_CORE_DEPEND_INCLUDE_DIR})
 
 FIND_PATH ( POLYCODE_CORE_DEPEND_AL_INCLUDE_DIR NAMES efx-creative.h
             HINTS
@@ -129,7 +115,6 @@ FIND_PATH ( POLYCODE_CORE_DEPEND_AL_INCLUDE_DIR NAMES efx-creative.h
             CMAKE_FIND_FRAMEWORK NEVER
             PATHS ${POLYCODE_SEARCH_PATHS} 
           )
-#MESSAGE(STATUS ${POLYCODE_CORE_DEPEND_AL_INCLUDE_DIR})
 
 SET ( POLYCODE_CORE_INCLUDE_DIR
       ${POLYCODE_CORE_CORE_INCLUDE_DIR}
@@ -138,12 +123,7 @@ SET ( POLYCODE_CORE_INCLUDE_DIR
       ${POLYCODE_VIEW_DIR}
     )
 
-
-#MESSAGE (STATUS ${POLYCODE_CORE_INCLUDE_DIR})
-
 FOREACH( LIBRARY ${POLLYCORE_LIB_NAMES} )
-    
-    #MESSAGE(STATUS ${LIBRARY})
     FIND_LIBRARY  ( LIB_${LIBRARY} NAME ${LIBRARY}
                     HINTS
                     NO_DEFAULT_PATH
@@ -158,21 +138,16 @@ FOREACH( LIBRARY ${POLLYCORE_LIB_NAMES} )
                     PATHS ${POLYCODE_SEARCH_PATHS} 
                   )
     
-    #MESSAGE(STATUS ${LIB_${LIBRARY}})
-    
     IF( LIB_${LIBRARY} )
-        MESSAGE(STATUS ${LIBRARY} " was found")
+       # MESSAGE(STATUS ${LIBRARY} " was found")
         SET ( LIB_POLYCODE_CORE  
                 ${LIB_POLYCODE_CORE}
                 ${LIB_${LIBRARY}}
             )
     ENDIF( LIB_${LIBRARY} )
-
 ENDFOREACH( LIBRARY ${POLLYCORE_LIB_NAMES} )
 
 FOREACH( LIBRARY ${POLLYCORE_LIB_DEBUG_NAMES} )
-    
-    #MESSAGE(STATUS ${LIBRARY})
     FIND_LIBRARY  ( LIB_${LIBRARY} NAME ${LIBRARY}
                     HINTS
                     NO_DEFAULT_PATH
@@ -187,20 +162,23 @@ FOREACH( LIBRARY ${POLLYCORE_LIB_DEBUG_NAMES} )
                     PATHS ${POLYCODE_SEARCH_PATHS} 
                   )
     
-    #MESSAGE(STATUS ${LIB_${LIBRARY}})
-    
     IF( LIB_${LIBRARY} )   
-        MESSAGE(STATUS ${LIBRARY} " DEBUG was found")
+      #  MESSAGE(STATUS ${LIBRARY} " DEBUG was found")
         SET ( LIB_POLYCODE_CORE_DEBUG
                 ${LIB_POLYCODE_CORE_DEBUG}
                 ${LIB_${LIBRARY}}
             )
     ENDIF( LIB_${LIBRARY} )
-
 ENDFOREACH( LIBRARY ${POLLYCORE_LIB_DEBUG_NAMES} )
 
-IF(POLYCODE_CORE_INCLUDE_DIR AND LIB_POLYCODE_CORE AND LIB_POLYCODE_CORE_DEBUG)
-    SET(POLYCODE_CORE_FOUND TRUE)
-    MESSAGE(STATUS "POLYCODE CORE LIB WAS FOUND")
-ENDIF(POLYCODE_CORE_INCLUDE_DIR AND LIB_POLYCODE_CORE AND LIB_POLYCODE_CORE_DEBUG)
+IF( POLYCODE_CORE_INCLUDE_DIR AND LIB_POLYCODE_CORE AND LIB_POLYCODE_CORE_DEBUG )
+    IF( NOT POLYCODE_CORE_FOUND )
+        SET(POLYCODE_CORE_FOUND TRUE)
+        MESSAGE(STATUS "POLYCODE CORE LIB WAS FOUND")
+        MESSAGE(STATUS "Release:")
+        MESSAGE(STATUS ${LIB_POLYCODE_CORE})
+        MESSAGE(STATUS "Debug:")
+        MESSAGE(STATUS ${LIB_POLYCODE_CORE_DEBUG})
+    ENDIF()
+ENDIF()
 
