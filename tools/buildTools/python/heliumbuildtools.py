@@ -35,8 +35,6 @@ def cmakeGenerate( buildType, cmakeGenerator, srcDir, otherOpt, log_file ):
 def buildProject( buildType, log_file ):
     if sys.platform == 'linux2':
         runCmd(['make'], log_file)
-        print("Try to make install, wait few second please...")
-        runCmd(['make', 'install'], log_file)
     
     elif sys.platform == 'win32':
         cmd = 'c:/Windows/Microsoft.NET/Framework/v4.0.30319/MSBuild.exe'
@@ -45,3 +43,16 @@ def buildProject( buildType, log_file ):
         arg3 = '/nologo'
         runCmd([cmd, arg1, arg2, arg3], log_file)
     return
+
+def installProject( buildType, log_file ):
+    if sys.platform == 'linux2':
+        runCmd(['make', 'install'], log_file)
+    
+    elif sys.platform == 'win32':
+        cmd = 'c:/Windows/Microsoft.NET/Framework/v4.0.30319/MSBuild.exe'
+        arg1 = 'INSTALL.vcxproj'
+        arg2 = '/p:Configuration='+buildType
+        arg3 = '/nologo'
+        runCmd([cmd, arg1, arg2, arg3], log_file)
+    return
+

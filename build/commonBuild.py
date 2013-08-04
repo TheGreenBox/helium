@@ -70,6 +70,8 @@ os.chdir(buildDir)
 
 heliumbuildtools.cmakeGenerate( buildType, cmakeGenerator, '../../..',[''], log_file )
 heliumbuildtools.buildProject( buildType, log_file )
+heliumbuildtools.installProject( buildType, log_file )
+
 log_file.close()
 
 os.chdir(rootScriptName)
