@@ -24,7 +24,7 @@ IF ( WIN32 )
             MESSAGE (STATUS ${LIB_NAME} " was found" )
             SET ( LIB_OPENAL_FILES
                     ${LIB_OPENAL_FILES}
-                    FINDED_${LIB_NAME}
+                    ${FINDED_${LIB_NAME}}
                 )
         ENDIF( FINDED_${LIB_NAME} )
     ENDFOREACH( LIB_NAME ${LIB_OPENAL_POSIBLE_NAMES} )
