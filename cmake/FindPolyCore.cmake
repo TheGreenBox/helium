@@ -1,12 +1,12 @@
 SET ( POLYCODE_SEARCH_PATHS
       ${CMAKE_HOME_DIRECTORY}/../polycode/Release/${CMAKE_SYSTEM_NAME}/Framework/Core/lib
-      ${CMAKE_HOME_DIRECTORY}/../polycode/Release/${CMAKE_SYSTEM_NAME}/Framework/Core/bin
       ${CMAKE_HOME_DIRECTORY}/../polycode/Release/${CMAKE_SYSTEM_NAME}/Framework/Core/Dependencies/lib
       
       ${CMAKE_HOME_DIRECTORY}/../polycode/Release/${CMAKE_SYSTEM_NAME}/Framework/Core/include
       ${CMAKE_HOME_DIRECTORY}/../polycode/Release/${CMAKE_SYSTEM_NAME}/Framework/Core/PolycodeView
       ${CMAKE_HOME_DIRECTORY}/../polycode/Release/${CMAKE_SYSTEM_NAME}/Framework/Core/Dependencies/include
       ${CMAKE_HOME_DIRECTORY}/../polycode/Release/${CMAKE_SYSTEM_NAME}/Framework/Core/Dependencies/include/AL
+      ${CMAKE_HOME_DIRECTORY}/../polycode/Release/${CMAKE_SYSTEM_NAME}/Framework/Core/Dependencies/bin
     )
 
 SET ( LIB_PNG_POSIBLE_NAMES 
@@ -177,9 +177,14 @@ IF( POLYCODE_CORE_INCLUDE_DIR AND LIB_POLYCODE_CORE AND LIB_POLYCODE_CORE_DEBUG 
         SET(POLYCODE_CORE_FOUND TRUE)
         MESSAGE(STATUS "POLYCODE CORE LIB WAS FOUND")
         MESSAGE(STATUS "Release:")
-        MESSAGE(STATUS ${LIB_POLYCODE_CORE})
+        FOREACH( LIBRARY ${LIB_POLYCODE_CORE} )
+            MESSAGE(STATUS ${LIBRARY})
+        ENDFOREACH()
+
         MESSAGE(STATUS "Debug:")
-        MESSAGE(STATUS ${LIB_POLYCODE_CORE_DEBUG})
-    ENDIF()
+        FOREACH( LIBRARY ${LIB_POLYCODE_CORE_DEBUG} )
+            MESSAGE(STATUS ${LIBRARY})
+        ENDFOREACH()
+    ENDIF( NOT POLYCODE_CORE_FOUND )
 ENDIF()
 
