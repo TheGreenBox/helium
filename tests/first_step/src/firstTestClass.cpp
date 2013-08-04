@@ -17,7 +17,7 @@ FirstStepTest::FirstStepTest(PolycodeView *view)
 	CoreServices::getInstance()->getResourceManager()->addDirResource("default", false);
 
 	Screen *screen = new Screen();			
-	image = new ScreenImage("../helium_resource/ChrisGerrard_tooth_steampunk_gear.png");
+	image = new ScreenImage("helium_resource/ChrisGerrard_tooth_steampunk_gear.png");
 	screen->addChild(image);	
 }
 
