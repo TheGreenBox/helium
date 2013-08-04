@@ -43,6 +43,6 @@ TARGET_LINK_LIBRARIES ( firstKeyControl
                       )
 
 INSTALL ( TARGETS firstKeyControl
-            DESTINATION ${OUTCOME_PATH}/tests
+            DESTINATION ${OUTCOME_PATH}
         )
 

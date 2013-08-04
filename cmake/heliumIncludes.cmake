@@ -14,7 +14,7 @@ IF( CMAKE_BUILD_TYPE STREQUAL Release )
           ${LIB_POLYCODE_CORE}
           ${LIB_POLYCODE_MODULES}
           ${SDL_LIBRARY}
-          ${OPENGL_LIBRARIES} # GL and GLU
+          ${OPENGL_LIBRARIES}
         )
 
     SET ( SRC_STATIC_LIB 
@@ -26,7 +26,7 @@ ELSEIF( CMAKE_BUILD_TYPE STREQUAL Debug )
           ${LIB_POLYCODE_CORE_DEBUG}
           ${LIB_POLYCODE_MODULES_DEBUG}
           ${SDL_LIBRARY}
-          ${OPENGL_LIBRARIES} # GL and GLU
+          ${OPENGL_LIBRARIES}
         )
 
     SET ( SRC_STATIC_LIB 
@@ -37,15 +37,24 @@ ELSE()
     MESSAGE (ERROR "CMAKE_BUILD_TYPE must be defined")
 ENDIF()
 
-IF( WIN32 )
-    SET ( LIB_POLYCODE ${LIB_POLYCODE} ws2_32 Winmm )
-ENDIF( WIN32 )
+IF( UNIX )
+    SET ( LIB_POLYCODE 
+            ${LIB_POLYCODE} 
+            -ldl 
+            -lrt
+        )
+ELSEIF( WIN32 )
+    SET ( LIB_POLYCODE 
+            ${LIB_POLYCODE} 
+            ws2_32 Winmm 
+        )
+ENDIF( )
 
 
 INCLUDE_DIRECTORIES ( ${HELIUM_MODULES_DIR}/heliumGameCore/include
                       ${HELIUM_MODULES_DIR}/heliumMainMenu/include
                       ${HELIUM_MODULES_DIR}/heliumSceneObjects/include
-                      ${HELIUM_MODULES_DIR}/util
+                      ${HELIUM_MODULES_DIR}/util/include
                       ${POLYCODE_CORE_INCLUDE_DIR}
                       ${POLYCODE_MODULES_INCLUDE_DIR}
                       ${SDL_INCLUDE_DIR}
@@ -55,14 +64,13 @@ INCLUDE_DIRECTORIES ( ${HELIUM_MODULES_DIR}/heliumGameCore/include
 LINK_DIRECTORIES ( ${HELIUM_MODULES_DIR}/heliumGameCore )
 LINK_DIRECTORIES ( ${HELIUM_MODULES_DIR}/heliumMainMenu )
 LINK_DIRECTORIES ( ${HELIUM_MODULES_DIR}/heliumSceneObjects )
+LINK_DIRECTORIES ( ${HELIUM_MODULES_DIR}/util )
 
 ADD_DEFINITIONS(-DUNICODE -D_UNICODE)
 
 IF(UNIX)
     ADD_DEFINITIONS(-DOS_LINUX) 
-ENDIF(UNIX)
-
-IF(WIN32)
+ELSEIF(WIN32)
     ADD_DEFINITIONS(-DOS_WIN32)
-ENDIF(WIN32)
+ENDIF(UNIX)
 

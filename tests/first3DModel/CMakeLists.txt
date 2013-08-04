@@ -29,20 +29,21 @@ ADD_EXECUTABLE ( first3DModel
                )
 
 IF(WIN32)
-    set_target_properties( first3DModel PROPERTIES LINK_FLAGS_DEBUG "/SUBSYSTEM:windows") 
-    set_target_properties( first3DModel PROPERTIES COMPILE_DEFINITIONS_DEBUG "_WINDOWS")
-    set_target_properties( first3DModel PROPERTIES LINK_FLAGS_RELWITHDEBINFO "/SUBSYSTEM:windows")
+    set_target_properties( first3DModel PROPERTIES LINK_FLAGS_DEBUG                   "/SUBSYSTEM:windows") 
+    set_target_properties( first3DModel PROPERTIES COMPILE_DEFINITIONS_DEBUG          "_WINDOWS")
+    set_target_properties( first3DModel PROPERTIES LINK_FLAGS_RELWITHDEBINFO          "/SUBSYSTEM:windows")
     set_target_properties( first3DModel PROPERTIES COMPILE_DEFINITIONS_RELWITHDEBINFO "_WINDOWS")
-    set_target_properties( first3DModel PROPERTIES LINK_FLAGS_RELEASE "/SUBSYSTEM:windows")
-    set_target_properties( first3DModel PROPERTIES LINK_FLAGS_MINSIZEREL "/SUBSYSTEM:windows")
-    SET_TARGET_PROPERTIES( first3DModel PROPERTIES COMPILE_DEFINITIONS _UNICODE,UNICODE)
+    set_target_properties( first3DModel PROPERTIES LINK_FLAGS_RELEASE                 "/SUBSYSTEM:windows")
+    set_target_properties( first3DModel PROPERTIES LINK_FLAGS_MINSIZEREL              "/SUBSYSTEM:windows")
+    SET_TARGET_PROPERTIES( first3DModel PROPERTIES COMPILE_DEFINITIONS                _UNICODE,UNICODE)
 ENDIF(WIN32)
 
 TARGET_LINK_LIBRARIES ( first3DModel
                         ${LIB_POLYCODE}
+                        heliumUtil
                       )
 
 INSTALL ( TARGETS first3DModel
-            DESTINATION ${OUTCOME_PATH}/tests
+            DESTINATION ${OUTCOME_PATH}
         )
 

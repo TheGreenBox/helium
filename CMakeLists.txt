@@ -13,6 +13,7 @@ INCLUDE( heliumResourceIncludes )
 # -------------------------------------------------------------------
 # ------ modules building -------
 
+ADD_SUBDIRECTORY ( ${HELIUM_MODULES_DIR}/util               )
 ADD_SUBDIRECTORY ( ${HELIUM_MODULES_DIR}/heliumSceneObjects )
 ADD_SUBDIRECTORY ( ${HELIUM_MODULES_DIR}/heliumGameCore     )
 ADD_SUBDIRECTORY ( ${HELIUM_MODULES_DIR}/heliumMainMenu     )
@@ -37,6 +38,8 @@ ADD_SUBDIRECTORY ( ${CMAKE_SOURCE_DIR}/game)
 INSTALL ( DIRECTORY ${HELIUM_RESOURCE_SRC_DIR}/
             DESTINATION ${OUTCOME_RESOURCES_PATH}
         )
+
+INCLUDE( heliumLibInstall )
 
 MESSAGE(STATUS "END HELIUM GENERATING")
 

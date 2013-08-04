@@ -10,11 +10,11 @@ First3DTest::First3DTest(PolycodeView *view)
 
 	Scene *scene = new Scene();
 	ScenePrimitive *ground = new ScenePrimitive(ScenePrimitive::TYPE_PLANE, 25,25);
-	ground->loadTexture("../helium_resource/sand_big.png");
+	ground->loadTexture("helium_resource/sand_big.png");
 	scene->addEntity(ground);
 
 	ScenePrimitive *box = new ScenePrimitive(ScenePrimitive::TYPE_BOX, 1,1,1);
-	box->loadTexture("../helium_resource/electronica.png");
+	box->loadTexture("helium_resource/electronica.png");
 	box->setPosition(0.0, 0.5, 0.0);
 	scene->addEntity(box);
 	
@@ -22,7 +22,7 @@ First3DTest::First3DTest(PolycodeView *view)
 	scene->getDefaultCamera()->lookAt(Vector3(0,-2,0));
 
 	Screen *screen = new Screen();			
-    cursor = new ScreenImage("../helium_resource/cursor.png");
+    cursor = new ScreenImage("helium_resource/cursor.png");
 	cursor->setPositionMode(ScreenEntity::POSITION_CENTER);
 	screen->addChild(cursor);	
 	

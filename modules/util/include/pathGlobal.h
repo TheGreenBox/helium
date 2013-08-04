@@ -2,12 +2,11 @@
  * Organization: The Green Box
  * 
  * Project name: Helium
- * File name:  mainLoop.h 
+ * File name:  pathGlobal.h 
  * Description:
  * Author:  AKindyakov 
  * ========================================================
  */
 
-#define HELIUM_RESOURCE_PATH "helium_resource"
-#define HELIUM_RESOURCE_PATH_FROM_TEST "../helium_resource"
+extern const char* HELIUM_RESOURCE_PATH;
 

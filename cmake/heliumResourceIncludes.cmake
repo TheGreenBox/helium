@@ -1,11 +1,12 @@
+MESSAGE( STATUS "HELIUM INSTAL RECOURCES:")
 
 SET ( HELIUM_RESOURCE_SEARCH_PATHS
-      ${CMAKE_HOME_DIRECTORY}/../helium_resource
-      ${CMAKE_HOME_DIRECTORY}/../Helium_resource
-      ${CMAKE_HOME_DIRECTORY}/../HeliumResource
       ~/Dropbox/game_project/helium_resource/art
       ~/Dropbox/game_project/Helium_resource/art
       ~/Dropbox/game_project/HeliumResource/art
+      ${CMAKE_HOME_DIRECTORY}/../helium_resource
+      ${CMAKE_HOME_DIRECTORY}/../Helium_resource
+      ${CMAKE_HOME_DIRECTORY}/../HeliumResource
     )
 
 FIND_PATH ( HELIUM_RESOURCE_SRC_DIR NAME helium_resource.txt 
@@ -19,6 +20,5 @@ FIND_PATH ( HELIUM_RESOURCE_SRC_DIR NAME helium_resource.txt
             PATHS ${HELIUM_RESOURCE_SEARCH_PATHS} 
           )
 
-MESSAGE( STATUS "HELIUM resource directory :")
-MESSAGE( STATUS ${HELIUM_RESOURCE_SRC_DIR} )
+MESSAGE( STATUS "From: "${HELIUM_RESOURCE_SRC_DIR} )
 
