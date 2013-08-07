@@ -16,22 +16,25 @@
 
 #include "heliumSceneObjects.h"
 
-class HeliumGameCore
-{
+class HeliumGameCore {
 public:    
     HeliumGameCore(Polycode::Core* );
     virtual ~HeliumGameCore();
     void game();
     
+protected:
+    void renderPause(bool);
+	
 private:
+    Polycode::Core*      engineCore;
     
-	Polycode::Core*      engineCore;
+    Polycode::Scene*     engineScene;
+    Polycode::Screen*    engineScreen; // may be it wiil be no one ?
     
     WorldObjects*        physObjects;
+    
+    // gameObjectsBehavior();
 };
 
-// physicsUpdate();
-// stuckDetector();
-// gameObjectsBehavior();
-
 #endif // _HELIUM_GAME_CORE_INCLUDED_
+

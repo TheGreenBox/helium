@@ -8,6 +8,8 @@
  * ========================================================
  */
 
+#include <Polycode.h>
+
 #include "heliumSceneObjects.h"
 
 /*SceneMesh *mesh = new SceneMesh("ninja.mesh");
