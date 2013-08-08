@@ -32,8 +32,6 @@ private:
     Polycode::Screen*    engineScreen; // may be it wiil be no one ?
     
     WorldObjects*        physObjects;
-    
-    // gameObjectsBehavior();
 };
 
 #endif // _HELIUM_GAME_CORE_INCLUDED_

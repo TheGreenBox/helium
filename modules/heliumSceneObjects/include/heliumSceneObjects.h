@@ -49,14 +49,16 @@ private:
     
 };
 
-class ObjectDamage {
+class ObjectVitalSings {
 public:
-    ObjectDamage();
-    virtual ~ObjectDamage();
+    ObjectVitalSings();
+    virtual ~ObjectVitalSings();
     void takeThePulse();
-private:
-    long int damage;
+    void getHarm(long int);
     
+private:
+    long int health;
+    long int damage;
 };
 
 class StaticObject {
@@ -74,11 +76,12 @@ public:
     DynamicObject(Polycode::SceneMesh*);
     
     virtual ~DynamicObject();
+    void lifeStep();
     
 protected:
     int priorityLevel;
-    ObjectDamage*   pPulse;
-    ObjectBehavior* pMind;
+    ObjectVitalSings*  pPulse;
+    ObjectBehavior*    pMind;
 };
 
 class PhysicObject : public DynamicObject {
@@ -118,16 +121,25 @@ class WorldObjects {
 public:    
     WorldObjects();
     virtual ~WorldObjects();
+    
+    virtual void lifeStep()=0;
+    virtual int  addObject(long int id)=0;
 };
 
 class CommonWorldObjects : public WorldObjects {
 public:    
     CommonWorldObjects();
     virtual ~CommonWorldObjects();
+    
+    void lifeStep();
+    int  addObject(long int id);
 
 private:
+
+    Polycode::Scene* pEngineScene;
+    
     std::list<StaticObject*>  staticiObjects;
-    std::list<DynamicObject*> dynamicObject;
+    std::list<DynamicObject*> dynamicObjects;
 };
 
 #endif // _HELIUM_SCENE_OBJECTS_INCLUDED_

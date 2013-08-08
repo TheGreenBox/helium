@@ -44,13 +44,19 @@ ObjectBehavior::~ObjectBehavior() {
 void ObjectBehavior::thinkAndDo() {
 }
 
-ObjectDamage::ObjectDamage() {
+ObjectVitalSings::ObjectVitalSings() {
 }
 
-ObjectDamage::~ObjectDamage() {
+ObjectVitalSings::~ObjectVitalSings() {
 }
 
-void ObjectDamage::takeThePulse() {
+void ObjectVitalSings::takeThePulse() {
+    health -= damage;
+    damage  = 0;
+}
+
+void ObjectVitalSings::getHarm(long int newHarm) {
+   damage += newHarm; 
 }
 
 StaticObject::StaticObject() {
@@ -62,16 +68,21 @@ StaticObject::~StaticObject() {
 DynamicObject::DynamicObject() {
 }
 
-DynamicObject::DynamicObject(Polycode::SceneMesh*) {
+DynamicObject::DynamicObject(Polycode::SceneMesh* _mesh) {
 }
 
 DynamicObject::~DynamicObject() {
+}
+
+void DynamicObject::lifeStep() {
+    pPulse->takeThePulse();   
+    pMind->thinkAndDo();
 }
     
 PhysicObject::PhysicObject() {
 }
 
-PhysicObject::PhysicObject(Polycode::SceneMesh*) {
+PhysicObject::PhysicObject(Polycode::SceneMesh* _mesh) {
 }
 
 PhysicObject::~PhysicObject() {
@@ -80,7 +91,7 @@ PhysicObject::~PhysicObject() {
 CollisionOnlyObject::CollisionOnlyObject() {
 }
 
-CollisionOnlyObject::CollisionOnlyObject(Polycode::SceneMesh*) {
+CollisionOnlyObject::CollisionOnlyObject(Polycode::SceneMesh* _mesh) {
 }
 
 CollisionOnlyObject::~CollisionOnlyObject() {
@@ -89,7 +100,7 @@ CollisionOnlyObject::~CollisionOnlyObject() {
 ImmaterialObject::ImmaterialObject() {
 }
 
-ImmaterialObject::ImmaterialObject(Polycode::SceneMesh*) {
+ImmaterialObject::ImmaterialObject(Polycode::SceneMesh* _mesh) {
 }
 
 ImmaterialObject::~ImmaterialObject() {
@@ -101,3 +112,16 @@ CommonWorldObjects::CommonWorldObjects() {
 CommonWorldObjects::~CommonWorldObjects() {
 }
 
+void CommonWorldObjects::lifeStep() {
+    using std::list;
+    for ( list<DynamicObject*>::iterator dynIt = dynamicObjects.begin();
+            dynIt != dynamicObjects.end(); ++dynIt )
+    {
+        (*dynIt)->lifeStep();
+    }
+}
+
+int CommonWorldObjects::addObject(long int id)
+{
+    
+}
