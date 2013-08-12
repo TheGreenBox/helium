@@ -64,7 +64,12 @@ private:
 class StaticObject {
 public:    
     StaticObject();
+    StaticObject(Polycode::SceneMesh* );
     virtual ~StaticObject();
+    
+    Polycode::SceneMesh* getMesh(){ return pModel; };
+    void changeMesh(){};
+    void setPosition( double x, double y, double z );
 
 private:
     Polycode::SceneMesh* pModel;
@@ -76,7 +81,11 @@ public:
     DynamicObject(Polycode::SceneMesh*);
     
     virtual ~DynamicObject();
-    void lifeStep();
+    virtual void lifeStep();
+    
+    virtual Polycode::SceneMesh* getMesh()=0;
+    virtual void changeMesh()=0;
+    virtual void setPosition( double x, double y, double z )=0;
     
 protected:
     int priorityLevel;
@@ -90,6 +99,10 @@ public:
     PhysicObject(Polycode::SceneMesh*);
     
     virtual ~PhysicObject();
+    
+    Polycode::SceneMesh* getMesh(){ return NULL; };
+    void changeMesh(){};
+    void setPosition( double x, double y, double z ){};
 
 private:
 	Polycode::PhysicsSceneEntity*  pEntity;
@@ -101,6 +114,10 @@ public:
     CollisionOnlyObject(Polycode::SceneMesh*);
     
     virtual ~CollisionOnlyObject();
+    
+    Polycode::SceneMesh* getMesh(){ return NULL; };
+    void changeMesh(){};
+    void setPosition( double x, double y, double z ){};
 
 private:
     Polycode::CollisionSceneEntity* pEntity;
@@ -112,6 +129,10 @@ public:
     ImmaterialObject(Polycode::SceneMesh*);
     
     virtual ~ImmaterialObject();
+    
+    Polycode::SceneMesh* getMesh(){ return NULL; };
+    void changeMesh(){};
+    void setPosition( double x, double y, double z ){};
 
 private:
     Polycode::SceneMesh* pEntity;
