@@ -14,54 +14,34 @@
 #include <Polycode.h>
 #include "PolycodeView.h"
 #include "Polycode3DPhysics.h"
-
-class ListOfAllObjects
-{
+class Console {
 public:
-	
-    ListOfAllObjects(){};
-    virtual ~ListOfAllObjects();
-   
-	void addCommon( Polycode::PhysicsSceneEntity* );
-    void addChar( Polycode::PhysicsCharacter* );
+    Console(Polycode::Screen*);
+    virtual ~Console();
 
-    void addGraphObj( Polycode::ScenePrimitive*);
+    void add(const std::string&);    
+    void add(const char*);    
+    void add(const Polycode::String&);    
+    void clean();    
+    
 private:
-    std::list< Polycode::ScenePrimitive* >     graphObj;
-    
-    std::list< Polycode::PhysicsSceneEntity* > phObj;
-	std::list< Polycode::PhysicsSceneEntity* > commonObj;
-    std::list< Polycode::PhysicsCharacter* >   charObj;
-	std::list< Polycode::PhysicsVehicle* >     vehiclesObj; 
-    
+    Polycode::ScreenLabel label;
+    Polycode::Screen* screen;
 };
 
-struct ProHeliumGameState
-{
-    std::list<Polycode::PolyKEY> clampedKeys; 
-    std::list<Polycode::PhysicsSceneEntity*> highlightingObjects; 
-    ListOfAllObjects *worldobjects;
-};
-
-class KeyboardUserInput
+class KeyboardUserInput : public Polycode::EventHandler
 {
 public:
-    KeyboardUserInput( Polycode::Core *engCore,
-                       ListOfAllObjects*   pallObj,
-                       ProHeliumGameState* pGameState );
+    KeyboardUserInput( Console* );
     virtual ~KeyboardUserInput(){};
      
     void handleEvent(Polycode::Event *e);
     
 private:
-    void mouseKeyUP(Polycode::InputEvent*);
-    void mouseKeyDOWN(Polycode::InputEvent*);
     void keyUP(Polycode::InputEvent*);
     void keyDOWN(Polycode::InputEvent*);
     
-	Polycode::Core *core;
-    ListOfAllObjects* worldObjects;
-    ProHeliumGameState* gameState;
+    Console* console;
 };
 
 class ProGameobject
@@ -74,10 +54,9 @@ public:
 private:
 	Polycode::Core *core;
 	Polycode::PhysicsScene *scene;
-    
-    ListOfAllObjects worldobjects;
-    KeyboardUserInput keysHandler;
-    ProHeliumGameState gameState;
+	Polycode::Screen *screen;
 
+    Console console;
+    KeyboardUserInput keysHandler;
 };
 

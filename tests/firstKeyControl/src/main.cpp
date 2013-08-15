@@ -20,8 +20,16 @@
    #include "tchar.h"
 #endif
 
+#include "wrapClasses.h"
+
 APP_MAIN_FINCTION
 {
-    std::cout << "template test"; 
+    using namespace Polycode;
+	PolycodeView *view = new POLYCODE_VIEW_CREATOR("first step test");
+    ProGameobject* gm = new ProGameobject( view );
+    std::cout << "template test start...\n"; 
+    while (gm->update()) {
+    }
+    std::cout << "template test finished!\n"; 
     return 0;
 }

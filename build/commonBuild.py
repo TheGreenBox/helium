@@ -47,11 +47,11 @@ if cmakeGenerator == '':
     elif sys.platform == 'win32':
         cmakeGenerator = '-GVisual Studio 11'
  
-print( '\n--------------------------------------------------')
-print( 'Helium buld : buildType      : '+ buildType     )
-print( 'Helium buld : cmakeGenerator : '+ cmakeGenerator)
-print( 'Helium buld : platform       : '+ targetPlatform)
-print( '--------------------------------------------------\n')
+print( '\n------------------------------------------------------------')
+print( '\tHelium buld : buildType      : '+ buildType     )
+print( '\tHelium buld : cmakeGenerator : '+ cmakeGenerator)
+print( '\tHelium buld : platform       : '+ targetPlatform)
+print( '------------------------------------------------------------\n')
 
 sandboxDir = rootScriptName + '/product'
 
