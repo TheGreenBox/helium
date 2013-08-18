@@ -15,12 +15,12 @@ INCLUDE_DIRECTORIES ( ${3D_POLY_PHYS_TEST_DIR}/include )
 
 SET ( first3DModel_SRCS
       ${3D_POLY_PHYS_TEST_DIR}/src/main.cpp 
-      ${3D_POLY_PHYS_TEST_DIR}/src/helium3DWrap.h
+      ${3D_POLY_PHYS_TEST_DIR}/src/helium3DWrap.cpp
       ${SRC_STATIC_LIB}
     )
 
 SET ( first3DModel_HDRS
-      ${3D_POLY_PHYS_TEST_DIR}/src/helium3DWrap.cpp
+      ${3D_POLY_PHYS_TEST_DIR}/src/helium3DWrap.h
     )
 
 ADD_EXECUTABLE ( first3DModel

@@ -23,6 +23,7 @@ public:
     void add(const char*);    
     void add(const Polycode::String&);    
     void clean();    
+    void addEndOfLine();    
     
 private:
     Polycode::ScreenLabel label;
@@ -53,10 +54,10 @@ public:
     
 private:
 	Polycode::Core *core;
-	Polycode::PhysicsScene *scene;
-	Polycode::Screen *screen;
+//	Polycode::PhysicsScene *scene;
+//	Polycode::Screen *screen;
 
-    Console console;
-    KeyboardUserInput keysHandler;
+    Console* console;
+    KeyboardUserInput* keysHandler;
 };
 

@@ -10,11 +10,14 @@
 #include <iostream>
 #include "wrapClasses.h"
 
+#include "pathGlobal.h"
+
 namespace P = Polycode;
 
 Console::Console(P::Screen* consScreen) 
     : screen(consScreen),
-        label("Hello!\n", 12) {
+        label("Hello!", 12, "mono") {
+    label.setColor(0,1,0,1);
     screen->addChild(&label);
 }
 
@@ -33,6 +36,9 @@ void Console::add(const Polycode::String& str) {
 
 void Console::clean() {
     label.setText("");
+}
+
+void addEndOfLine() {
 }
 
 KeyboardUserInput::KeyboardUserInput( Console* cons )
@@ -62,20 +68,27 @@ void KeyboardUserInput::keyDOWN(P::InputEvent* inputEvent){
     console->add("down\n");
 }
 
-using namespace P; // fucking macros !
-ProGameobject::ProGameobject( PolycodeView* view )
-        : core(new POLYCODE_CORE(view, 640,480,false,false,0,0,90)),
-          screen(new Screen()),
-          console(screen),
-          keysHandler(&console) {
-    //core = new POLYCODE_CORE(view, 640,480,false,false,0,0,90);
-	Screen *screen = new Screen();
-	ScreenLabel *label = new ScreenLabel("Hello, Polycode!", 32);
-	screen->addChild(label);
-	core->getInput()->addEventListener( &keysHandler, 
+ProGameobject::ProGameobject( P::PolycodeView* view )
+//        : core(new POLYCODE_CORE(view, 640,480,false,false,0,0,90)),
+//          screen(new Screen()),
+//          console(screen),
+//          keysHandler(&console) {
+{
+    using namespace P; // fucking macros !
+    core = new POLYCODE_CORE(view, 640,480,false,false,0,0,90);
+
+    P::String res_path(HELIUM_RESOURCE_PATH);
+    CoreServices::getInstance()->getResourceManager()->addArchive(res_path+"/default.pak");
+    CoreServices::getInstance()->getResourceManager()->addDirResource("default", false);
+	
+    Screen *screen = new Screen();
+	
+    console = new Console(screen);
+    keysHandler = new KeyboardUserInput(console);
+    core->getInput()->addEventListener( keysHandler, 
                                 P::InputEvent::EVENT_KEYDOWN);
-    
-	core->getInput()->addEventListener( &keysHandler,
+  
+    core->getInput()->addEventListener( keysHandler,
                                 P::InputEvent::EVENT_KEYUP);
 }
 
@@ -83,6 +96,8 @@ ProGameobject::~ProGameobject(){
 }
 
 int ProGameobject::update() {
+//    screen->Update();
+//    screen->Render();
     return core->updateAndRender();
 }
 

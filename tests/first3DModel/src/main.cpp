@@ -9,7 +9,6 @@
  */
 
 #include <iostream> 
-//#include <string>
 
 #include <Polycode.h>
 #include <PolyMesh.h>

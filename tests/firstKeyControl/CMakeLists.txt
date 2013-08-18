@@ -40,6 +40,7 @@ ENDIF(WIN32)
 
 TARGET_LINK_LIBRARIES ( firstKeyControl
                         ${LIB_POLYCODE}
+                        heliumUtil
                       )
 
 INSTALL ( TARGETS firstKeyControl
