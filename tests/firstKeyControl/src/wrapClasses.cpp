@@ -14,61 +14,7 @@
 
 namespace P = Polycode;
 
-Console::Console() 
-    : screen(new P::Screen()),
-        lines_count(0),
-        visible_lines(0),
-        lineSpacing(0.2),
-        textSize(12),
-        allLines(15) {
-    
-    this->newLine();
-    this->add("Helium Console v_0.0.0.1:");
-    this->newLine();
-}
-
-Console::~Console() {
-    lines.back()->setText(lines.back()->getText() + str);
-}
-
-void Console::add(const std::string&) {}
-void Console::add(const char* str) {
-    lines.back()->setText(lines.back()->getText() + str);
-}
-
-void Console::add(const Polycode::String& str) {
-    lines.back()->setText(lines.back()->getText() + str);
-}
-
-void Console::clean() {
-    lines.back()->setText("");
-}
-
-void Console::newLine() {
-    P::String lineBegin = P::String::IntToString(lines_count);
-    lineBegin += " : ";
-    
-    P::ScreenLabel* label = new P::ScreenLabel(lineBegin, textSize, "mono");
-    label->setColor(0,1,0,1);
-    label->setPosition(4, static_cast<double>(lines_count*textSize)*(lineSpacing+1) );
-    screen->addChild(label);
-    
-    lines.push_back(label);
-    ++lines_count;
-    ++visible_lines;
-    if ( visible_lines > allLines ) {
-        scroll(-1);        
-        --visible_lines;
-    }
-}
-
-void Console::scroll(int n) {
-    double offset = static_cast<double>((lines_count-visible_lines+n)*textSize) * (lineSpacing+1);
-    screen->setScreenOffset(0, -offset);
-    visible_lines += n;
-}
-
-KeyboardUserInput::KeyboardUserInput( Console* cons )
+KeyboardUserInput::KeyboardUserInput( ScreenConsole* cons )
         : console(cons)
 {}
  
@@ -86,7 +32,6 @@ void KeyboardUserInput::handleEvent(Polycode::Event *e) {
 }
 
 void KeyboardUserInput::keyUP(P::InputEvent* inputEvent){
-    //std::cout << "Key Up: " << inputEvent->keyCode() << '\n';
     console->add("up: ");
     console->add(P::String::IntToString(inputEvent->keyCode()));
     console->add(" : ");
@@ -95,7 +40,6 @@ void KeyboardUserInput::keyUP(P::InputEvent* inputEvent){
 }
 
 void KeyboardUserInput::keyDOWN(P::InputEvent* inputEvent){
-    //std::cout << "Key Down: " << inputEvent->keyCode() << '\n';
     console->add("down: ");
     console->add(P::String::IntToString(inputEvent->keyCode()));
     console->add(" : ");
@@ -104,10 +48,6 @@ void KeyboardUserInput::keyDOWN(P::InputEvent* inputEvent){
 }
 
 ProGameobject::ProGameobject( P::PolycodeView* view )
-//        : core(new POLYCODE_CORE(view, 640,480,false,false,0,0,90)),
-//          screen(new Screen()),
-//          console(screen),
-//          keysHandler(&console) {
 {
     using namespace P; // fucking macros !
     core = new POLYCODE_CORE(view, 640,480,false,false,0,0,90);
@@ -116,9 +56,7 @@ ProGameobject::ProGameobject( P::PolycodeView* view )
     CoreServices::getInstance()->getResourceManager()->addArchive(res_path+"/default.pak");
     CoreServices::getInstance()->getResourceManager()->addDirResource("default", false);
 	
-//    Screen *screen = new Screen();
-	
-    console = new Console();
+    console = new ScreenConsole( 12, 17, 128, 0.25, P::Vector3(0.,1.,0.) );
     keysHandler = new KeyboardUserInput(console);
     core->getInput()->addEventListener( keysHandler, 
                                 P::InputEvent::EVENT_KEYDOWN);

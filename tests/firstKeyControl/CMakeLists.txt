@@ -6,8 +6,8 @@ PROJECT( firstKeyControl )
 
 SET( EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin/tests )
 SET(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/)
-INCLUDE(heliumIncludes)
 
+INCLUDE(heliumIncludes)
 
 SET( 3D_POLY_PHYS_TEST_DIR ${CMAKE_SOURCE_DIR}/tests/firstKeyControl )
 
@@ -41,6 +41,7 @@ ENDIF(WIN32)
 TARGET_LINK_LIBRARIES ( firstKeyControl
                         ${LIB_POLYCODE}
                         heliumUtil
+                        heliumScreenObjects
                       )
 
 INSTALL ( TARGETS firstKeyControl

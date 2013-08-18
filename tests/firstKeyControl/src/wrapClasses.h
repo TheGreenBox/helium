@@ -15,43 +15,12 @@
 #include "PolycodeView.h"
 #include "Polycode3DPhysics.h"
 
-class ConsoleLine {
-public:
-    ConsoleLine() {};
-    virtual ~ConsoleLine() {};
-    
-private:
-    Polycode::ScreenLabel* line;
-};
-
-class Console {
-public:
-    Console();
-    virtual ~Console();
-
-    void add(const std::string&);    
-    void add(const char*);    
-    void add(const Polycode::String&);    
-    void clean();    
-    void newLine();    
-    void scroll(int);    
-    
-private:
-    // Polycode::ScreenLabel label;
-    std::list< Polycode::ScreenLabel* > lines;
-    int lines_count;
-    int visible_lines;
-    Polycode::Screen* screen;
-    
-    double lineSpacing;
-    int    textSize;
-    int    allLines;
-};
+#include "heliumScreenConsole.h"
 
 class KeyboardUserInput : public Polycode::EventHandler
 {
 public:
-    KeyboardUserInput( Console* );
+    KeyboardUserInput( ScreenConsole* );
     virtual ~KeyboardUserInput(){};
      
     void handleEvent(Polycode::Event *e);
@@ -60,7 +29,7 @@ private:
     void keyUP(Polycode::InputEvent*);
     void keyDOWN(Polycode::InputEvent*);
     
-    Console* console;
+    ScreenConsole* console;
 };
 
 class ProGameobject
@@ -71,11 +40,9 @@ public:
     int update();
     
 private:
-	Polycode::Core *core;
-//	Polycode::PhysicsScene *scene;
-//	Polycode::Screen *screen;
-
-    Console* console;
+    Polycode::Core *core;
+    
+    ScreenConsole* console;
     KeyboardUserInput* keysHandler;
 };
 
