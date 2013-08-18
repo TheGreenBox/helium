@@ -14,20 +14,38 @@
 #include <Polycode.h>
 #include "PolycodeView.h"
 #include "Polycode3DPhysics.h"
+
+class ConsoleLine {
+public:
+    ConsoleLine() {};
+    virtual ~ConsoleLine() {};
+    
+private:
+    Polycode::ScreenLabel* line;
+};
+
 class Console {
 public:
-    Console(Polycode::Screen*);
+    Console();
     virtual ~Console();
 
     void add(const std::string&);    
     void add(const char*);    
     void add(const Polycode::String&);    
     void clean();    
-    void addEndOfLine();    
+    void newLine();    
+    void scroll(int);    
     
 private:
-    Polycode::ScreenLabel label;
+    // Polycode::ScreenLabel label;
+    std::list< Polycode::ScreenLabel* > lines;
+    int lines_count;
+    int visible_lines;
     Polycode::Screen* screen;
+    
+    double lineSpacing;
+    int    textSize;
+    int    allLines;
 };
 
 class KeyboardUserInput : public Polycode::EventHandler
