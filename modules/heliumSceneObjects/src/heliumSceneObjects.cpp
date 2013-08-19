@@ -106,7 +106,7 @@ ImmaterialObject::ImmaterialObject(Polycode::SceneMesh* _mesh) {
 ImmaterialObject::~ImmaterialObject() {
 }
 
-CommonWorldObjects::CommonWorldObjects() { 
+CommonWorldObjects::CommonWorldObjects(Polycode::Scene*) { 
 }
 
 CommonWorldObjects::~CommonWorldObjects() {

@@ -49,6 +49,5 @@ void HeliumGameCore::game() {
 
 void HeliumGameCore::renderPause(bool set) {
     engineScene->setVirtual(set);
-    engineScreen->enabled = set;
 }
 

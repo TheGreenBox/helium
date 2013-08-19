@@ -29,9 +29,9 @@ private:
     Polycode::Core*      engineCore;
     
     Polycode::Scene*     engineScene;
-    Polycode::Screen*    engineScreen; // may be it wiil be no one ?
+    // Polycode::Screen*    engineScreen; // may be it wiil be no one ?
     
-    WorldObjects*        physObjects;
+    WorldObjects*        objects;
 };
 
 #endif // _HELIUM_GAME_CORE_INCLUDED_
