@@ -40,7 +40,8 @@ public:
     int update();
     
 private:
-    Polycode::Core *core;
+    Polycode::Core* core;
+    Polycode::PhysicsScene* scene;
     
     ScreenConsole* console;
     KeyboardUserInput* keysHandler;

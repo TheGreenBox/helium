@@ -14,6 +14,7 @@ INCLUDE( heliumResourceIncludes )
 # ------ modules building -------
 
 ADD_SUBDIRECTORY ( ${HELIUM_MODULES_DIR}/util                )
+ADD_SUBDIRECTORY ( ${HELIUM_MODULES_DIR}/userInput           )
 ADD_SUBDIRECTORY ( ${HELIUM_MODULES_DIR}/heliumSceneObjects  )
 ADD_SUBDIRECTORY ( ${HELIUM_MODULES_DIR}/heliumScreenObjects )
 ADD_SUBDIRECTORY ( ${HELIUM_MODULES_DIR}/heliumGameCore      )

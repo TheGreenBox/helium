@@ -56,13 +56,32 @@ ProGameobject::ProGameobject( P::PolycodeView* view )
     CoreServices::getInstance()->getResourceManager()->addArchive(res_path+"/default.pak");
     CoreServices::getInstance()->getResourceManager()->addDirResource("default", false);
 	
-    console = new ScreenConsole( 12, 17, 128, 0.25, P::Vector3(0.,1.,0.) );
+    console = new ScreenConsole( 12, 10, 128, 0.25, P::Vector3(0.,1.,0.) );
     keysHandler = new KeyboardUserInput(console);
     core->getInput()->addEventListener( keysHandler, 
                                 P::InputEvent::EVENT_KEYDOWN);
   
     core->getInput()->addEventListener( keysHandler,
                                 P::InputEvent::EVENT_KEYUP);
+	
+	scene = new PhysicsScene();
+    
+    scene->getDefaultCamera()->setPosition(16,16,16);
+	scene->getDefaultCamera()->lookAt(Vector3(0,0,0));
+
+	ScenePrimitive* ground = new ScenePrimitive(ScenePrimitive::TYPE_PLANE, 16, 16);
+	ground->loadTexture(res_path + "/simple_grey_texture.png");
+	scene->addPhysicsChild(ground, PhysicsSceneEntity::SHAPE_PLANE, 0.0);
+    
+    ScenePrimitive* wall = new ScenePrimitive(ScenePrimitive::TYPE_VPLANE, 16, 2);
+	wall->loadTexture(res_path + "/simple_grey_texture.png");
+	wall->setPosition( 0, 1, 8 );
+	scene->addPhysicsChild(wall, PhysicsSceneEntity::SHAPE_PLANE, 0.0);
+    
+    wall = new ScenePrimitive(ScenePrimitive::TYPE_VPLANE, 16, 2);
+	wall->loadTexture(res_path + "/simple_grey_texture.png");
+	wall->setPosition( 0, 1, -8 );
+	scene->addPhysicsChild(wall, PhysicsSceneEntity::SHAPE_PLANE, 0.0);
 }
 
 ProGameobject::~ProGameobject(){
