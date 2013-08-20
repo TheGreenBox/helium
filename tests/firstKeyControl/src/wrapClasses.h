@@ -17,23 +17,38 @@
 
 #include "heliumScreenConsole.h"
 
-class KeyboardUserInput : public Polycode::EventHandler
-{
+class KeyHandler {
 public:
-    KeyboardUserInput( ScreenConsole* );
+    KeyHandler(){};
+    virtual ~KeyHandler(){};
+    virtual void process(Polycode::PhysicsScene*)=0;
+};
+
+class AddDice : public KeyHandler {
+public:
+    AddDice(){};
+    virtual ~AddDice(){};
+    void process(Polycode::PhysicsScene*);
+    static int status;
+};
+
+class KeyboardUserInput : public Polycode::EventHandler {
+public:
+    KeyboardUserInput(Polycode::PhysicsScene*);
     virtual ~KeyboardUserInput(){};
      
-    void handleEvent(Polycode::Event *e);
+    void handleEvent(Polycode::Event*);
     
 private:
     void keyUP(Polycode::InputEvent*);
     void keyDOWN(Polycode::InputEvent*);
     
+    std::map<int, KeyHandler*> handlers;
     ScreenConsole* console;
+    Polycode::PhysicsScene* scene;
 };
 
-class ProGameobject
-{
+class ProGameobject {
 public:
     ProGameobject( Polycode::PolycodeView* );
     virtual ~ProGameobject();
@@ -43,7 +58,6 @@ private:
     Polycode::Core* core;
     Polycode::PhysicsScene* scene;
     
-    ScreenConsole* console;
     KeyboardUserInput* keysHandler;
 };
 
