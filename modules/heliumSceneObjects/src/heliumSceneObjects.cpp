@@ -106,7 +106,8 @@ ImmaterialObject::ImmaterialObject(Polycode::SceneMesh* _mesh) {
 ImmaterialObject::~ImmaterialObject() {
 }
 
-CommonWorldObjects::CommonWorldObjects(Polycode::Scene*) { 
+CommonWorldObjects::CommonWorldObjects(Polycode::PhysicsScene* _scene)
+    : pEngineScene(_scene) {
 }
 
 CommonWorldObjects::~CommonWorldObjects() {
@@ -121,7 +122,3 @@ void CommonWorldObjects::lifeStep() {
     }
 }
 
-int CommonWorldObjects::addObject(long int id)
-{
-    
-}

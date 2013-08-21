@@ -12,9 +12,9 @@
 #define _HELIUM_SCENE_OBJECTS_INCLUDED_
 
 #include <list>
+
 #include <Polycode.h>
-#include <PolyCollisionSceneEntity.h>
-#include <PolyPhysicsSceneEntity.h>
+#include "Polycode3DPhysics.h"
 
 class ObjectBehavior {
 public:
@@ -114,31 +114,18 @@ private:
     Polycode::SceneMesh* pEntity;
 };
 
-class WorldObjects {
+class CommonWorldObjects {
 public:    
-    WorldObjects();
-    virtual ~WorldObjects();
-    
-    virtual void lifeStep()=0;
-    virtual int  addObject(long int id)=0;
-};
-
-class CommonWorldObjects : public WorldObjects {
-public:    
-    CommonWorldObjects(Polycode::Scene*);
+    CommonWorldObjects(Polycode::PhysicsScene*);
     virtual ~CommonWorldObjects();
     
     void lifeStep();
-    int  addObject(long int id);
     
-    void  addGround(long int id);
-
 private:
-
-    Polycode::Scene* pEngineScene;
+    Polycode::PhysicsScene*     pEngineScene;
     
-    std::list<StaticObject*>  staticiObjects;
-    std::list<DynamicObject*> dynamicObjects;
+    std::list< StaticObject* >  staticiObjects;
+    std::list< DynamicObject*>  dynamicObjects;
 };
 
 #endif // _HELIUM_SCENE_OBJECTS_INCLUDED_

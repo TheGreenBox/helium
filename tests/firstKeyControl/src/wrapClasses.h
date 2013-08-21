@@ -15,26 +15,36 @@
 #include "PolycodeView.h"
 #include "Polycode3DPhysics.h"
 
+#include "heliumSceneObjects.h"
 #include "heliumScreenConsole.h"
+
+class ProGameObject;
 
 class KeyHandler {
 public:
     KeyHandler(){};
     virtual ~KeyHandler(){};
-    virtual void process(Polycode::PhysicsScene*)=0;
+    virtual void process(ProGameObject*)=0;
 };
 
 class AddDice : public KeyHandler {
 public:
     AddDice(){};
     virtual ~AddDice(){};
-    void process(Polycode::PhysicsScene*);
+    void process(ProGameObject*);
     static int status;
+};
+
+class EscapeGame : public KeyHandler {
+public:
+    EscapeGame(){};
+    virtual ~EscapeGame(){};
+    void process(ProGameObject*);
 };
 
 class KeyboardUserInput : public Polycode::EventHandler {
 public:
-    KeyboardUserInput(Polycode::PhysicsScene*);
+    KeyboardUserInput(ProGameObject*);
     virtual ~KeyboardUserInput(){};
      
     void handleEvent(Polycode::Event*);
@@ -43,21 +53,28 @@ private:
     void keyUP(Polycode::InputEvent*);
     void keyDOWN(Polycode::InputEvent*);
     
-    std::map<int, KeyHandler*> handlers;
+    std::map< int, KeyHandler* > handlers;
+    
     ScreenConsole* console;
-    Polycode::PhysicsScene* scene;
+    ProGameObject* gamePt;
 };
 
-class ProGameobject {
+class ProGameObject {
 public:
-    ProGameobject( Polycode::PolycodeView* );
-    virtual ~ProGameobject();
+    ProGameObject( Polycode::PolycodeView* );
+    virtual ~ProGameObject();
+    
+    CommonWorldObjects*     getWorldPt() { return &world; };
+    Polycode::PhysicsScene* getScenePt() { return scene; };
+    Polycode::Core* getCorePt() { return core; };
+    
     int update();
     
 private:
-    Polycode::Core* core;
+    Polycode::Core*         core;
     Polycode::PhysicsScene* scene;
     
     KeyboardUserInput* keysHandler;
+    CommonWorldObjects world;
 };
 

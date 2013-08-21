@@ -16,20 +16,25 @@ namespace P = Polycode;
 
 P::String res_path(HELIUM_RESOURCE_PATH);
 
-void AddDice::process(P::PhysicsScene* scene) {
-    P::ScenePrimitive* dice = new P::ScenePrimitive(P::ScenePrimitive::TYPE_BOX, 1.1, 1.1, 1.1 );
+void AddDice::process(ProGameObject* gm) {
+    P::ScenePrimitive* dice = new P::ScenePrimitive(P::ScenePrimitive::TYPE_BOX, 0.5, 0.5, 0.5 );
     dice->loadTexture(res_path + "/flame1.png");
     dice->setRoll(-45);
     dice->setPitch(45);
     dice->setPosition(0, 10, 0);
-    scene->addPhysicsChild(dice, P::PhysicsSceneEntity::SHAPE_BOX, 1.0);
+    gm->getScenePt()->addPhysicsChild(dice, P::PhysicsSceneEntity::SHAPE_BOX, 0.5);
 }
 
-KeyboardUserInput::KeyboardUserInput(P::PhysicsScene* _scene)
+void EscapeGame::process(ProGameObject* gm) {
+    gm->getCorePt()->Shutdown();
+}
+
+KeyboardUserInput::KeyboardUserInput(ProGameObject* gm)
         : console(new ScreenConsole( 12, 10, 128, 0.25, P::Vector3(0.0,1.0,0.0))),
-          scene(_scene)
+          gamePt(gm)
 {
    handlers[P::KEY_a] = new AddDice();
+   handlers[P::KEY_ESCAPE] = new EscapeGame();
 }
  
 void KeyboardUserInput::handleEvent(P::Event *e) {
@@ -61,27 +66,26 @@ void KeyboardUserInput::keyDOWN(P::InputEvent* inputEvent){
     console->newLine();
     std::map<int, KeyHandler*>::iterator prc = handlers.find(inputEvent->keyCode());
     if ( prc != handlers.end() ) {
-        prc->second->process(scene);
+        prc->second->process(gamePt);
     }
 }
 
-ProGameobject::ProGameobject( P::PolycodeView* view )
+using namespace P; // fucking macros !
+ProGameObject::ProGameObject( P::PolycodeView* view )
+    : core(new POLYCODE_CORE(view, 640, 480, false, false, 0, 0, 90)),
+      scene(new PhysicsScene()),
+      world(scene)
 {
-    using namespace P; // fucking macros !
-    core = new POLYCODE_CORE(view, 640, 480, false, false, 0, 0, 90);
-
     CoreServices::getInstance()->getResourceManager()->addArchive(res_path+"/default.pak");
     CoreServices::getInstance()->getResourceManager()->addDirResource("default", false);
-	scene = new PhysicsScene();
     
-    keysHandler = new KeyboardUserInput(scene);
+    keysHandler = new KeyboardUserInput(this);
 
     core->getInput()->addEventListener( keysHandler, 
                                         P::InputEvent::EVENT_KEYDOWN);
   
     core->getInput()->addEventListener( keysHandler,
                                         P::InputEvent::EVENT_KEYUP);
-	std::cout << "85\n";
     
     scene->getDefaultCamera()->setPosition(16,16,16);
 	scene->getDefaultCamera()->lookAt(Vector3(0,0,0));
@@ -113,10 +117,10 @@ ProGameobject::ProGameobject( P::PolycodeView* view )
 	scene->addPhysicsChild(wall, PhysicsSceneEntity::SHAPE_PLANE, 0.0);
 }
 
-ProGameobject::~ProGameobject(){
+ProGameObject::~ProGameObject(){
 }
 
-int ProGameobject::update() {
+int ProGameObject::update() {
     return core->updateAndRender();
 }
 

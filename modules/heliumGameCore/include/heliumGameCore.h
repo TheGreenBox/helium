@@ -26,12 +26,10 @@ protected:
     void renderPause(bool);
 	
 private:
-    Polycode::Core*      engineCore;
+    Polycode::Core*         engineCore;
+    Polycode::PhysicsScene* engineScene;
     
-    Polycode::Scene*     engineScene;
-    // Polycode::Screen*    engineScreen; // may be it wiil be no one ?
-    
-    WorldObjects*        objects;
+    CommonWorldObjects*     objects;
 };
 
 #endif // _HELIUM_GAME_CORE_INCLUDED_

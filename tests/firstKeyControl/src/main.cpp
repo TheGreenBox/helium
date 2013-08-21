@@ -25,13 +25,15 @@
 APP_MAIN_FINCTION
 {
     using namespace Polycode;
-	PolycodeView *view = new POLYCODE_VIEW_CREATOR("key test");
-    ProGameobject* gm = new ProGameobject( view );
+	PolycodeView*  view = new POLYCODE_VIEW_CREATOR("key test");
+    
+    ProGameObject* game = new ProGameObject( view );
     
     std::cout << "Keys test start...\n"; 
     
-    while (gm->update()) { }
+    while (game->update()) { }
     
     std::cout << "Keys test finished!\n"; 
     return 0;
 }
+

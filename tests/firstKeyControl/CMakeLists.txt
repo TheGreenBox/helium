@@ -42,6 +42,7 @@ TARGET_LINK_LIBRARIES ( firstKeyControl
                         ${LIB_POLYCODE}
                         heliumUtil
                         heliumScreenObjects
+                        heliumSceneObjects
                       )
 
 INSTALL ( TARGETS firstKeyControl
