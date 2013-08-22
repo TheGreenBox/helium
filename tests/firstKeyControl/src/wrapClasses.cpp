@@ -30,6 +30,13 @@ void AddDice::process(ProGameObject* gm) {
     gm->getScenePt()->addPhysicsChild(dice, P::PhysicsSceneEntity::SHAPE_BOX, 0.5);
 }
 
+void AddBarrel::process(ProGameObject* gm) {
+    P::Mesh mesh(P::Mesh::LINE_STRIP_MESH);
+    mesh.createCylinder(1, 0.25, 8);
+    PhysicsObject* bar = new PhysicsObject(new P::SceneMesh(&mesh));    
+    gm->getWorldPt()->addDynamic( bar );
+}
+
 void AddBoll::process(ProGameObject* gm) {
     P::ScenePrimitive* dice 
         = new P::ScenePrimitive(P::ScenePrimitive::TYPE_SPHERE, 0.5, 10, 10 );
@@ -76,6 +83,7 @@ KeyboardUserInput::KeyboardUserInput(ProGameObject* gm)
 {
     handlers[P::KEY_1] = new AddDice();
     handlers[P::KEY_2] = new AddBoll();
+    handlers[P::KEY_3] = new AddBarrel();
     handlers[P::KEY_ESCAPE] = new EscapeGame();
     
     handlers[P::KEY_d] = new YCameraMove();

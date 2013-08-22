@@ -31,6 +31,10 @@ struct AddDice : public KeyHandler {
     void process(ProGameObject*);
 };
 
+struct AddBarrel : public KeyHandler {
+    void process(ProGameObject*);
+};
+
 struct AddBoll : public KeyHandler {
     void process(ProGameObject*);
 };
@@ -79,7 +83,7 @@ public:
     
     CommonWorldObjects*     getWorldPt() { return &world; };
     Polycode::PhysicsScene* getScenePt() { return scene; };
-    Polycode::Core* getCorePt() { return core; };
+    Polycode::Core*         getCorePt() { return core; };
     
     int update();
     

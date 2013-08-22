@@ -37,48 +37,44 @@ private:
     long int damage;
 };
 
-class StaticObject {
+class HeliumObject {
 public:    
-    StaticObject();
+    virtual void changeMesh()=0;
+    virtual void setPosition( double x, double y, double z )=0;
+    virtual void pushToScene(Polycode::PhysicsScene*)=0;
+};
+
+class StaticObject : public HeliumObject {
+public:    
     StaticObject(Polycode::SceneMesh* );
     virtual ~StaticObject();
     
-    Polycode::SceneMesh* getMesh(){ return pModel; };
-    void changeMesh(){};
-    void setPosition( double x, double y, double z );
+    void setPosition( double x, double y, double z ){};
 
 private:
     Polycode::SceneMesh* pModel;
 };
 
-class DynamicObject {
+class DynamicObject : public HeliumObject {
 public:    
     DynamicObject();
-    DynamicObject(Polycode::SceneMesh*);
-    
     virtual ~DynamicObject();
-    virtual void lifeStep();
-    
-    virtual Polycode::SceneMesh* getMesh()=0;
-    virtual void changeMesh()=0;
-    virtual void setPosition( double x, double y, double z )=0;
+    void lifeStep();
     
 protected:
-    int priorityLevel;
     ObjectVitalSings*  pPulse;
     ObjectBehavior*    pMind;
 };
 
-class PhysicObject : public DynamicObject {
+class PhysicsObject : public DynamicObject {
 public:    
-    PhysicObject();
-    PhysicObject(Polycode::SceneMesh*);
+    PhysicsObject(Polycode::SceneMesh*);
     
-    virtual ~PhysicObject();
+    virtual ~PhysicsObject();
     
-    Polycode::SceneMesh* getMesh(){ return NULL; };
     void changeMesh(){};
     void setPosition( double x, double y, double z ){};
+    void pushToScene(Polycode::PhysicsScene*){};
 
 private:
 	Polycode::PhysicsSceneEntity*  pEntity;
@@ -86,12 +82,10 @@ private:
 
 class CollisionOnlyObject : public DynamicObject{
 public:    
-    CollisionOnlyObject();
     CollisionOnlyObject(Polycode::SceneMesh*);
     
     virtual ~CollisionOnlyObject();
     
-    Polycode::SceneMesh* getMesh(){ return NULL; };
     void changeMesh(){};
     void setPosition( double x, double y, double z ){};
 
@@ -101,12 +95,10 @@ private:
 
 class ImmaterialObject : public DynamicObject{
 public:    
-    ImmaterialObject();
     ImmaterialObject(Polycode::SceneMesh*);
     
     virtual ~ImmaterialObject();
     
-    Polycode::SceneMesh* getMesh(){ return NULL; };
     void changeMesh(){};
     void setPosition( double x, double y, double z ){};
 
@@ -118,6 +110,9 @@ class CommonWorldObjects {
 public:    
     CommonWorldObjects(Polycode::PhysicsScene*);
     virtual ~CommonWorldObjects();
+    
+    void addDynamic( DynamicObject* );
+    void addStatic( StaticObject* );
     
     void lifeStep();
     
