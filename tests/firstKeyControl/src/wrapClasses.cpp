@@ -7,6 +7,7 @@
  * Author:  AKindyakov 
  * ========================================================
  */
+#include <cmath>
 #include <iostream>
 #include "wrapClasses.h"
 
@@ -17,12 +18,52 @@ namespace P = Polycode;
 P::String res_path(HELIUM_RESOURCE_PATH);
 
 void AddDice::process(ProGameObject* gm) {
+    static float pos = 1;
+    double x = 3 * std::sin(pos);
+    double y = 3 * std::cos(pos);
+    pos += 0.25;
     P::ScenePrimitive* dice = new P::ScenePrimitive(P::ScenePrimitive::TYPE_BOX, 0.5, 0.5, 0.5 );
     dice->loadTexture(res_path + "/flame1.png");
     dice->setRoll(-45);
     dice->setPitch(45);
-    dice->setPosition(0, 10, 0);
+    dice->setPosition(x, 10, y);
     gm->getScenePt()->addPhysicsChild(dice, P::PhysicsSceneEntity::SHAPE_BOX, 0.5);
+}
+
+void AddBoll::process(ProGameObject* gm) {
+    P::ScenePrimitive* dice 
+        = new P::ScenePrimitive(P::ScenePrimitive::TYPE_SPHERE, 0.5, 10, 10 );
+    dice->loadTexture(res_path + "/flame1.png");
+    dice->setPosition(0, 10, 0);
+    gm->getScenePt()->addPhysicsChild(dice, P::PhysicsSceneEntity::SHAPE_SPHERE, 0.5, 0.1, 100 );
+}
+
+void XCameraMove::process(ProGameObject* gm) {
+    P::Vector3 pos = gm->getScenePt()->getDefaultCamera()->getPosition();
+    pos.x = pos.x - 0.25;
+    pos.z = pos.z - 0.25;
+    gm->getScenePt()->getDefaultCamera()->setPosition(pos);
+}
+
+void XNegativeCameraMove::process(ProGameObject* gm) {
+    P::Vector3 pos = gm->getScenePt()->getDefaultCamera()->getPosition();
+    pos.x = pos.x + 0.25;
+    pos.z = pos.z + 0.25;
+    gm->getScenePt()->getDefaultCamera()->setPosition(pos);
+}
+
+void YCameraMove::process(ProGameObject* gm) {
+    P::Vector3 pos = gm->getScenePt()->getDefaultCamera()->getPosition();
+    pos.x = pos.x + 0.25;
+    pos.z = pos.z - 0.25;
+    gm->getScenePt()->getDefaultCamera()->setPosition(pos);
+}
+
+void YNegativeCameraMove::process(ProGameObject* gm) {
+    P::Vector3 pos = gm->getScenePt()->getDefaultCamera()->getPosition();
+    pos.x = pos.x - 0.25;
+    pos.z = pos.z + 0.25;
+    gm->getScenePt()->getDefaultCamera()->setPosition(pos);
 }
 
 void EscapeGame::process(ProGameObject* gm) {
@@ -33,8 +74,14 @@ KeyboardUserInput::KeyboardUserInput(ProGameObject* gm)
         : console(new ScreenConsole( 12, 10, 128, 0.25, P::Vector3(0.0,1.0,0.0))),
           gamePt(gm)
 {
-   handlers[P::KEY_a] = new AddDice();
-   handlers[P::KEY_ESCAPE] = new EscapeGame();
+    handlers[P::KEY_1] = new AddDice();
+    handlers[P::KEY_2] = new AddBoll();
+    handlers[P::KEY_ESCAPE] = new EscapeGame();
+    
+    handlers[P::KEY_d] = new YCameraMove();
+    handlers[P::KEY_a] = new YNegativeCameraMove();
+    handlers[P::KEY_w] = new XCameraMove();
+    handlers[P::KEY_s] = new XNegativeCameraMove();
 }
  
 void KeyboardUserInput::handleEvent(P::Event *e) {
@@ -87,7 +134,7 @@ ProGameObject::ProGameObject( P::PolycodeView* view )
     core->getInput()->addEventListener( keysHandler,
                                         P::InputEvent::EVENT_KEYUP);
     
-    scene->getDefaultCamera()->setPosition(16,16,16);
+    scene->getDefaultCamera()->setPosition(17,17,17);
 	scene->getDefaultCamera()->lookAt(Vector3(0,0,0));
 
 	ScenePrimitive* ground = new ScenePrimitive(ScenePrimitive::TYPE_PLANE, 16, 16);

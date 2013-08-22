@@ -27,18 +27,31 @@ public:
     virtual void process(ProGameObject*)=0;
 };
 
-class AddDice : public KeyHandler {
-public:
-    AddDice(){};
-    virtual ~AddDice(){};
+struct AddDice : public KeyHandler {
     void process(ProGameObject*);
-    static int status;
 };
 
-class EscapeGame : public KeyHandler {
-public:
-    EscapeGame(){};
-    virtual ~EscapeGame(){};
+struct AddBoll : public KeyHandler {
+    void process(ProGameObject*);
+};
+
+struct XCameraMove : public KeyHandler {
+    void process(ProGameObject*);
+};
+
+struct XNegativeCameraMove : public KeyHandler {
+    void process(ProGameObject*);
+};
+
+struct YCameraMove : public KeyHandler {
+    void process(ProGameObject*);
+};
+
+struct YNegativeCameraMove : public KeyHandler {
+    void process(ProGameObject*);
+};
+
+struct EscapeGame : public KeyHandler {
     void process(ProGameObject*);
 };
 
