@@ -8,6 +8,8 @@
  * ========================================================
  */
 
+#include <iostream>
+
 #include <Polycode.h>
 
 #include "heliumSceneObjects.h"
@@ -59,7 +61,8 @@ void ObjectVitalSings::getHarm(long int newHarm) {
    damage += newHarm; 
 }
 
-LifelessObject::LifelessObject(Polycode::ScenePrimitive* _primitive) {
+LifelessObject::LifelessObject(Polycode::ScenePrimitive* _primitive)
+    : model(_primitive) {
 }
 
 LifelessObject::~LifelessObject() {
@@ -100,6 +103,21 @@ CommonWorldObjects::CommonWorldObjects(Polycode::PhysicsScene* _scene)
 }
 
 CommonWorldObjects::~CommonWorldObjects() {
+}
+
+void CommonWorldObjects::addPhysicsObject( 
+                LifelessObject* obj,
+                int type,
+                Number mass,
+                Number friction,
+                Number restitution,
+                int group,
+                bool compoundChildren ) { 
+    std::cout << "before addPhysicsChild\n";
+    pEngineScene->addPhysicsChild( obj->getModel(),type,mass,friction,
+                                  restitution,group,compoundChildren );
+    std::cout << "before push_back\n";
+    lifelessObjects.push_back( obj );
 }
 
 void CommonWorldObjects::lifeStep() {

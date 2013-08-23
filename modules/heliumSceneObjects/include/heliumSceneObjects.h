@@ -45,7 +45,9 @@ public:
     virtual ~LifelessObject();
     
     void setPosition( double x, double y, double z );
-
+    
+    Polycode::ScenePrimitive* getModel() { return model; }
+    
 protected:
     Polycode::ScenePrimitive* model;
 };
@@ -134,7 +136,7 @@ public:
 private:
     Polycode::PhysicsScene*     pEngineScene;
     
-    std::list< LifelessObject* >  deadObjects;
+    std::list< LifelessObject* >  lifelessObjects;
     std::list< AliveObject*    >  aliveObjects;
 };
 

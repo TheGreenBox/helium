@@ -22,12 +22,15 @@ void AddDice::process(ProGameObject* gm) {
     double x = 3 * std::sin(pos);
     double y = 3 * std::cos(pos);
     pos += 0.25;
-    P::ScenePrimitive* dice = new P::ScenePrimitive(P::ScenePrimitive::TYPE_BOX, 0.5, 0.5, 0.5 );
-    dice->loadTexture(res_path + "/flame1.png");
-    dice->setRoll(-45);
-    dice->setPitch(45);
-    dice->setPosition(x, 10, y);
-    gm->getScenePt()->addPhysicsChild(dice, P::PhysicsSceneEntity::SHAPE_BOX, 0.5);
+    
+    P::ScenePrimitive* diceModel = new P::ScenePrimitive(P::ScenePrimitive::TYPE_BOX, 0.5, 0.5, 0.5 );
+    diceModel->loadTexture(res_path + "/flame1.png");
+    diceModel->setRoll(-45);
+    diceModel->setPitch(45);
+    diceModel->setPosition(x, 10, y);
+    
+    LifelessObject* dice = new LifelessObject(diceModel);
+    gm->getWorldPt()->addPhysicsObject(dice, P::PhysicsSceneEntity::SHAPE_BOX, 0.5);
 }
 
 void AddBarrel::process(ProGameObject* gm) {
