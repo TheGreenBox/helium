@@ -15,6 +15,7 @@
 
 #include <Polycode.h>
 #include "Polycode3DPhysics.h"
+#include "heliumPrepared3DObjects.h"
 
 class ObjectBehavior {
 public:
@@ -37,28 +38,23 @@ private:
     long int damage;
 };
 
-class HeliumObject {
+class LifelessObject {
 public:    
-    virtual void changeMesh()=0;
-    virtual void setPosition( double x, double y, double z )=0;
-    virtual void pushToScene(Polycode::PhysicsScene*)=0;
-};
-
-class StaticObject : public HeliumObject {
-public:    
-    StaticObject(Polycode::SceneMesh* );
-    virtual ~StaticObject();
+    LifelessObject(Polycode::ScenePrimitive*);
     
-    void setPosition( double x, double y, double z ){};
+    virtual ~LifelessObject();
+    
+    void setPosition( double x, double y, double z );
 
-private:
-    Polycode::SceneMesh* pModel;
+protected:
+    Polycode::ScenePrimitive* model;
 };
 
-class DynamicObject : public HeliumObject {
+class AliveObject : public LifelessObject {
 public:    
-    DynamicObject();
-    virtual ~DynamicObject();
+    //AliveObject();
+    AliveObject(Polycode::ScenePrimitive*);
+    virtual ~AliveObject();
     void lifeStep();
     
 protected:
@@ -66,44 +62,33 @@ protected:
     ObjectBehavior*    pMind;
 };
 
-class PhysicsObject : public DynamicObject {
-public:    
-    PhysicsObject(Polycode::SceneMesh*);
+struct PhysicsObject {
+    PhysicsObject();
+    ~PhysicsObject();
     
-    virtual ~PhysicsObject();
+    LifelessObject* body; 
     
-    void changeMesh(){};
-    void setPosition( double x, double y, double z ){};
-    void pushToScene(Polycode::PhysicsScene*){};
-
-private:
-	Polycode::PhysicsSceneEntity*  pEntity;
+    int type;
+    Number mass;
+    Number friction;
+    Number restitution;
+    int group;
 };
 
-class CollisionOnlyObject : public DynamicObject{
-public:    
-    CollisionOnlyObject(Polycode::SceneMesh*);
+struct CollisionOnlyObject {
+    CollisionOnlyObject();
+    ~CollisionOnlyObject();
     
-    virtual ~CollisionOnlyObject();
-    
-    void changeMesh(){};
-    void setPosition( double x, double y, double z ){};
+    LifelessObject* body; 
 
-private:
-    Polycode::CollisionSceneEntity* pEntity;
+    int type; 
 };
 
-class ImmaterialObject : public DynamicObject{
-public:    
-    ImmaterialObject(Polycode::SceneMesh*);
-    
-    virtual ~ImmaterialObject();
-    
-    void changeMesh(){};
-    void setPosition( double x, double y, double z ){};
+struct ImmaterialObject {
+    ImmaterialObject();
+    ~ImmaterialObject();
 
-private:
-    Polycode::SceneMesh* pEntity;
+    LifelessObject* body; 
 };
 
 class CommonWorldObjects {
@@ -111,16 +96,46 @@ public:
     CommonWorldObjects(Polycode::PhysicsScene*);
     virtual ~CommonWorldObjects();
     
-    void addDynamic( DynamicObject* );
-    void addStatic( StaticObject* );
+    void addObject( HeliumPrepared3D );
+    
+    void addObject( PhysicsObject );
+    void addObject( CollisionOnlyObject );
+    void addObject( ImmaterialObject );
+    
+    void addImmaterialObject( LifelessObject* );
+    void addImmaterialObject( AliveObject* );
+    
+    void addPhysicsObject( AliveObject* obj,
+                           int type=0,
+                           Number mass = 0.0f,
+                           Number friction=1,
+                           Number restitution=0,
+                           int group=1, 
+                           bool compoundChildren = false );
+    
+    void addCollisionOnlyObject( AliveObject* obj,
+                                 int type, 
+                                 bool compoundChildren = false );
+    
+    void addPhysicsObject( LifelessObject* obj,
+                           int type=0,
+                           Number mass = 0.0f,
+                           Number friction=1,
+                           Number restitution=0,
+                           int group=1, 
+                           bool compoundChildren = false );
+    
+    void addCollisionOnlyObject( LifelessObject* obj,
+                                 int type, 
+                                 bool compoundChildren = false );
     
     void lifeStep();
     
 private:
     Polycode::PhysicsScene*     pEngineScene;
     
-    std::list< StaticObject* >  staticiObjects;
-    std::list< DynamicObject*>  dynamicObjects;
+    std::list< LifelessObject* >  deadObjects;
+    std::list< AliveObject*    >  aliveObjects;
 };
 
 #endif // _HELIUM_SCENE_OBJECTS_INCLUDED_

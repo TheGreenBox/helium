@@ -31,10 +31,10 @@ void AddDice::process(ProGameObject* gm) {
 }
 
 void AddBarrel::process(ProGameObject* gm) {
-    P::Mesh mesh(P::Mesh::LINE_STRIP_MESH);
-    mesh.createCylinder(1, 0.25, 8);
-    PhysicsObject* bar = new PhysicsObject(new P::SceneMesh(&mesh));    
-    gm->getWorldPt()->addDynamic( bar );
+//    P::Mesh* mesh = new P::Mesh(P::Mesh::LINE_STRIP_MESH);
+//    mesh->createCylinder(1, 0.25, 8);
+//    PhysicsObject* bar = new PhysicsObject(new P::SceneMesh(mesh));    
+//    gm->getWorldPt()->addDynamic( bar );
 }
 
 void AddBoll::process(ProGameObject* gm) {
