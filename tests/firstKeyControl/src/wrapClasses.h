@@ -17,6 +17,7 @@
 
 #include "heliumSceneObjects.h"
 #include "heliumScreenConsole.h"
+#include "keyboardHandler.h"
 
 class ProGameObject;
 

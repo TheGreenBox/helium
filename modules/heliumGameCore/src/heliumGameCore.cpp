@@ -10,8 +10,12 @@
 
 #include "heliumGameCore.h"
 
+namespace P = Polycode;
+
 HeliumGameCore::HeliumGameCore( Polycode::Core* engCore ) 
-    : engineCore( engCore )
+    : engineCore( engCore ),
+      engineScene(new P::PhysicsScene()),
+      objects(engineScene)
 {
     
 }
@@ -34,9 +38,8 @@ void HeliumGameCore::game() {
 
         while( engineCore->getTicks() > next_game_tick 
                 && loops < MAX_FRAMESKIP       ) {
-            //update_game();
             engineCore->Update();
-
+            objects.lifeStep();
             next_game_tick += SKIP_TICKS;
             loops++;
         }

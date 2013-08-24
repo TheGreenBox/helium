@@ -29,7 +29,7 @@ private:
     Polycode::Core*         engineCore;
     Polycode::PhysicsScene* engineScene;
     
-    CommonWorldObjects*     objects;
+    CommonWorldObjects      objects;
 };
 
 #endif // _HELIUM_GAME_CORE_INCLUDED_

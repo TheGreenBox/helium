@@ -42,10 +42,10 @@ void AddBarrel::process(ProGameObject* gm) {
 
 void AddBoll::process(ProGameObject* gm) {
     P::ScenePrimitive* dice 
-        = new P::ScenePrimitive(P::ScenePrimitive::TYPE_SPHERE, 0.5, 10, 10 );
-    dice->loadTexture(res_path + "/flame1.png");
+        = new P::ScenePrimitive(P::ScenePrimitive::TYPE_SPHERE, 1, 5, 5 );
+    dice->loadTexture(res_path + "/simple_grey_texture.png");
     dice->setPosition(0, 10, 0);
-    gm->getScenePt()->addPhysicsChild(dice, P::PhysicsSceneEntity::SHAPE_SPHERE, 0.5, 0.1, 100 );
+    gm->getScenePt()->addPhysicsChild(dice, P::PhysicsSceneEntity::SHAPE_BOX, 0.5, 0.1, 0.1 );
 }
 
 void XCameraMove::process(ProGameObject* gm) {
@@ -152,26 +152,26 @@ ProGameObject::ProGameObject( P::PolycodeView* view )
 	ground->loadTexture(res_path + "/simple_stone_texture.png");
 	scene->addPhysicsChild(ground, PhysicsSceneEntity::SHAPE_PLANE, 0.0);
     
-    ScenePrimitive* wall = new ScenePrimitive(ScenePrimitive::TYPE_VPLANE, 16, 2);
+    ScenePrimitive* wall = new ScenePrimitive(ScenePrimitive::TYPE_VPLANE, 16, 4);
 	wall->loadTexture(res_path + "/simple_stone_texture.png");
-	wall->setPosition( 0, 1, 8 );
+	wall->setPosition( 0, 2, 8 );
 	scene->addPhysicsChild(wall, PhysicsSceneEntity::SHAPE_PLANE, 0.0);
     
-    wall = new ScenePrimitive(ScenePrimitive::TYPE_VPLANE, 16, 2);
+    wall = new ScenePrimitive(ScenePrimitive::TYPE_VPLANE, 16, 4);
 	wall->loadTexture(res_path + "/simple_stone_texture.png");
-	wall->setPosition( 0, 1, -8 );
+	wall->setPosition( 0, 2, -8 );
 	scene->addPhysicsChild(wall, PhysicsSceneEntity::SHAPE_PLANE, 0.0);
     
-    wall = new ScenePrimitive(ScenePrimitive::TYPE_VPLANE, 16, 2);
+    wall = new ScenePrimitive(ScenePrimitive::TYPE_VPLANE, 16, 4);
 	wall->loadTexture(res_path + "/simple_stone_texture.png");
 	wall->setYaw( 90 );
-	wall->setPosition( 8, 1, 0 );
+	wall->setPosition( 8, 2, 0 );
 	scene->addPhysicsChild(wall, PhysicsSceneEntity::SHAPE_PLANE, 0.0);
 
-    wall = new ScenePrimitive(ScenePrimitive::TYPE_VPLANE, 16, 2);
+    wall = new ScenePrimitive(ScenePrimitive::TYPE_VPLANE, 16, 4);
 	wall->loadTexture(res_path + "/simple_stone_texture.png");
 	wall->setYaw( 90 );
-	wall->setPosition( -8, 1, 0 );
+	wall->setPosition( -8, 2, 0 );
 	scene->addPhysicsChild(wall, PhysicsSceneEntity::SHAPE_PLANE, 0.0);
 }
 
@@ -179,6 +179,9 @@ ProGameObject::~ProGameObject(){
 }
 
 int ProGameObject::update() {
-    return core->updateAndRender();
+    
+    world.lifeStep();
+    core->Render();
+    return core->Update();
 }
 

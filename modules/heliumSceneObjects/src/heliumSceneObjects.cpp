@@ -113,10 +113,8 @@ void CommonWorldObjects::addPhysicsObject(
                 Number restitution,
                 int group,
                 bool compoundChildren ) { 
-    std::cout << "before addPhysicsChild\n";
     pEngineScene->addPhysicsChild( obj->getModel(),type,mass,friction,
                                   restitution,group,compoundChildren );
-    std::cout << "before push_back\n";
     lifelessObjects.push_back( obj );
 }
 
