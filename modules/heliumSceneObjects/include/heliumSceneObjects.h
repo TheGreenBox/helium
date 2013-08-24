@@ -95,7 +95,7 @@ struct ImmaterialObject {
 
 class CommonWorldObjects {
 public:    
-    CommonWorldObjects(Polycode::PhysicsScene*);
+    CommonWorldObjects();
     virtual ~CommonWorldObjects();
     
     void addObject( HeliumPrepared3D );
@@ -133,8 +133,12 @@ public:
     
     void lifeStep();
     
+    Polycode::PhysicsScene* getEngineScenePt() {
+        return engineScene;
+    };
+    
 private:
-    Polycode::PhysicsScene*     pEngineScene;
+    Polycode::PhysicsScene* engineScene;
     
     std::list< LifelessObject* >  lifelessObjects;
     std::list< AliveObject*    >  aliveObjects;

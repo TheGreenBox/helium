@@ -22,14 +22,18 @@ public:
     virtual ~HeliumGameCore();
     void game();
     
-protected:
-    void renderPause(bool);
-	
-private:
-    Polycode::Core*         engineCore;
-    Polycode::PhysicsScene* engineScene;
+    CommonWorldObjects* getObjectWorldPt() { 
+        return &objectWorld; 
+    };
     
-    CommonWorldObjects      objects;
+    Polycode::Core* getEngineCorePt() { 
+        return engineCore; 
+    };
+    
+protected:
+//    void renderPause(bool);
+    Polycode::Core*         engineCore;
+    CommonWorldObjects      objectWorld;
 };
 
 #endif // _HELIUM_GAME_CORE_INCLUDED_

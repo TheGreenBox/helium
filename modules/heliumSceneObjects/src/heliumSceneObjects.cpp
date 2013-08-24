@@ -98,8 +98,8 @@ ImmaterialObject::ImmaterialObject() {
 ImmaterialObject::~ImmaterialObject() {
 }
 
-CommonWorldObjects::CommonWorldObjects(Polycode::PhysicsScene* _scene)
-    : pEngineScene(_scene) {
+CommonWorldObjects::CommonWorldObjects()
+    : engineScene(new Polycode::PhysicsScene()) {
 }
 
 CommonWorldObjects::~CommonWorldObjects() {
@@ -113,7 +113,7 @@ void CommonWorldObjects::addPhysicsObject(
                 Number restitution,
                 int group,
                 bool compoundChildren ) { 
-    pEngineScene->addPhysicsChild( obj->getModel(),type,mass,friction,
+    engineScene->addPhysicsChild( obj->getModel(),type,mass,friction,
                                   restitution,group,compoundChildren );
     lifelessObjects.push_back( obj );
 }

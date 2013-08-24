@@ -15,54 +15,44 @@
 #include "PolycodeView.h"
 #include "Polycode3DPhysics.h"
 
+#include "heliumGameCore.h"
 #include "heliumSceneObjects.h"
 #include "heliumScreenConsole.h"
 #include "keyboardHandler.h"
 
 class ProGameObject;
 
-class KeyHandler {
-public:
-    KeyHandler(){};
-    virtual ~KeyHandler(){};
-    virtual void process(ProGameObject*)=0;
-};
-
 struct AddDice : public KeyHandler {
-    void process(ProGameObject*);
+    void process(HeliumGameCore*);
 };
 
 struct AddBarrel : public KeyHandler {
-    void process(ProGameObject*);
+    void process(HeliumGameCore*);
 };
 
 struct AddBoll : public KeyHandler {
-    void process(ProGameObject*);
+    void process(HeliumGameCore*);
 };
 
 struct XCameraMove : public KeyHandler {
-    void process(ProGameObject*);
+    void process(HeliumGameCore*);
 };
 
 struct XNegativeCameraMove : public KeyHandler {
-    void process(ProGameObject*);
+    void process(HeliumGameCore*);
 };
 
 struct YCameraMove : public KeyHandler {
-    void process(ProGameObject*);
+    void process(HeliumGameCore*);
 };
 
 struct YNegativeCameraMove : public KeyHandler {
-    void process(ProGameObject*);
-};
-
-struct EscapeGame : public KeyHandler {
-    void process(ProGameObject*);
+    void process(HeliumGameCore*);
 };
 
 class KeyboardUserInput : public Polycode::EventHandler {
 public:
-    KeyboardUserInput(ProGameObject*);
+    KeyboardUserInput(HeliumGameCore*);
     virtual ~KeyboardUserInput(){};
      
     void handleEvent(Polycode::Event*);
@@ -74,25 +64,15 @@ private:
     std::map< int, KeyHandler* > handlers;
     
     ScreenConsole* console;
-    ProGameObject* gamePt;
+    HeliumGameCore* gamePt;
 };
 
-class ProGameObject {
+class ProGameObject : public HeliumGameCore {
 public:
-    ProGameObject( Polycode::PolycodeView* );
+    ProGameObject( Polycode::Core* );
     virtual ~ProGameObject();
     
-    CommonWorldObjects*     getWorldPt() { return &world; };
-    Polycode::PhysicsScene* getScenePt() { return scene; };
-    Polycode::Core*         getCorePt() { return core; };
-    
-    int update();
-    
 private:
-    Polycode::Core*         core;
-    Polycode::PhysicsScene* scene;
-    
     KeyboardUserInput* keysHandler;
-    CommonWorldObjects world;
 };
 

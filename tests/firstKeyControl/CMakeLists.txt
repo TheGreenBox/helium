@@ -40,6 +40,8 @@ ENDIF(WIN32)
 
 TARGET_LINK_LIBRARIES ( firstKeyControl
                         ${LIB_POLYCODE}
+                        heliumGameCore
+                        heliumUserInput
                         heliumUtil
                         heliumScreenObjects
                         heliumSceneObjects
