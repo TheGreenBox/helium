@@ -10,21 +10,18 @@
 
 #include <Polycode.h>
 
-#include "heliumGameCore.h"
 #include "heliumInputDipather.h"
 
 namespace P = Polycode;
 
-KeyboardUserInput::KeyboardUserInput(HeliumGameCore* gm)
+KeyboardUserInput::KeyboardUserInput(HeliumGameCoreObjects* gm)
         : console(new ScreenConsole( 12, 10, 128, 0.25, P::Vector3(0.0,1.0,0.0))),
-          gamePt(gm)
-{
-
-    gamePt->getEngineCorePt()->getInput()->addEventListener( keysHandler, 
-                                        P::InputEvent::EVENT_KEYDOWN);
+          gamePt(gm) {
+    gamePt->getEngineCorePt()->getInput()->addEventListener( this, 
+                                                    P::InputEvent::EVENT_KEYDOWN);
   
-    gamePt->getEngineCorePt()->getInput()->addEventListener( keysHandler,
-                                        P::InputEvent::EVENT_KEYUP);
+    gamePt->getEngineCorePt()->getInput()->addEventListener( this,
+                                                    P::InputEvent::EVENT_KEYUP);
     
     handlers[P::KEY_ESCAPE] = new EscapeGame();
     handlers[P::KEY_PAUSE] = new PauseGame();

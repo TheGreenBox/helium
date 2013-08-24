@@ -11,25 +11,25 @@
 #ifndef HELIUM_KEYBOARD_HANDLER_INCLUDED
 #define HELIUM_KEYBOARD_HANDLER_INCLUDED
 
-#include "heliumGameCore.h"
+#include "heliumGameCoreObjects.h"
 
 class KeyHandler {
 public:
     KeyHandler(){};
     virtual ~KeyHandler(){};
-    virtual void process(HeliumGameCore*)=0;
+    virtual void process(HeliumGameCoreObjects*)=0;
 };
 
 struct EscapeGame : public KeyHandler {
-    void process(HeliumGameCore*);
+    void process(HeliumGameCoreObjects*);
 };
 
 struct PauseGame : public KeyHandler {
-    void process(HeliumGameCore* gm);
+    void process(HeliumGameCoreObjects* gm);
 };
 
 struct SetVirtualGame : public KeyHandler {
-    void process(HeliumGameCore* gm);
+    void process(HeliumGameCoreObjects* gm);
 };
 
 #endif // HELIUM_KEYBOARD_HANDLER_INCLUDED

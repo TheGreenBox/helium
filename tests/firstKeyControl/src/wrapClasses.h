@@ -16,38 +16,38 @@
 
 #include "heliumGameCore.h"
 #include "heliumSceneObjects.h"
-#include "heliumScreenConsole.h"
+#include "heliumScreenObjects.h"
 
 #include "heliumUserInput.h"
 
 class ProGameObject;
 
 struct AddDice : public KeyHandler {
-    void process(HeliumGameCore*);
+    void process(HeliumGameCoreObjects*);
 };
 
 struct AddBarrel : public KeyHandler {
-    void process(HeliumGameCore*);
+    void process(HeliumGameCoreObjects*);
 };
 
 struct AddBoll : public KeyHandler {
-    void process(HeliumGameCore*);
+    void process(HeliumGameCoreObjects*);
 };
 
 struct XCameraMove : public KeyHandler {
-    void process(HeliumGameCore*);
+    void process(HeliumGameCoreObjects*);
 };
 
 struct XNegativeCameraMove : public KeyHandler {
-    void process(HeliumGameCore*);
+    void process(HeliumGameCoreObjects*);
 };
 
 struct YCameraMove : public KeyHandler {
-    void process(HeliumGameCore*);
+    void process(HeliumGameCoreObjects*);
 };
 
 struct YNegativeCameraMove : public KeyHandler {
-    void process(HeliumGameCore*);
+    void process(HeliumGameCoreObjects*);
 };
 
 class ProGameObject : public HeliumGameCore {

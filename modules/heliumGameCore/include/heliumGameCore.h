@@ -14,25 +14,18 @@
 #include <Polycode.h>
 #include "PolycodeView.h"
 
-#include "heliumSceneObjects.h"
+#include "heliumGameCoreObjects.h"
+#include "heliumUserInput.h"
 
-class HeliumGameCore {
+class HeliumGameCore : public HeliumGameCoreObjects {
 public:    
     HeliumGameCore(Polycode::Core* );
     virtual ~HeliumGameCore();
     void game();
-    
-    CommonWorldObjects* getObjectWorldPt() { 
-        return &objectWorld; 
-    };
-    
-    Polycode::Core* getEngineCorePt() { 
-        return engineCore; 
-    };
-    
-protected:
-    Polycode::Core*         engineCore;
-    CommonWorldObjects      objectWorld;
+
+private:
+    KeyboardUserInput*  keyInput;
+    MouseUserInput*     mouseInput;
 };
 
 #endif // HELIUM_GAME_CORE_INCLUDED

@@ -14,7 +14,7 @@
 namespace P = Polycode;
 
 HeliumGameCore::HeliumGameCore( Polycode::Core* engCore ) 
-    : engineCore( engCore )
+    : HeliumGameCoreObjects( engCore )
 {
     
 }

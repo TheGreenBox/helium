@@ -17,7 +17,7 @@ namespace P = Polycode;
 
 P::String res_path(HELIUM_RESOURCE_PATH);
 
-void AddDice::process(HeliumGameCore* gm) {
+void AddDice::process(HeliumGameCoreObjects* gm) {
     static float pos = 1;
     double x = 3 * std::sin(pos);
     double y = 3 * std::cos(pos);
@@ -33,14 +33,14 @@ void AddDice::process(HeliumGameCore* gm) {
     gm->getObjectWorldPt()->addPhysicsObject(dice, P::PhysicsSceneEntity::SHAPE_BOX, 0.5);
 }
 
-void AddBarrel::process(HeliumGameCore* gm) {
+void AddBarrel::process(HeliumGameCoreObjects* gm) {
 //    P::Mesh* mesh = new P::Mesh(P::Mesh::LINE_STRIP_MESH);
 //    mesh->createCylinder(1, 0.25, 8);
 //    PhysicsObject* bar = new PhysicsObject(new P::SceneMesh(mesh));    
 //    gm->getObjectWorldPt()->addDynamic( bar );
 }
 
-void AddBoll::process(HeliumGameCore* gm) {
+void AddBoll::process(HeliumGameCoreObjects* gm) {
     P::ScenePrimitive* dice 
         = new P::ScenePrimitive(P::ScenePrimitive::TYPE_SPHERE, 1, 5, 5 );
     dice->loadTexture(res_path + "/simple_grey_texture.png");
@@ -48,28 +48,28 @@ void AddBoll::process(HeliumGameCore* gm) {
     gm->getObjectWorldPt()->getEngineScenePt()->addPhysicsChild(dice, P::PhysicsSceneEntity::SHAPE_BOX, 0.5, 0.1, 0.1 );
 }
 
-void XCameraMove::process(HeliumGameCore* gm) {
+void XCameraMove::process(HeliumGameCoreObjects* gm) {
     P::Vector3 pos = gm->getObjectWorldPt()->getEngineScenePt()->getDefaultCamera()->getPosition();
     pos.x = pos.x - 0.25;
     pos.z = pos.z - 0.25;
     gm->getObjectWorldPt()->getEngineScenePt()->getDefaultCamera()->setPosition(pos);
 }
 
-void XNegativeCameraMove::process(HeliumGameCore* gm) {
+void XNegativeCameraMove::process(HeliumGameCoreObjects* gm) {
     P::Vector3 pos = gm->getObjectWorldPt()->getEngineScenePt()->getDefaultCamera()->getPosition();
     pos.x = pos.x + 0.25;
     pos.z = pos.z + 0.25;
     gm->getObjectWorldPt()->getEngineScenePt()->getDefaultCamera()->setPosition(pos);
 }
 
-void YCameraMove::process(HeliumGameCore* gm) {
+void YCameraMove::process(HeliumGameCoreObjects* gm) {
     P::Vector3 pos = gm->getObjectWorldPt()->getEngineScenePt()->getDefaultCamera()->getPosition();
     pos.x = pos.x + 0.25;
     pos.z = pos.z - 0.25;
     gm->getObjectWorldPt()->getEngineScenePt()->getDefaultCamera()->setPosition(pos);
 }
 
-void YNegativeCameraMove::process(HeliumGameCore* gm) {
+void YNegativeCameraMove::process(HeliumGameCoreObjects* gm) {
     P::Vector3 pos = gm->getObjectWorldPt()->getEngineScenePt()->getDefaultCamera()->getPosition();
     pos.x = pos.x - 0.25;
     pos.z = pos.z + 0.25;

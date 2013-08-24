@@ -10,11 +10,11 @@
 
 #include "keyboardHandler.h"
 
-void EscapeGame::process(HeliumGameCore* gm) {
+void EscapeGame::process(HeliumGameCoreObjects* gm) {
     gm->getEngineCorePt()->Shutdown();
 }
 
-void PauseGame::process(HeliumGameCore* gm) {
+void PauseGame::process(HeliumGameCoreObjects* gm) {
     if ( gm->getObjectWorldPt()->getEngineScenePt()->isEnabled() ) {
         gm->getObjectWorldPt()->getEngineScenePt()->setEnabled(false);
     }
@@ -23,7 +23,7 @@ void PauseGame::process(HeliumGameCore* gm) {
     }
 }
 
-void SetVirtualGame::process(HeliumGameCore* gm) {
+void SetVirtualGame::process(HeliumGameCoreObjects* gm) {
     if ( gm->getObjectWorldPt()->getEngineScenePt()->isVirtual() ) {
         gm->getObjectWorldPt()->getEngineScenePt()->setVirtual(false);
     }

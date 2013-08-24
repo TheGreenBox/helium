@@ -15,13 +15,12 @@
 #include <map>
 
 #include "keyboardHandler.h"
-#include "heliumScreenConsole.h"
-
-class HeliumGameCore;
+#include "heliumScreenObjects.h"
+#include "heliumGameCoreObjects.h"
 
 class KeyboardUserInput : public Polycode::EventHandler {
 public:
-    KeyboardUserInput(HeliumGameCore*);
+    KeyboardUserInput(HeliumGameCoreObjects*);
     virtual ~KeyboardUserInput(){};
      
     void handleEvent(Polycode::Event*);
@@ -34,7 +33,16 @@ private:
     std::map< Polycode::PolyKEY, KeyHandler* > handlers;
     
     ScreenConsole* console;
-    HeliumGameCore* gamePt;
+    HeliumGameCoreObjects* gamePt;
+};
+
+class MouseUserInput : public Polycode::EventHandler {
+public:
+    MouseUserInput(HeliumGameCoreObjects*){};
+    virtual ~MouseUserInput(){};
+     
+private:
+    HeliumGameCoreObjects* gamePt;
 };
 
 #endif // HELIUM_INPUT_DIPATHER_INCLUDED
