@@ -8,8 +8,8 @@
  * ========================================================
  */
 
-#ifndef _HELIUM_SCENE_OBJECTS_INCLUDED_
-#define _HELIUM_SCENE_OBJECTS_INCLUDED_
+#ifndef HELIUM_SCENE_OBJECTS_INCLUDED
+#define HELIUM_SCENE_OBJECTS_INCLUDED
 
 #include <list>
 
@@ -144,5 +144,5 @@ private:
     std::list< AliveObject*    >  aliveObjects;
 };
 
-#endif // _HELIUM_SCENE_OBJECTS_INCLUDED_
+#endif // HELIUM_SCENE_OBJECTS_INCLUDED
 

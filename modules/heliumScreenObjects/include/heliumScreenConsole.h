@@ -7,8 +7,11 @@
  * Author:  AKindyakov 
  * ========================================================
  */
-#include <list>
 
+#ifndef HELIUM_SCREEN_CONSOLE_INCLUDED
+#define HELIUM_SCREEN_CONSOLE_INCLUDED
+
+#include <list>
 #include <Polycode.h>
 
 class ScreenConsole {
@@ -73,4 +76,6 @@ private:
     int lines_count;
     int visible_lines;
 };
+
+#endif // HELIUM_SCREEN_CONSOLE_INCLUDED
 

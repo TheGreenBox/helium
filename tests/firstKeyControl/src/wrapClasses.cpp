@@ -76,54 +76,6 @@ void YNegativeCameraMove::process(HeliumGameCore* gm) {
     gm->getObjectWorldPt()->getEngineScenePt()->getDefaultCamera()->setPosition(pos);
 }
 
-KeyboardUserInput::KeyboardUserInput(HeliumGameCore* gm)
-        : console(new ScreenConsole( 12, 10, 128, 0.25, P::Vector3(0.0,1.0,0.0))),
-          gamePt(gm)
-{
-    handlers[P::KEY_1] = new AddDice();
-    handlers[P::KEY_2] = new AddBoll();
-    handlers[P::KEY_3] = new AddBarrel();
-    handlers[P::KEY_ESCAPE] = new EscapeGame();
-    
-    handlers[P::KEY_d] = new YCameraMove();
-    handlers[P::KEY_a] = new YNegativeCameraMove();
-    handlers[P::KEY_w] = new XCameraMove();
-    handlers[P::KEY_s] = new XNegativeCameraMove();
-}
- 
-void KeyboardUserInput::handleEvent(P::Event *e) {
-    // if(e->getDispatcher() == core->getInput()) {
-    switch(e->getEventCode()) {
-        case P::InputEvent::EVENT_KEYDOWN:
-            this->keyDOWN( (P::InputEvent*)e );
-        break;
-        
-        case P::InputEvent::EVENT_KEYUP:
-            this->keyUP( (P::InputEvent*)e );
-        break;
-    }
-}
-
-void KeyboardUserInput::keyUP(P::InputEvent* inputEvent){
-    console->add("up: ");
-    console->add(P::String::IntToString(inputEvent->keyCode()));
-    console->add(" : ");
-    console->add(inputEvent->charCode);
-    console->newLine();
-}
-
-void KeyboardUserInput::keyDOWN(P::InputEvent* inputEvent){
-    console->add("down: ");
-    console->add(P::String::IntToString(inputEvent->keyCode()));
-    console->add(" : ");
-    console->add(inputEvent->charCode);
-    console->newLine();
-    std::map<int, KeyHandler*>::iterator prc = handlers.find(inputEvent->keyCode());
-    if ( prc != handlers.end() ) {
-        prc->second->process(gamePt);
-    }
-}
-
 using namespace P; // fucking macros !
 ProGameObject::ProGameObject( P::Core* _core )
     : HeliumGameCore( _core ) 
@@ -132,12 +84,15 @@ ProGameObject::ProGameObject( P::Core* _core )
     CoreServices::getInstance()->getResourceManager()->addDirResource("default", false);
     
     keysHandler = new KeyboardUserInput(this);
+    
+    keysHandler->addEventHandler( P::KEY_1, new AddDice());
+    keysHandler->addEventHandler( P::KEY_2, new AddBoll());
+    keysHandler->addEventHandler( P::KEY_3, new AddBarrel());
 
-    engineCore->getInput()->addEventListener( keysHandler, 
-                                        P::InputEvent::EVENT_KEYDOWN);
-  
-    engineCore->getInput()->addEventListener( keysHandler,
-                                        P::InputEvent::EVENT_KEYUP);
+    keysHandler->addEventHandler( P::KEY_d, new YCameraMove());
+    keysHandler->addEventHandler( P::KEY_a, new YNegativeCameraMove());
+    keysHandler->addEventHandler( P::KEY_w, new XCameraMove());
+    keysHandler->addEventHandler( P::KEY_s, new XNegativeCameraMove());
     
     objectWorld.getEngineScenePt()->getDefaultCamera()->setPosition(17,17,17);
 	objectWorld.getEngineScenePt()->getDefaultCamera()->lookAt(Vector3(0,0,0));

@@ -8,6 +8,9 @@
  * ========================================================
  */
 
+#ifndef HELIUM_KEYBOARD_HANDLER_INCLUDED
+#define HELIUM_KEYBOARD_HANDLER_INCLUDED
+
 #include "heliumGameCore.h"
 
 class KeyHandler {
@@ -28,4 +31,6 @@ struct PauseGame : public KeyHandler {
 struct SetVirtualGame : public KeyHandler {
     void process(HeliumGameCore* gm);
 };
+
+#endif // HELIUM_KEYBOARD_HANDLER_INCLUDED
 

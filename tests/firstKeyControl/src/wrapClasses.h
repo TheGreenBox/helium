@@ -9,7 +9,6 @@
  */
 
 #include <list>
-#include <map>
 
 #include <Polycode.h>
 #include "PolycodeView.h"
@@ -18,7 +17,8 @@
 #include "heliumGameCore.h"
 #include "heliumSceneObjects.h"
 #include "heliumScreenConsole.h"
-#include "keyboardHandler.h"
+
+#include "heliumUserInput.h"
 
 class ProGameObject;
 
@@ -48,23 +48,6 @@ struct YCameraMove : public KeyHandler {
 
 struct YNegativeCameraMove : public KeyHandler {
     void process(HeliumGameCore*);
-};
-
-class KeyboardUserInput : public Polycode::EventHandler {
-public:
-    KeyboardUserInput(HeliumGameCore*);
-    virtual ~KeyboardUserInput(){};
-     
-    void handleEvent(Polycode::Event*);
-    
-private:
-    void keyUP(Polycode::InputEvent*);
-    void keyDOWN(Polycode::InputEvent*);
-    
-    std::map< int, KeyHandler* > handlers;
-    
-    ScreenConsole* console;
-    HeliumGameCore* gamePt;
 };
 
 class ProGameObject : public HeliumGameCore {

@@ -8,8 +8,8 @@
  * ========================================================
  */
 
-#ifndef _HELIUM_GAME_CORE_INCLUDED_
-#define _HELIUM_GAME_CORE_INCLUDED_
+#ifndef HELIUM_GAME_CORE_INCLUDED
+#define HELIUM_GAME_CORE_INCLUDED
 
 #include <Polycode.h>
 #include "PolycodeView.h"
@@ -31,10 +31,9 @@ public:
     };
     
 protected:
-//    void renderPause(bool);
     Polycode::Core*         engineCore;
     CommonWorldObjects      objectWorld;
 };
 
-#endif // _HELIUM_GAME_CORE_INCLUDED_
+#endif // HELIUM_GAME_CORE_INCLUDED
 

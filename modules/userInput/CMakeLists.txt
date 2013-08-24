@@ -8,10 +8,12 @@ INCLUDE( heliumIncludes )
 
 SET ( heliumUserInput_SRCS
         ${HELIUM_MODULES_DIR}/userInput/src/keyboardHandler.cpp
+        ${HELIUM_MODULES_DIR}/userInput/src/heliumInputDipather.cpp
     )
 
 SET ( heliumUserInput_HDRS
         ${HELIUM_MODULES_DIR}/userInput/include/keyboardHandler.h
+        ${HELIUM_MODULES_DIR}/userInput/include/heliumInputDipather.h
     ) 
 
 ADD_LIBRARY ( heliumUserInput STATIC
