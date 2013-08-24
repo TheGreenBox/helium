@@ -6,11 +6,14 @@ header=$(echo "/* ========================================================\n"\
 " * Organization: The Green Box\n"\
 " * \n"\
 " * Project name: Helium\n"\
-" * File name: " "$1" "\n"\
+" * File name:   " $1 "\n"\
 " * Description:\n"\
-" * Author: " "$userName" "\n"\
+" * Author:      " "$userName" "\n"\
 " * ========================================================\n"\
-" */\n")
+" */\n"\
+"#ifndef " $1 "\n"\
+"#define " $1 "\n"\
+"#endif //"  $1 "\n" )
 
 if [ -f "$1" ] ; then
     echo "file " "$1" " already exist"
