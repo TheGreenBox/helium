@@ -14,11 +14,13 @@ void EscapeGame::process(HeliumGameCoreObjects* gm) {
 }
 
 void PauseGame::process(HeliumGameCoreObjects* gm) {
-    if ( gm->getSceneWorldPt()->getEngineScenePt()->isEnabled() ) {
-        gm->getSceneWorldPt()->getEngineScenePt()->setEnabled(false);
+    if ( gm->getSceneWorldPt()->getPause() ) {
+        gm->getSceneWorldPt()->setPause(false);
+        //gm->getScreenWorldPt();
     }
-    else {    
-        gm->getSceneWorldPt()->getEngineScenePt()->setEnabled(true);
+    else {
+        gm->getSceneWorldPt()->setPause(true);
+        //gm->getScreenWorldPt();
     }
 }
 

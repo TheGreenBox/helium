@@ -129,3 +129,11 @@ void CommonWorldObjects::lifeStep() {
     }
 }
 
+void CommonWorldObjects::setPause(bool set) {
+    engineScene->setEnabled(set);
+}
+
+bool CommonWorldObjects::getPause() {
+    return engineScene->isEnabled();
+}
+

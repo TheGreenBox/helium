@@ -47,6 +47,9 @@ public:
     
     void lifeStep();
     
+    void setPause(bool);
+    bool getPause();
+    
     Polycode::Screen* getEngineScreenPt() { 
         return engineScreen;
     }

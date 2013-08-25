@@ -39,6 +39,14 @@ void ScreenObjectsWorld::lifeStep() {
         (*it)->lifeStep();
     }
 }
+    
+void ScreenObjectsWorld::setPause(bool set) {
+    engineScreen->enabled = set;
+}
+
+bool ScreenObjectsWorld::getPause() {
+    return engineScreen->enabled;
+}
 
 void ScreenObjectsWorld::addObject( ScreenObject* obj ) {
     engineScreen->addEntity( obj->getModel() );

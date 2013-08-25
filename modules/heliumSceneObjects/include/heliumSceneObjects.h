@@ -132,6 +132,8 @@ public:
                                  bool compoundChildren = false );
     
     void lifeStep();
+    void setPause(bool);
+    bool getPause();
     
     Polycode::PhysicsScene* getEngineScenePt() {
         return engineScene;
