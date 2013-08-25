@@ -13,7 +13,7 @@
 #include <Polycode.h>
 #include "heliumUserInput.h"
 
-class ScreenButton : public FlatAlifeObject {
+class ScreenButton : public AlifeScreenObject {
 public:
     ScreenButton( Polycode::ScreenEntity* model,
                   KeyHandler*             mouseClickEvent,

@@ -12,40 +12,40 @@
 #include <Polycode.h>
 #include "heliumScreenObjects.h"
 
-FlatLifelessObject::FlatLifelessObject( Polycode::ScreenEntity* _model )
+ScreenObject::ScreenObject( Polycode::ScreenEntity* _model )
     :   model(_model) {}
 
-Polycode::ScreenEntity* FlatLifelessObject::getModel() {
+Polycode::ScreenEntity* ScreenObject::getModel() {
     return model;
 }
 
-FlatAlifeObject::FlatAlifeObject( Polycode::ScreenEntity* _model )
-    :   FlatLifelessObject(_model) {}
+AlifeScreenObject::AlifeScreenObject( Polycode::ScreenEntity* _model )
+    :   ScreenObject(_model) {}
 
-ScreenObjects::ScreenObjects ()
+ScreenObjectsWorld::ScreenObjectsWorld ()
     : engineScreen(new Polycode::Screen()) {
     std::cout << "engineScreen->enabled: " << engineScreen->enabled << '\n';
 }
 
-ScreenObjects::~ScreenObjects () {
+ScreenObjectsWorld::~ScreenObjectsWorld () {
     engineScreen->Shutdown();
 }
 
-void ScreenObjects::lifeStep() {
+void ScreenObjectsWorld::lifeStep() {
     using std::list;
-    for ( list< FlatAlifeObject* >::iterator it = aliveObjects.begin();
+    for ( list< AlifeScreenObject* >::iterator it = aliveObjects.begin();
             it != aliveObjects.end(); ++it )
     {
         (*it)->lifeStep();
     }
 }
 
-void ScreenObjects::addLifelessObject( FlatLifelessObject* obj ) {
+void ScreenObjectsWorld::addObject( ScreenObject* obj ) {
     engineScreen->addEntity( obj->getModel() );
-    lifelessObjects.push_back(obj);
+    objects.push_back(obj);
 }
 
-void ScreenObjects::addAlifeObject( FlatAlifeObject* obj ) {
+void ScreenObjectsWorld::addAlifeObject( AlifeScreenObject* obj ) {
     engineScreen->addEntity( obj->getModel() );
     aliveObjects.push_back(obj);
 }

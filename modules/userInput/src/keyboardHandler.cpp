@@ -7,7 +7,6 @@
  * Author:  AKindyakov 
  * ========================================================
  */
-#include <iostream>
 #include "keyboardHandler.h"
 
 void EscapeGame::process(HeliumGameCoreObjects* gm) {
@@ -15,20 +14,19 @@ void EscapeGame::process(HeliumGameCoreObjects* gm) {
 }
 
 void PauseGame::process(HeliumGameCoreObjects* gm) {
-    std::cout << gm->getObjectWorldPt()->getEngineScenePt()->isEnabled() << "\n";
-    if ( gm->getObjectWorldPt()->getEngineScenePt()->isEnabled() ) {
-        gm->getObjectWorldPt()->getEngineScenePt()->setEnabled(false);
+    if ( gm->getSceneWorldPt()->getEngineScenePt()->isEnabled() ) {
+        gm->getSceneWorldPt()->getEngineScenePt()->setEnabled(false);
     }
     else {    
-        gm->getObjectWorldPt()->getEngineScenePt()->setEnabled(true);
+        gm->getSceneWorldPt()->getEngineScenePt()->setEnabled(true);
     }
 }
 
 void SetVirtualGame::process(HeliumGameCoreObjects* gm) {
-    if ( gm->getObjectWorldPt()->getEngineScenePt()->isVirtual() ) {
-        gm->getObjectWorldPt()->getEngineScenePt()->setVirtual(false);
+    if ( gm->getSceneWorldPt()->getEngineScenePt()->isVirtual() ) {
+        gm->getSceneWorldPt()->getEngineScenePt()->setVirtual(false);
     }
     else {    
-        gm->getObjectWorldPt()->getEngineScenePt()->setVirtual(true);
+        gm->getSceneWorldPt()->getEngineScenePt()->setVirtual(true);
     }
 }

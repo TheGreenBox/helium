@@ -9,7 +9,6 @@
  */
 
 #include <Polycode.h>
-#include <iostream>
 
 #include "heliumInputDipather.h"
 
@@ -25,7 +24,6 @@ KeyboardUserInput::KeyboardUserInput(HeliumGameCoreObjects* gm)
     
     handlers[P::KEY_ESCAPE] = new EscapeGame();
     handlers[P::KEY_PAUSE] = new PauseGame();
-    std::cout << "KeyboardUserInput was created\n";
 }
  
 void KeyboardUserInput::handleEvent(P::Event *e) {
@@ -52,7 +50,6 @@ void KeyboardUserInput::keyDOWN(P::InputEvent* inputEvent){
     P::PolyKEY code = static_cast<P::PolyKEY>(inputEvent->keyCode());
     std::map<P::PolyKEY, KeyHandler*>::iterator prc = handlers.find(code);
     if ( prc != handlers.end() ) {
-        std::cout << "Key down: " << inputEvent->keyCode() << '\n';
         prc->second->process(gamePt);
     }
 }

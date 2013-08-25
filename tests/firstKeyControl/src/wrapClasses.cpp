@@ -32,7 +32,7 @@ void AddDice::process(HeliumGameCoreObjects* gm) {
     diceModel->setPosition(x, 10, y);
     
     LifelessObject* dice = new LifelessObject(diceModel);
-    gm->getObjectWorldPt()->addPhysicsObject(dice, P::PhysicsSceneEntity::SHAPE_BOX, 0.5);
+    gm->getSceneWorldPt()->addPhysicsObject(dice, P::PhysicsSceneEntity::SHAPE_BOX, 0.5);
 }
 
 void AddBarrel::process(HeliumGameCoreObjects* gm) {
@@ -43,36 +43,36 @@ void AddBoll::process(HeliumGameCoreObjects* gm) {
         = new P::ScenePrimitive(P::ScenePrimitive::TYPE_SPHERE, 2, 8, 8 );
     dice->loadTexture(res_path + "/earth_world_map.png");
     dice->setPosition(0, 10, 0);
-    gm->getObjectWorldPt()->getEngineScenePt()->addPhysicsChild(dice,
+    gm->getSceneWorldPt()->getEngineScenePt()->addPhysicsChild(dice,
 P::PhysicsSceneEntity::SHAPE_SPHERE, 0.5, 0.1, 0.1 );
 }
 
 void XCameraMove::process(HeliumGameCoreObjects* gm) {
-    P::Vector3 pos = gm->getObjectWorldPt()->getEngineScenePt()->getDefaultCamera()->getPosition();
+    P::Vector3 pos = gm->getSceneWorldPt()->getEngineScenePt()->getDefaultCamera()->getPosition();
     pos.x = pos.x - 0.25;
     pos.z = pos.z - 0.25;
-    gm->getObjectWorldPt()->getEngineScenePt()->getDefaultCamera()->setPosition(pos);
+    gm->getSceneWorldPt()->getEngineScenePt()->getDefaultCamera()->setPosition(pos);
 }
 
 void XNegativeCameraMove::process(HeliumGameCoreObjects* gm) {
-    P::Vector3 pos = gm->getObjectWorldPt()->getEngineScenePt()->getDefaultCamera()->getPosition();
+    P::Vector3 pos = gm->getSceneWorldPt()->getEngineScenePt()->getDefaultCamera()->getPosition();
     pos.x = pos.x + 0.25;
     pos.z = pos.z + 0.25;
-    gm->getObjectWorldPt()->getEngineScenePt()->getDefaultCamera()->setPosition(pos);
+    gm->getSceneWorldPt()->getEngineScenePt()->getDefaultCamera()->setPosition(pos);
 }
 
 void YCameraMove::process(HeliumGameCoreObjects* gm) {
-    P::Vector3 pos = gm->getObjectWorldPt()->getEngineScenePt()->getDefaultCamera()->getPosition();
+    P::Vector3 pos = gm->getSceneWorldPt()->getEngineScenePt()->getDefaultCamera()->getPosition();
     pos.x = pos.x + 0.25;
     pos.z = pos.z - 0.25;
-    gm->getObjectWorldPt()->getEngineScenePt()->getDefaultCamera()->setPosition(pos);
+    gm->getSceneWorldPt()->getEngineScenePt()->getDefaultCamera()->setPosition(pos);
 }
 
 void YNegativeCameraMove::process(HeliumGameCoreObjects* gm) {
-    P::Vector3 pos = gm->getObjectWorldPt()->getEngineScenePt()->getDefaultCamera()->getPosition();
+    P::Vector3 pos = gm->getSceneWorldPt()->getEngineScenePt()->getDefaultCamera()->getPosition();
     pos.x = pos.x - 0.25;
     pos.z = pos.z + 0.25;
-    gm->getObjectWorldPt()->getEngineScenePt()->getDefaultCamera()->setPosition(pos);
+    gm->getSceneWorldPt()->getEngineScenePt()->getDefaultCamera()->setPosition(pos);
 }
 
 using namespace P; // fucking macros !
@@ -125,9 +125,7 @@ ProGameObject::ProGameObject( P::Core* _core )
     button->setPosition( this->getEngineCorePt()->getXRes()-25,
                          this->getEngineCorePt()->getYRes()-25);
     button->loadTexture( res_path + "/exit_button.png" );
-    this->getFlatWorldPt()->addAlifeObject(new ScreenButton( button, 
-                                                                new EscapeGame, 
-                                                                NULL ) );
+    this->getScreenWorldPt()->addAlifeObject(new ScreenButton( button, new EscapeGame(), NULL ) );
 }
 
 ProGameObject::~ProGameObject(){
