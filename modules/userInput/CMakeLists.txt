@@ -14,6 +14,7 @@ SET ( heliumUserInput_SRCS
 SET ( heliumUserInput_HDRS
         ${HELIUM_MODULES_DIR}/userInput/include/keyboardHandler.h
         ${HELIUM_MODULES_DIR}/userInput/include/heliumInputDipather.h
+        ${HELIUM_MODULES_DIR}/userInput/include/heliumUserInputHandler.h
     ) 
 
 ADD_LIBRARY ( heliumUserInput STATIC
@@ -23,5 +24,6 @@ ADD_LIBRARY ( heliumUserInput STATIC
 
 TARGET_LINK_LIBRARIES ( heliumUserInput
                             ${LIB_POLYCODE}
+                            heliumScreenObjects
                       )
 

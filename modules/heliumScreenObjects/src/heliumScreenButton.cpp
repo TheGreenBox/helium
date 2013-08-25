@@ -10,7 +10,7 @@
 
 #include <Polycode.h>
 #include "heliumScreenButton.h"
-#include "keyboardHandler.h"
+#include "heliumUserInputHandler.h"
 
 ScreenButton::ScreenButton( Polycode::ScreenEntity* _model,
                             KeyHandler* _mouseClickEvent,

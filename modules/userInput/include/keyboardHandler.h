@@ -12,20 +12,18 @@
 #define HELIUM_KEYBOARD_HANDLER_INCLUDED
 
 #include "heliumGameCoreObjects.h"
-
-class KeyHandler {
-public:
-    KeyHandler(){};
-    virtual ~KeyHandler(){};
-    virtual void process(HeliumGameCoreObjects*)=0;
-};
+#include "heliumUserInputHandler.h"
+#include "heliumScreenButton.h"
 
 struct EscapeGame : public KeyHandler {
     void process(HeliumGameCoreObjects*);
 };
 
 struct PauseGame : public KeyHandler {
+    PauseGame();
+    virtual ~PauseGame();
     void process(HeliumGameCoreObjects* gm);
+//    static ScreenButton* pauseButton;
 };
 
 struct SetVirtualGame : public KeyHandler {
