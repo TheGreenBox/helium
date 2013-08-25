@@ -100,6 +100,8 @@ ImmaterialObject::~ImmaterialObject() {
 
 CommonWorldObjects::CommonWorldObjects()
     : engineScene(new Polycode::PhysicsScene()) {
+    engineScene->clearColor = Polycode::Color(1,1,1,1);
+    engineScene->useClearColor = true;
 }
 
 CommonWorldObjects::~CommonWorldObjects() {

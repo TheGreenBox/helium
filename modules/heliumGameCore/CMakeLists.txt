@@ -23,5 +23,7 @@ ADD_LIBRARY ( heliumGameCore STATIC
 TARGET_LINK_LIBRARIES ( heliumGameCore
                             ${LIB_POLYCODE}
                             heliumSceneObjects
+                            heliumScreenObjects
+                            heliumUserInput
                       )
 

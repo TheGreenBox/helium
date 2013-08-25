@@ -23,8 +23,8 @@ public:
     virtual ~HeliumGameCore();
     void game();
 
-private:
-    KeyboardUserInput*  keyInput;
+protected:
+    KeyboardUserInput*  keyboardInput;
     MouseUserInput*     mouseInput;
 };
 

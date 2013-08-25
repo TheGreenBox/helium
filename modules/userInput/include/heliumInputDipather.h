@@ -15,7 +15,6 @@
 #include <map>
 
 #include "keyboardHandler.h"
-#include "heliumScreenObjects.h"
 #include "heliumGameCoreObjects.h"
 
 class KeyboardUserInput : public Polycode::EventHandler {
@@ -31,8 +30,6 @@ private:
     void keyDOWN(Polycode::InputEvent*);
     
     std::map< Polycode::PolyKEY, KeyHandler* > handlers;
-    
-    ScreenConsole* console;
     HeliumGameCoreObjects* gamePt;
 };
 

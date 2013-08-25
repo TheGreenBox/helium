@@ -7,7 +7,7 @@
  * Author:  AKindyakov 
  * ========================================================
  */
-
+#include <iostream>
 #include "keyboardHandler.h"
 
 void EscapeGame::process(HeliumGameCoreObjects* gm) {
@@ -15,6 +15,7 @@ void EscapeGame::process(HeliumGameCoreObjects* gm) {
 }
 
 void PauseGame::process(HeliumGameCoreObjects* gm) {
+    std::cout << gm->getObjectWorldPt()->getEngineScenePt()->isEnabled() << "\n";
     if ( gm->getObjectWorldPt()->getEngineScenePt()->isEnabled() ) {
         gm->getObjectWorldPt()->getEngineScenePt()->setEnabled(false);
     }

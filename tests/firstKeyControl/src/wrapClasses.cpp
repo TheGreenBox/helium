@@ -12,6 +12,8 @@
 #include "wrapClasses.h"
 
 #include "pathGlobal.h"
+#include "heliumScreenObjects.h"
+#include "heliumScreenButton.h"
 
 namespace P = Polycode;
 
@@ -34,18 +36,15 @@ void AddDice::process(HeliumGameCoreObjects* gm) {
 }
 
 void AddBarrel::process(HeliumGameCoreObjects* gm) {
-//    P::Mesh* mesh = new P::Mesh(P::Mesh::LINE_STRIP_MESH);
-//    mesh->createCylinder(1, 0.25, 8);
-//    PhysicsObject* bar = new PhysicsObject(new P::SceneMesh(mesh));    
-//    gm->getObjectWorldPt()->addDynamic( bar );
 }
 
 void AddBoll::process(HeliumGameCoreObjects* gm) {
     P::ScenePrimitive* dice 
-        = new P::ScenePrimitive(P::ScenePrimitive::TYPE_SPHERE, 1, 5, 5 );
-    dice->loadTexture(res_path + "/simple_grey_texture.png");
+        = new P::ScenePrimitive(P::ScenePrimitive::TYPE_SPHERE, 2, 8, 8 );
+    dice->loadTexture(res_path + "/earth_world_map.png");
     dice->setPosition(0, 10, 0);
-    gm->getObjectWorldPt()->getEngineScenePt()->addPhysicsChild(dice, P::PhysicsSceneEntity::SHAPE_BOX, 0.5, 0.1, 0.1 );
+    gm->getObjectWorldPt()->getEngineScenePt()->addPhysicsChild(dice,
+P::PhysicsSceneEntity::SHAPE_SPHERE, 0.5, 0.1, 0.1 );
 }
 
 void XCameraMove::process(HeliumGameCoreObjects* gm) {
@@ -83,16 +82,14 @@ ProGameObject::ProGameObject( P::Core* _core )
     CoreServices::getInstance()->getResourceManager()->addArchive(res_path+"/default.pak");
     CoreServices::getInstance()->getResourceManager()->addDirResource("default", false);
     
-    keysHandler = new KeyboardUserInput(this);
-    
-    keysHandler->addEventHandler( P::KEY_1, new AddDice());
-    keysHandler->addEventHandler( P::KEY_2, new AddBoll());
-    keysHandler->addEventHandler( P::KEY_3, new AddBarrel());
+    keyboardInput->addEventHandler( P::KEY_1, new AddDice());
+    keyboardInput->addEventHandler( P::KEY_2, new AddBoll());
+    keyboardInput->addEventHandler( P::KEY_3, new AddBarrel());
 
-    keysHandler->addEventHandler( P::KEY_d, new YCameraMove());
-    keysHandler->addEventHandler( P::KEY_a, new YNegativeCameraMove());
-    keysHandler->addEventHandler( P::KEY_w, new XCameraMove());
-    keysHandler->addEventHandler( P::KEY_s, new XNegativeCameraMove());
+    keyboardInput->addEventHandler( P::KEY_d, new YCameraMove());
+    keyboardInput->addEventHandler( P::KEY_a, new YNegativeCameraMove());
+    keyboardInput->addEventHandler( P::KEY_w, new XCameraMove());
+    keyboardInput->addEventHandler( P::KEY_s, new XNegativeCameraMove());
     
     objectWorld.getEngineScenePt()->getDefaultCamera()->setPosition(17,17,17);
 	objectWorld.getEngineScenePt()->getDefaultCamera()->lookAt(Vector3(0,0,0));
@@ -122,6 +119,15 @@ ProGameObject::ProGameObject( P::Core* _core )
 	wall->setYaw( 90 );
 	wall->setPosition( -8, 2, 0 );
 	objectWorld.getEngineScenePt()->addPhysicsChild(wall, PhysicsSceneEntity::SHAPE_PLANE, 0.0);
+
+    Polycode::ScreenShape* button = 
+            new Polycode::ScreenShape( Polycode::ScreenShape::SHAPE_RECT, 50, 50);
+    button->setPosition( this->getEngineCorePt()->getXRes()-25,
+                         this->getEngineCorePt()->getYRes()-25);
+    button->loadTexture( res_path + "/exit_button.png" );
+    this->getFlatWorldPt()->addAlifeObject(new ScreenButton( button, 
+                                                                new EscapeGame, 
+                                                                NULL ) );
 }
 
 ProGameObject::~ProGameObject(){

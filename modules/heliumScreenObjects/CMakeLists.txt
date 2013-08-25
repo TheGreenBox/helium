@@ -9,11 +9,13 @@ INCLUDE( heliumIncludes )
 SET ( heliumScreenObjects_SRCS
         ${HELIUM_MODULES_DIR}/heliumScreenObjects/src/heliumScreenConsole.cpp
         ${HELIUM_MODULES_DIR}/heliumScreenObjects/src/heliumScreenObjects.cpp
+        ${HELIUM_MODULES_DIR}/heliumScreenObjects/src/heliumScreenButton.cpp 
     )
 
 SET ( heliumScreenObjects_HDRS
         ${HELIUM_MODULES_DIR}/heliumScreenObjects/include/heliumScreenConsole.h
         ${HELIUM_MODULES_DIR}/heliumScreenObjects/include/heliumScreenObjects.h
+        ${HELIUM_MODULES_DIR}/heliumScreenObjects/include/heliumScreenButton.h
     ) 
 
 ADD_LIBRARY ( heliumScreenObjects STATIC

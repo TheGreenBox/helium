@@ -14,7 +14,8 @@
 namespace P = Polycode;
 
 HeliumGameCore::HeliumGameCore( Polycode::Core* engCore ) 
-    : HeliumGameCoreObjects( engCore )
+    : HeliumGameCoreObjects( engCore ),
+      keyboardInput(new KeyboardUserInput(this))
 {
     
 }

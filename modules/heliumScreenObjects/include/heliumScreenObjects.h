@@ -15,13 +15,46 @@
 
 #include "heliumScreenConsole.h"
 
+class FlatLifelessObject {
+public:
+    FlatLifelessObject(Polycode::ScreenEntity*);
+    virtual ~FlatLifelessObject() {}
+    Polycode::ScreenEntity* getModel();
+
+protected:
+    Polycode::ScreenEntity* model;
+};
+
+class FlatAlifeObject : public FlatLifelessObject {
+public:
+    FlatAlifeObject(Polycode::ScreenEntity*);
+    virtual ~FlatAlifeObject() {}
+    
+    virtual void lifeStep()=0;
+    virtual void mouseCursor()=0;
+    virtual void mouseClick()=0;
+    virtual void mouseDoubleClick()=0;
+};
+
 class ScreenObjects {
 public:
-    ScreenObjects(){};
-    virtual ~ScreenObjects(){};
+    ScreenObjects();
+    virtual ~ScreenObjects();
     
-private:
+    void addAlifeObject( FlatAlifeObject* );
+    
+    void addLifelessObject( FlatLifelessObject* );
+    
+    void lifeStep();
+    
+    Polycode::Screen* getEngineScreenPt() { 
+        return engineScreen;
+    }
 
+private:
+    Polycode::Screen* engineScreen;   
+    std::list< FlatLifelessObject* > lifelessObjects;
+    std::list< FlatAlifeObject* >    aliveObjects;
 };
 
 #endif // HELIUM_SCREEN_OJECTS_INCLUDED

@@ -54,8 +54,5 @@ class ProGameObject : public HeliumGameCore {
 public:
     ProGameObject( Polycode::Core* );
     virtual ~ProGameObject();
-    
-private:
-    KeyboardUserInput* keysHandler;
 };
 
