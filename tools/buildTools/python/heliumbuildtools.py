@@ -5,18 +5,24 @@ import subprocess
 
 def runCmd( cmd, logFile ):
     cmakeProc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    log, logEr = cmakeProc.communicate()
     
-    if log:
-        logFile.write(log)
-        print("Stdout:\n")
-        print(log)
-        
-    if logEr:
-        logFile.write(logEr)
-        print("Error out:\n")
-        print(logEr)
-        raise Exception("Cmd error "+' '.join(cmd))
+    s = '\n'
+    while s:
+        print s.rstrip()
+        logFile.write(s)
+        s=cmakeProc.stdout.readline()
+    
+    err = '\n'
+    errorOccur = False
+    while err:
+        print err.rstrip()
+        logFile.write(err)
+        err=cmakeProc.stderr.readline()
+
+    cmakeProc.wait()
+    if cmakeProc.returncode != 0:
+        raise Exception("Cmd error \""+cmd[0]+"\"\n")
+    
     return
 
 def cmakeGenerate( buildType, cmakeGenerator, srcDir, otherOpt, log_file ):
@@ -29,10 +35,13 @@ def cmakeGenerate( buildType, cmakeGenerator, srcDir, otherOpt, log_file ):
     luaCmakeCmd.append(srcDir)
     
     print("Cmake generating...")
+    log_file.write("Cmake generating...\n")
     runCmd(luaCmakeCmd, log_file)
     return
 
 def buildProject( buildType, log_file ):
+    print("Build...")
+    log_file.write("Build...\n")
     if sys.platform == 'linux2':
         runCmd(['make'], log_file)
     
@@ -45,6 +54,9 @@ def buildProject( buildType, log_file ):
     return
 
 def installProject( buildType, log_file ):
+    print("Install...")
+    log_file.write("Install...\n")
+    
     if sys.platform == 'linux2':
         runCmd(['make', 'install'], log_file)
     

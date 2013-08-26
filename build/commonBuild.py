@@ -47,11 +47,20 @@ if cmakeGenerator == '':
     elif sys.platform == 'win32':
         cmakeGenerator = '-GVisual Studio 11'
  
-print( '\n------------------------------------------------------------')
-print( '\tHelium buld : buildType      : '+ buildType     )
-print( '\tHelium buld : cmakeGenerator : '+ cmakeGenerator)
-print( '\tHelium buld : platform       : '+ targetPlatform)
-print( '------------------------------------------------------------\n')
+#print( '\n------------------------------------------------------------')
+#print( '\tHelium buld : buildType      : '+ buildType     )
+#print( '\tHelium buld : cmakeGenerator : '+ cmakeGenerator)
+#print( '\tHelium buld : platform       : '+ targetPlatform)
+#print( '------------------------------------------------------------\n')
+
+header = \
+    '------------------------------------------------------------\n'+\
+    '\tHelium buld : buildType      : '+ buildType+'\n'+\
+    '\tHelium buld : cmakeGenerator : '+ cmakeGenerator+'\n'+\
+    '\tHelium buld : platform       : '+ targetPlatform+'\n'+\
+    '------------------------------------------------------------\n'
+print('\n')
+print(header)
 
 sandboxDir = rootScriptName + '/product'
 
@@ -65,6 +74,8 @@ if os.path.isdir(buildDir):
 os.mkdir(buildDir)
 
 log_file = open(buildDir+'/Heluim_'+buildType+'_build.log', 'w')
+log_file.write(header)
+log_file.write('\n')
 
 os.chdir(buildDir)
 
