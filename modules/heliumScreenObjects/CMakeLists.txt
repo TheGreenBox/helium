@@ -10,12 +10,14 @@ SET ( heliumScreenObjects_SRCS
         ${HELIUM_MODULES_DIR}/heliumScreenObjects/src/heliumScreenConsole.cpp
         ${HELIUM_MODULES_DIR}/heliumScreenObjects/src/heliumScreenObjects.cpp
         ${HELIUM_MODULES_DIR}/heliumScreenObjects/src/heliumScreenButton.cpp 
+        ${HELIUM_MODULES_DIR}/heliumScreenObjects/src/heliumPreparedScreenButton.cpp
     )
 
 SET ( heliumScreenObjects_HDRS
         ${HELIUM_MODULES_DIR}/heliumScreenObjects/include/heliumScreenConsole.h
         ${HELIUM_MODULES_DIR}/heliumScreenObjects/include/heliumScreenObjects.h
         ${HELIUM_MODULES_DIR}/heliumScreenObjects/include/heliumScreenButton.h
+        ${HELIUM_MODULES_DIR}/heliumScreenObjects/include/heliumPreparedScreenButton.h
     ) 
 
 ADD_LIBRARY ( heliumScreenObjects STATIC

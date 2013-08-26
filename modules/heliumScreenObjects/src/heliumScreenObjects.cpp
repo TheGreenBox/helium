@@ -34,8 +34,7 @@ ScreenObjectsWorld::~ScreenObjectsWorld () {
 void ScreenObjectsWorld::lifeStep() {
     using std::list;
     for ( list< AlifeScreenObject* >::iterator it = aliveObjects.begin();
-            it != aliveObjects.end(); ++it )
-    {
+            it != aliveObjects.end(); ++it ) {
         (*it)->lifeStep();
     }
 }
@@ -51,6 +50,9 @@ bool ScreenObjectsWorld::getPause() {
 void ScreenObjectsWorld::addObject( ScreenObject* obj ) {
     engineScreen->addEntity( obj->getModel() );
     objects.push_back(obj);
+}
+
+void ScreenObjectsWorld::removeObject( ScreenObject* obj) {
 }
 
 void ScreenObjectsWorld::addAlifeObject( AlifeScreenObject* obj ) {

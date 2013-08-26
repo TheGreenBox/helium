@@ -12,6 +12,7 @@
 #define HELIUM_USER_INPUT_INCLUDED
 
 #include "heliumInputDipather.h"
+#include "heliumUserInputHandler.h"
 #include "keyboardHandler.h"
 
 #endif // HELIUM_USER_INPUT_INCLUDED

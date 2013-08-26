@@ -11,7 +11,8 @@
 #define  HELIUM_SCREEN_BUTTON_INCLUDED
 
 #include <Polycode.h>
-#include "heliumUserInput.h"
+#include "heliumUserInputHandler.h"
+#include "heliumScreenObjects.h"
 
 class ScreenButton : public AlifeScreenObject {
 public:

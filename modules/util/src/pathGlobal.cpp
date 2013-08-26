@@ -10,5 +10,6 @@
 
 #include "pathGlobal.h"
 
-const char* HELIUM_RESOURCE_PATH           = "helium_resource";
+const char* HELIUM_RESOURCE_PATH   = "helium_resource";
+//g_helium_resource_path = HELIUM_RESOURCE_PATH;
 

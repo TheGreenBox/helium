@@ -11,9 +11,8 @@
 #ifndef HELIUM_SCREEN_OJECTS_INCLUDED
 #define HELIUM_SCREEN_OJECTS_INCLUDED
 
+#include <list>
 #include <Polycode.h>
-
-#include "heliumScreenConsole.h"
 
 class ScreenObject {
 public:
@@ -42,6 +41,7 @@ public:
     virtual ~ScreenObjectsWorld();
     
     void addObject( ScreenObject* );
+    void removeObject( ScreenObject* );
     
     void addAlifeObject( AlifeScreenObject* );
     

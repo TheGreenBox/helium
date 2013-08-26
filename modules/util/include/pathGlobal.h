@@ -8,5 +8,12 @@
  * ========================================================
  */
 
-extern const char* HELIUM_RESOURCE_PATH;
+#ifndef HELIUM_PATH_GLOBAL_INCLUDED
+#define HELIUM_PATH_GLOBAL_INCLUDED
+
+#include <Polycode.h>
+
+static const Polycode::String g_helium_resource_path("helium_resource");
+
+#endif // HELIUM_PATH_GLOBAL_INCLUDED
 

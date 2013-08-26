@@ -13,11 +13,10 @@
 
 #include "pathGlobal.h"
 #include "heliumScreenObjects.h"
-#include "heliumScreenButton.h"
+//#include "heliumScreenButton.h"
+#include "heliumPreparedScreenButton.h"
 
 namespace P = Polycode;
-
-P::String res_path(HELIUM_RESOURCE_PATH);
 
 void AddDice::process(HeliumGameCoreObjects* gm) {
     static float pos = 1;
@@ -26,7 +25,7 @@ void AddDice::process(HeliumGameCoreObjects* gm) {
     pos += 0.25;
     
     P::ScenePrimitive* diceModel = new P::ScenePrimitive(P::ScenePrimitive::TYPE_BOX, 0.5, 0.5, 0.5 );
-    diceModel->loadTexture(res_path + "/flame1.png");
+    diceModel->loadTexture(g_helium_resource_path + "/flame1.png");
     diceModel->setRoll(-45);
     diceModel->setPitch(45);
     diceModel->setPosition(x, 10, y);
@@ -41,7 +40,7 @@ void AddBarrel::process(HeliumGameCoreObjects* gm) {
 void AddBoll::process(HeliumGameCoreObjects* gm) {
     P::ScenePrimitive* dice 
         = new P::ScenePrimitive(P::ScenePrimitive::TYPE_SPHERE, 2, 8, 8 );
-    dice->loadTexture(res_path + "/earth_world_map.png");
+    dice->loadTexture(g_helium_resource_path + "/earth_world_map.png");
     dice->setPosition(0, 10, 0);
     gm->getSceneWorldPt()->getEngineScenePt()->addPhysicsChild(dice,
 P::PhysicsSceneEntity::SHAPE_SPHERE, 0.5, 0.1, 0.1 );
@@ -79,7 +78,7 @@ using namespace P; // fucking macros !
 ProGameObject::ProGameObject( P::Core* _core )
     : HeliumGameCore( _core ) 
 {
-    CoreServices::getInstance()->getResourceManager()->addArchive(res_path+"/default.pak");
+    CoreServices::getInstance()->getResourceManager()->addArchive(g_helium_resource_path+"/default.pak");
     CoreServices::getInstance()->getResourceManager()->addDirResource("default", false);
     
     keyboardInput->addEventHandler( P::KEY_1, new AddDice());
@@ -95,37 +94,33 @@ ProGameObject::ProGameObject( P::Core* _core )
 	objectWorld.getEngineScenePt()->getDefaultCamera()->lookAt(Vector3(0,0,0));
 
 	ScenePrimitive* ground = new ScenePrimitive(ScenePrimitive::TYPE_PLANE, 16, 16);
-	ground->loadTexture(res_path + "/simple_stone_texture.png");
+	ground->loadTexture(g_helium_resource_path + "/simple_stone_texture.png");
 	objectWorld.getEngineScenePt()->addPhysicsChild(ground, PhysicsSceneEntity::SHAPE_PLANE, 0.0);
     
     ScenePrimitive* wall = new ScenePrimitive(ScenePrimitive::TYPE_VPLANE, 16, 4);
-	wall->loadTexture(res_path + "/simple_stone_texture.png");
+	wall->loadTexture(g_helium_resource_path + "/simple_stone_texture.png");
 	wall->setPosition( 0, 2, 8 );
 	objectWorld.getEngineScenePt()->addPhysicsChild(wall, PhysicsSceneEntity::SHAPE_PLANE, 0.0);
     
     wall = new ScenePrimitive(ScenePrimitive::TYPE_VPLANE, 16, 4);
-	wall->loadTexture(res_path + "/simple_stone_texture.png");
+	wall->loadTexture(g_helium_resource_path + "/simple_stone_texture.png");
 	wall->setPosition( 0, 2, -8 );
 	objectWorld.getEngineScenePt()->addPhysicsChild(wall, PhysicsSceneEntity::SHAPE_PLANE, 0.0);
     
     wall = new ScenePrimitive(ScenePrimitive::TYPE_VPLANE, 16, 4);
-	wall->loadTexture(res_path + "/simple_stone_texture.png");
+	wall->loadTexture(g_helium_resource_path + "/simple_stone_texture.png");
 	wall->setYaw( 90 );
 	wall->setPosition( 8, 2, 0 );
 	objectWorld.getEngineScenePt()->addPhysicsChild(wall, PhysicsSceneEntity::SHAPE_PLANE, 0.0);
 
     wall = new ScenePrimitive(ScenePrimitive::TYPE_VPLANE, 16, 4);
-	wall->loadTexture(res_path + "/simple_stone_texture.png");
+	wall->loadTexture(g_helium_resource_path + "/simple_stone_texture.png");
 	wall->setYaw( 90 );
 	wall->setPosition( -8, 2, 0 );
 	objectWorld.getEngineScenePt()->addPhysicsChild(wall, PhysicsSceneEntity::SHAPE_PLANE, 0.0);
-
-    Polycode::ScreenShape* button = 
-            new Polycode::ScreenShape( Polycode::ScreenShape::SHAPE_RECT, 50, 50);
-    button->setPosition( this->getEngineCorePt()->getXRes()-25,
-                         this->getEngineCorePt()->getYRes()-25);
-    button->loadTexture( res_path + "/exit_button.png" );
-    this->getScreenWorldPt()->addAlifeObject(new ScreenButton( button, new EscapeGame(), NULL ) );
+    
+    HeliumExitScreenButton exitBt(this);
+    this->getScreenWorldPt()->addAlifeObject(exitBt.getButton());
 }
 
 ProGameObject::~ProGameObject(){

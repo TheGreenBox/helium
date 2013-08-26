@@ -10,6 +10,8 @@
 #ifndef  HELIUM_USER_INPUT_HANDLER_INCLUDED
 #define  HELIUM_USER_INPUT_HANDLER_INCLUDED
 
+#include "heliumGameCoreObjects.h"
+
 class KeyHandler {
 public:
     KeyHandler(){};

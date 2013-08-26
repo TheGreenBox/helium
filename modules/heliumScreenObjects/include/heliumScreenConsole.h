@@ -14,6 +14,8 @@
 #include <list>
 #include <Polycode.h>
 
+#include "heliumScreenObjects.h"
+
 class ScreenConsole {
 public:
 

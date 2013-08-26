@@ -23,7 +23,7 @@ struct PauseGame : public KeyHandler {
     PauseGame();
     virtual ~PauseGame();
     void process(HeliumGameCoreObjects* gm);
-//    static ScreenButton* pauseButton;
+    static ScreenButton* pauseButton;
 };
 
 struct SetVirtualGame : public KeyHandler {
