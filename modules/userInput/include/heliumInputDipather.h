@@ -42,5 +42,14 @@ private:
     HeliumGameCoreObjects* gamePt;
 };
 
+class JoystickUserInput : public Polycode::EventHandler {
+public:
+    JoystickUserInput(HeliumGameCoreObjects*){};
+    virtual ~JoystickUserInput(){};
+     
+private:
+    HeliumGameCoreObjects* gamePt;
+};
+
 #endif // HELIUM_INPUT_DIPATHER_INCLUDED
 
