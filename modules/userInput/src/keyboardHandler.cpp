@@ -8,34 +8,41 @@
  * ========================================================
  */
 #include "keyboardHandler.h"
+#include "heliumPreparedScreenButton.h"
+
+#include <iostream>
 
 void EscapeGame::process(HeliumGameCoreObjects* gm) {
     gm->getEngineCorePt()->Shutdown();
 }
 
 PauseGame::PauseGame() {
-    //Polycode::ScreenShape* button = 
-    //        new Polycode::ScreenShape( Polycode::ScreenShape::SHAPE_RECT, 50, 50);
-    //button->setPosition( this->getEngineCorePt()->getXRes()/2,
-    //                     this->getEngineCorePt()->getYRes()/2);
-    //button->loadTexture( res_path + "/exit_button.png" );
-    //pauseButton()
+    PauseGame::pauseButton = NULL;
 }
 
+ScreenButton* PauseGame::pauseButton;
+
 PauseGame::~PauseGame() {
+    if ( pauseButton != NULL ) {
+        delete pauseButton->getModel();
+        delete pauseButton;
+    }
 }
 
 void PauseGame::process(HeliumGameCoreObjects* gm) {
     if ( gm->getSceneWorldPt()->getPause() ) {
         gm->getSceneWorldPt()->setPause(false);
-        //gm->getScreenWorldPt();
+        HeliumPauseScreenButton pauseButtonConstrctor(gm);
+        pauseButton = pauseButtonConstrctor.getButton();
+        gm->getScreenWorldPt()->addAlifeObject(pauseButton);
     }
     else {
         gm->getSceneWorldPt()->setPause(true);
-        //pauseButton = 
-        //gm->getScreenWorldPt();
+        gm->getScreenWorldPt()->signOutObject( pauseButton );
+        delete pauseButton->getModel();
+        delete pauseButton;
+        pauseButton = NULL;
     }
-    
 }
 
 void SetVirtualGame::process(HeliumGameCoreObjects* gm) {

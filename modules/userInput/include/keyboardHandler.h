@@ -19,10 +19,12 @@ struct EscapeGame : public KeyHandler {
     void process(HeliumGameCoreObjects*);
 };
 
-struct PauseGame : public KeyHandler {
+class PauseGame : public KeyHandler {
+public:
     PauseGame();
     virtual ~PauseGame();
     void process(HeliumGameCoreObjects* gm);
+private:
     static ScreenButton* pauseButton;
 };
 

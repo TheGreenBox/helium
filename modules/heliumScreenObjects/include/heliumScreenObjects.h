@@ -41,7 +41,7 @@ public:
     virtual ~ScreenObjectsWorld();
     
     void addObject( ScreenObject* );
-    void removeObject( ScreenObject* );
+    void signOutObject( ScreenObject* );
     
     void addAlifeObject( AlifeScreenObject* );
     

@@ -8,7 +8,6 @@
  * ========================================================
  */
 
-#include <iostream>
 #include <Polycode.h>
 #include "heliumScreenObjects.h"
 
@@ -24,7 +23,6 @@ AlifeScreenObject::AlifeScreenObject( Polycode::ScreenEntity* _model )
 
 ScreenObjectsWorld::ScreenObjectsWorld ()
     : engineScreen(new Polycode::Screen()) {
-    std::cout << "engineScreen->enabled: " << engineScreen->enabled << '\n';
 }
 
 ScreenObjectsWorld::~ScreenObjectsWorld () {
@@ -52,10 +50,28 @@ void ScreenObjectsWorld::addObject( ScreenObject* obj ) {
     objects.push_back(obj);
 }
 
-void ScreenObjectsWorld::removeObject( ScreenObject* obj) {
+void ScreenObjectsWorld::signOutObject( ScreenObject* obj) {
+    using std::list;
+    for ( list< ScreenObject* >::iterator it = objects.begin();
+            it != objects.end(); ++it ) {
+        if ( (*it) == obj ) {
+            engineScreen->removeChild( (*it)->getModel() );
+            objects.erase(it);
+            return;
+        }
+    }
+    for ( list< AlifeScreenObject* >::iterator itl = aliveObjects.begin();
+            itl != aliveObjects.end(); ++itl ) {
+        if ( (*itl) == obj ) {
+            engineScreen->removeChild( (*itl)->getModel() );
+            aliveObjects.erase(itl);
+            return;
+        }
+    }
 }
 
 void ScreenObjectsWorld::addAlifeObject( AlifeScreenObject* obj ) {
     engineScreen->addEntity( obj->getModel() );
     aliveObjects.push_back(obj);
 }
+

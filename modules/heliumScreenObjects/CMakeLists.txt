@@ -27,5 +27,6 @@ ADD_LIBRARY ( heliumScreenObjects STATIC
 
 TARGET_LINK_LIBRARIES ( heliumScreenObjects
                             ${LIB_POLYCODE}
+                            heliumScreenObjects
                       )
 

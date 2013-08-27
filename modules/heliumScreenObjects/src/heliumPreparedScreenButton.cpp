@@ -20,10 +20,10 @@ HeliumPauseScreenButton::HeliumPauseScreenButton (HeliumGameCoreObjects* game) {
     const int b_size = 50;
     P::ScreenShape* shape = new P::ScreenShape( P::ScreenShape::SHAPE_RECT, 
                                                  b_size, b_size);
-    
+  
     shape->setPosition( game->getEngineCorePt()->getXRes()/2,
                          game->getEngineCorePt()->getYRes()/2);
-    
+  
     shape->loadTexture( g_helium_resource_path + "/pause_button.png" );
     button = new ScreenButton( shape, new PauseGame(), NULL );
 }

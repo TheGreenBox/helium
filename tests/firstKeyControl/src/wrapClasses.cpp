@@ -39,7 +39,7 @@ void AddBarrel::process(HeliumGameCoreObjects* gm) {
 
 void AddBoll::process(HeliumGameCoreObjects* gm) {
     P::ScenePrimitive* dice 
-        = new P::ScenePrimitive(P::ScenePrimitive::TYPE_SPHERE, 2, 8, 8 );
+        = new P::ScenePrimitive(P::ScenePrimitive::TYPE_SPHERE, 3, 16, 16 );
     dice->loadTexture(g_helium_resource_path + "/earth_world_map.png");
     dice->setPosition(0, 10, 0);
     gm->getSceneWorldPt()->getEngineScenePt()->addPhysicsChild(dice,
@@ -106,7 +106,7 @@ ProGameObject::ProGameObject( P::Core* _core )
 	wall->loadTexture(g_helium_resource_path + "/simple_stone_texture.png");
 	wall->setPosition( 0, 2, -8 );
 	objectWorld.getEngineScenePt()->addPhysicsChild(wall, PhysicsSceneEntity::SHAPE_PLANE, 0.0);
-    
+
     wall = new ScenePrimitive(ScenePrimitive::TYPE_VPLANE, 16, 4);
 	wall->loadTexture(g_helium_resource_path + "/simple_stone_texture.png");
 	wall->setYaw( 90 );
