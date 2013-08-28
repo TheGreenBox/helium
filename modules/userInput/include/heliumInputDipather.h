@@ -20,10 +20,11 @@
 class KeyboardUserInput : public Polycode::EventHandler {
 public:
     KeyboardUserInput(HeliumGameCoreObjects*);
-    virtual ~KeyboardUserInput(){};
+    virtual ~KeyboardUserInput();
      
     void handleEvent(Polycode::Event*);
     void addEventHandler(Polycode::PolyKEY, KeyHandler*);
+    void setEnable(bool);
     
 private:
     void keyUP(Polycode::InputEvent*);
@@ -35,13 +36,69 @@ private:
 
 class MouseUserInput : public Polycode::EventHandler {
 public:
-    MouseUserInput(HeliumGameCoreObjects*){};
-    virtual ~MouseUserInput(){};
+    MouseUserInput(HeliumGameCoreObjects*);
+    virtual ~MouseUserInput();
      
+    void handleEvent(Polycode::Event*);
+    void addEventHandler(Polycode::PolyKEY, KeyHandler*);
+    void setEnable(bool);
+    
 private:
+    void keyUP    (Polycode::InputEvent*);
+    void keyDOWN  (Polycode::InputEvent*);
+    void mouseMove(Polycode::InputEvent*);
+    
+    Polycode::Rectangle    selectionArea;
     HeliumGameCoreObjects* gamePt;
 };
 
+class MouseButtonUserInput : public Polycode::EventHandler {
+
+    MouseButtonUserInput();
+    virtual ~MouseButtonUserInput();
+    
+    void handleEvent(Polycode::Event*);
+    
+    void addRightEventHandler(KeyHandler*);
+    void addLeftEventHandler(KeyHandler*);
+    void setEnable(bool);
+};
+
+class MouseMoveUserInput : public Polycode::EventHandler {
+    MouseMoveUserInput();
+    virtual ~MouseMoveUserInput();
+    
+    void handleEvent(Polycode::Event*);
+    // not KeyHandler
+    void addEventHandler();
+    void setEnable(bool);
+};
+
+class MouseOtherUserInput : public Polycode::EventHandler {
+    MouseOtherUserInput();
+    virtual ~MouseOtherUserInput();
+    
+    void handleEvent(Polycode::Event*);
+    // not KeyHandler
+    void addEventHandler();
+    void setEnable(bool);
+};
+
+class MouseWheelUserInput : public Polycode::EventHandler {
+public:
+    MouseWheelUserInput();
+    ~MouseWheelUserInput();
+
+    void handleEvent(Polycode::Event*);
+    void addUpEventHandler();
+    void addDownEventHandler();
+    void setEnable(bool);
+
+private:
+    KeyHandler* wheelUp;
+    KeyHandler* wheelDown;
+};
+        
 class JoystickUserInput : public Polycode::EventHandler {
 public:
     JoystickUserInput(HeliumGameCoreObjects*){};

@@ -29,14 +29,14 @@ void ScreenButton::mouseCursor() {
 void ScreenButton::mouseClick() {
     clickAnimation();
     if ( mouseClickEvent != NULL ) {
-//        mouseClickEvent->process();
+    //    mouseClickEvent->process();
     }
 }
 
 void ScreenButton::mouseDoubleClick() {
     clickAnimation();
     if ( mouseDoubleClickEvent != NULL ) {
-//        mouseDoubleClickEvent->process();
+    //    mouseDoubleClickEvent->process();
     }
 }
 
