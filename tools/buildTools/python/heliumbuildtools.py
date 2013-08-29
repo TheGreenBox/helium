@@ -3,26 +3,28 @@
 import sys
 import subprocess
 
-def runCmd( cmd, logFile ):
-    cmakeProc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+def runAndLogCmd( cmd, logFile ):
+    proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     
     s = '\n'
     while s:
         print s.rstrip()
         logFile.write(s)
-        s=cmakeProc.stdout.readline()
+        s=proc.stdout.readline()
     
     err = '\n'
     errorOccur = False
     while err:
         print err.rstrip()
         logFile.write(err)
-        err=cmakeProc.stderr.readline()
+        err=proc.stderr.readline()
 
-    cmakeProc.wait()
-    if cmakeProc.returncode != 0:
+    proc.wait()
+    return proc.returncode
+
+def runCmd( cmd, logFile ):
+    if runAndLogCmd( cmd, logFile ) != 0:
         raise Exception("Cmd error \""+cmd[0]+"\"\n")
-    
     return
 
 def cmakeGenerate( buildType, cmakeGenerator, srcDir, otherOpt, log_file ):
