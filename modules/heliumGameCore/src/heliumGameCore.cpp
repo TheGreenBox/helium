@@ -24,6 +24,7 @@ HeliumGameCore::~HeliumGameCore() {
 }
 
 void HeliumGameCore::game() { 
+    keyboardInput->setEnable(true);
     //const int TICKS_PER_SECOND = 50;
     //const int SKIP_TICKS = 1000 / TICKS_PER_SECOND;
     //const int MAX_FRAMESKIP = 10;
@@ -44,6 +45,7 @@ void HeliumGameCore::game() {
         //}
         engineCore->Render();
     }   
+    keyboardInput->setEnable(false);
     return; 
 }
 
