@@ -1,12 +1,21 @@
 SET ( POLYCODE_FRAMEWORK_DIR ${CMAKE_HOME_DIRECTORY}/../polycode/Release/${CMAKE_SYSTEM_NAME}/Framework )
+SET ( POLYCODE_FRAMEWORK_DIR_BIG ${CMAKE_HOME_DIRECTORY}/../Polycode/Release/${CMAKE_SYSTEM_NAME}/Framework )
 
 SET ( POLYCODE_SEARCH_PATHS
       ${POLYCODE_FRAMEWORK_DIR}/Modules/lib
+      ${POLYCODE_FRAMEWORK_DIR_BIG}/Modules/lib
+    
       ${POLYCODE_FRAMEWORK_DIR}/Modules/Dependencies/lib
+      ${POLYCODE_FRAMEWORK_DIR_BIG}/Modules/Dependencies/lib
     
       ${POLYCODE_FRAMEWORK_DIR}/Modules/include 
+      ${POLYCODE_FRAMEWORK_DIR_BIG}/Modules/include 
+    
       ${POLYCODE_FRAMEWORK_DIR}/Modules/Dependencies/include/Box2D 
+      ${POLYCODE_FRAMEWORK_DIR_BIG}/Modules/Dependencies/include/Box2D 
+    
       ${POLYCODE_FRAMEWORK_DIR}/Modules/Dependencies/include/bullet
+      ${POLYCODE_FRAMEWORK_DIR_BIG}/Modules/Dependencies/include/bullet
     )
 
 SET ( POLYCODE_MODULES_LIB_NAMES
