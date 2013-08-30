@@ -3,18 +3,58 @@
  --- git upload ---
 
 
+* remote polycode_origin
+  Fetch URL: https://github.com/TheGreenBox/Polycode.git
+  Push  URL: https://github.com/TheGreenBox/Polycode.git
+  HEAD branch: master
+  Remote branches:
+    gh-pages new (next fetch will store in remotes/polycode_origin)
+    master   new (next fetch will store in remotes/polycode_origin)
+  Local ref configured for 'git push':
+    master pushes to master (up to date)
 
-fatal: 'polycode_origin' does not appear to be a git repository
-fatal: Could not read from remote repository.
 
-Please make sure you have the correct access rights
-and the repository exists.
-
-Initialized empty Git repository in /home/akindyakov/source/helium/thirdparty/polycode/polycode_src/.git/
-
-
-
-
+Already up-to-date.
 
 From https://github.com/TheGreenBox/Polycode
  * branch            master     -> FETCH_HEAD
+Cmake generating...
+
+-- The C compiler identification is GNU 4.7.3
+-- The CXX compiler identification is GNU 4.7.3
+-- Check for working C compiler: /usr/bin/cc
+-- Check for working C compiler: /usr/bin/cc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++
+-- Check for working CXX compiler: /usr/bin/c++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Looking for XOpenDisplay in /usr/lib/x86_64-linux-gnu/libX11.so;/usr/lib/x86_64-linux-gnu/libXext.so
+-- Looking for XOpenDisplay in /usr/lib/x86_64-linux-gnu/libX11.so;/usr/lib/x86_64-linux-gnu/libXext.so - found
+-- Looking for gethostbyname
+-- Looking for gethostbyname - found
+-- Looking for connect
+-- Looking for connect - found
+-- Looking for remove
+-- Looking for remove - found
+-- Looking for shmat
+-- Looking for shmat - found
+-- Looking for IceConnectionNumber in ICE
+-- Looking for IceConnectionNumber in ICE - found
+-- Found X11: /usr/lib/x86_64-linux-gnu/libX11.so
+-- Found OpenGL: /usr/lib/x86_64-linux-gnu/libGL.so  
+-- Found ZLIB: /usr/lib/x86_64-linux-gnu/libz.so (found version "1.2.7") 
+-- Found PNG: /usr/lib/x86_64-linux-gnu/libpng.so  
+-- Configuring incomplete, errors occurred!
+
+No POLYCODE_RELEASE_DIR specified, to /home/akindyakov/source/helium/thirdparty/polycode/polycode_src/Release/Linux
+CMake Error at /usr/share/cmake-2.8/Modules/FindPackageHandleStandardArgs.cmake:97 (message):
+  Could NOT find PhysFS (missing: PHYSFS_LIBRARY PHYSFS_INCLUDE_DIR)
+Call Stack (most recent call first):
+  /usr/share/cmake-2.8/Modules/FindPackageHandleStandardArgs.cmake:291 (_FPHSA_FAILURE_MESSAGE)
+  /usr/share/cmake-2.8/Modules/FindPhysFS.cmake:56 (FIND_PACKAGE_HANDLE_STANDARD_ARGS)
+  CMake/PolycodeIncludes.cmake:16 (FIND_PACKAGE)
+  Core/Contents/CMakeLists.txt:2 (INCLUDE)
+
+

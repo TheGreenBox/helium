@@ -3,6 +3,8 @@
 #---------------------------------------
 import os
 import sys
+import string
+import shutil
 #---------------------------------------
 
 rootScriptName = os.path.abspath(os.path.dirname(__file__))
@@ -13,28 +15,46 @@ import heliumbuildtools
 
 polycodeGitURL = 'https://github.com/TheGreenBox/Polycode.git'
 
-def _polycode_dependencies_build_and_install( buildPath, buildType, log_file ):
-
+def _polycode_dependencies_build( buildPath, buildType, log_file ):
+    
     if sys.platform == 'linux2':
+        typePth = buildPath + '/' +buildType
+        if not os.path.isdir(typePth):
+            os.mkdir(typePth)
+        os.chdir(typePth)
+
+        heliumbuildtools.cmakeGenerate( buildType, 'Unix Makefiles', '../..', [], log_file )
         heliumbuildtools.runCmd(['make'], log_file)
 
     elif sys.platform == 'win32':
+        os.chdir(dependPth)
+        heliumbuildtools.cmakeGenerate( buildType, 'Visual Studio 10', '..', [], log_file )
+        
         cmd = 'c:/Windows/Microsoft.NET/Framework'
         arg1 = 'ALL_BUILD.vcxproj'                   
         arg2 = '/p:Configuration='+buildType
         arg3 = '/nologo'
         heliumbuildtools.runCmd([cmd, arg1, arg2, arg3], log_file)
+        
         arg1 = 'glext.vcxproj'                   
         heliumbuildtools.runCmd([cmd, arg1, arg2, arg3], log_file)
+        
         arg1 = 'wglext.vcxproj'                   
         heliumbuildtools.runCmd([cmd, arg1, arg2, arg3], log_file)
     
     return
 
 def _polycode_build_and_install( buildPath, buildType, log_file ):
-
+    
     if sys.platform == 'linux2':
+        typePth = buildPath + '/' + buildType
+        if not os.path.isdir(typePth):
+            os.mkdir(typePth)
+        os.chdir(typePth)
+
+        heliumbuildtools.cmakeGenerate( buildType, 'Unix Makefiles', '../..', [], log_file )
         heliumbuildtools.runCmd(['make'], log_file)
+        heliumbuildtools.runCmd(['make', 'install'], log_file)
 
     elif sys.platform == 'win32':
         cmd = 'c:/Windows/Microsoft.NET/Framework'
@@ -42,6 +62,7 @@ def _polycode_build_and_install( buildPath, buildType, log_file ):
         arg2 = '/p:Configuration='+buildType
         arg3 = '/nologo'
         heliumbuildtools.runCmd([cmd, arg1, arg2, arg3], log_file)
+        
         arg1 = 'INSTALL.vcxproj'                   
         heliumbuildtools.runCmd([cmd, arg1, arg2, arg3], log_file)
     
@@ -61,6 +82,8 @@ def _polycode_upload( log_file ):
     return
 
 def build( buildRootPath ):
+    
+    buildRootPath = os.path.normpath(rootScriptName + '/' + buildRootPath)
     log_file = open(buildRootPath+'/Polycode_build.log', 'w')
     
     srcPath = buildRootPath + '/polycode_src'
@@ -68,7 +91,22 @@ def build( buildRootPath ):
         os.mkdir(srcPath)
     os.chdir(srcPath)
     _polycode_upload( log_file )
+  
+    dependPath = srcPath + '/Dependencies/Build'
+    if os.path.isdir(dependPath):
+        shutil.rmtree(dependPath)
+    os.mkdir(dependPath)
+   
+    #_polycode_dependencies_build( dependPath, 'Debug', log_file )
+    #_polycode_dependencies_build( dependPath, 'Release', log_file )
     
-    #_polycode_dependencies_build_and_install( buildPath, buildType, log_file )
-    #_polycode_build_and_install( buildPath, buildType, log_file )
+    buildPath = srcPath + '/Build'
+    if os.path.isdir(buildPath):
+        shutil.rmtree(buildPath)
+    os.mkdir(buildPath)
+    
+    _polycode_build_and_install( buildPath, 'Debug', log_file )
+    _polycode_build_and_install( buildPath, 'Release', log_file )
+    
+    log_file.close()
     return 
