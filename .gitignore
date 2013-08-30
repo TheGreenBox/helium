@@ -2,6 +2,7 @@
 *.swo
 *.pyc
 *.o
+*.log
 
 build/product
 build/log
@@ -11,4 +12,6 @@ thirdparty/builds/build
 thirdparty/builds/log
 thirdparty/lua/build
 thirdparty/lua/lua-5*
+thirdparty/polycode/polycode_src/
+thirdparty/polycode/polycode_src/*
 
