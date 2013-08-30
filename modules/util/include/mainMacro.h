@@ -29,7 +29,7 @@
     #define APP_MAIN_FINCTION __WIN32_MAIN_FUNCTION
 #else
     #define APP_MAIN_FINCTION 
-    #warning "OS type didn't defined and main function type can not be define"
+    #warning "OS type wasn't defined and main function type can not be defined"
 #endif
 
 
