@@ -1,0 +1,20 @@
+
+
+ --- git upload ---
+
+
+
+fatal: 'polycode_origin' does not appear to be a git repository
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+Initialized empty Git repository in /home/akindyakov/source/helium/thirdparty/polycode/polycode_src/.git/
+
+
+
+
+
+From https://github.com/TheGreenBox/Polycode
+ * branch            master     -> FETCH_HEAD

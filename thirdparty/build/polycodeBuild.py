@@ -2,8 +2,11 @@
 
 #---------------------------------------
 import os
+import sys
 #---------------------------------------
 
+rootScriptName = os.path.abspath(os.path.dirname(__file__))
+buildToolsDir = os.path.normpath(rootScriptName+'/../../tools/buildTools/python')
 if buildToolsDir not in sys.path:
     sys.path.append(buildToolsDir)
 import heliumbuildtools
@@ -44,16 +47,16 @@ def _polycode_build_and_install( buildPath, buildType, log_file ):
     
     return
 
-def _polycode_upload( uploadDir, log_file ):
-    
+def _polycode_upload( log_file ):
+    urlHead = 'polycode_origin'
     log_file.write('\n\n --- git upload ---\n\n')
-    if runAndLogCmd( ['git', 'status'], log_file ) != 0 :
-        if runAndLogCmd( ['git', 'init'], log_file ) != 0 :
+    if heliumbuildtools.runAndLogCmd( ['git', 'remote', '-v', 'show', urlHead], log_file ) != 0 :
+        if heliumbuildtools.runAndLogCmd( ['git', 'init'], log_file ) != 0 :
             raise Exception("git init error\n")
-        if runAndLogCmd( ['git', 'remote', 'add', polycodeGitURL, 'origin'], log_file ) != 0 :
+        if heliumbuildtools.runAndLogCmd( ['git', 'remote', 'add', urlHead, polycodeGitURL], log_file ) != 0 :
             raise Exception("git remote add origin error")
          
-    if runAndLogCmd( ['git', 'pull', 'origin', 'master'], log_file ) != 0 :
+    if heliumbuildtools.runAndLogCmd( ['git', 'pull', urlHead, 'master'], log_file ) != 0 :
         raise Exception("git pullin error")
     return
 
@@ -61,10 +64,10 @@ def build( buildRootPath ):
     log_file = open(buildRootPath+'/Polycode_build.log', 'w')
     
     srcPath = buildRootPath + '/polycode_src'
-    if os.path.isdir(srcPath):
+    if not os.path.isdir(srcPath):
         os.mkdir(srcPath)
     os.chdir(srcPath)
-    _polycode_upload( uploadDir, log_file )
+    _polycode_upload( log_file )
     
     #_polycode_dependencies_build_and_install( buildPath, buildType, log_file )
     #_polycode_build_and_install( buildPath, buildType, log_file )
