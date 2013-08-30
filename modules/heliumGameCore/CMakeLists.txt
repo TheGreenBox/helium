@@ -8,11 +8,13 @@ INCLUDE( heliumIncludes )
 
 SET ( heliumGameCore_SRCS
         ${HELIUM_MODULES_DIR}/heliumGameCore/src/heliumGameCore.cpp
+        ${HELIUM_MODULES_DIR}/heliumGameCore/src/heliumGameGlobal.cpp 
     )
 
 SET ( heliumGameCore_HDRS
         ${HELIUM_MODULES_DIR}/heliumGameCore/include/heliumGameCore.h
         ${HELIUM_MODULES_DIR}/heliumGameCore/include/heliumGameCoreObjects.h
+        ${HELIUM_MODULES_DIR}/heliumGameCore/include/heliumGameGlobal.h
     ) 
 
 ADD_LIBRARY ( heliumGameCore STATIC
