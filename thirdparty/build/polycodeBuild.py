@@ -97,8 +97,8 @@ def build( buildRootPath ):
         shutil.rmtree(dependPath)
     os.mkdir(dependPath)
    
-    #_polycode_dependencies_build( dependPath, 'Debug', log_file )
-    #_polycode_dependencies_build( dependPath, 'Release', log_file )
+    _polycode_dependencies_build( dependPath, 'Debug', log_file )
+    _polycode_dependencies_build( dependPath, 'Release', log_file )
     
     buildPath = srcPath + '/Build'
     if os.path.isdir(buildPath):
