@@ -27,7 +27,6 @@ def _polycode_dependencies_build( buildPath, buildType, log_file ):
         heliumbuildtools.runCmd(['make'], log_file)
 
     elif sys.platform == 'win32':
-        os.chdir(dependPth)
         heliumbuildtools.cmakeGenerate( buildType, 'Visual Studio 10', '..', [], log_file )
         
         cmd = 'c:/Windows/Microsoft.NET/Framework'
