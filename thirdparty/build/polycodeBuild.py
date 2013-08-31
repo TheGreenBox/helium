@@ -27,7 +27,7 @@ def _polycode_dependencies_build( buildPath, buildType, log_file ):
         heliumbuildtools.runCmd(['make'], log_file)
 
     elif sys.platform == 'win32':
-        heliumbuildtools.cmakeGenerate( buildType, 'Visual Studio 10', '..', [], log_file )
+        heliumbuildtools.cmakeGenerate( buildType, 'Visual Studio 11', '..', [], log_file )
         
         cmd = 'c:/Windows/Microsoft.NET/Framework'
         arg1 = 'ALL_BUILD.vcxproj'                   
@@ -56,6 +56,8 @@ def _polycode_build_and_install( buildPath, buildType, log_file ):
         heliumbuildtools.runCmd(['make', 'install'], log_file)
 
     elif sys.platform == 'win32':
+        heliumbuildtools.cmakeGenerate( buildType, 'Visual Studio 11', '..', [], log_file )
+        
         cmd = 'c:/Windows/Microsoft.NET/Framework'
         arg1 = 'ALL_BUILD.vcxproj'                   
         arg2 = '/p:Configuration='+buildType
