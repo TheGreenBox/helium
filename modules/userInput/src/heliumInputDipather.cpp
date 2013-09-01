@@ -193,11 +193,13 @@ void MouseWheelUserInput::setEnable(bool set) {
 void MouseWheelUserInput::handleEvent(Polycode::Event* e) {
     switch(e->getEventCode()) {
         case P::InputEvent::EVENT_MOUSEWHEEL_UP:
+            std::cout << "Mouse wheel up\n";
             if ( wheelUp != NULL ) {
                 wheelUp->process();
             }
         break;
         case P::InputEvent::EVENT_MOUSEWHEEL_DOWN:
+            std::cout << "Mouse wheel down\n";
             if ( wheelDown != NULL ) {
                 wheelDown->process();
             }
