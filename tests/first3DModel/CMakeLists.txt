@@ -4,7 +4,7 @@ MESSAGE(STATUS "3d model prototype TEST GENERATING")
 
 PROJECT( first3DModel )
 
-SET( EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin/tests )
+SET( RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/tests )
 SET(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/)
 
 INCLUDE(heliumIncludes)
@@ -14,7 +14,7 @@ SET( 3D_POLY_PHYS_TEST_DIR ${CMAKE_SOURCE_DIR}/tests/first3DModel )
 INCLUDE_DIRECTORIES ( ${3D_POLY_PHYS_TEST_DIR}/include )
 
 SET ( first3DModel_SRCS
-      ${3D_POLY_PHYS_TEST_DIR}/src/main.cpp 
+      ${3D_POLY_PHYS_TEST_DIR}/src/main.cpp
       ${3D_POLY_PHYS_TEST_DIR}/src/helium3DWrap.cpp
       ${SRC_STATIC_LIB}
     )
@@ -24,12 +24,12 @@ SET ( first3DModel_HDRS
     )
 
 ADD_EXECUTABLE ( first3DModel
-                 ${first3DModel_SRCS}   
+                 ${first3DModel_SRCS}
                  ${first3DModel_HDRS}
                )
 
 IF(WIN32)
-    set_target_properties( first3DModel PROPERTIES LINK_FLAGS_DEBUG                   "/SUBSYSTEM:windows") 
+    set_target_properties( first3DModel PROPERTIES LINK_FLAGS_DEBUG                   "/SUBSYSTEM:windows")
     set_target_properties( first3DModel PROPERTIES COMPILE_DEFINITIONS_DEBUG          "_WINDOWS")
     set_target_properties( first3DModel PROPERTIES LINK_FLAGS_RELWITHDEBINFO          "/SUBSYSTEM:windows")
     set_target_properties( first3DModel PROPERTIES COMPILE_DEFINITIONS_RELWITHDEBINFO "_WINDOWS")

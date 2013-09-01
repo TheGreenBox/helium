@@ -10,25 +10,25 @@ INCLUDE(heliumIncludes)
 SET( FIRST_STEP_TEST_DIR ${CMAKE_SOURCE_DIR}/tests/first_step)
 INCLUDE_DIRECTORIES ( ${FIRST_STEP_TEST_DIR}/include )
 
-SET( EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin/tests )
+SET( RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/tests )
 
 SET ( firstStepTest_SRCS
-      ${FIRST_STEP_TEST_DIR}/src/main.cpp 
-      ${FIRST_STEP_TEST_DIR}/src/firstTestClass.cpp 
+      ${FIRST_STEP_TEST_DIR}/src/main.cpp
+      ${FIRST_STEP_TEST_DIR}/src/firstTestClass.cpp
       ${SRC_STATIC_LIB}
     )
 
 SET ( firstStepTest_HDRS
-      ${FIRST_STEP_TEST_DIR}/include/firstTestClass.h 
+      ${FIRST_STEP_TEST_DIR}/include/firstTestClass.h
     )
 
 ADD_EXECUTABLE ( firstStepTest
-                 ${firstStepTest_SRCS}   
+                 ${firstStepTest_SRCS}
                  ${firstStepTest_HDRS}
                )
 IF( UNIX )
 ELSEIF( WIN32 )
-    SET_TARGET_PROPERTIES( firstStepTest PROPERTIES LINK_FLAGS_DEBUG "/SUBSYSTEM:windows") 
+    SET_TARGET_PROPERTIES( firstStepTest PROPERTIES LINK_FLAGS_DEBUG "/SUBSYSTEM:windows")
     SET_TARGET_PROPERTIES( firstStepTest PROPERTIES COMPILE_DEFINITIONS_DEBUG "_CONSOLE")
     SET_TARGET_PROPERTIES( firstStepTest PROPERTIES LINK_FLAGS_RELWITHDEBINFO "/SUBSYSTEM:windows")
     SET_TARGET_PROPERTIES( firstStepTest PROPERTIES COMPILE_DEFINITIONS_RELWITHDEBINFO "_CONSOLE")

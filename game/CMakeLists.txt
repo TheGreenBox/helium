@@ -5,7 +5,7 @@ MESSAGE(STATUS "HELIUM GAME GENERATING")
 PROJECT( helium )
 
 SET ( CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/)
-SET ( EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
+SET ( RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 SET ( COMMON_GAME_SRC_DIR ${CMAKE_SOURCE_DIR}/game )
 
 INCLUDE( heliumIncludes )
@@ -13,8 +13,8 @@ INCLUDE( heliumIncludes )
 INCLUDE_DIRECTORIES ( ${COMMON_GAME_SRC_DIR}/include )
 
 SET ( helium_SRCS
-        ${COMMON_GAME_SRC_DIR}/src/main.cpp 
-        ${COMMON_GAME_SRC_DIR}/src/commonGameLoop.cpp 
+        ${COMMON_GAME_SRC_DIR}/src/main.cpp
+        ${COMMON_GAME_SRC_DIR}/src/commonGameLoop.cpp
         ${POLYCODE_VIEW_DIR}/PolycodeView.cpp
         ${SRC_STATIC_LIB}
     )
@@ -26,7 +26,7 @@ SET ( helium_HDRS
 ADD_EXECUTABLE( helium ${helium_SRCS} ${helium_HDRS} )
 
 if(WIN32)
-    SET_TARGET_PROPERTIES( helium PROPERTIES LINK_FLAGS_DEBUG "/SUBSYSTEM:windows" ) 
+    SET_TARGET_PROPERTIES( helium PROPERTIES LINK_FLAGS_DEBUG "/SUBSYSTEM:windows" )
     SET_TARGET_PROPERTIES( helium PROPERTIES COMPILE_DEFINITIONS_DEBUG "_WINDOWS" )
     SET_TARGET_PROPERTIES( helium PROPERTIES LINK_FLAGS_RELWITHDEBINFO "/SUBSYSTEM:windows" )
     SET_TARGET_PROPERTIES( helium PROPERTIES COMPILE_DEFINITIONS_RELWITHDEBINFO "_WINDOWS" )
@@ -35,9 +35,9 @@ if(WIN32)
     SET_TARGET_PROPERTIES( helium PROPERTIES COMPILE_DEFINITIONS _UNICODE,UNICODE )
 endif(WIN32)
 
-TARGET_LINK_LIBRARIES ( helium 
-                            heliumGameCore 
-                            heliumMainMenu 
+TARGET_LINK_LIBRARIES ( helium
+                            heliumGameCore
+                            heliumMainMenu
                             ${LIB_POLYCODE}
                       )
 INSTALL ( TARGETS helium

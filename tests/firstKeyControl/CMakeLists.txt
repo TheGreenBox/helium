@@ -4,7 +4,7 @@ MESSAGE(STATUS "firstKeyControl TEST GENERATING")
 
 PROJECT( firstKeyControl )
 
-SET( EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin/tests )
+SET( RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/tests )
 SET(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/)
 
 INCLUDE(heliumIncludes)
@@ -14,22 +14,22 @@ SET( 3D_POLY_PHYS_TEST_DIR ${CMAKE_SOURCE_DIR}/tests/firstKeyControl )
 INCLUDE_DIRECTORIES ( ${3D_POLY_PHYS_TEST_DIR}/include )
 
 SET ( firstKeyControl_SRCS
-      ${3D_POLY_PHYS_TEST_DIR}/src/main.cpp 
-      ${3D_POLY_PHYS_TEST_DIR}/src/wrapClasses.cpp 
+      ${3D_POLY_PHYS_TEST_DIR}/src/main.cpp
+      ${3D_POLY_PHYS_TEST_DIR}/src/wrapClasses.cpp
       ${SRC_STATIC_LIB}
     )
 
 SET ( firstKeyControl_HDRS
-      ${3D_POLY_PHYS_TEST_DIR}/src/wrapClasses.h 
+      ${3D_POLY_PHYS_TEST_DIR}/src/wrapClasses.h
     )
 
 ADD_EXECUTABLE ( firstKeyControl
-                 ${firstKeyControl_SRCS}   
+                 ${firstKeyControl_SRCS}
                  ${firstKeyControl_HDRS}
                )
 
 IF(WIN32)
-    set_target_properties( firstKeyControl PROPERTIES LINK_FLAGS_DEBUG "/SUBSYSTEM:windows") 
+    set_target_properties( firstKeyControl PROPERTIES LINK_FLAGS_DEBUG "/SUBSYSTEM:windows")
     set_target_properties( firstKeyControl PROPERTIES COMPILE_DEFINITIONS_DEBUG "_WINDOWS")
     set_target_properties( firstKeyControl PROPERTIES LINK_FLAGS_RELWITHDEBINFO "/SUBSYSTEM:windows")
     set_target_properties( firstKeyControl PROPERTIES COMPILE_DEFINITIONS_RELWITHDEBINFO "_WINDOWS")
