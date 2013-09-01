@@ -22,6 +22,7 @@ public:
     HeliumGameCore(Polycode::Core* );
     virtual ~HeliumGameCore();
     void game();
+    void makeSelfMainChief();
 
 protected:
     KeyboardUserInput*  keyboardInput;

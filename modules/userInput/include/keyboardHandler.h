@@ -16,20 +16,20 @@
 #include "heliumScreenButton.h"
 
 struct EscapeGame : public KeyHandler {
-    void process(HeliumGameCoreObjects*);
+    void process();
 };
 
 class PauseGame : public KeyHandler {
 public:
     PauseGame();
     virtual ~PauseGame();
-    void process(HeliumGameCoreObjects* gm);
+    void process();
 private:
     static ScreenButton* pauseButton;
 };
 
 struct SetVirtualGame : public KeyHandler {
-    void process(HeliumGameCoreObjects* gm);
+    void process();
 };
 
 #endif // HELIUM_KEYBOARD_HANDLER_INCLUDED

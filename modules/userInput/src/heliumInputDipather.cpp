@@ -61,7 +61,7 @@ void KeyboardUserInput::keyDOWN(P::InputEvent* inputEvent){
     P::PolyKEY code = static_cast<P::PolyKEY>(inputEvent->keyCode());
     std::map<P::PolyKEY, KeyHandler*>::iterator prc = handlers.find(code);
     if ( prc != handlers.end() ) {
-        prc->second->process(gamePt);
+        prc->second->process();
     }
 }
 
