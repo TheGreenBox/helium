@@ -36,6 +36,14 @@ void ScreenObjectsWorld::lifeStep() {
         (*it)->lifeStep();
     }
 }
+
+bool ScreenObjectsWorld::mouseLeftClick(Polycode::Vector2 position) {
+
+}
+
+bool ScreenObjectsWorld::mouseRightClick(Polycode::Vector2 position) {
+
+}
     
 void ScreenObjectsWorld::setPause(bool set) {
     engineScreen->enabled = set;

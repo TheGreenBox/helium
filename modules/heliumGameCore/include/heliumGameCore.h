@@ -26,7 +26,7 @@ public:
 
 protected:
     KeyboardUserInput*  keyboardInput;
-//    MouseUserInput*     mouseInput;
+    MouseUserInput*     mouseInput;
 };
 
 #endif // HELIUM_GAME_CORE_INCLUDED

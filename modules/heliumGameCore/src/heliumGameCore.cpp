@@ -16,7 +16,8 @@ namespace P = Polycode;
 
 HeliumGameCore::HeliumGameCore( Polycode::Core* engCore ) 
     : HeliumGameCoreObjects( engCore ),
-      keyboardInput(new KeyboardUserInput(this))
+      keyboardInput(new KeyboardUserInput()),
+      mouseInput(new MouseUserInput())
 {
     
 }
@@ -27,6 +28,7 @@ HeliumGameCore::~HeliumGameCore() {
 void HeliumGameCore::game() { 
     HeliumGlobal::setCurrentGame(this);
     keyboardInput->setEnable(true);
+    mouseInput->setEnable(true);
     
     bool game_is_running = true;
     while( game_is_running ) {
@@ -34,6 +36,7 @@ void HeliumGameCore::game() {
         objectWorld.lifeStep();
         engineCore->Render();
     }
+    mouseInput->setEnable(false);
     keyboardInput->setEnable(false);
     HeliumGlobal::setCurrentGame(NULL);
     return; 

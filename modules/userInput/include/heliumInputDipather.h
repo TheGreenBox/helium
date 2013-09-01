@@ -19,7 +19,7 @@
 
 class KeyboardUserInput : public Polycode::EventHandler {
 public:
-    KeyboardUserInput(HeliumGameCoreObjects*);
+    KeyboardUserInput();
     virtual ~KeyboardUserInput();
      
     void handleEvent(Polycode::Event*);
@@ -36,7 +36,7 @@ private:
 class MouseButtonUserInput : public Polycode::EventHandler {
 public:
     MouseButtonUserInput();
-    virtual ~MouseButtonUserInput();
+    virtual ~MouseButtonUserInput() {}
     
     void handleEvent(Polycode::Event*);
     
@@ -57,7 +57,7 @@ private:
 class MouseMoveUserInput : public Polycode::EventHandler {
 public:
     MouseMoveUserInput();
-    virtual ~MouseMoveUserInput();
+    virtual ~MouseMoveUserInput() {}
     
     void handleEvent(Polycode::Event*){};
     // not KeyHandler
@@ -71,7 +71,7 @@ private:
 class MouseOtherUserInput : public Polycode::EventHandler {
 public:
     MouseOtherUserInput();
-    virtual ~MouseOtherUserInput();
+    virtual ~MouseOtherUserInput(){}
     
     void handleEvent(Polycode::Event*){}
     // not KeyHandler
@@ -82,7 +82,7 @@ public:
 class MouseWheelUserInput : public Polycode::EventHandler {
 public:
     MouseWheelUserInput();
-    ~MouseWheelUserInput();
+    ~MouseWheelUserInput(){}
 
     void handleEvent(Polycode::Event*);
     void addUpEventHandler(KeyHandler*);
@@ -96,7 +96,7 @@ private:
         
 class MouseUserInput : public Polycode::EventHandler {
 public:
-    MouseUserInput(HeliumGameCoreObjects*);
+    MouseUserInput();
     virtual ~MouseUserInput();
      
     void addEventHandler(Polycode::PolyKEY, KeyHandler*);

@@ -7,7 +7,7 @@
  * Author:  AKindyakov 
  * ========================================================
  */
-
+#include <iostream>
 #include <Polycode.h>
 
 #include "heliumInputDipather.h"
@@ -15,7 +15,7 @@
 
 namespace P = Polycode;
 
-KeyboardUserInput::KeyboardUserInput(HeliumGameCoreObjects* gm) {
+KeyboardUserInput::KeyboardUserInput() {
     handlers[P::KEY_ESCAPE] = new EscapeGame();
     handlers[P::KEY_PAUSE] = new PauseGame();
 }
@@ -65,17 +65,24 @@ void KeyboardUserInput::keyUP(P::InputEvent* inputEvent){
 void KeyboardUserInput::keyDOWN(P::InputEvent* inputEvent){
 }
 
-MouseUserInput::MouseUserInput(HeliumGameCoreObjects*) {
-}
+MouseUserInput::MouseUserInput() 
+    :   buttoninput(new MouseButtonUserInput),
+        moveInput  (new MouseMoveUserInput  ),
+        otherInput (new MouseOtherUserInput),
+        wheelInput (new MouseWheelUserInput)
+{}
 
 MouseUserInput::~MouseUserInput() {
 }
      
 void MouseUserInput::setEnable(bool set) {
     buttoninput->setEnable(set);
-    moveInput->setEnable(set); 
-    otherInput->setEnable(set);
-    wheelInput->setEnable(set);
+  //  moveInput->setEnable(set); 
+  //  otherInput->setEnable(set);
+  //  wheelInput->setEnable(set);
+}
+
+MouseButtonUserInput::MouseButtonUserInput () {
 }
 
 void MouseButtonUserInput::setEnable(bool set) {
@@ -96,32 +103,34 @@ void MouseButtonUserInput::setEnable(bool set) {
 void MouseButtonUserInput::handleEvent(Polycode::Event* e) {
     P::InputEvent* ie = dynamic_cast<P::InputEvent*>(e);
     int code = ie->mouseButton;
-    switch(e->getEventCode()) {
-        case P::InputEvent::EVENT_MOUSEDOWN:
-        {
-            std::map<int, MouseKeyHandler*>::iterator prc = downHandlers.find(code);
-            if ( prc != downHandlers.end() ) {
-                prc->second->process(ie->getMousePosition());
-            }
-        }
-        break;
-        case P::InputEvent::EVENT_MOUSEUP:
-        {
-            std::map<int, MouseKeyHandler*>::iterator prc = upHandlers.find(code);
-            if ( prc != upHandlers.end() ) {
-                prc->second->process(ie->getMousePosition());
-            }
-        }
-        break;
-        case P::InputEvent::EVENT_DOUBLECLICK:
-        {
-            std::map<int, MouseKeyHandler*>::iterator prc = doubleClickHandlers.find(code);
-            if ( prc != doubleClickHandlers.end() ) {
-                prc->second->process(ie->getMousePosition());
-            }
-        }
-        break;
-    }
+    std::cout << "Mouse input: " << code << '\n';
+//    switch(e->getEventCode()) {
+//        case P::InputEvent::EVENT_MOUSEDOWN:
+//        {
+//            std::map<int, MouseKeyHandler*>::iterator prc = downHandlers.find(code);
+//            if ( prc != downHandlers.end() ) {
+//                prc->second->process(ie->getMousePosition());
+//            }
+//        }
+//        break;
+//        case P::InputEvent::EVENT_MOUSEUP:
+//        {
+//            std::map<int, MouseKeyHandler*>::iterator prc = upHandlers.find(code);
+//            if ( prc != upHandlers.end() ) {
+//                prc->second->process(ie->getMousePosition());
+//            }
+//            HeliumGlobal::GetCurrentGame()->getSceneWorldPt():E
+//        }
+//        break;
+//        case P::InputEvent::EVENT_DOUBLECLICK:
+//        {
+//            std::map<int, MouseKeyHandler*>::iterator prc = doubleClickHandlers.find(code);
+//            if ( prc != doubleClickHandlers.end() ) {
+//                prc->second->process(ie->getMousePosition());
+//            }
+//        }
+//        break;
+//    }
 }
 
 void MouseButtonUserInput::addRightEventHandler(MouseKeyHandler*) {
@@ -133,6 +142,9 @@ void MouseButtonUserInput::addLeftEventHandler(MouseKeyHandler*) {
 void MouseButtonUserInput::addButtonEventHandler(int, MouseKeyHandler*) {
 }
 
+MouseMoveUserInput::MouseMoveUserInput() {
+}
+
 void MouseMoveUserInput::setEnable(bool set) {
     HeliumGameCore* gm = HeliumGlobal::getCurrentGame();
     Polycode::CoreInput* input = gm->getEngineCorePt()->getInput();
@@ -142,6 +154,9 @@ void MouseMoveUserInput::setEnable(bool set) {
     else {
         input->removeEventListener( this, P::InputEvent::EVENT_MOUSEMOVE       );
     }
+}
+
+MouseOtherUserInput::MouseOtherUserInput () {
 }
 
 void MouseOtherUserInput::setEnable(bool set) {
@@ -157,6 +172,9 @@ void MouseOtherUserInput::setEnable(bool set) {
         input->removeEventListener( this, P::InputEvent::EVENT_MOUSEOUT        );
         input->removeEventListener( this, P::InputEvent::EVENT_MOUSEUP_OUTSIDE );
     }
+}
+
+MouseWheelUserInput::MouseWheelUserInput () {
 }
 
 void MouseWheelUserInput::setEnable(bool set) {

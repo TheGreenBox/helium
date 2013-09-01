@@ -46,6 +46,8 @@ public:
     void addAlifeObject( AlifeScreenObject* );
     
     void lifeStep();
+    bool mouseLeftClick(Polycode::Vector2 position);
+    bool mouseRightClick(Polycode::Vector2 position);
     
     void setPause(bool);
     bool getPause();
