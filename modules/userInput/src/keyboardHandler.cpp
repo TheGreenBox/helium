@@ -9,10 +9,12 @@
  */
 #include "keyboardHandler.h"
 #include "heliumPreparedScreenButton.h"
+#include "heliumGameGlobal.h"
 
 #include <iostream>
 
-void EscapeGame::process(HeliumGameCoreObjects* gm) {
+void EscapeGame::process() {
+    HeliumGameCore* gm = HeliumGlobal::getCurrentGame();
     gm->getEngineCorePt()->Shutdown();
 }
 
@@ -29,9 +31,11 @@ PauseGame::~PauseGame() {
     }
 }
 
-void PauseGame::process(HeliumGameCoreObjects* gm) {
+void PauseGame::process() {
+    HeliumGameCore* gm = HeliumGlobal::getCurrentGame();
     if ( gm->getSceneWorldPt()->getPause() ) {
         gm->getSceneWorldPt()->setPause(false);
+        
         HeliumPauseScreenButton pauseButtonConstrctor(gm);
         pauseButton = pauseButtonConstrctor.getButton();
         gm->getScreenWorldPt()->addAlifeObject(pauseButton);
@@ -45,7 +49,8 @@ void PauseGame::process(HeliumGameCoreObjects* gm) {
     }
 }
 
-void SetVirtualGame::process(HeliumGameCoreObjects* gm) {
+void SetVirtualGame::process() {
+    HeliumGameCore* gm = HeliumGlobal::getCurrentGame();
     if ( gm->getSceneWorldPt()->getEngineScenePt()->isVirtual() ) {
         gm->getSceneWorldPt()->getEngineScenePt()->setVirtual(false);
     }

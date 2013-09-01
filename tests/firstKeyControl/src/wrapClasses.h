@@ -23,31 +23,31 @@
 class ProGameObject;
 
 struct AddDice : public KeyHandler {
-    void process(HeliumGameCoreObjects*);
+    void process();
 };
 
 struct AddBarrel : public KeyHandler {
-    void process(HeliumGameCoreObjects*);
+    void process();
 };
 
 struct AddBoll : public KeyHandler {
-    void process(HeliumGameCoreObjects*);
+    void process();
 };
 
 struct XCameraMove : public KeyHandler {
-    void process(HeliumGameCoreObjects*);
+    void process();
 };
 
 struct XNegativeCameraMove : public KeyHandler {
-    void process(HeliumGameCoreObjects*);
+    void process();
 };
 
 struct YCameraMove : public KeyHandler {
-    void process(HeliumGameCoreObjects*);
+    void process();
 };
 
 struct YNegativeCameraMove : public KeyHandler {
-    void process(HeliumGameCoreObjects*);
+    void process();
 };
 
 class ProGameObject : public HeliumGameCore {

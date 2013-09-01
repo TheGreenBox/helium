@@ -16,7 +16,7 @@ class KeyHandler {
 public:
     KeyHandler(){};
     virtual ~KeyHandler(){};
-    virtual void process(HeliumGameCoreObjects*)=0;
+    virtual void process()=0;
 };
 
 #endif // HELIUM_USER_INPUT_HANDLER_INCLUDED

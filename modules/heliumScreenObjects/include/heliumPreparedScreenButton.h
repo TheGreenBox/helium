@@ -11,10 +11,10 @@
 #define  HELIUM_PREPARED_SCREEN_BUTTON_INCLUDED
 
 #include "heliumScreenButton.h"
-#include "heliumGameCoreObjects.h"
+#include "heliumGameCore.h"
 
 struct HeliumPauseScreenButton {
-    HeliumPauseScreenButton (HeliumGameCoreObjects* );
+    HeliumPauseScreenButton (HeliumGameCore*);
     virtual ~HeliumPauseScreenButton ();
 
     ScreenButton* getButton() { return button; }
@@ -22,7 +22,7 @@ struct HeliumPauseScreenButton {
 };
 
 struct HeliumExitScreenButton {
-    HeliumExitScreenButton(HeliumGameCoreObjects* );
+    HeliumExitScreenButton(HeliumGameCore*);
     virtual ~HeliumExitScreenButton();
 
     ScreenButton* getButton() { return button; }

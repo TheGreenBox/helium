@@ -13,12 +13,12 @@
 
 #include "pathGlobal.h"
 #include "heliumScreenObjects.h"
-//#include "heliumScreenButton.h"
+#include "heliumGameGlobal.h"
 #include "heliumPreparedScreenButton.h"
 
 namespace P = Polycode;
 
-void AddDice::process(HeliumGameCoreObjects* gm) {
+void AddDice::process() {
     static float pos = 1;
     double x = 3 * std::sin(pos);
     double y = 3 * std::cos(pos);
@@ -31,43 +31,49 @@ void AddDice::process(HeliumGameCoreObjects* gm) {
     diceModel->setPosition(x, 10, y);
     
     LifelessObject* dice = new LifelessObject(diceModel);
+    HeliumGameCore* gm = HeliumGlobal::getCurrentGame();
     gm->getSceneWorldPt()->addPhysicsObject(dice, P::PhysicsSceneEntity::SHAPE_BOX, 0.5);
 }
 
-void AddBarrel::process(HeliumGameCoreObjects* gm) {
+void AddBarrel::process() {
 }
 
-void AddBoll::process(HeliumGameCoreObjects* gm) {
+void AddBoll::process() {
     P::ScenePrimitive* dice 
         = new P::ScenePrimitive(P::ScenePrimitive::TYPE_SPHERE, 3, 16, 16 );
     dice->loadTexture(g_helium_resource_path + "/earth_world_map.png");
     dice->setPosition(0, 10, 0);
+    HeliumGameCore* gm = HeliumGlobal::getCurrentGame();
     gm->getSceneWorldPt()->getEngineScenePt()->addPhysicsChild(dice,
 P::PhysicsSceneEntity::SHAPE_SPHERE, 0.5, 0.1, 0.1 );
 }
 
-void XCameraMove::process(HeliumGameCoreObjects* gm) {
+void XCameraMove::process() {
+    HeliumGameCore* gm = HeliumGlobal::getCurrentGame();
     P::Vector3 pos = gm->getSceneWorldPt()->getEngineScenePt()->getDefaultCamera()->getPosition();
     pos.x = pos.x - 0.25;
     pos.z = pos.z - 0.25;
     gm->getSceneWorldPt()->getEngineScenePt()->getDefaultCamera()->setPosition(pos);
 }
 
-void XNegativeCameraMove::process(HeliumGameCoreObjects* gm) {
+void XNegativeCameraMove::process() {
+    HeliumGameCore* gm = HeliumGlobal::getCurrentGame();
     P::Vector3 pos = gm->getSceneWorldPt()->getEngineScenePt()->getDefaultCamera()->getPosition();
     pos.x = pos.x + 0.25;
     pos.z = pos.z + 0.25;
     gm->getSceneWorldPt()->getEngineScenePt()->getDefaultCamera()->setPosition(pos);
 }
 
-void YCameraMove::process(HeliumGameCoreObjects* gm) {
+void YCameraMove::process() {
+    HeliumGameCore* gm = HeliumGlobal::getCurrentGame();
     P::Vector3 pos = gm->getSceneWorldPt()->getEngineScenePt()->getDefaultCamera()->getPosition();
     pos.x = pos.x + 0.25;
     pos.z = pos.z - 0.25;
     gm->getSceneWorldPt()->getEngineScenePt()->getDefaultCamera()->setPosition(pos);
 }
 
-void YNegativeCameraMove::process(HeliumGameCoreObjects* gm) {
+void YNegativeCameraMove::process() {
+    HeliumGameCore* gm = HeliumGlobal::getCurrentGame();
     P::Vector3 pos = gm->getSceneWorldPt()->getEngineScenePt()->getDefaultCamera()->getPosition();
     pos.x = pos.x - 0.25;
     pos.z = pos.z + 0.25;
