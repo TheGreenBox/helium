@@ -17,7 +17,7 @@ void printArray(int numberOfArguments, char** stringArray) {
 void swapFirstAndLastElements(int arraySize, char** stringArray) {
     char* temp = stringArray[arraySize - 1];
     stringArray[arraySize - 1] = stringArray[0];
-    stringgArray[0] = temp;
+    stringArray[0] = temp;
     return;
 }
 
@@ -28,7 +28,7 @@ void swapFirstAndLastElements(int arraySize, char** stringArray) {
 int main(int argsNum, char** argAr) {
     printArray(argsNum, argAr);
     swapFirstAndLastElements(argsNum, argAr);
-    std:cout << "\nAfter swap:\n";
+    std::cout << "\nAfter swap:\n";
     printArray(argsNum, argAr);
     return 0;
 }
