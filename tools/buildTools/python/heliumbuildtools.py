@@ -13,9 +13,8 @@ def runAndLogCmd( cmd, logFile ):
         s=proc.stdout.readline()
     
     err = '\n'
-    errorOccur = False
     while err:
-        print err.rstrip()
+        print '[ERR] '+err.rstrip()
         logFile.write(err)
         err=proc.stderr.readline()
 
