@@ -19,5 +19,12 @@ public:
     virtual void process()=0;
 };
 
+class MouseKeyHandler {
+public:
+    MouseKeyHandler(){};
+    virtual ~MouseKeyHandler(){};
+    virtual void process(Polycode::Vector2 mousePosition)=0;
+};
+
 #endif // HELIUM_USER_INPUT_HANDLER_INCLUDED
 

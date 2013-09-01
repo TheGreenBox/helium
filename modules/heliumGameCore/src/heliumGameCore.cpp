@@ -25,8 +25,8 @@ HeliumGameCore::~HeliumGameCore() {
 }
 
 void HeliumGameCore::game() { 
-    keyboardInput->setEnable(true);
     HeliumGlobal::setCurrentGame(this);
+    keyboardInput->setEnable(true);
     
     bool game_is_running = true;
     while( game_is_running ) {
