@@ -59,7 +59,7 @@ public:
     MouseMoveUserInput();
     virtual ~MouseMoveUserInput() {}
     
-    void handleEvent(Polycode::Event*){};
+    void handleEvent(Polycode::Event*);
     // not KeyHandler
     void addEventHandler(){};
     void setEnable(bool);
@@ -73,9 +73,9 @@ public:
     MouseOtherUserInput();
     virtual ~MouseOtherUserInput(){}
     
-    void handleEvent(Polycode::Event*){}
+    void handleEvent(Polycode::Event*);
     // not KeyHandler
-    void addEventHandler(){}
+    void addEventHandler();
     void setEnable(bool);
 };
 

@@ -77,9 +77,9 @@ MouseUserInput::~MouseUserInput() {
      
 void MouseUserInput::setEnable(bool set) {
     buttoninput->setEnable(set);
-  //  moveInput->setEnable(set); 
-  //  otherInput->setEnable(set);
-  //  wheelInput->setEnable(set);
+    moveInput->setEnable(set); 
+    otherInput->setEnable(set);
+    wheelInput->setEnable(set);
 }
 
 MouseButtonUserInput::MouseButtonUserInput () {
@@ -103,7 +103,7 @@ void MouseButtonUserInput::setEnable(bool set) {
 void MouseButtonUserInput::handleEvent(Polycode::Event* e) {
     P::InputEvent* ie = dynamic_cast<P::InputEvent*>(e);
     int code = ie->mouseButton;
-    std::cout << "Mouse input: " << code << '\n';
+    std::cout << "Mouse button: " << code << '\n';
 //    switch(e->getEventCode()) {
 //        case P::InputEvent::EVENT_MOUSEDOWN:
 //        {
@@ -156,7 +156,11 @@ void MouseMoveUserInput::setEnable(bool set) {
     }
 }
 
-MouseOtherUserInput::MouseOtherUserInput () {
+void MouseMoveUserInput::handleEvent(Polycode::Event* e) {
+    //std::cout << "Mouse move\n";
+}
+
+MouseOtherUserInput::MouseOtherUserInput() {
 }
 
 void MouseOtherUserInput::setEnable(bool set) {
@@ -172,6 +176,10 @@ void MouseOtherUserInput::setEnable(bool set) {
         input->removeEventListener( this, P::InputEvent::EVENT_MOUSEOUT        );
         input->removeEventListener( this, P::InputEvent::EVENT_MOUSEUP_OUTSIDE );
     }
+}
+
+void MouseOtherUserInput::handleEvent(Polycode::Event* e) {
+    std::cout << "Mouse other\n";
 }
 
 MouseWheelUserInput::MouseWheelUserInput () {
