@@ -7,7 +7,7 @@
  * Author:       AKindyakov 
  * ========================================================
  */
-
+#include <iostream>
 #include <Polycode.h>
 #include "heliumScreenButton.h"
 #include "heliumUserInputHandler.h"
@@ -26,15 +26,14 @@ void ScreenButton::mouseCursor() {
     cursorAnimation();
 }
 
-void ScreenButton::mouseClick() {
-    clickAnimation();
-    if ( mouseClickEvent != NULL ) {
-    //    mouseClickEvent->process();
+void ScreenButton::mouseClick(bool upDown) {
+    clickAnimation(upDown);
+    if ( upDown && mouseClickEvent != NULL ) {
+        mouseClickEvent->process();
     }
 }
 
 void ScreenButton::mouseDoubleClick() {
-    clickAnimation();
     if ( mouseDoubleClickEvent != NULL ) {
     //    mouseDoubleClickEvent->process();
     }
@@ -43,6 +42,12 @@ void ScreenButton::mouseDoubleClick() {
 void ScreenButton::cursorAnimation() {
 }
 
-void ScreenButton::clickAnimation() {
+void ScreenButton::clickAnimation(bool upDown) {
+    if ( upDown ) {
+        this->getModel()->setColor(1.0, 1.0, 1.0, 1.0);
+    }
+    else {
+        this->getModel()->setColor(1.0, 0.2, 0.0, 1.0);
+    }
 }
 

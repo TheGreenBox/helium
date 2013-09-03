@@ -13,6 +13,7 @@
 
 #include <list>
 #include <Polycode.h>
+#include <PolyPhysicsScreen.h>
 
 class ScreenObject {
 public:
@@ -31,7 +32,7 @@ public:
     
     virtual void lifeStep()=0;
     virtual void mouseCursor()=0;
-    virtual void mouseClick()=0;
+    virtual void mouseClick( bool upDown )=0;
     virtual void mouseDoubleClick()=0;
 };
 
@@ -46,8 +47,8 @@ public:
     void addAlifeObject( AlifeScreenObject* );
     
     void lifeStep();
-    bool mouseLeftClick(Polycode::Vector2 position);
-    bool mouseRightClick(Polycode::Vector2 position);
+
+    bool mouseClick( int button, bool upDown, Polycode::Vector2 position );
     
     void setPause(bool);
     bool getPause();
@@ -57,7 +58,8 @@ public:
     }
 
 private:
-    Polycode::Screen* engineScreen;   
+    AlifeScreenObject* getAlifeObject( Polycode::ScreenEntity* );
+    Polycode::PhysicsScreen* engineScreen;   
     std::list< ScreenObject* >      objects;
     std::list< AlifeScreenObject* > aliveObjects;
 };

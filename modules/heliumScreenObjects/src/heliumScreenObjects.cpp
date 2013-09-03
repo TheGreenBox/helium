@@ -7,9 +7,13 @@
  * Author:       AKindyakov 
  * ========================================================
  */
+#include <iostream>
 
 #include <Polycode.h>
+#include <Polycode2DPhysics.h>
 #include "heliumScreenObjects.h"
+
+namespace P = Polycode;
 
 ScreenObject::ScreenObject( Polycode::ScreenEntity* _model )
     :   model(_model) {}
@@ -22,7 +26,7 @@ AlifeScreenObject::AlifeScreenObject( Polycode::ScreenEntity* _model )
     :   ScreenObject(_model) {}
 
 ScreenObjectsWorld::ScreenObjectsWorld ()
-    : engineScreen(new Polycode::Screen()) {
+    : engineScreen(new Polycode::PhysicsScreen()) {
 }
 
 ScreenObjectsWorld::~ScreenObjectsWorld () {
@@ -37,12 +41,23 @@ void ScreenObjectsWorld::lifeStep() {
     }
 }
 
-bool ScreenObjectsWorld::mouseLeftClick(Polycode::Vector2 position) {
+bool ScreenObjectsWorld::mouseClick( int button, bool upDown, P::Vector2 mouse ) {
+	P::ScreenEntity* entity = engineScreen->getEntityAtPosition(mouse.x, mouse.y);
+    if ( entity == NULL ) {
+        return false;
+    }
 
-}
-
-bool ScreenObjectsWorld::mouseRightClick(Polycode::Vector2 position) {
-
+    if ( button == 0 ) {
+        AlifeScreenObject* obj = this->getAlifeObject(entity);
+        if ( obj != NULL ) {
+            obj->mouseClick(upDown);
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    return false;
 }
     
 void ScreenObjectsWorld::setPause(bool set) {
@@ -79,7 +94,18 @@ void ScreenObjectsWorld::signOutObject( ScreenObject* obj) {
 }
 
 void ScreenObjectsWorld::addAlifeObject( AlifeScreenObject* obj ) {
-    engineScreen->addEntity( obj->getModel() );
+    //engineScreen->addEntity( obj->getModel() );
+    engineScreen->addCollisionChild( obj->getModel(), P::PhysicsScreenEntity::ENTITY_RECT );
     aliveObjects.push_back(obj);
 }
 
+AlifeScreenObject* ScreenObjectsWorld::getAlifeObject( P::ScreenEntity* entity ) {
+    using std::list;
+    for ( list< AlifeScreenObject* >::iterator itl = aliveObjects.begin();
+            itl != aliveObjects.end(); ++itl ) {
+        if ( (*itl)->getModel() == entity ) {
+            return *itl;
+        }
+    }
+    return NULL;
+}

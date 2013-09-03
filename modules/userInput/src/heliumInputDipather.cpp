@@ -104,33 +104,22 @@ void MouseButtonUserInput::handleEvent(Polycode::Event* e) {
     P::InputEvent* ie = dynamic_cast<P::InputEvent*>(e);
     int code = ie->mouseButton;
     std::cout << "Mouse button: " << code << '\n';
-//    switch(e->getEventCode()) {
-//        case P::InputEvent::EVENT_MOUSEDOWN:
-//        {
-//            std::map<int, MouseKeyHandler*>::iterator prc = downHandlers.find(code);
-//            if ( prc != downHandlers.end() ) {
-//                prc->second->process(ie->getMousePosition());
-//            }
-//        }
-//        break;
-//        case P::InputEvent::EVENT_MOUSEUP:
-//        {
-//            std::map<int, MouseKeyHandler*>::iterator prc = upHandlers.find(code);
-//            if ( prc != upHandlers.end() ) {
-//                prc->second->process(ie->getMousePosition());
-//            }
-//            HeliumGlobal::GetCurrentGame()->getSceneWorldPt():E
-//        }
-//        break;
-//        case P::InputEvent::EVENT_DOUBLECLICK:
-//        {
-//            std::map<int, MouseKeyHandler*>::iterator prc = doubleClickHandlers.find(code);
-//            if ( prc != doubleClickHandlers.end() ) {
-//                prc->second->process(ie->getMousePosition());
-//            }
-//        }
-//        break;
-//    }
+    
+    HeliumGameCore* gm = HeliumGlobal::getCurrentGame();
+    switch(e->getEventCode()) {
+        case P::InputEvent::EVENT_MOUSEDOWN:
+        {
+              gm->getScreenWorldPt()->mouseClick( code, false, ie->getMousePosition() );
+        }
+        break;
+        case P::InputEvent::EVENT_MOUSEUP:
+        {
+              gm->getScreenWorldPt()->mouseClick( code, true, ie->getMousePosition() );
+        }
+        //break;
+        //case P::InputEvent::EVENT_DOUBLECLICK:
+        //break;
+    }
 }
 
 void MouseButtonUserInput::addRightEventHandler(MouseKeyHandler*) {
@@ -149,10 +138,10 @@ void MouseMoveUserInput::setEnable(bool set) {
     HeliumGameCore* gm = HeliumGlobal::getCurrentGame();
     Polycode::CoreInput* input = gm->getEngineCorePt()->getInput();
     if (set) {
-        input->addEventListener( this, P::InputEvent::EVENT_MOUSEMOVE       );
+        input->addEventListener( this, P::InputEvent::EVENT_MOUSEMOVE );
     }
     else {
-        input->removeEventListener( this, P::InputEvent::EVENT_MOUSEMOVE       );
+        input->removeEventListener( this, P::InputEvent::EVENT_MOUSEMOVE );
     }
 }
 

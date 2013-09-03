@@ -24,12 +24,12 @@ public:
     void lifeStep();
     
     void mouseCursor();
-    void mouseClick();
+    void mouseClick(bool upDown);
     void mouseDoubleClick();
 
 private:
     void cursorAnimation();
-    void clickAnimation();
+    void clickAnimation(bool upDown);
     
     Polycode::ScreenEntity* model;   
     
