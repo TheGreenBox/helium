@@ -18,7 +18,7 @@
 class ScreenObject {
 public:
     ScreenObject(Polycode::ScreenEntity*);
-    virtual ~ScreenObject() {}
+    virtual ~ScreenObject();
     Polycode::ScreenEntity* getModel();
 
 protected:
@@ -59,7 +59,8 @@ public:
 
 private:
     AlifeScreenObject* getAlifeObject( Polycode::ScreenEntity* );
-    Polycode::PhysicsScreen* engineScreen;   
+
+    Polycode::PhysicsScreen*        engineScreen;
     std::list< ScreenObject* >      objects;
     std::list< AlifeScreenObject* > aliveObjects;
 };

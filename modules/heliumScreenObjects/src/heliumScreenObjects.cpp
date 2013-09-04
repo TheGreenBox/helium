@@ -8,6 +8,7 @@
  * ========================================================
  */
 #include <iostream>
+#include <algorithm>
 
 #include <Polycode.h>
 #include <Polycode2DPhysics.h>
@@ -17,6 +18,10 @@ namespace P = Polycode;
 
 ScreenObject::ScreenObject( Polycode::ScreenEntity* _model )
     :   model(_model) {}
+
+ScreenObject::~ScreenObject() {
+    delete model;
+}
 
 Polycode::ScreenEntity* ScreenObject::getModel() {
     return model;
@@ -30,12 +35,19 @@ ScreenObjectsWorld::ScreenObjectsWorld ()
 }
 
 ScreenObjectsWorld::~ScreenObjectsWorld () {
+    for ( std::list< ScreenObject* >::iterator it = objects.begin();
+            it != objects.end(); ++it ) {
+        delete *it;
+    }
+    for ( std::list< AlifeScreenObject* >::iterator itl = aliveObjects.begin();
+            itl != aliveObjects.end(); ++itl ) {
+        delete *itl;
+    }
     engineScreen->Shutdown();
 }
 
 void ScreenObjectsWorld::lifeStep() {
-    using std::list;
-    for ( list< AlifeScreenObject* >::iterator it = aliveObjects.begin();
+    for ( std::list< AlifeScreenObject* >::iterator it = aliveObjects.begin();
             it != aliveObjects.end(); ++it ) {
         (*it)->lifeStep();
     }
@@ -74,6 +86,7 @@ void ScreenObjectsWorld::addObject( ScreenObject* obj ) {
 }
 
 void ScreenObjectsWorld::signOutObject( ScreenObject* obj) {
+    // FIXME !!!
     using std::list;
     for ( list< ScreenObject* >::iterator it = objects.begin();
             it != objects.end(); ++it ) {
@@ -94,7 +107,6 @@ void ScreenObjectsWorld::signOutObject( ScreenObject* obj) {
 }
 
 void ScreenObjectsWorld::addAlifeObject( AlifeScreenObject* obj ) {
-    //engineScreen->addEntity( obj->getModel() );
     engineScreen->addCollisionChild( obj->getModel(), P::PhysicsScreenEntity::ENTITY_RECT );
     aliveObjects.push_back(obj);
 }

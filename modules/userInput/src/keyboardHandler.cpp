@@ -26,7 +26,6 @@ ScreenButton* PauseGame::pauseButton;
 
 PauseGame::~PauseGame() {
     if ( pauseButton != NULL ) {
-        delete pauseButton->getModel();
         delete pauseButton;
     }
 }
@@ -43,7 +42,6 @@ void PauseGame::process() {
     else {
         gm->getSceneWorldPt()->setPause(true);
         gm->getScreenWorldPt()->signOutObject( pauseButton );
-        delete pauseButton->getModel();
         delete pauseButton;
         pauseButton = NULL;
     }
