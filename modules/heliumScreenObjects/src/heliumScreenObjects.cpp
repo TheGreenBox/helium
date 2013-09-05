@@ -28,46 +28,44 @@ Polycode::ScreenEntity* ScreenObject::getModel() {
 }
 
 AlifeScreenObject::AlifeScreenObject( Polycode::ScreenEntity* _model )
-    :   ScreenObject(_model) {}
+    : ScreenObject(_model) {}
 
 ScreenObjectsWorld::ScreenObjectsWorld ()
     : engineScreen(new Polycode::PhysicsScreen()) {
 }
 
 ScreenObjectsWorld::~ScreenObjectsWorld () {
-    for ( std::list< ScreenObject* >::iterator it = objects.begin();
-            it != objects.end(); ++it ) {
-        delete *it;
-    }
-    for ( std::list< AlifeScreenObject* >::iterator itl = aliveObjects.begin();
-            itl != aliveObjects.end(); ++itl ) {
-        delete *itl;
-    }
     engineScreen->Shutdown();
+    
+    for ( std::set< ScreenObject* >::iterator it = objects.begin();
+            it != objects.end(); ++it ) {
+        delete reinterpret_cast<P::ScreenEntity*>(*it);
+    }
+    for ( std::map< AlifeScreenObject* >::iterator itl = aliveObjects.begin();
+            itl != aliveObjects.end(); ++itl ) {
+        delete reinterpret_cast<P::ScreenEntity*>(*itl->first);
+        delete itl->second;
+    }
 }
 
 void ScreenObjectsWorld::lifeStep() {
-    for ( std::list< AlifeScreenObject* >::iterator it = aliveObjects.begin();
+    for ( AlifeIterator it = aliveObjects.begin();
             it != aliveObjects.end(); ++it ) {
-        (*it)->lifeStep();
+        it->second->lifeStep();
     }
 }
 
 bool ScreenObjectsWorld::mouseClick( int button, bool upDown, P::Vector2 mouse ) {
 	P::ScreenEntity* entity = engineScreen->getEntityAtPosition(mouse.x, mouse.y);
-    if ( entity == NULL ) {
-        return false;
-    }
+    
+    // TODO !! wrap it to inline function!
+    IHeliumObjectsWorld::ObjectsIdType id = 
+        reinterpret_cast< IHeliumObjectsWorld::ObjectsIdType >(entity);
 
-    if ( button == 0 ) {
-        AlifeScreenObject* obj = this->getAlifeObject(entity);
-        if ( obj != NULL ) {
-            obj->mouseClick(upDown);
-            return true;
-        }
-        else {
-            return false;
-        }
+    AlifeIterator ait = alifeObjects.find(id);
+    if (ait != alifeObjects.end() ) {
+        ait->second->mouseClick(upDown);
+        return true;
     }
     return false;
 }
@@ -80,44 +78,46 @@ bool ScreenObjectsWorld::getPause() {
     return engineScreen->enabled;
 }
 
-void ScreenObjectsWorld::addObject( ScreenObject* obj ) {
-    engineScreen->addEntity( obj->getModel() );
-    objects.push_back(obj);
+ScreenObjectsWorld::HeliumObjectsIdType 
+ScreenObjectsWorld::addObject( PackagedScreenObject& obj ) {
+    engineScreen->addChild( obj.getModel() );
+    objects.push_back( obj.getId() );
 }
 
-void ScreenObjectsWorld::signOutObject( ScreenObject* obj) {
-    // FIXME !!!
-    using std::list;
-    for ( list< ScreenObject* >::iterator it = objects.begin();
-            it != objects.end(); ++it ) {
-        if ( (*it) == obj ) {
-            engineScreen->removeChild( (*it)->getModel() );
-            objects.erase(it);
-            return;
-        }
+void ScreenObjectsWorld::signOutObject( HeliumObjectsIdType id ) {
+    ObjectIterator it = objects.find(id);
+    if ( it != objects.end() ) {
+        P::ScreenEntity* pObj = reinterpret_cast<P::ScreenEntity*>(id);
+            
+        engineScreen->removeChild( pObj );
+        delete pObj;
+        objects.erase(it);
     }
-    for ( list< AlifeScreenObject* >::iterator itl = aliveObjects.begin();
-            itl != aliveObjects.end(); ++itl ) {
-        if ( (*itl) == obj ) {
-            engineScreen->removeChild( (*itl)->getModel() );
-            aliveObjects.erase(itl);
-            return;
+    else {
+        AlifeIterator ait = alifeObjects.find(id);
+        if (ait != alifeObjects.end() ) {
+            P::ScreenEntity* pObj = reinterpret_cast<P::ScreenEntity*>(id);
+                
+            engineScreen->removeChild( pObj );
+            delete pObj;
+            objects.erase(ait);
         }
-    }
 }
 
-void ScreenObjectsWorld::addAlifeObject( AlifeScreenObject* obj ) {
-    engineScreen->addCollisionChild( obj->getModel(), P::PhysicsScreenEntity::ENTITY_RECT );
-    aliveObjects.push_back(obj);
+void ScreenObjectsWorld::addAlifeObject( PackagedAlifeScreenObject& obj ) {
+    engineScreen->addCollisionChild( obj.getModel(), obj.getEntityType() );
+    aliveObjects.push_back( obj.getAlifePair() );
 }
 
-AlifeScreenObject* ScreenObjectsWorld::getAlifeObject( P::ScreenEntity* entity ) {
-    using std::list;
-    for ( list< AlifeScreenObject* >::iterator itl = aliveObjects.begin();
-            itl != aliveObjects.end(); ++itl ) {
-        if ( (*itl)->getModel() == entity ) {
-            return *itl;
-        }
-    }
-    return NULL;
-}
+//AlifeScreenObject* ScreenObjectsWorld::getAlifeObject( P::ScreenEntity* entity ) {
+//    using std::list;
+//    
+//    for ( set< AlifeScreenObject* >::iterator itl = aliveObjects.begin();
+//            itl != aliveObjects.end(); ++itl ) {
+//        if ( (*itl)->getModel() == entity ) {
+//            return *itl;
+//        }
+//    }
+//    return NULL;
+//}
+
