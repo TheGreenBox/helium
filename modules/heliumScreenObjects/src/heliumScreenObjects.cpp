@@ -16,10 +16,40 @@
 
 namespace P = Polycode;
 
+// --------------- Screen Object implementation --------
 ScreenObject::ScreenObject( Polycode::ScreenEntity* _model )
     : model (_model)
 {}
 
+// --------------- Packaged Screen Object implementation --------
+Polycode::ScreenEntity* PackagedScreenObject::getModel()const {
+    return heliumAlife->getModel();
+}
+
+AlifePairType PackagedScreenObject::getAlifePair()const {
+    return AlifePairType(
+            reinterpret_cast<IHeliumObjectsWorld::ObjectsIdType>(this->getModel()),
+            heliumAlife );
+}
+
+IHeliumObjectsWorld::ObjectsIdType PackagedScreenObject::getId()const {
+    return reinterpret_cast<IHeliumObjectsWorld::ObjectsIdType>(this->getModel());
+}
+
+PackagedScreenObject::ScreenEntityType
+PackagedScreenObject::getEntityType()const {
+    return entityType;
+}
+
+int PackagedScreenObject::getShapeType()const {
+    return entityShapeType;
+}
+
+int PackagedScreenObject::isAlife ()const {
+    return alife;
+}
+
+// --------------- screen obj world implementation --------
 ScreenObjectsWorld::ScreenObjectsWorld ()
     : engineScreen(new Polycode::PhysicsScreen()) {
 }

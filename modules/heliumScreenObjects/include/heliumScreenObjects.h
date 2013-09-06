@@ -18,15 +18,41 @@
 
 #include "heliumObjectsWorldIntefrace.h"
 
+/**
+*
+*/  
 class ScreenObject {
 public:
+    /**
+    *
+    */  
     ScreenObject(Polycode::ScreenEntity*);
+    
     virtual ~ScreenObject() {}
     
+    /**
+    *
+    */  
     virtual void lifeStep() {}
+    
+    /**
+    *
+    */  
     virtual void mouseCursor() {}
+    
+    /**
+    *
+    */  
     virtual void mouseClick( bool upDown ) {}
+    
+    /**
+    *
+    */  
     virtual void mouseDoubleClick() {}
+    
+    /**
+    *
+    */  
     Polycode::ScreenEntity* getModel() {
         return model;
     }
@@ -37,25 +63,32 @@ protected:
 
 typedef std::pair< IHeliumObjectsWorld::ObjectsIdType, ScreenObject* > AlifePairType;
 
+/**
+*
+*/  
 class PackagedScreenObject {
 public:
+    /**
+    *
+    */
     PackagedScreenObject (){}
     
     virtual ~PackagedScreenObject (){}
     
-    Polycode::ScreenEntity* getModel()const {
-        return heliumAlife->getModel();
-    }
+    /**
+    *
+    */  
+    Polycode::ScreenEntity* getModel()const;
     
-    AlifePairType getAlifePair()const {
-        return AlifePairType(
-                reinterpret_cast<IHeliumObjectsWorld::ObjectsIdType>(this->getModel()),
-                heliumAlife );
-    }
+    /**
+    *
+    */  
+    AlifePairType getAlifePair()const;
     
-    IHeliumObjectsWorld::ObjectsIdType getId()const {
-        return reinterpret_cast<IHeliumObjectsWorld::ObjectsIdType>(this->getModel());
-    }
+    /**
+    *
+    */  
+    IHeliumObjectsWorld::ObjectsIdType getId()const;
     
     typedef enum {
         ENTITY_IMMATERIAL,
@@ -64,17 +97,20 @@ public:
         ENTITY_EMPTY
     } ScreenEntityType;
     
-    ScreenEntityType getEntityType()const {
-        return entityType;
-    }
+    /**
+    *
+    */  
+    ScreenEntityType getEntityType()const;
     
-    int getShapeType()const {
-        return entityShapeType;
-    }
+    /**
+    *
+    */  
+    int getShapeType()const;
     
-    int isAlife ()const {
-        return alife;
-    }
+    /**
+    *
+    */  
+    int isAlife ()const;
     
 protected:
     ScreenObject* heliumAlife;
@@ -84,33 +120,66 @@ protected:
     int alife;
 };
 
+/**
+*
+*/  
 class ScreenObjectsFactory {
 public:
+    /**
+    *
+    */  
     ScreenObjectsFactory () {}
+    
     ~ScreenObjectsFactory () {}
+    
+    /**
+    *
+    */  
     static PackagedScreenObject& make(int);
 private:
 
 };
 
+/**
+*
+*/  
 class ScreenObjectsWorld : public IHeliumObjectsWorld {
 public:
+
+    /**
+    *
+    */  
     ScreenObjectsWorld();
     virtual ~ScreenObjectsWorld();
     
+    /**
+    *
+    */  
     void lifeStep();
 
+    /**
+    *
+    */  
     bool mouseClick( int button, bool upDown, Polycode::Vector2 position );
     
+    /**
+    *
+    */  
     void setPause(bool);
+    
+    /**
+    *
+    */  
     bool getPause();
     
-    //Polycode::Screen* getEngineScreenPt() { 
-    //    return engineScreen;
-    //}
-    
+    /**
+    *
+    */  
     void signOutObject( IHeliumObjectsWorld::ObjectsIdType );
     
+    /**
+    *
+    */  
     IHeliumObjectsWorld::ObjectsIdType addObject( PackagedScreenObject* );
     
 private:
