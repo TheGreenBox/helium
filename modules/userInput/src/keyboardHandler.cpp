@@ -18,32 +18,22 @@ void EscapeGame::process() {
     gm->getEngineCorePt()->Shutdown();
 }
 
-PauseGame::PauseGame() {
-    PauseGame::pauseButton = NULL;
-}
+PauseGame::PauseGame() {}
 
-ScreenButton* PauseGame::pauseButton;
+IHeliumObjectsWorld::ObjectsIdType PauseGame::button = 0;
 
-PauseGame::~PauseGame() {
-    if ( pauseButton != NULL ) {
-        delete pauseButton;
-    }
-}
+PauseGame::~PauseGame() {}
 
 void PauseGame::process() {
     HeliumGameCore* gm = HeliumGlobal::getCurrentGame();
     if ( gm->getSceneWorldPt()->getPause() ) {
         gm->getSceneWorldPt()->setPause(false);
-        
-        HeliumPauseScreenButton pauseButtonConstrctor(gm);
-        pauseButton = pauseButtonConstrctor.getButton();
-        gm->getScreenWorldPt()->addAlifeObject(pauseButton);
+        HeliumPauseScreenButton container(gm);
+        button = gm->getScreenWorldPt()->addObject( &container );
     }
     else {
         gm->getSceneWorldPt()->setPause(true);
-        gm->getScreenWorldPt()->signOutObject( pauseButton );
-        delete pauseButton;
-        pauseButton = NULL;
+        gm->getScreenWorldPt()->signOutObject( button );
     }
 }
 

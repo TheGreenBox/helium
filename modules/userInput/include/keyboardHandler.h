@@ -25,7 +25,7 @@ public:
     virtual ~PauseGame();
     void process();
 private:
-    static ScreenButton* pauseButton;
+    static IHeliumObjectsWorld::ObjectsIdType button;
 };
 
 struct SetVirtualGame : public KeyHandler {

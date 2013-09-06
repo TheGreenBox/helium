@@ -124,11 +124,9 @@ ProGameObject::ProGameObject( P::Core* _core )
 	wall->setYaw( 90 );
 	wall->setPosition( -8, 2, 0 );
 	objectWorld.getEngineScenePt()->addPhysicsChild(wall, PhysicsSceneEntity::SHAPE_PLANE, 0.0);
-    std::cout << "!\n";
+    
     HeliumExitScreenButton exitBt(this);
-    std::cout << "!!\n";
-    this->getScreenWorldPt()->addAlifeObject(exitBt.getButton());
-    std::cout << "!!!\n";
+    this->getScreenWorldPt()->addObject( &exitBt );
 }
 
 ProGameObject::~ProGameObject(){

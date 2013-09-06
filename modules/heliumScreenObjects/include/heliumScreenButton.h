@@ -14,11 +14,12 @@
 #include "heliumUserInputHandler.h"
 #include "heliumScreenObjects.h"
 
-class ScreenButton : public AlifeScreenObject {
+class ScreenButton : public ScreenObject {
 public:
-    ScreenButton( Polycode::ScreenEntity* model,
+    ScreenButton( Polycode::ScreenEntity* _model,
                   KeyHandler*             mouseClickEvent,
                   KeyHandler*             mouseDoubleClickEvent );
+    
     virtual ~ScreenButton() {}
     
     void lifeStep();
@@ -30,8 +31,6 @@ public:
 private:
     void cursorAnimation();
     void clickAnimation(bool upDown);
-    
-    Polycode::ScreenEntity* model;   
     
     KeyHandler* mouseClickEvent;
     KeyHandler* mouseDoubleClickEvent;

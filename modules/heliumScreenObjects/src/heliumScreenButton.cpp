@@ -15,7 +15,7 @@
 ScreenButton::ScreenButton( Polycode::ScreenEntity* _model,
                             KeyHandler* _mouseClickEvent,
                             KeyHandler* _mouseDoubleClickEvent )
-    :   AlifeScreenObject(_model),
+    :   ScreenObject(_model),
         mouseClickEvent(_mouseClickEvent),
         mouseDoubleClickEvent(_mouseDoubleClickEvent) {}
 

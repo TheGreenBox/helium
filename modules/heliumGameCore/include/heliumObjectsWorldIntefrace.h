@@ -14,8 +14,8 @@
 
 class IHeliumObjectsWorld {
 public:
-    IHeliumObjectsWorld();
-    virtual ~IHeliumObjectsWorld();
+//    IHeliumObjectsWorld();
+//    virtual ~IHeliumObjectsWorld();
     
     /**
     * 

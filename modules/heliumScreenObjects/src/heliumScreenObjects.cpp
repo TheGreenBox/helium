@@ -16,7 +16,8 @@
 
 namespace P = Polycode;
 
-AlifeScreenObject::AlifeScreenObject( Polycode::ScreenEntity* _model )
+ScreenObject::ScreenObject( Polycode::ScreenEntity* _model )
+    : model (_model)
 {}
 
 ScreenObjectsWorld::ScreenObjectsWorld ()
@@ -68,9 +69,28 @@ bool ScreenObjectsWorld::getPause() {
 }
 
 IHeliumObjectsWorld::ObjectsIdType 
-ScreenObjectsWorld::addObject( PackagedScreenObject& obj ) {
-    engineScreen->addChild( obj.getModel() );
-    objects.insert( obj.getId() );
+ScreenObjectsWorld::addObject( PackagedScreenObject* obj ) {
+    switch( obj->getEntityType() ) {
+    case PackagedScreenObject::ENTITY_IMMATERIAL:
+        engineScreen->addChild( obj->getModel() );
+    break;
+    case PackagedScreenObject::ENTITY_COLLISION_ONLY:
+        engineScreen->addCollisionChild( obj->getModel(), obj->getShapeType() );
+    break;
+    case PackagedScreenObject::ENTITY_PHYSICAL:
+        engineScreen->addPhysicsChild( obj->getModel(), obj->getShapeType(), false );
+    break;
+    default:
+        throw "Create correct exeption class!";
+    }
+    
+    if ( obj->isAlife() != 0 ) {
+        alifeObjects.insert( obj->getAlifePair() );
+    }
+    else {
+        objects.insert( obj->getId() );
+    }
+    return obj->getId();
 }
 
 void ScreenObjectsWorld::signOutObject( IHeliumObjectsWorld::ObjectsIdType id ) {
@@ -90,25 +110,8 @@ void ScreenObjectsWorld::signOutObject( IHeliumObjectsWorld::ObjectsIdType id ) 
             engineScreen->removeChild( pObj );
             delete pObj;
             alifeObjects.erase(ait);
+            delete ait->second;
         }
     }
 }
-
-IHeliumObjectsWorld::ObjectsIdType 
-ScreenObjectsWorld::addAlifeObject( PackagedAlifeScreenObject& obj ) {
-    engineScreen->addCollisionChild( obj.getModel(), obj.getEntityType() );
-    alifeObjects.insert( obj.getAlifePair() );
-}
-
-//AlifeScreenObject* ScreenObjectsWorld::getAlifeObject( P::ScreenEntity* entity ) {
-//    using std::list;
-//    
-//    for ( set< AlifeScreenObject* >::iterator itl = alifeObjects.begin();
-//            itl != alifeObjects.end(); ++itl ) {
-//        if ( (*itl)->getModel() == entity ) {
-//            return *itl;
-//        }
-//    }
-//    return NULL;
-//}
 

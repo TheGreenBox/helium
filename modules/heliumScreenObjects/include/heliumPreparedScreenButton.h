@@ -13,20 +13,14 @@
 #include "heliumScreenButton.h"
 #include "heliumGameCore.h"
 
-struct HeliumPauseScreenButton {
-    HeliumPauseScreenButton (HeliumGameCore*);
+struct HeliumPauseScreenButton : public PackagedScreenObject {
+    HeliumPauseScreenButton ( HeliumGameCore* );
     virtual ~HeliumPauseScreenButton ();
-
-    ScreenButton* getButton() { return button; }
-    ScreenButton* button;
 };
 
-struct HeliumExitScreenButton {
-    HeliumExitScreenButton(HeliumGameCore*);
+struct HeliumExitScreenButton : public PackagedScreenObject {
+    HeliumExitScreenButton ( HeliumGameCore* );
     virtual ~HeliumExitScreenButton();
-
-    ScreenButton* getButton() { return button; }
-    ScreenButton* button;
 };
 
 #endif // HELIUM_PREPARED_SCREEN_BUTTON_INCLUDED

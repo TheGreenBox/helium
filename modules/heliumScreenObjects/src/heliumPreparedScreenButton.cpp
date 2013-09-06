@@ -9,10 +9,10 @@
  */
 
 #include <Polycode.h>
+#include "Polycode2DPhysics.h"
 
 #include "heliumPreparedScreenButton.h"
 #include "keyboardHandler.h"
-//#include "heliumGameGlobal.h"
 #include "pathGlobal.h"
 
 namespace P = Polycode;
@@ -25,11 +25,14 @@ HeliumPauseScreenButton::HeliumPauseScreenButton (HeliumGameCore* gm) {
                          gm->getEngineCorePt()->getYRes()/2);
   
     shape->loadTexture( g_helium_resource_path + "/pause_button.png" );
-    button = new ScreenButton( shape, new PauseGame(), NULL );
+    this->heliumAlife = new ScreenButton( shape, new PauseGame(), NULL );
+    
+    this->entityType = PackagedScreenObject::ENTITY_COLLISION_ONLY;
+    this->entityShapeType = P::PhysicsScreenEntity::ENTITY_RECT;
+    this->alife = 1;
 }
 
-HeliumPauseScreenButton::~HeliumPauseScreenButton () {
-}
+HeliumPauseScreenButton::~HeliumPauseScreenButton () {}
 
 HeliumExitScreenButton::HeliumExitScreenButton(HeliumGameCore* gm) {
     const int b_size = 50;
@@ -39,7 +42,11 @@ HeliumExitScreenButton::HeliumExitScreenButton(HeliumGameCore* gm) {
                         gm->getEngineCorePt()->getYRes()-b_size/2 );
     
     shape->loadTexture( g_helium_resource_path + "/exit_button.png" );
-    button = new ScreenButton( shape, new EscapeGame(), NULL );
+    heliumAlife = new ScreenButton( shape, new EscapeGame(), NULL );
+    
+    this->entityType = PackagedScreenObject::ENTITY_COLLISION_ONLY;
+    this->entityShapeType = P::PhysicsScreenEntity::ENTITY_RECT;
+    this->alife = 1;
 }
 
 HeliumExitScreenButton::~HeliumExitScreenButton() {}

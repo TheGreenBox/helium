@@ -18,45 +18,24 @@
 
 #include "heliumObjectsWorldIntefrace.h"
 
-class AlifeScreenObject {
+class ScreenObject {
 public:
-    AlifeScreenObject(Polycode::ScreenEntity*);
-    virtual ~AlifeScreenObject() {}
+    ScreenObject(Polycode::ScreenEntity*);
+    virtual ~ScreenObject() {}
     
-    virtual void lifeStep()=0;
-    virtual void mouseCursor()=0;
-    virtual void mouseClick( bool upDown )=0;
-    virtual void mouseDoubleClick()=0;
-};
-
-typedef std::pair< IHeliumObjectsWorld::ObjectsIdType, AlifeScreenObject* > AlifePairType;
-
-class PackagedAlifeScreenObject {
-public:
-    PackagedAlifeScreenObject (){}
-    
-    virtual ~PackagedAlifeScreenObject (){}
-    
-    Polycode::ScreenEntity* getModel()const {
+    virtual void lifeStep() {}
+    virtual void mouseCursor() {}
+    virtual void mouseClick( bool upDown ) {}
+    virtual void mouseDoubleClick() {}
+    Polycode::ScreenEntity* getModel() {
         return model;
     }
     
-    int getEntityType()const {
-        return entityType;
-    }
-
-    AlifePairType getAlifePair()const {
-        return AlifePairType(
-                reinterpret_cast<IHeliumObjectsWorld::ObjectsIdType>(model),
-                heliumAlife );
-    }
-
 protected:
     Polycode::ScreenEntity* model;
-    int entityType;
-
-    AlifeScreenObject* heliumAlife;
 };
+
+typedef std::pair< IHeliumObjectsWorld::ObjectsIdType, ScreenObject* > AlifePairType;
 
 class PackagedScreenObject {
 public:
@@ -65,15 +44,44 @@ public:
     virtual ~PackagedScreenObject (){}
     
     Polycode::ScreenEntity* getModel()const {
-        return model;
+        return heliumAlife->getModel();
+    }
+    
+    AlifePairType getAlifePair()const {
+        return AlifePairType(
+                reinterpret_cast<IHeliumObjectsWorld::ObjectsIdType>(this->getModel()),
+                heliumAlife );
     }
     
     IHeliumObjectsWorld::ObjectsIdType getId()const {
-        return reinterpret_cast<IHeliumObjectsWorld::ObjectsIdType>(model);
+        return reinterpret_cast<IHeliumObjectsWorld::ObjectsIdType>(this->getModel());
     }
-
+    
+    typedef enum {
+        ENTITY_IMMATERIAL,
+        ENTITY_COLLISION_ONLY,
+        ENTITY_PHYSICAL,     
+        ENTITY_EMPTY
+    } ScreenEntityType;
+    
+    ScreenEntityType getEntityType()const {
+        return entityType;
+    }
+    
+    int getShapeType()const {
+        return entityShapeType;
+    }
+    
+    int isAlife ()const {
+        return alife;
+    }
+    
 protected:
-    Polycode::ScreenEntity* model;
+    ScreenObject* heliumAlife;
+    
+    ScreenEntityType entityType;
+    int entityShapeType;
+    int alife;
 };
 
 class ScreenObjectsFactory {
@@ -100,12 +108,10 @@ public:
     //Polycode::Screen* getEngineScreenPt() { 
     //    return engineScreen;
     //}
-    //typedef unsigned long long int HeliumObjectsIdType;
     
     void signOutObject( IHeliumObjectsWorld::ObjectsIdType );
     
-    IHeliumObjectsWorld::ObjectsIdType addObject( PackagedScreenObject& );
-    IHeliumObjectsWorld::ObjectsIdType addAlifeObject( PackagedAlifeScreenObject& );
+    IHeliumObjectsWorld::ObjectsIdType addObject( PackagedScreenObject* );
     
 private:
     Polycode::PhysicsScreen* engineScreen;
@@ -114,8 +120,8 @@ private:
     std::set< IHeliumObjectsWorld::ObjectsIdType > objects;
     typedef std::set< IHeliumObjectsWorld::ObjectsIdType >::iterator ObjectIterator;
     
-    std::map< IHeliumObjectsWorld::ObjectsIdType, AlifeScreenObject* > alifeObjects;
-    typedef std::map< IHeliumObjectsWorld::ObjectsIdType, AlifeScreenObject* >::iterator AlifeIterator;
+    std::map< IHeliumObjectsWorld::ObjectsIdType, ScreenObject* > alifeObjects;
+    typedef std::map< IHeliumObjectsWorld::ObjectsIdType, ScreenObject* >::iterator AlifeIterator;
 };
 
 #endif // HELIUM_SCREEN_OBJECTS_INCLUDED
