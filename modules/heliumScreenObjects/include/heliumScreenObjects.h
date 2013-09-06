@@ -8,8 +8,8 @@
  * ========================================================
  */
 
-#ifndef HELIUM_SCREEN_OJBECTS_INCLUDED
-#define HELIUM_SCREEN_OJBECTS_INCLUDED
+#ifndef HELIUM_SCREEN_OBJECTS_INCLUDED
+#define HELIUM_SCREEN_OBJECTS_INCLUDED
 
 #include <set>
 #include <map>
@@ -38,7 +38,7 @@ public:
     virtual ~PackagedAlifeScreenObject (){}
     
     Polycode::ScreenEntity* getModel()const {
-        reutrn model;
+        return model;
     }
     
     int getEntityType()const {
@@ -65,13 +65,9 @@ public:
     virtual ~PackagedScreenObject (){}
     
     Polycode::ScreenEntity* getModel()const {
-        reutrn model;
+        return model;
     }
     
-    int getEntityType()const {
-        return entityType;
-    }
-
     IHeliumObjectsWorld::ObjectsIdType getId()const {
         return reinterpret_cast<IHeliumObjectsWorld::ObjectsIdType>(model);
     }
@@ -104,23 +100,23 @@ public:
     //Polycode::Screen* getEngineScreenPt() { 
     //    return engineScreen;
     //}
-    typedef unsigned long long int HeliumObjectsIdType;
+    //typedef unsigned long long int HeliumObjectsIdType;
     
     void signOutObject( IHeliumObjectsWorld::ObjectsIdType );
     
-    HeliumObjectsIdType addObject( PackagedScreenObject& );
-    HeliumObjectsIdType addAlifeObject( PackagedAlifeScreenObject& );
+    IHeliumObjectsWorld::ObjectsIdType addObject( PackagedScreenObject& );
+    IHeliumObjectsWorld::ObjectsIdType addAlifeObject( PackagedAlifeScreenObject& );
     
 private:
     Polycode::PhysicsScreen* engineScreen;
     
     // may be in the future here will be map
     std::set< IHeliumObjectsWorld::ObjectsIdType > objects;
-    typedef std::set< IHeliumObjectsWorld::ObjectsIdType >::iterator ObjectIterator;     
+    typedef std::set< IHeliumObjectsWorld::ObjectsIdType >::iterator ObjectIterator;
     
     std::map< IHeliumObjectsWorld::ObjectsIdType, AlifeScreenObject* > alifeObjects;
     typedef std::map< IHeliumObjectsWorld::ObjectsIdType, AlifeScreenObject* >::iterator AlifeIterator;
 };
 
-#endif // HELIUM_SCREEN_OJBECTS_INCLUDED
+#endif // HELIUM_SCREEN_OBJECTS_INCLUDED
 

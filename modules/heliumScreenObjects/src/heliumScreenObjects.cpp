@@ -16,19 +16,8 @@
 
 namespace P = Polycode;
 
-ScreenObject::ScreenObject( Polycode::ScreenEntity* _model )
-    :   model(_model) {}
-
-ScreenObject::~ScreenObject() {
-    delete model;
-}
-
-Polycode::ScreenEntity* ScreenObject::getModel() {
-    return model;
-}
-
 AlifeScreenObject::AlifeScreenObject( Polycode::ScreenEntity* _model )
-    : ScreenObject(_model) {}
+{}
 
 ScreenObjectsWorld::ScreenObjectsWorld ()
     : engineScreen(new Polycode::PhysicsScreen()) {
@@ -37,20 +26,20 @@ ScreenObjectsWorld::ScreenObjectsWorld ()
 ScreenObjectsWorld::~ScreenObjectsWorld () {
     engineScreen->Shutdown();
     
-    for ( std::set< ScreenObject* >::iterator it = objects.begin();
+    for ( ObjectIterator it = objects.begin();
             it != objects.end(); ++it ) {
         delete reinterpret_cast<P::ScreenEntity*>(*it);
     }
-    for ( std::map< AlifeScreenObject* >::iterator itl = aliveObjects.begin();
-            itl != aliveObjects.end(); ++itl ) {
-        delete reinterpret_cast<P::ScreenEntity*>(*itl->first);
+    for ( AlifeIterator itl = alifeObjects.begin();
+            itl != alifeObjects.end(); ++itl ) {
+        delete reinterpret_cast<P::ScreenEntity*>(itl->first);
         delete itl->second;
     }
 }
 
 void ScreenObjectsWorld::lifeStep() {
-    for ( AlifeIterator it = aliveObjects.begin();
-            it != aliveObjects.end(); ++it ) {
+    for ( AlifeIterator it = alifeObjects.begin();
+            it != alifeObjects.end(); ++it ) {
         it->second->lifeStep();
     }
 }
@@ -78,13 +67,13 @@ bool ScreenObjectsWorld::getPause() {
     return engineScreen->enabled;
 }
 
-ScreenObjectsWorld::HeliumObjectsIdType 
+IHeliumObjectsWorld::ObjectsIdType 
 ScreenObjectsWorld::addObject( PackagedScreenObject& obj ) {
     engineScreen->addChild( obj.getModel() );
-    objects.push_back( obj.getId() );
+    objects.insert( obj.getId() );
 }
 
-void ScreenObjectsWorld::signOutObject( HeliumObjectsIdType id ) {
+void ScreenObjectsWorld::signOutObject( IHeliumObjectsWorld::ObjectsIdType id ) {
     ObjectIterator it = objects.find(id);
     if ( it != objects.end() ) {
         P::ScreenEntity* pObj = reinterpret_cast<P::ScreenEntity*>(id);
@@ -100,20 +89,22 @@ void ScreenObjectsWorld::signOutObject( HeliumObjectsIdType id ) {
                 
             engineScreen->removeChild( pObj );
             delete pObj;
-            objects.erase(ait);
+            alifeObjects.erase(ait);
         }
+    }
 }
 
-void ScreenObjectsWorld::addAlifeObject( PackagedAlifeScreenObject& obj ) {
+IHeliumObjectsWorld::ObjectsIdType 
+ScreenObjectsWorld::addAlifeObject( PackagedAlifeScreenObject& obj ) {
     engineScreen->addCollisionChild( obj.getModel(), obj.getEntityType() );
-    aliveObjects.push_back( obj.getAlifePair() );
+    alifeObjects.insert( obj.getAlifePair() );
 }
 
 //AlifeScreenObject* ScreenObjectsWorld::getAlifeObject( P::ScreenEntity* entity ) {
 //    using std::list;
 //    
-//    for ( set< AlifeScreenObject* >::iterator itl = aliveObjects.begin();
-//            itl != aliveObjects.end(); ++itl ) {
+//    for ( set< AlifeScreenObject* >::iterator itl = alifeObjects.begin();
+//            itl != alifeObjects.end(); ++itl ) {
 //        if ( (*itl)->getModel() == entity ) {
 //            return *itl;
 //        }
