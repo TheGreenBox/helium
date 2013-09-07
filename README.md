@@ -8,7 +8,6 @@ Dependencies
 - Polycode
 - OpenGL
 - SDL
-- Boost 
 
 
 Build
