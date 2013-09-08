@@ -22,8 +22,7 @@
 
 APP_MAIN_FINCTION
 {
-    setDebugConsoleForWin32();
-
+    enableDebugTools();
     std::cout << "template test";
     return 0;
 }

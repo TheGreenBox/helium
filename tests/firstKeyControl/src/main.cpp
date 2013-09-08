@@ -24,7 +24,7 @@
 
 APP_MAIN_FINCTION
 {
-    setDebugConsoleForWin32();
+    enableDebugTools();
 
     using namespace Polycode;
     PolycodeView*  view = new POLYCODE_VIEW_CREATOR("key test");

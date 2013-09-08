@@ -20,7 +20,7 @@
 
 APP_MAIN_FINCTION
 {
-    setDebugConsoleForWin32();
+    enableDebugTools();
 
 	PolycodeView *view = new POLYCODE_VIEW_CREATOR("first step test");
 

@@ -9,3 +9,6 @@
  */
 
 int setDebugConsoleForWin32();
+
+void enableDebugTools();
+
