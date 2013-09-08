@@ -8,8 +8,11 @@
  * ========================================================
  */
 
+#ifdef OS_WIN32
 #include <windows.h>
 #include <stdio.h>
+#endif
+
 #include "debugTools.h"
 
 int setDebugConsoleForWin32() {
@@ -22,4 +25,8 @@ int setDebugConsoleForWin32() {
         return 0;
     #endif
     return 1;
+}
+
+void enableDebugTools() {
+    setDebugConsoleForWin32();
 }

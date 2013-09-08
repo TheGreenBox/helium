@@ -25,7 +25,7 @@
 
 APP_MAIN_FINCTION
 {
-    setDebugConsoleForWin32();
+    enableDebugTools();
 
     std::cout << "Hello! 3D Model learning test.\n";
     Polycode::String mesh_path = g_helium_resource_path + "/polycode_smpl.mesh";
