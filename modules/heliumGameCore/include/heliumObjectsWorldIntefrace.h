@@ -12,38 +12,43 @@
 
 #include <Polycode.h>
 
+/**
+* @brief Interface for the different Helium Object Worlds
+*        pure virtual class
+*/
 class IHeliumObjectsWorld {
 public:
-//    IHeliumObjectsWorld();
-//    virtual ~IHeliumObjectsWorld();
     
     /**
-    * 
+    * @brief Step of behavior in game main loop
     */
     virtual void lifeStep()=0;
 
     /**
-    * @param
-    * @param
-    * @param
+    * @brief Method that will be call when mouse click event was occured
+    * @param button - number of mouse button [0,1,2]
+    * @param upDown - pushed down the button - false, realised the button - true
+    * @param position - screen coords that have mouse cursor when event was occured
     */
     virtual bool mouseClick( int button, bool upDown, Polycode::Vector2 position )=0;
     
     /**
-    * @param
+    * @brief Temporaly swithched off the world and not render it
+    * @param [ true-pause, false-work ]
     */
     virtual void setPause(bool)=0;
     
     /**
-    *
+    * @brief Check pause state of object world
     */
     virtual bool getPause()=0;
     
-    //!> 
+    //!> Helium internal type for object index
     typedef unsigned long long int ObjectsIdType;
     
     /**
-    * @param
+    * @brief Delete object from scene and from memory
+    * @param Object index
     */
     virtual void signOutObject( ObjectsIdType )=0;
 };

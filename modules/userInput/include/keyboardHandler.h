@@ -11,7 +11,7 @@
 #ifndef HELIUM_KEYBOARD_HANDLER_INCLUDED
 #define HELIUM_KEYBOARD_HANDLER_INCLUDED
 
-#include "heliumGameCoreObjects.h"
+#include "heliumObjectsWorldIntefrace.h"
 #include "heliumUserInputHandler.h"
 #include "heliumScreenButton.h"
 

@@ -2,16 +2,15 @@
  * Organization: The Green Box
  * 
  * Project name: Helium
- * File name:  src/keyboardHandler.cpp 
+ * File name:  keyboardHandler.cpp 
  * Description:
  * Author:  AKindyakov 
  * ========================================================
  */
 #include "keyboardHandler.h"
 #include "heliumPreparedScreenButton.h"
+#include "heliumGameCore.h"
 #include "heliumGameGlobal.h"
-
-#include <iostream>
 
 void EscapeGame::process() {
     HeliumGameCore* gm = HeliumGlobal::getCurrentGame();
@@ -38,11 +37,11 @@ void PauseGame::process() {
 }
 
 void SetVirtualGame::process() {
-    HeliumGameCore* gm = HeliumGlobal::getCurrentGame();
-    if ( gm->getSceneWorldPt()->getEngineScenePt()->isVirtual() ) {
-        gm->getSceneWorldPt()->getEngineScenePt()->setVirtual(false);
-    }
-    else {    
-        gm->getSceneWorldPt()->getEngineScenePt()->setVirtual(true);
-    }
+//    HeliumGameCore* gm = HeliumGlobal::getCurrentGame();
+//    if ( gm->getSceneWorldPt()->getEngineScenePt()->isVirtual() ) {
+//        gm->getSceneWorldPt()->getEngineScenePt()->setVirtual(false);
+//    }
+//    else {    
+//        gm->getSceneWorldPt()->getEngineScenePt()->setVirtual(true);
+//    }
 }

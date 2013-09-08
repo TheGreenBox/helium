@@ -18,6 +18,11 @@
 
 #include "heliumObjectsWorldIntefrace.h"
 
+class ScreenObject;
+class ScreenObjectsWorld;
+class PackagedScreenObject;
+class ScreenObjectsFactory;
+
 /**
 *
 */  
@@ -61,7 +66,61 @@ protected:
     Polycode::ScreenEntity* model;
 };
 
-typedef std::pair< IHeliumObjectsWorld::ObjectsIdType, ScreenObject* > AlifePairType;
+/**
+*
+*/  
+class ScreenObjectsWorld : public IHeliumObjectsWorld {
+public:
+
+    /**
+    *
+    */  
+    ScreenObjectsWorld();
+    virtual ~ScreenObjectsWorld();
+    
+    /**
+    *
+    */  
+    void lifeStep();
+
+    /**
+    *
+    */  
+    bool mouseClick( int button, bool upDown, Polycode::Vector2 position );
+    
+    /**
+    *
+    */  
+    void setPause(bool);
+    
+    /**
+    *
+    */  
+    bool getPause();
+    
+    /**
+    *
+    */  
+    void signOutObject( IHeliumObjectsWorld::ObjectsIdType );
+    
+    /**
+    *
+    */  
+    IHeliumObjectsWorld::ObjectsIdType addObject( PackagedScreenObject* );
+    
+    //!> 
+    typedef std::pair< IHeliumObjectsWorld::ObjectsIdType, ScreenObject* > AlifePairType;
+    
+private:
+    Polycode::PhysicsScreen* engineScreen;
+    
+    // may be in the future here will be map
+    std::set< IHeliumObjectsWorld::ObjectsIdType > objects;
+    typedef std::set< IHeliumObjectsWorld::ObjectsIdType >::iterator ObjectIterator;
+    
+    std::map< IHeliumObjectsWorld::ObjectsIdType, ScreenObject* > alifeObjects;
+    typedef std::map< IHeliumObjectsWorld::ObjectsIdType, ScreenObject* >::iterator AlifeIterator;
+};
 
 /**
 *
@@ -83,7 +142,7 @@ public:
     /**
     *
     */  
-    AlifePairType getAlifePair()const;
+    ScreenObjectsWorld::AlifePairType getAlifePair()const;
     
     /**
     *
@@ -138,59 +197,6 @@ public:
     static PackagedScreenObject& make(int);
 private:
 
-};
-
-/**
-*
-*/  
-class ScreenObjectsWorld : public IHeliumObjectsWorld {
-public:
-
-    /**
-    *
-    */  
-    ScreenObjectsWorld();
-    virtual ~ScreenObjectsWorld();
-    
-    /**
-    *
-    */  
-    void lifeStep();
-
-    /**
-    *
-    */  
-    bool mouseClick( int button, bool upDown, Polycode::Vector2 position );
-    
-    /**
-    *
-    */  
-    void setPause(bool);
-    
-    /**
-    *
-    */  
-    bool getPause();
-    
-    /**
-    *
-    */  
-    void signOutObject( IHeliumObjectsWorld::ObjectsIdType );
-    
-    /**
-    *
-    */  
-    IHeliumObjectsWorld::ObjectsIdType addObject( PackagedScreenObject* );
-    
-private:
-    Polycode::PhysicsScreen* engineScreen;
-    
-    // may be in the future here will be map
-    std::set< IHeliumObjectsWorld::ObjectsIdType > objects;
-    typedef std::set< IHeliumObjectsWorld::ObjectsIdType >::iterator ObjectIterator;
-    
-    std::map< IHeliumObjectsWorld::ObjectsIdType, ScreenObject* > alifeObjects;
-    typedef std::map< IHeliumObjectsWorld::ObjectsIdType, ScreenObject* >::iterator AlifeIterator;
 };
 
 #endif // HELIUM_SCREEN_OBJECTS_INCLUDED

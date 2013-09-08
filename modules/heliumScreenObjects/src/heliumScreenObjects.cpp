@@ -26,8 +26,8 @@ Polycode::ScreenEntity* PackagedScreenObject::getModel()const {
     return heliumAlife->getModel();
 }
 
-AlifePairType PackagedScreenObject::getAlifePair()const {
-    return AlifePairType(
+ScreenObjectsWorld::AlifePairType PackagedScreenObject::getAlifePair()const {
+    return ScreenObjectsWorld::AlifePairType(
             reinterpret_cast<IHeliumObjectsWorld::ObjectsIdType>(this->getModel()),
             heliumAlife );
 }
