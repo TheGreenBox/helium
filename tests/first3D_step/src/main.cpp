@@ -1,14 +1,14 @@
 /* ========================================================
  * Organization: The Green Box
- * 
+ *
  * Project name: Helium
- * File name:  first_step_main.cpp 
+ * File name:  first_step_main.cpp
  * Description:
- * Author:  AKindyakov 
+ * Author:  AKindyakov
  * ========================================================
  */
 
-#include <iostream> 
+#include <iostream>
 
 #include <Polycode.h>
 #include "PolycodeView.h"
@@ -23,11 +23,13 @@
 
 APP_MAIN_FINCTION
 {
+    setDebugConsoleForWin32();
+
 	PolycodeView *view = new POLYCODE_VIEW_CREATOR("first 3D test");
-    
+
     First3DTest* test = new First3DTest(view);
 
 	while( test->Update() ) {}
-    
+
     return 0;
 }

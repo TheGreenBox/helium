@@ -1,14 +1,14 @@
 /* ========================================================
  * Organization: The Green Box
- * 
+ *
  * Project name: Helium
- * File name:  first_step_main.cpp 
+ * File name:  first_step_main.cpp
  * Description:
- * Author:  AKindyakov 
+ * Author:  AKindyakov
  * ========================================================
  */
 
-#include <iostream> 
+#include <iostream>
 
 #include <Polycode.h>
 #include "PolycodeView.h"
@@ -22,6 +22,8 @@
 
 APP_MAIN_FINCTION
 {
-    std::cout << "template test"; 
+    setDebugConsoleForWin32();
+
+    std::cout << "template test";
     return 0;
 }

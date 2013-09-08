@@ -1,14 +1,14 @@
 /* ========================================================
  * Organization: The Green Box
- * 
+ *
  * Project name: Helium
- * File name:  first_step_main.cpp 
+ * File name:  first_step_main.cpp
  * Description:
- * Author:  AKindyakov 
+ * Author:  AKindyakov
  * ========================================================
  */
 
-#include <iostream> 
+#include <iostream>
 
 #include <Polycode.h>
 #include <PolyMesh.h>
@@ -25,11 +25,13 @@
 
 APP_MAIN_FINCTION
 {
+    setDebugConsoleForWin32();
+
     std::cout << "Hello! 3D Model learning test.\n";
     Polycode::String mesh_path = g_helium_resource_path + "/polycode_smpl.mesh";
     std::cout << "Path to 3d model: " << mesh_path.c_str() << '\n';
-    
+
     Polycode::SceneMesh* mesh = new Polycode::SceneMesh(mesh_path);
-    
+
     return 0;
 }
