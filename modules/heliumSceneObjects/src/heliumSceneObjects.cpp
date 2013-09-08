@@ -8,17 +8,20 @@
  * ========================================================
  */
 
-#include <iostream>
-
 #include <Polycode.h>
 #include "heliumSceneObjects.h"
 
 namespace P = Polycode;
 
+SceneObject::SceneObject( P::SceneEntity* _model ) 
+    : model(_model) {}
+
 SceneObjectsWorld::SceneObjectsWorld()
-    : engineScene(new Polycode::PhysicsScene()) {
-    engineScene->clearColor = Polycode::Color(1,1,1,1);
+    : engineScene(new P::PhysicsScene()) {
+    engineScene->clearColor = P::Color(1,1,1,1);
     engineScene->useClearColor = true;
+    engineScene->getDefaultCamera()->setPosition(17,17,17);
+	engineScene->getDefaultCamera()->lookAt(P::Vector3(0,0,0));
 }
 
 SceneObjectsWorld::~SceneObjectsWorld() {
@@ -61,7 +64,7 @@ bool SceneObjectsWorld::mouseClick( int button, bool upDown, P::Vector2 mouse ) 
 
 IHeliumObjectsWorld::ObjectsIdType 
 SceneObjectsWorld::addObject( PackagedSceneObject* obj ) { 
-    switch ( obj->getShapeType() ) {
+    switch ( obj->getEntityType() ) {
         case PackagedSceneObject::POLY_ENTITY_IMMATERIAL:
             engineScene->addChild(obj->getModel());
         break;
@@ -74,9 +77,7 @@ SceneObjectsWorld::addObject( PackagedSceneObject* obj ) {
         case PackagedSceneObject::POLY_ENTITY_PHYSICAL:
             engineScene->addPhysicsChild( obj->getModel(), obj->getShapeType(),
                                           obj->getMass(), obj->getFriction(),
-                                          obj->getRestitution(), 
-                                          obj->getCompoundChildren());
-        
+                                          obj->getRestitution() );
         break;
         default:
             throw "Addition secene child without idetificator";
@@ -124,6 +125,10 @@ void SceneObjectsWorld::signOutObject( IHeliumObjectsWorld::ObjectsIdType id ) {
 
 int PackagedSceneObject::isAlife()const {
     return alife;
+}
+
+PackagedSceneObject::PolySceneEntityType PackagedSceneObject::getEntityType()const {
+    return entityType;
 }
 
 int PackagedSceneObject::getShapeType () {

@@ -15,6 +15,7 @@
 #include "heliumScreenObjects.h"
 #include "heliumGameGlobal.h"
 #include "heliumPreparedScreenButton.h"
+#include "heliumPrepared3DObjects.h"
 
 namespace P = Polycode;
 
@@ -55,9 +56,15 @@ ProGameObject::ProGameObject( P::Core* _core )
     keyboardInput->addEventHandler( P::KEY_w, new XCameraMove());
     keyboardInput->addEventHandler( P::KEY_s, new XNegativeCameraMove());
     
-    //objectWorld.getEngineScenePt()->getDefaultCamera()->setPosition(17,17,17);
-	//objectWorld.getEngineScenePt()->getDefaultCamera()->lookAt(Vector3(0,0,0));
+    HeliumTestFloor floor( 20.0, 20.0 );
+    this->getSceneWorldPt()->addObject( &floor );
+    
+    HeliumTestBarrel barrel( 1, 3, 0, 0, 6 );
+    this->getSceneWorldPt()->addObject( &barrel );
 
+    HeliumTestBox box( 2, 2, 2, 2, 2, 5); 
+    this->getSceneWorldPt()->addObject( &box );
+    
     HeliumExitScreenButton exitBt(this);
     this->getScreenWorldPt()->addObject( &exitBt );
 }

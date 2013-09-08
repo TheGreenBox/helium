@@ -8,10 +8,12 @@ INCLUDE( heliumIncludes )
 
 SET ( heliumSceneObjects_SRCS
         ${HELIUM_MODULES_DIR}/heliumSceneObjects/src/heliumSceneObjects.cpp
+        ${HELIUM_MODULES_DIR}/heliumSceneObjects/src/heliumPrepared3DObjects.cpp
     )
 
 SET ( heliumSceneObjects_HDRS
         ${HELIUM_MODULES_DIR}/heliumSceneObjects/include/heliumSceneObjects.h
+        ${HELIUM_MODULES_DIR}/heliumSceneObjects/include/heliumPrepared3DObjects.h
     ) 
 
 ADD_LIBRARY ( heliumSceneObjects STATIC

@@ -96,7 +96,7 @@ ProGameObject::ProGameObject( P::Core* _core )
     keyboardInput->addEventHandler( P::KEY_w, new XCameraMove());
     keyboardInput->addEventHandler( P::KEY_s, new XNegativeCameraMove());
     
-//    objectWorld.getEngineScenePt()->getDefaultCamera()->setPosition(17,17,17);
+//  objectWorld.getEngineScenePt()->getDefaultCamera()->setPosition(17,17,17);
 //	objectWorld.getEngineScenePt()->getDefaultCamera()->lookAt(Vector3(0,0,0));
 
 //	ScenePrimitive* ground = new ScenePrimitive(ScenePrimitive::TYPE_PLANE, 16, 16);

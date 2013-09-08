@@ -80,7 +80,7 @@ public:
     /**
     * Constructor from 3d model
     */  
-    SceneObject(Polycode::ScreenEntity*);
+    SceneObject(Polycode::SceneEntity*);
     
     virtual ~SceneObject() {}
     
@@ -241,6 +241,11 @@ public:
     /**
     * @brief
     */  
+    PolySceneEntityType getEntityType()const;
+    
+    /**
+    * @brief
+    */  
     SceneObjectsWorld::AlifePairType getAlifePair()const;
     
     /**
@@ -258,6 +263,7 @@ protected:
     SceneObject* heliumAlife;
     
     int alife;
+    PolySceneEntityType entityType;
     
     int    shapeType;
     Number mass;
@@ -273,7 +279,7 @@ protected:
 class SceneObjectsFactory {
 public:
     /**
-    *
+    * @brief
     */  
     SceneObjectsFactory () {}
     
