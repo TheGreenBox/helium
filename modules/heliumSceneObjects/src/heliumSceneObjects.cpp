@@ -52,7 +52,7 @@ bool SceneObjectsWorld::mouseClick( int button, bool upDown, P::Vector2 mouse ) 
 //        reinterpret_cast< IHeliumObjectsWorld::ObjectsIdType >(entity);
 //
 //    SceneObjectsWorld::AlifeIterator ait = alifeObjects.find(id);
- //   if (ait != alifeObjects.end() ) {
+//    if (ait != alifeObjects.end() ) {
 //        ait->second->mouseClick(upDown);
 //        return true;
 //    }
@@ -120,5 +120,47 @@ void SceneObjectsWorld::signOutObject( IHeliumObjectsWorld::ObjectsIdType id ) {
             delete ait->second;
         }
     }
+}
+
+int PackagedSceneObject::isAlife()const {
+    return alife;
+}
+
+int PackagedSceneObject::getShapeType () {
+    return shapeType;
+}
+    
+Number PackagedSceneObject::getMass () {
+    return mass;
+}
+    
+Number PackagedSceneObject::getFriction () {
+    return friction;
+}
+    
+Number PackagedSceneObject::getRestitution () {
+    return restitution;
+}
+
+int PackagedSceneObject::getGroup () {
+    return group;
+}
+
+bool PackagedSceneObject::getCompoundChildren () {
+    return compoundChildren;
+}
+    
+SceneObjectsWorld::AlifePairType PackagedSceneObject::getAlifePair()const {
+    return SceneObjectsWorld::AlifePairType (
+            reinterpret_cast<IHeliumObjectsWorld::ObjectsIdType>(heliumAlife->getModel()),
+            heliumAlife );
+}
+    
+IHeliumObjectsWorld::ObjectsIdType PackagedSceneObject::getId()const {
+    return reinterpret_cast<IHeliumObjectsWorld::ObjectsIdType>(heliumAlife->getModel());
+}
+    
+Polycode::SceneEntity* PackagedSceneObject::getModel()const {
+    return heliumAlife->getModel();
 }
 

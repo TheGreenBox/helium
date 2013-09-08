@@ -31,8 +31,15 @@ class SceneObjectsFactory;
 */  
 class ObjectBehavior {
 public:
+    /**
+    *
+    */  
     ObjectBehavior();
     virtual ~ObjectBehavior();
+    
+    /**
+    *
+    */  
     void thinkAndDo();
 private:
     
@@ -43,9 +50,21 @@ private:
 */  
 class ObjectVitalSings {
 public:
+    /**
+    *
+    */  
     ObjectVitalSings();
     virtual ~ObjectVitalSings();
+    
+    /**
+    * @brief
+    */  
     void takeThePulse();
+    
+    /**
+    * @brief
+    * @param
+    */  
     void getHarm(long int);
     
 private:
@@ -66,32 +85,32 @@ public:
     virtual ~SceneObject() {}
     
     /**
-    * 
+    * @brief
     */  
     virtual void lifeStep() {}
     
     /**
-    *
+    * @brief
     */
     virtual void getHarm() {}
     
     /**
-    *
+    * @brief
     */  
     virtual void mouseCursor() {}
     
     /**
-    *
+    * @brief
     */  
     virtual void mouseClick( bool upDown ) {}
     
     /**
-    *
+    * @brief
     */  
     virtual void mouseDoubleClick() {}
     
     /**
-    *
+    * @brief
     */  
     Polycode::SceneEntity* getModel() {
         return model;
@@ -172,44 +191,44 @@ private:
 class PackagedSceneObject {
 public:
     PackagedSceneObject() {}
-    virtual ~PackagedSceneObject() {}
+    virtual ~PackagedSceneObject(){};
 
     /**
     * @brief return type of life, 0 - object is dead
     */  
-    int isAlife ()const {}
+    int isAlife ()const;
 
     /**
     * @brief return one of [ SHAPE_BOX, SHAPE_TERRAIN, SHAPE_SPHERE,
                 SHAPE_MESH, CHARACTER_CONTROLLER, SHAPE_CAPSULE,
                 SHAPE_PLANE, SHAPE_CONE, SHAPE_CYLINDER             ]
     */
-    int getShapeType () {}
+    int getShapeType ();
     
     /**
     * @brief return mass of 3d object
     */  
-    Number getMass () {}
+    Number getMass ();
     
     /**
     * @brief return coefficient of friction
     */  
-   	Number getFriction () {}
+   	Number getFriction ();
     
     /**
     * @brief 
     */  
-    Number getRestitution () {}
+    Number getRestitution ();
 
     /**
     * @brief
     */  
-    int getGroup () {}
+    int getGroup ();
 
     /**
     * @brief
     */  
-    bool getCompoundChildren () {}
+    bool getCompoundChildren ();
     
     //!> The way, we push object to poly scene 
     typedef enum {
@@ -220,19 +239,19 @@ public:
     } PolySceneEntityType;
         
     /**
-    *
+    * @brief
     */  
-    SceneObjectsWorld::AlifePairType getAlifePair()const{};
+    SceneObjectsWorld::AlifePairType getAlifePair()const;
     
     /**
-    *
+    * @brief
     */  
-    IHeliumObjectsWorld::ObjectsIdType getId()const{};
+    IHeliumObjectsWorld::ObjectsIdType getId()const;
     
     /**
-    *
+    * @brief
     */  
-    Polycode::SceneEntity* getModel()const{};
+    Polycode::SceneEntity* getModel()const;
 
 protected:
     //!> Pointer to PolySceneObject helium wrap
