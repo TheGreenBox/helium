@@ -39,6 +39,7 @@ ENDIF()
 
 TARGET_LINK_LIBRARIES ( firstStepTest
                         ${LIB_POLYCODE}
+                        heliumUtil
                       )
 
 INSTALL ( TARGETS firstStepTest

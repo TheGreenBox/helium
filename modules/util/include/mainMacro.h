@@ -36,12 +36,6 @@
 // end of main app function macros
 //=============================================================================
 
-        if (!AttachConsole(ATTACH_PARENT_PROCESS)) {    \
-            AllocConsole();                             \
-        }                                               \
-        freopen("CONOUT$", "w", stdout);
-
-
 //=============================================================================
 // creating  POLYCODE VIEW obj macros
 

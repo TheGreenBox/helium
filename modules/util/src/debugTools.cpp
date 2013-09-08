@@ -9,6 +9,7 @@
  */
 
 #include <windows.h>
+#include <stdio.h>
 #include "debugTools.h"
 
 int setDebugConsoleForWin32() {
