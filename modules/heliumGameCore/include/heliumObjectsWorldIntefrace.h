@@ -13,7 +13,8 @@
 #include <Polycode.h>
 
 /**
-* @brief Interface for the different Helium Object Worlds 
+* @brief Interface for the different Helium Object Worlds
+*        pure virtual class
 */
 class IHeliumObjectsWorld {
 public:

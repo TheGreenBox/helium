@@ -11,129 +11,117 @@
 #include <iostream>
 
 #include <Polycode.h>
-
 #include "heliumSceneObjects.h"
 
-/*SceneMesh *mesh = new SceneMesh("ninja.mesh");
-    mesh->loadTexture("ninja.png");
-    mesh->loadSkeleton("ninja.skeleton");
-    mesh->getSkeleton()->addAnimation("Run", "run.anim");
-    mesh->getSkeleton()->playAnimation("Run");
-    scene->addEntity(mesh);
+namespace P = Polycode;
 
-
-ScenePrimitive *box = new ScenePrimitive(ScenePrimitive::TYPE_BOX, 4,4,6);  
-    box->setPitch(25.0);
-    box->setPosition(7,-1.05, 0.0);
-    box->setColor(0.5,0.5,1.0,1.0);
-    box->loadTexture("green_texture.png");
-    scene->addPhysicsChild(box, PhysicsSceneEntity::SHAPE_BOX, 0.0);
-
-
-testBox = new ScenePrimitive(ScenePrimitive::TYPE_BOX, 4, 4, 4);
-    testBox->loadTexture("Resources/pink_texture.png");
-    testBox->setColor(0.3,0.5, 1.0,0.4);
-    testBox->setPosition(-5,2,7);
-    scene->addCollisionChild(testBox, PhysicsSceneEntity::SHAPE_BOX);
-*/
-
-ObjectBehavior::ObjectBehavior() {
-}
-
-ObjectBehavior::~ObjectBehavior() {
-}
-
-void ObjectBehavior::thinkAndDo() {
-}
-
-ObjectVitalSings::ObjectVitalSings() {
-}
-
-ObjectVitalSings::~ObjectVitalSings() {
-}
-
-void ObjectVitalSings::takeThePulse() {
-    health -= damage;
-    damage  = 0;
-}
-
-void ObjectVitalSings::getHarm(long int newHarm) {
-   damage += newHarm; 
-}
-
-LifelessObject::LifelessObject(Polycode::ScenePrimitive* _primitive)
-    : model(_primitive) {
-}
-
-LifelessObject::~LifelessObject() {
-}
-
-AliveObject::AliveObject(Polycode::ScenePrimitive* _primitive)
-    :LifelessObject(_primitive) {
-}
-
-AliveObject::~AliveObject() {
-}
-
-void AliveObject::lifeStep() {
-    pPulse->takeThePulse();   
-    pMind->thinkAndDo();
-}
-    
-PhysicsObject::PhysicsObject() {
-}
-
-PhysicsObject::~PhysicsObject() {
-}
-
-CollisionOnlyObject::CollisionOnlyObject() {
-}
-
-CollisionOnlyObject::~CollisionOnlyObject() {
-}
-
-ImmaterialObject::ImmaterialObject() {
-}
-
-ImmaterialObject::~ImmaterialObject() {
-}
-
-CommonWorldObjects::CommonWorldObjects()
+SceneObjectsWorld::SceneObjectsWorld()
     : engineScene(new Polycode::PhysicsScene()) {
     engineScene->clearColor = Polycode::Color(1,1,1,1);
     engineScene->useClearColor = true;
 }
 
-CommonWorldObjects::~CommonWorldObjects() {
-}
-
-void CommonWorldObjects::addPhysicsObject( 
-                LifelessObject* obj,
-                int type,
-                Number mass,
-                Number friction,
-                Number restitution,
-                int group,
-                bool compoundChildren ) { 
-    engineScene->addPhysicsChild( obj->getModel(),type,mass,friction,
-                                  restitution,group,compoundChildren );
-    lifelessObjects.push_back( obj );
-}
-
-void CommonWorldObjects::lifeStep() {
-    using std::list;
-    for ( list<AliveObject*>::iterator it = aliveObjects.begin();
-            it != aliveObjects.end(); ++it )
-    {
-        (*it)->lifeStep();
+SceneObjectsWorld::~SceneObjectsWorld() {
+    for ( ObjectIterator it = objects.begin();
+            it != objects.end(); ++it ) {
+        P::SceneEntity* entity = reinterpret_cast<P::SceneEntity*>(*it);
+        engineScene->removeEntity(entity);
+        delete entity;
+    }
+    for ( AlifeIterator itl = alifeObjects.begin();
+            itl != alifeObjects.end(); ++itl ) {
+        P::SceneEntity* entity = reinterpret_cast<P::SceneEntity*>(itl->first);
+        engineScene->removeEntity(entity);
+        delete entity;
+        delete itl->second;
     }
 }
 
-void CommonWorldObjects::setPause(bool set) {
+void SceneObjectsWorld::lifeStep() {
+    for ( AlifeIterator it = alifeObjects.begin();
+            it != alifeObjects.end(); ++it ) {
+        it->second->lifeStep();
+    }
+}
+
+bool SceneObjectsWorld::mouseClick( int button, bool upDown, P::Vector2 mouse ) {
+//	P::SceneEntity* entity = engineScene->getEntityAtPosition(mouse.x, mouse.y);
+//    
+//    // TODO !! wrap it to inline function!
+//    IHeliumObjectsWorld::ObjectsIdType id = 
+//        reinterpret_cast< IHeliumObjectsWorld::ObjectsIdType >(entity);
+//
+//    SceneObjectsWorld::AlifeIterator ait = alifeObjects.find(id);
+ //   if (ait != alifeObjects.end() ) {
+//        ait->second->mouseClick(upDown);
+//        return true;
+//    }
+    return false;
+}
+
+IHeliumObjectsWorld::ObjectsIdType 
+SceneObjectsWorld::addObject( PackagedSceneObject* obj ) { 
+    switch ( obj->getShapeType() ) {
+        case PackagedSceneObject::POLY_ENTITY_IMMATERIAL:
+            engineScene->addChild(obj->getModel());
+        break;
+        
+        case PackagedSceneObject::POLY_ENTITY_COLLISION_ONLY:
+            engineScene->addCollisionChild( obj->getModel(),   
+                                            obj->getShapeType() ); 
+        break;
+        
+        case PackagedSceneObject::POLY_ENTITY_PHYSICAL:
+            engineScene->addPhysicsChild( obj->getModel(), obj->getShapeType(),
+                                          obj->getMass(), obj->getFriction(),
+                                          obj->getRestitution(), 
+                                          obj->getCompoundChildren());
+        
+        break;
+        default:
+            throw "Addition secene child without idetificator";
+        break;
+    }
+    
+    if ( obj->isAlife() != 0 ) {
+        alifeObjects.insert( obj->getAlifePair() );
+    }
+    else {
+        objects.insert( obj->getId() );
+    }
+    return obj->getId();
+}
+
+void SceneObjectsWorld::lifeStep() {
+}
+
+void SceneObjectsWorld::setPause(bool set) {
     engineScene->setEnabled(set);
 }
 
-bool CommonWorldObjects::getPause() {
+bool SceneObjectsWorld::getPause() {
     return engineScene->isEnabled();
+}
+
+void SceneObjectsWorld::signOutObject( IHeliumObjectsWorld::ObjectsIdType id ) {
+    ObjectIterator it = objects.find(id);
+    if ( it != objects.end() ) {
+        P::SceneEntity* pObj = reinterpret_cast<P::SceneEntity*>(id);
+            
+        engineScene->removeChild( pObj );
+        delete pObj;
+        objects.erase(it);
+    }
+    else {
+        AlifeIterator ait = alifeObjects.find(id);
+        if (ait != alifeObjects.end() ) {
+            P::SceneEntity* pObj = reinterpret_cast<P::SceneEntity*>(id);
+                
+            engineScene->removeChild( pObj );
+            delete pObj;
+            alifeObjects.erase(ait);
+            delete ait->second;
+        }
+    }
 }
 
