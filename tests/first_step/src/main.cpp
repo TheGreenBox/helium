@@ -1,14 +1,14 @@
 /* ========================================================
  * Organization: The Green Box
- * 
+ *
  * Project name: Helium
- * File name:  first_step_main.cpp 
+ * File name:  first_step_main.cpp
  * Description:
- * Author:  AKindyakov 
+ * Author:  AKindyakov
  * ========================================================
  */
 
-#include <iostream> 
+#include <iostream>
 #include "firstTestClass.h"
 
 #include "mainMacro.h"
@@ -20,11 +20,13 @@
 
 APP_MAIN_FINCTION
 {
+    setDebugConsoleForWin32();
+
 	PolycodeView *view = new POLYCODE_VIEW_CREATOR("first step test");
-    
+
     FirstStepTest* test = new FirstStepTest(view);
-   
-	while(test->Update()) 
+
+	while(test->Update())
     {}
     return 0;
 }

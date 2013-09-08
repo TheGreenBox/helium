@@ -55,6 +55,7 @@ ENDIF(WIN32)
 
 TARGET_LINK_LIBRARIES ( ${TEST_NAME}
                         ${LIB_POLYCODE}
+                        heliumUtil
                       )
 
 INSTALL ( TARGETS ${TEST_NAME}
