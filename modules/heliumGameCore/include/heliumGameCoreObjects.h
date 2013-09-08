@@ -22,8 +22,8 @@ public:
     HeliumGameCoreObjects(Polycode::Core* core) : engineCore(core) {}
     virtual ~HeliumGameCoreObjects(){}
     
-    CommonWorldObjects* getSceneWorldPt() { 
-        return &objectWorld; 
+    SceneObjectsWorld* getSceneWorldPt() { 
+        return &solidWorld; 
     }
     
     ScreenObjectsWorld* getScreenWorldPt() { 
@@ -36,7 +36,7 @@ public:
     
 protected:
     Polycode::Core*     engineCore;
-    CommonWorldObjects  objectWorld;
+    SceneObjectsWorld   solidWorld;
     ScreenObjectsWorld  flatWorld; 
 };
 

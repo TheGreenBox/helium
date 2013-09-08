@@ -33,7 +33,8 @@ void HeliumGameCore::game() {
     bool game_is_running = true;
     while( game_is_running ) {
         game_is_running = engineCore->Update();
-        objectWorld.lifeStep();
+        solidWorld.lifeStep();
+        flatWorld.lifeStep();
         engineCore->Render();
     }
     mouseInput->setEnable(false);
