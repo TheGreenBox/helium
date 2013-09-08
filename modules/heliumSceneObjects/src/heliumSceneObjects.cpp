@@ -92,9 +92,6 @@ SceneObjectsWorld::addObject( PackagedSceneObject* obj ) {
     return obj->getId();
 }
 
-void SceneObjectsWorld::lifeStep() {
-}
-
 void SceneObjectsWorld::setPause(bool set) {
     engineScene->setEnabled(set);
 }
@@ -108,7 +105,7 @@ void SceneObjectsWorld::signOutObject( IHeliumObjectsWorld::ObjectsIdType id ) {
     if ( it != objects.end() ) {
         P::SceneEntity* pObj = reinterpret_cast<P::SceneEntity*>(id);
             
-        engineScene->removeChild( pObj );
+        engineScene->removeEntity( pObj );
         delete pObj;
         objects.erase(it);
     }
@@ -117,7 +114,7 @@ void SceneObjectsWorld::signOutObject( IHeliumObjectsWorld::ObjectsIdType id ) {
         if (ait != alifeObjects.end() ) {
             P::SceneEntity* pObj = reinterpret_cast<P::SceneEntity*>(id);
                 
-            engineScene->removeChild( pObj );
+            engineScene->removeEntity( pObj );
             delete pObj;
             alifeObjects.erase(ait);
             delete ait->second;

@@ -222,17 +222,17 @@ public:
     /**
     *
     */  
-    SceneObjectsWorld::AlifePairType getAlifePair()const;
+    SceneObjectsWorld::AlifePairType getAlifePair()const{};
     
     /**
     *
     */  
-    IHeliumObjectsWorld::ObjectsIdType getId()const;
+    IHeliumObjectsWorld::ObjectsIdType getId()const{};
     
     /**
     *
     */  
-    Polycode::SceneEntity* getModel()const;
+    Polycode::SceneEntity* getModel()const{};
 
 protected:
     //!> Pointer to PolySceneObject helium wrap
