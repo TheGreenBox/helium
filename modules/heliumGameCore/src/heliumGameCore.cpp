@@ -12,6 +12,10 @@
 #include "heliumGameCore.h"
 #include "heliumGameGlobal.h"
 
+#if OS_WIN32
+#include "windows.h"
+#endif
+
 namespace P = Polycode;
 
 HeliumGameCore::HeliumGameCore( Polycode::Core* engCore ) 
@@ -25,21 +29,37 @@ HeliumGameCore::~HeliumGameCore() {
     
 }
 
+void HeliumGameCore::mainLoop() {
+    #if OS_WIN32
+        MSG Msg;
+        do {
+            solidWorld.lifeStep();
+            flatWorld.lifeStep();
+            engineCore->Render();
+            
+            if(PeekMessage(&Msg, NULL, 0,0,PM_REMOVE)) {
+                TranslateMessage(&Msg);
+                DispatchMessage(&Msg);
+            }
+        } while( engineCore->Update() );
+    #elif OS_LINUX
+        while( engineCore->Update() ) {
+            solidWorld.lifeStep();
+            flatWorld.lifeStep();
+            engineCore->Render();
+        }
+    #endif
+}
+
 void HeliumGameCore::game() { 
     HeliumGlobal::setCurrentGame(this);
     keyboardInput->setEnable(true);
     mouseInput->setEnable(true);
     
-    bool game_is_running = true;
-    while( game_is_running ) {
-        game_is_running = engineCore->Update();
-        solidWorld.lifeStep();
-        flatWorld.lifeStep();
-        engineCore->Render();
-    }
+    this->mainLoop();
+    
     mouseInput->setEnable(false);
     keyboardInput->setEnable(false);
     HeliumGlobal::setCurrentGame(NULL);
-    return; 
 }
 
