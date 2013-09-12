@@ -19,7 +19,7 @@
 namespace P = Polycode;
 
 HeliumGameCore::HeliumGameCore( Polycode::Core* engCore ) 
-    : HeliumGameCoreObjects( engCore ),
+    : engineCore( engCore ),
       keyboardInput(new KeyboardUserInput()),
       mouseInput(new MouseUserInput())
 {

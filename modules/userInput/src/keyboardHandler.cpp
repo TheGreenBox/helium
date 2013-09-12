@@ -7,9 +7,10 @@
  * Author:  AKindyakov 
  * ========================================================
  */
+
 #include "keyboardHandler.h"
+
 #include "heliumPreparedScreenButton.h"
-#include "heliumGameCore.h"
 #include "heliumGameGlobal.h"
 
 void EscapeGame::process() {

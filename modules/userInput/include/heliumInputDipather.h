@@ -14,8 +14,7 @@
 #include <Polycode.h>
 #include <map>
 
-#include "keyboardHandler.h"
-#include "heliumGameCoreObjects.h"
+#include "heliumUserInputHandler.h"
 
 class KeyboardUserInput : public Polycode::EventHandler {
 public:
@@ -113,11 +112,8 @@ private:
 
 class JoystickUserInput : public Polycode::EventHandler {
 public:
-    JoystickUserInput(HeliumGameCoreObjects*){};
+    JoystickUserInput(){};
     virtual ~JoystickUserInput(){};
-     
-private:
-    HeliumGameCoreObjects* gamePt;
 };
 
 #endif // HELIUM_INPUT_DIPATHER_INCLUDED
