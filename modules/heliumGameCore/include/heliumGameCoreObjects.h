@@ -14,9 +14,11 @@
 #include <Polycode.h>
 #include "PolycodeView.h"
 
-#include "heliumSceneObjects.h"
-#include "heliumScreenObjects.h"
+#include "heliumGameCore.h"
 
+//#include "heliumSceneObjects.h"
+//#include "heliumScreenObjects.h"
+/*
 class HeliumGameCoreObjects {
 public:    
     HeliumGameCoreObjects(Polycode::Core* core) : engineCore(core) {}
@@ -39,6 +41,6 @@ protected:
     SceneObjectsWorld   solidWorld;
     ScreenObjectsWorld  flatWorld; 
 };
-
+*/
 #endif // HELIUM_GAME_CORE_INTEFACE_INCLUDED
 
