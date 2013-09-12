@@ -139,8 +139,8 @@ void ScreenObjectsWorld::signOutObject( IHeliumObjectsWorld::ObjectsIdType id ) 
                 
             engineScreen->removeChild( pObj );
             delete pObj;
-            alifeObjects.erase(ait);
             delete ait->second;
+            alifeObjects.erase(ait);
         }
     }
 }
