@@ -117,8 +117,8 @@ void SceneObjectsWorld::signOutObject( IHeliumObjectsWorld::ObjectsIdType id ) {
                 
             engineScene->removeEntity( pObj );
             delete pObj;
-            alifeObjects.erase(ait);
             delete ait->second;
+            alifeObjects.erase(ait);
         }
     }
 }
