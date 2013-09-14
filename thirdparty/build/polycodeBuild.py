@@ -14,6 +14,7 @@ if buildToolsDir not in sys.path:
 import heliumbuildtools
 
 polycodeGitURL = 'https://github.com/TheGreenBox/Polycode.git'
+Win32Make = 'c:/Windows/Microsoft.NET/Framework/v4.0.30319/MSBuild.exe'
 
 def _polycode_dependencies_build( buildPath, buildType, log_file ):
     
@@ -30,17 +31,16 @@ def _polycode_dependencies_build( buildPath, buildType, log_file ):
         os.chdir(buildPath)
         heliumbuildtools.cmakeGenerate( buildType, 'Visual Studio 11', '..', [], log_file )
         
-        cmd = 'c:/Windows/Microsoft.NET/Framework'
         arg1 = 'ALL_BUILD.vcxproj'                   
         arg2 = '/p:Configuration='+buildType
         arg3 = '/nologo'
-        heliumbuildtools.runCmd([cmd, arg1, arg2, arg3], log_file)
+        heliumbuildtools.runCmd([Win32Make, arg1, arg2, arg3], log_file)
         
         arg1 = 'glext.vcxproj'                   
-        heliumbuildtools.runCmd([cmd, arg1, arg2, arg3], log_file)
+        heliumbuildtools.runCmd([Win32Make, arg1, arg2, arg3], log_file)
         
         arg1 = 'wglext.vcxproj'                   
-        heliumbuildtools.runCmd([cmd, arg1, arg2, arg3], log_file)
+        heliumbuildtools.runCmd([Win32Make, arg1, arg2, arg3], log_file)
     
     return
 
@@ -60,14 +60,13 @@ def _polycode_build_and_install( buildPath, buildType, log_file ):
         os.chdir(buildPath)
         heliumbuildtools.cmakeGenerate( buildType, 'Visual Studio 11', '..', [], log_file )
         
-        cmd = 'c:/Windows/Microsoft.NET/Framework'
         arg1 = 'ALL_BUILD.vcxproj'                   
         arg2 = '/p:Configuration='+buildType
         arg3 = '/nologo'
-        heliumbuildtools.runCmd([cmd, arg1, arg2, arg3], log_file)
+        heliumbuildtools.runCmd([Win32Make, arg1, arg2, arg3], log_file)
         
         arg1 = 'INSTALL.vcxproj'                   
-        heliumbuildtools.runCmd([cmd, arg1, arg2, arg3], log_file)
+        heliumbuildtools.runCmd([Win32Make, arg1, arg2, arg3], log_file)
     
     return
 
@@ -113,3 +112,4 @@ def build( buildRootPath ):
     
     log_file.close()
     return 
+
