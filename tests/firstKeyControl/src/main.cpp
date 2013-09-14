@@ -34,7 +34,6 @@ APP_MAIN_FINCTION
 
     std::cout << "Keys test start...\n";
 
-//    while (game->update()) { }
     game->game();
 
     std::cout << "Keys test finished!\n";

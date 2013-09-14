@@ -15,6 +15,7 @@
 #include "heliumScreenObjects.h"
 #include "heliumGameGlobal.h"
 #include "heliumPreparedScreenButton.h"
+#include "heliumPrepared3DObjects.h"
 
 namespace P = Polycode;
 

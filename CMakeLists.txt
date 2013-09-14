@@ -36,7 +36,7 @@ ADD_SUBDIRECTORY ( ${CMAKE_SOURCE_DIR}/tests/sceneWorldDevelop )
 
 # -------------------------------------------------------------------
 
-ADD_SUBDIRECTORY ( ${CMAKE_SOURCE_DIR}/game)
+ADD_SUBDIRECTORY ( ${CMAKE_SOURCE_DIR}/game )
 
 INSTALL ( DIRECTORY ${HELIUM_RESOURCE_SRC_DIR}/
             DESTINATION ${OUTCOME_RESOURCES_PATH}

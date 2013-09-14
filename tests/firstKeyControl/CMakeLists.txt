@@ -1,26 +1,26 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
 
-MESSAGE(STATUS "\"FIRST KEY CONTROL\" TEST GENERATING")
+MESSAGE(STATUS "\"FIRST KEY CONTROL TEST\" GENERATING")
 
 PROJECT( firstKeyControl )
 
 SET( RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/tests )
-SET(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/)
+SET( CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake )
 
 INCLUDE(heliumIncludes)
 
-SET( 3D_POLY_PHYS_TEST_DIR ${CMAKE_SOURCE_DIR}/tests/firstKeyControl )
+SET( TEST_DIR ${CMAKE_SOURCE_DIR}/tests/firstKeyControl )
 
-INCLUDE_DIRECTORIES ( ${3D_POLY_PHYS_TEST_DIR}/include )
+INCLUDE_DIRECTORIES ( ${TEST_DIR}/include )
 
 SET ( firstKeyControl_SRCS
-      ${3D_POLY_PHYS_TEST_DIR}/src/main.cpp
-      ${3D_POLY_PHYS_TEST_DIR}/src/wrapClasses.cpp
+      ${TEST_DIR}/src/main.cpp
+      ${TEST_DIR}/src/wrapClasses.cpp
       ${SRC_STATIC_LIB}
     )
 
 SET ( firstKeyControl_HDRS
-      ${3D_POLY_PHYS_TEST_DIR}/src/wrapClasses.h
+      ${TEST_DIR}/src/wrapClasses.h
     )
 
 ADD_EXECUTABLE ( firstKeyControl

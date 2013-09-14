@@ -5,24 +5,24 @@ SET ( POLYCODE_MODULES_DIR_INT ${CMAKE_SOURCE_DIR}/thirdparty/polycode/polycode_
 MESSAGE( STATUS ${POLYCODE_FRAMEWORK_DIR_INT})
 
 SET ( POLYCODE_SEARCH_PATHS
-      ${POLYCODE_MODULES_DIR}/lib
-      ${POLYCODE_MODULES_DIR_BIG}/lib
+#      ${POLYCODE_MODULES_DIR}/lib
+#      ${POLYCODE_MODULES_DIR_BIG}/lib
       ${POLYCODE_MODULES_DIR_INT}/lib
     
-      ${POLYCODE_MODULES_DIR}/Dependencies/lib
-      ${POLYCODE_MODULES_DIR_BIG}/Dependencies/lib
+#      ${POLYCODE_MODULES_DIR}/Dependencies/lib
+#      ${POLYCODE_MODULES_DIR_BIG}/Dependencies/lib
       ${POLYCODE_MODULES_DIR_INT}/Dependencies/lib
     
-      ${POLYCODE_MODULES_DIR}/include 
-      ${POLYCODE_MODULES_DIR_BIG}/include 
+#      ${POLYCODE_MODULES_DIR}/include 
+#      ${POLYCODE_MODULES_DIR_BIG}/include 
       ${POLYCODE_MODULES_DIR_INT}/include 
     
-      ${POLYCODE_MODULES_DIR}/Dependencies/include/Box2D 
-      ${POLYCODE_MODULES_DIR_BIG}/Dependencies/include/Box2D 
+#      ${POLYCODE_MODULES_DIR}/Dependencies/include/Box2D 
+#      ${POLYCODE_MODULES_DIR_BIG}/Dependencies/include/Box2D 
       ${POLYCODE_MODULES_DIR_INT}/Dependencies/include/Box2D 
     
-      ${POLYCODE_MODULES_DIR}/Dependencies/include/bullet
-      ${POLYCODE_MODULES_DIR_BIG}/Dependencies/include/bullet
+#      ${POLYCODE_MODULES_DIR}/Dependencies/include/bullet
+#      ${POLYCODE_MODULES_DIR_BIG}/Dependencies/include/bullet
       ${POLYCODE_MODULES_DIR_INT}/Dependencies/include/bullet
     )
 

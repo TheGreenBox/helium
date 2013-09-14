@@ -1,26 +1,26 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
 
-MESSAGE(STATUS "\"SCENE WORLD DEVELOP\" TEST GENERATING")
+MESSAGE(STATUS "\"SCENE WORLD DEVELOP TEST\" GENERATING")
 
 PROJECT( sceneWorldDevelop )
 
 SET( RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/tests )
-SET(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/)
+SET(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 
 INCLUDE(heliumIncludes)
 
-SET( 3D_POLY_PHYS_TEST_DIR ${CMAKE_SOURCE_DIR}/tests/sceneWorldDevelop )
+SET( TEST_DIR ${CMAKE_SOURCE_DIR}/tests/sceneWorldDevelop )
 
-INCLUDE_DIRECTORIES ( ${3D_POLY_PHYS_TEST_DIR}/include )
+INCLUDE_DIRECTORIES ( ${TEST_DIR}/include )
 
 SET ( sceneWorldDevelop_SRCS
-      ${3D_POLY_PHYS_TEST_DIR}/src/main.cpp
-      ${3D_POLY_PHYS_TEST_DIR}/src/proGameObject.cpp
+      ${TEST_DIR}/src/main.cpp
+      ${TEST_DIR}/src/proGameObject.cpp
       ${SRC_STATIC_LIB}
     )
 
 SET ( sceneWorldDevelop_HDRS
-      ${3D_POLY_PHYS_TEST_DIR}/src/proGameObject.h
+      ${TEST_DIR}/src/proGameObject.h
     )
 
 ADD_EXECUTABLE ( sceneWorldDevelop

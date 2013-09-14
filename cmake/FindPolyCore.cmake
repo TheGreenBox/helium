@@ -3,32 +3,32 @@ SET ( POLYCODE_CORE_DIR_BIG ${CMAKE_SOURCE_DIR}/../Polycode/Release/${CMAKE_SYST
 SET ( POLYCODE_CORE_DIR_INT ${CMAKE_SOURCE_DIR}/thirdparty/polycode/polycode_src/Release/${CMAKE_SYSTEM_NAME}/Framework/Core)
 
 SET ( POLYCODE_SEARCH_PATHS
-        ${POLYCODE_CORE_DIR}/lib
-        ${POLYCODE_CORE_DIR_BIG}/lib
+#        ${POLYCODE_CORE_DIR}/lib
+#        ${POLYCODE_CORE_DIR_BIG}/lib
         ${POLYCODE_CORE_DIR_INT}/lib
       
-        ${POLYCODE_CORE_DIR}/Dependencies/lib
-        ${POLYCODE_CORE_DIR_BIG}/Dependencies/lib
+#        ${POLYCODE_CORE_DIR}/Dependencies/lib
+#        ${POLYCODE_CORE_DIR_BIG}/Dependencies/lib
         ${POLYCODE_CORE_DIR_INT}/Dependencies/lib
       
-        ${POLYCODE_CORE_DIR}/include
-        ${POLYCODE_CORE_DIR_BIG}/include
+#        ${POLYCODE_CORE_DIR}/include
+#        ${POLYCODE_CORE_DIR_BIG}/include
         ${POLYCODE_CORE_DIR_INT}/include
       
-        ${POLYCODE_CORE_DIR}/PolycodeView
-        ${POLYCODE_CORE_DIR_BIG}/PolycodeView
+#        ${POLYCODE_CORE_DIR}/PolycodeView
+#        ${POLYCODE_CORE_DIR_BIG}/PolycodeView
         ${POLYCODE_CORE_DIR_INT}/PolycodeView
       
-        ${POLYCODE_CORE_DIR}/Dependencies/include
-        ${POLYCODE_CORE_DIR_BIG}/Dependencies/include
+#        ${POLYCODE_CORE_DIR}/Dependencies/include
+#        ${POLYCODE_CORE_DIR_BIG}/Dependencies/include
         ${POLYCODE_CORE_DIR_INT}/Dependencies/include
       
-        ${POLYCODE_CORE_DIR}/Dependencies/include/AL
-        ${POLYCODE_CORE_DIR_BIG}/Dependencies/include/AL
+#        ${POLYCODE_CORE_DIR}/Dependencies/include/AL
+#        ${POLYCODE_CORE_DIR_BIG}/Dependencies/include/AL
         ${POLYCODE_CORE_DIR_INT}/Dependencies/include/AL
       
-        ${POLYCODE_CORE_DIR}/Dependencies/bin
-        ${POLYCODE_CORE_DIR_BIG}/Dependencies/bin
+#        ${POLYCODE_CORE_DIR}/Dependencies/bin
+#        ${POLYCODE_CORE_DIR_BIG}/Dependencies/bin
         ${POLYCODE_CORE_DIR_INT}/Dependencies/bin
     )
 
