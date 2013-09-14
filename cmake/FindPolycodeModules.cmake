@@ -5,24 +5,24 @@ SET ( POLYCODE_MODULES_DIR_INT ${CMAKE_SOURCE_DIR}/thirdparty/polycode/polycode_
 MESSAGE( STATUS ${POLYCODE_FRAMEWORK_DIR_INT})
 
 SET ( POLYCODE_SEARCH_PATHS
-#      ${POLYCODE_MODULES_DIR}/lib
-#      ${POLYCODE_MODULES_DIR_BIG}/lib
+      ${POLYCODE_MODULES_DIR}/lib
+      ${POLYCODE_MODULES_DIR_BIG}/lib
       ${POLYCODE_MODULES_DIR_INT}/lib
     
-#      ${POLYCODE_MODULES_DIR}/Dependencies/lib
-#      ${POLYCODE_MODULES_DIR_BIG}/Dependencies/lib
+      ${POLYCODE_MODULES_DIR}/Dependencies/lib
+      ${POLYCODE_MODULES_DIR_BIG}/Dependencies/lib
       ${POLYCODE_MODULES_DIR_INT}/Dependencies/lib
     
-#      ${POLYCODE_MODULES_DIR}/include 
-#      ${POLYCODE_MODULES_DIR_BIG}/include 
+      ${POLYCODE_MODULES_DIR}/include 
+      ${POLYCODE_MODULES_DIR_BIG}/include 
       ${POLYCODE_MODULES_DIR_INT}/include 
     
-#      ${POLYCODE_MODULES_DIR}/Dependencies/include/Box2D 
-#      ${POLYCODE_MODULES_DIR_BIG}/Dependencies/include/Box2D 
+      ${POLYCODE_MODULES_DIR}/Dependencies/include/Box2D 
+      ${POLYCODE_MODULES_DIR_BIG}/Dependencies/include/Box2D 
       ${POLYCODE_MODULES_DIR_INT}/Dependencies/include/Box2D 
     
-#      ${POLYCODE_MODULES_DIR}/Dependencies/include/bullet
-#      ${POLYCODE_MODULES_DIR_BIG}/Dependencies/include/bullet
+      ${POLYCODE_MODULES_DIR}/Dependencies/include/bullet
+      ${POLYCODE_MODULES_DIR_BIG}/Dependencies/include/bullet
       ${POLYCODE_MODULES_DIR_INT}/Dependencies/include/bullet
     )
 
@@ -50,11 +50,6 @@ SET ( POLYCODE_MODULES_LIB_DEBUG_NAMES
       "LinearMath_d"
     )
 
-
-#../../Modules/include 
-#../../Modules/Dependencies/include 
-#../../Modules/Dependencies/include/bullet
-
 FIND_PATH ( POLYCODE_MODULES_COMMON_INCLUDE_DIR NAMES Polycode3DPhysics.h
             HINTS
             NO_DEFAULT_PATH
@@ -65,6 +60,7 @@ FIND_PATH ( POLYCODE_MODULES_COMMON_INCLUDE_DIR NAMES Polycode3DPhysics.h
             CMAKE_FIND_FRAMEWORK NEVER
             PATHS ${POLYCODE_SEARCH_PATHS} 
           )
+#    uncomment it for easy debug    
 #MESSAGE(STATUS ${POLYCODE_MODULES_COMMON_INCLUDE_DIR})
 
 FIND_PATH ( POLYCODE_MODULES_DEPEND_INCLUDE_DIR NAMES Box2D.h
@@ -77,6 +73,7 @@ FIND_PATH ( POLYCODE_MODULES_DEPEND_INCLUDE_DIR NAMES Box2D.h
             CMAKE_FIND_FRAMEWORK NEVER
             PATHS ${POLYCODE_SEARCH_PATHS} 
           )
+#    uncomment it for easy debug    
 #MESSAGE(STATUS ${POLYCODE_MODULES_DEPEND_INCLUDE_DIR})
 
 FIND_PATH ( POLYCODE_MODULES_DEPEND_BULLET_INCLUDE_DIR NAMES btBulletCollisionCommon.h
@@ -89,6 +86,7 @@ FIND_PATH ( POLYCODE_MODULES_DEPEND_BULLET_INCLUDE_DIR NAMES btBulletCollisionCo
             CMAKE_FIND_FRAMEWORK NEVER
             PATHS ${POLYCODE_SEARCH_PATHS} 
           )
+#    uncomment it for easy debug    
 #MESSAGE(STATUS ${POLYCODE_MODULES_DEPEND_BULLET_INCLUDE_DIR})
 
 SET ( POLYCODE_MODULES_INCLUDE_DIR
@@ -99,6 +97,7 @@ SET ( POLYCODE_MODULES_INCLUDE_DIR
 
 FOREACH( LIBRARY ${POLYCODE_MODULES_LIB_NAMES} )
     
+#    uncomment it for easy debug    
 #    MESSAGE(STATUS ${LIBRARY})
     FIND_LIBRARY  ( LIB_${LIBRARY} NAME ${LIBRARY}
                     HINTS
@@ -114,6 +113,7 @@ FOREACH( LIBRARY ${POLYCODE_MODULES_LIB_NAMES} )
                     PATHS ${POLYCODE_SEARCH_PATHS} 
                   )
     
+#    uncomment it for easy debug    
 #    MESSAGE(STATUS ${LIB_${LIBRARY}})
     
     set ( LIB_POLYCODE_MODULES 
@@ -126,6 +126,7 @@ ENDFOREACH( LIBRARY ${POLYCODE_MODULES_LIB_NAMES} )
 
 FOREACH( LIBRARY ${POLYCODE_MODULES_LIB_DEBUG_NAMES} )
     
+#    uncomment it for easy debug    
 #    MESSAGE(STATUS ${LIBRARY})
     FIND_LIBRARY  ( LIB_${LIBRARY} NAME ${LIBRARY}
                     HINTS
@@ -140,7 +141,7 @@ FOREACH( LIBRARY ${POLYCODE_MODULES_LIB_DEBUG_NAMES} )
                     PATH_SUFFIXES lib 
                     PATHS ${POLYCODE_SEARCH_PATHS} 
                   )
-    
+#    uncomment it for easy debug    
 #    MESSAGE(STATUS ${LIB_${LIBRARY}})
     
     set ( LIB_POLYCODE_MODULES_DEBUG 
