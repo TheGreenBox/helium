@@ -103,7 +103,7 @@ void MouseButtonUserInput::setEnable(bool set) {
 void MouseButtonUserInput::handleEvent(Polycode::Event* e) {
     P::InputEvent* ie = dynamic_cast<P::InputEvent*>(e);
     int code = ie->mouseButton;
-    std::cout << "Mouse button: " << code << '\n';
+    //std::cout << "Mouse button: " << code << '\n';
     
     HeliumGameCore* gm = HeliumGlobal::getCurrentGame();
     P::Vector2 mouse = ie->getMousePosition();
@@ -121,9 +121,7 @@ void MouseButtonUserInput::handleEvent(Polycode::Event* e) {
                 gm->getSceneWorldPt()->mouseClick( code, true, mouse );
             }
         }
-        //break;
         //case P::InputEvent::EVENT_DOUBLECLICK:
-        //break;
     }
 }
 
@@ -151,7 +149,12 @@ void MouseMoveUserInput::setEnable(bool set) {
 }
 
 void MouseMoveUserInput::handleEvent(Polycode::Event* e) {
-    //std::cout << "Mouse move\n";
+    P::InputEvent* ie = dynamic_cast<P::InputEvent*>(e);
+    int code = ie->mouseButton;
+    
+    HeliumGameCore* gm = HeliumGlobal::getCurrentGame();
+    P::Vector2 mouse = ie->getMousePosition();
+    std::cout << "Mouse move: " << mouse.x << " : " << mouse.y << "\n";
 }
 
 MouseOtherUserInput::MouseOtherUserInput() {
