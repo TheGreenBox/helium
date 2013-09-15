@@ -20,6 +20,23 @@ CameraHorisontalMove::~CameraHorisontalMove() {
 }
 
 void CameraHorisontalMove::process(Polycode::Vector2 mouse) {
+    Number xres = Polycode::CoreServices::getInstance()->getCore()->getXRes();
+    Number yres = Polycode::CoreServices::getInstance()->getCore()->getYRes();
+    
+    HeliumGameCore* gm = HeliumGlobal::getCurrentGame();
+    const float BORDER = 0.95;
+    if ( mouse.x > xres*BORDER ) {
+    //    setSpeed(mouse);
+    }
+    if ( mouse.x < xres*(1-BORDER) ) {
+    //
+    }
+    if ( mouse.y > xres*BORDER ) {
+    //
+    }
+    if ( mouse.y < xres*(1-BORDER) ) {
+    //
+    }
 }
 
 SceneObjectHorTransfer::SceneObjectHorTransfer(Polycode::SceneEntity* _model) 

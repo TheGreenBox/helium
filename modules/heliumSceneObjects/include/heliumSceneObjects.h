@@ -172,10 +172,19 @@ public:
     //!> 
     typedef std::pair< IHeliumObjectsWorld::ObjectsIdType, SceneObject* > AlifePairType;
 
+    /**
+    *
+    */
+    void setCameraMovingDirection(Polycode::Vector2 dir);
+    
+    /**
+    *
+    */
     Polycode::RayTestResult rayTest(Polycode::Vector2);
     
 protected:
     Polycode::PhysicsScene* engineScene;
+    Polycode::Vector2 horisontalVectorMove;
     
     //!> dead objects, no behavior, no reactions, no life
     std::set< IHeliumObjectsWorld::ObjectsIdType > objects;

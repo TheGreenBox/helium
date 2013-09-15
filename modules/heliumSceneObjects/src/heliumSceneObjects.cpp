@@ -8,6 +8,7 @@
  * ========================================================
  */
 #include <iostream>
+#include <cmath>
 #include <Polycode.h>
 #include "heliumSceneObjects.h"
 
@@ -41,6 +42,33 @@ SceneObjectsWorld::~SceneObjectsWorld() {
 }
 
 void SceneObjectsWorld::lifeStep() {
+    
+    P::Quaternion quat = engineScene->getDefaultCamera()->getRotationQuat();
+    std::cout << "q: " << quat.w << " : " << quat.x << " : " << quat.y << " : " << quat.z << " : " << "\n";
+    P::Vector3 vx(1,0,0);
+    P::Vector3 vy(0,1,0);
+    P::Vector3 vz(0,0,1);
+    P::Vector3 v (1,1,1);
+    
+    vx = quat.applyTo(vx);   
+    vy = quat.applyTo(vy);
+    vz = quat.applyTo(vz);
+    v  = quat.applyTo(v );
+
+    std::cout << "vx: " << vx.x << ' ' << vx.y << ' ' << vx.z << '\n';
+    std::cout << "vy: " << vy.x << ' ' << vy.y << ' ' << vy.z << '\n';
+    std::cout << "vz: " << vz.x << ' ' << vz.y << ' ' << vz.z << '\n';
+    std::cout << "v : " << v.x  << ' ' << v.y  << ' ' << v.z << "\n\n";
+    
+    //engineScene->getDefaultCamera()->setRotationQuat(quat.w+0.1, quat.x, quat.y, quat.z);
+    static double angle = 0; 
+    P::Vector3 pos = engineScene->getDefaultCamera()->getPosition();
+    pos.x = 20 * std::sin(angle);
+    pos.z = 20 * std::cos(angle);
+    angle += 0.001;
+    engineScene->getDefaultCamera()->setPosition(pos);
+    //engineScene->getDefaultCamera()->lookAt(P::Vector3(0,0,0));
+     
     for ( AlifeIterator it = alifeObjects.begin();
             it != alifeObjects.end(); ++it ) {
         it->second->lifeStep();
@@ -135,6 +163,14 @@ void SceneObjectsWorld::signOutObject( IHeliumObjectsWorld::ObjectsIdType id ) {
             alifeObjects.erase(ait);
         }
     }
+}
+
+void SceneObjectsWorld::setCameraMovingDirection(Polycode::Vector2 dir) {
+    //engineScene->getDefaultCamera()->getTransformMatrix();
+    //engineScene->getDefaultCamera()->setPosition(17,17,17);
+    //engineScene->getDefaultCamera()->getPosition(17,17,17);
+    //engineScene->getDefaultCamera()->setPosition(17,17,17);
+    //horisontalVectorMove = dir;
 }
 
 int PackagedSceneObject::isAlife()const {
