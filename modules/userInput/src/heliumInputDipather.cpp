@@ -106,15 +106,20 @@ void MouseButtonUserInput::handleEvent(Polycode::Event* e) {
     std::cout << "Mouse button: " << code << '\n';
     
     HeliumGameCore* gm = HeliumGlobal::getCurrentGame();
+    P::Vector2 mouse = ie->getMousePosition();
     switch(e->getEventCode()) {
         case P::InputEvent::EVENT_MOUSEDOWN:
         {
-              gm->getScreenWorldPt()->mouseClick( code, false, ie->getMousePosition() );
+       //     if ( !gm->getScreenWorldPt()->mouseClick( code, false, mouse ) ) {
+       //         gm->getSceneWorldPt()->mouseClick( code, false, mouse );
+       //     }
         }
         break;
         case P::InputEvent::EVENT_MOUSEUP:
         {
-              gm->getScreenWorldPt()->mouseClick( code, true, ie->getMousePosition() );
+            if ( !gm->getScreenWorldPt()->mouseClick( code, true, mouse ) ) {
+                gm->getSceneWorldPt()->mouseClick( code, true, mouse );
+            }
         }
         //break;
         //case P::InputEvent::EVENT_DOUBLECLICK:
