@@ -14,13 +14,21 @@
 
 #include "heliumUserInputHandler.h"
 
-class CameraHorisontalMove : public MouseKeyHandler {
+struct CameraHorisontalMove : public MouseKeyHandler {
 public:
     CameraHorisontalMove();
     virtual ~CameraHorisontalMove();
     void process(Polycode::Vector2 mousePosition);
 
     static int speed;
+};
+
+struct SceneObjectHorTransfer : public MouseKeyHandler {
+    SceneObjectHorTransfer(Polycode::SceneEntity*);
+    virtual ~SceneObjectHorTransfer();
+    void process(Polycode::Vector2 mousePosition);
+
+    Polycode::SceneEntity* model;
 };
 
 #endif   // HELIUM_PREPARED_MOUSE_HANDLERS_INCLUDED

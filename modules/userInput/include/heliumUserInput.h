@@ -13,7 +13,8 @@
 
 #include "heliumInputDipather.h"
 #include "heliumUserInputHandler.h"
-#include "keyboardHandler.h"
+#include "heliumPreparedKeyHandlers.h"
+#include "heliumPreparedMouseHandlers.h"
 
 #endif // HELIUM_USER_INPUT_INCLUDED
 

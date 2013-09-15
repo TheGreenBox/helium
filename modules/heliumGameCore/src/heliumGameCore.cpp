@@ -37,7 +37,7 @@ void HeliumGameCore::mainLoop() {
             flatWorld.lifeStep();
             engineCore->Render();
             
-            if(PeekMessage(&Msg, NULL, 0,0,PM_REMOVE)) {
+            if(PeekMessage(&Msg, NULL, 0, 0, PM_REMOVE)) {
                 TranslateMessage(&Msg);
                 DispatchMessage(&Msg);
             }

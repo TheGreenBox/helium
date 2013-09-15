@@ -172,8 +172,9 @@ public:
     //!> 
     typedef std::pair< IHeliumObjectsWorld::ObjectsIdType, SceneObject* > AlifePairType;
 
+    Polycode::RayTestResult rayTest(Polycode::Vector2);
     
-private:
+protected:
     Polycode::PhysicsScene* engineScene;
     
     //!> dead objects, no behavior, no reactions, no life

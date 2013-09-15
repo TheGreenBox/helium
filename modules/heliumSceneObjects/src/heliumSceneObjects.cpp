@@ -47,14 +47,19 @@ void SceneObjectsWorld::lifeStep() {
     }
 }
 
-bool SceneObjectsWorld::mouseClick( int button, bool upDown, P::Vector2 mouse ) {
+
+P::RayTestResult SceneObjectsWorld::rayTest(P::Vector2 mouse) {
     P::Vector3 dir = 
     P::CoreServices::getInstance()->getRenderer()->projectRayFrom2DCoordinate( 
                          mouse.x, mouse.y,
                          P::CoreServices::getInstance()->getRenderer()->getCameraMatrix(),
                          engineScene->getDefaultCamera()->getProjectionMatrix() );
-    P::RayTestResult res = 
-    engineScene->getFirstEntityInRay(engineScene->getDefaultCamera()->getPosition(), dir * 100);               
+    return engineScene->getFirstEntityInRay(engineScene->getDefaultCamera()->getPosition(), dir * 100);               
+}
+
+bool SceneObjectsWorld::mouseClick( int button, bool upDown, P::Vector2 mouse ) {
+    
+    P::RayTestResult res = SceneObjectsWorld::rayTest(mouse);
     if (res.entity) {
         std::cout << "yes! ";
     }

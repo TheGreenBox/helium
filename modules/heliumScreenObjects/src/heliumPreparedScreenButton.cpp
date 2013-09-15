@@ -12,7 +12,7 @@
 #include "Polycode2DPhysics.h"
 
 #include "heliumPreparedScreenButton.h"
-#include "keyboardHandler.h"
+#include "heliumPreparedKeyHandlers.h"
 #include "pathGlobal.h"
 
 namespace P = Polycode;
