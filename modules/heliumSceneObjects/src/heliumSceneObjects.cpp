@@ -7,7 +7,7 @@
  * Author:  AKindyakov 
  * ========================================================
  */
-
+#include <iostream>
 #include <Polycode.h>
 #include "heliumSceneObjects.h"
 
@@ -21,7 +21,7 @@ SceneObjectsWorld::SceneObjectsWorld()
     engineScene->clearColor = P::Color(1,1,1,1);
     engineScene->useClearColor = true;
     engineScene->getDefaultCamera()->setPosition(17,17,17);
-	engineScene->getDefaultCamera()->lookAt(P::Vector3(0,0,0));
+    engineScene->getDefaultCamera()->lookAt(P::Vector3(0,0,0));
 }
 
 SceneObjectsWorld::~SceneObjectsWorld() {
@@ -48,17 +48,26 @@ void SceneObjectsWorld::lifeStep() {
 }
 
 bool SceneObjectsWorld::mouseClick( int button, bool upDown, P::Vector2 mouse ) {
-//	P::SceneEntity* entity = engineScene->getEntityAtPosition(mouse.x, mouse.y);
-//    
-//    // TODO !! wrap it to inline function!
-//    IHeliumObjectsWorld::ObjectsIdType id = 
-//        reinterpret_cast< IHeliumObjectsWorld::ObjectsIdType >(entity);
-//
-//    SceneObjectsWorld::AlifeIterator ait = alifeObjects.find(id);
-//    if (ait != alifeObjects.end() ) {
-//        ait->second->mouseClick(upDown);
-//        return true;
-//    }
+    P::Vector3 dir = 
+    P::CoreServices::getInstance()->getRenderer()->projectRayFrom2DCoordinate( 
+                         mouse.x, mouse.y,
+                         P::CoreServices::getInstance()->getRenderer()->getCameraMatrix(),
+                         engineScene->getDefaultCamera()->getProjectionMatrix() );
+    P::RayTestResult res = 
+    engineScene->getFirstEntityInRay(engineScene->getDefaultCamera()->getPosition(), dir * 100);               
+    if (res.entity) {
+        std::cout << "yes! ";
+    }
+    IHeliumObjectsWorld::ObjectsIdType id = 
+        reinterpret_cast< IHeliumObjectsWorld::ObjectsIdType >(res.entity);
+    std::cout << id << ' ';
+    SceneObjectsWorld::AlifeIterator ait = alifeObjects.find(id);
+    if (ait != alifeObjects.end() ) {
+        //ait->second->mouseClick(upDown);
+        std::cout << "Hit it!\n";
+        return true;
+    }
+    std::cout << "You miss! Keep to try!\n";
     return false;
 }
 
