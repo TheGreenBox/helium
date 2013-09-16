@@ -32,11 +32,11 @@ void CameraHorisontalMove::process(Polycode::Vector2 mouse) {
         mv.Normalize();
         mv = mv*speed;
         HeliumGameCore* gm = HeliumGlobal::getCurrentGame();
-        gm->getSceneWorldPt()->setCameraMovingDirection(mv);
+        gm->getSceneWorldPt()->cameraHorizonMovingDirection(mv);
     }
     else
     {
-        gm->getSceneWorldPt()->setCameraMovingDirection(Polycode::Vector2(0,0));
+        gm->getSceneWorldPt()->cameraHorizonMovingDirection(Polycode::Vector2(0,0));
     }
 }
 

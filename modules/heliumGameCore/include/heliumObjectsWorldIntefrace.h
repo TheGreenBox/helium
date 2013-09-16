@@ -51,6 +51,12 @@ public:
     * @param Object index
     */
     virtual void signOutObject( ObjectsIdType )=0;
+    
+    /**
+    * @brief Delete object from scene and from memory
+    * @param Object index
+    */
+    virtual void cursorMove(Polycode::Vector2)=0;
 };
 
 #endif // HELIUM_OBJECTS_WORLD_INTEFRACE_INCLUDED 

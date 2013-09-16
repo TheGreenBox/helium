@@ -111,6 +111,11 @@ public:
     //!> 
     typedef std::pair< IHeliumObjectsWorld::ObjectsIdType, ScreenObject* > AlifePairType;
     
+    /**   
+    *
+    */ 
+    void cursorMove(Polycode::Vector2){}
+    
 private:
     Polycode::PhysicsScreen* engineScreen;
     

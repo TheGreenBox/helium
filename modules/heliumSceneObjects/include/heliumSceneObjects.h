@@ -102,7 +102,12 @@ public:
     /**
     * @brief
     */  
-    virtual void mouseClick( bool upDown ) {}
+    virtual void mouseClick( int button, bool upDown ) {}
+    
+    /**
+    * @brief
+    */  
+    virtual void mousePoint( int button, bool upDown, Polycode::Vector2 mouse ) {}
     
     /**
     * @brief
@@ -175,12 +180,17 @@ public:
     /**
     *
     */
-    void setCameraMovingDirection(Polycode::Vector2 dir);
+    void cameraHorizonMovingDirection(Polycode::Vector2 dir);
     
     /**
     *
     */
     Polycode::RayTestResult rayTest(Polycode::Vector2);
+    
+    /**   
+    *
+    */ 
+    void cursorMove(Polycode::Vector2){}
     
 protected:
     Polycode::PhysicsScene* engineScene;
@@ -193,6 +203,8 @@ protected:
     //!> container of alife objects, have reactions and posible have behavior
     std::map< IHeliumObjectsWorld::ObjectsIdType, SceneObject* > alifeObjects;
     typedef std::map< IHeliumObjectsWorld::ObjectsIdType, SceneObject* >::iterator AlifeIterator;
+    
+    std::set< SceneObject* > queueToMousePoint;
 };
 
 /**
@@ -264,13 +276,13 @@ public:
     IHeliumObjectsWorld::ObjectsIdType getId()const;
     
     /**
-    * @brief
+    * @brief return
     */  
     Polycode::SceneEntity* getModel()const;
 
 protected:
     //!> Pointer to PolySceneObject helium wrap
-    SceneObject* heliumAlife;
+    SceneObject* heliumObject;
     
     int alife;
     PolySceneEntityType entityType;

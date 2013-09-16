@@ -28,7 +28,7 @@ HeliumTestBarrel::HeliumTestBarrel( double radius, double hight,
 	model->loadTexture( g_helium_resource_path + "/ChrisGerrard_tooth_steampunk_gear.png");
 	model->setPosition(position_x, position_z, position_y );
     
-    heliumAlife = new SceneObject(model);
+    heliumObject = new SceneObject(model);
     alife = 1;
     entityType = POLY_ENTITY_PHYSICAL;
     shapeType = P::PhysicsSceneEntity::SHAPE_CYLINDER;
@@ -44,7 +44,7 @@ HeliumTestFloor::HeliumTestFloor( double size_x, double size_y )
                                                         size_x, size_y );
 
     ground->loadTexture(g_helium_resource_path + "/simple_stone_texture.png");
-    heliumAlife = new SceneObject(ground);
+    heliumObject = new SceneObject(ground);
     alife = 1;
     entityType = POLY_ENTITY_PHYSICAL;
     shapeType = P::PhysicsSceneEntity::SHAPE_PLANE;
@@ -62,7 +62,7 @@ HeliumTestBox::HeliumTestBox( double size_x, double size_y, double size_z,
 
     box->loadTexture(g_helium_resource_path + "/flame1.png");
 	box->setPosition(pos_x, pos_z, pos_y );
-    heliumAlife = new SceneObject(box);
+    heliumObject = new SceneObject(box);
     alife = 1;
     entityType = POLY_ENTITY_PHYSICAL;
  

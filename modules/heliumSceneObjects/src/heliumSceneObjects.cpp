@@ -65,6 +65,13 @@ P::RayTestResult SceneObjectsWorld::rayTest(P::Vector2 mouse) {
 
 bool SceneObjectsWorld::mouseClick( int button, bool upDown, P::Vector2 mouse ) {
     
+    if ( ! queueToMousePoint.empty() ) {
+        for ( std::set< SceneObject* >::iterator it = queueToMousePoint.begin();
+                it != queueToMousePoint.end(); ++it ) {
+            (*it)->mousePoint( button, upDown, mouse );
+        }
+        return true;
+    }
     P::RayTestResult res = SceneObjectsWorld::rayTest(mouse);
     if (res.entity) {
         std::cout << "yes! ";
@@ -143,8 +150,7 @@ void SceneObjectsWorld::signOutObject( IHeliumObjectsWorld::ObjectsIdType id ) {
     }
 }
 
-void SceneObjectsWorld::setCameraMovingDirection(Polycode::Vector2 dir) {
-    std::cout << "v: " << dir.x << " : " << dir.y << "\n";
+void SceneObjectsWorld::cameraHorizonMovingDirection(Polycode::Vector2 dir) {
     P::Vector3 spaceMove(dir.x, 0, dir.y);
     P::Quaternion quat = engineScene->getDefaultCamera()->getRotationQuat();
     spaceMove = quat.applyTo(spaceMove);
@@ -186,15 +192,15 @@ bool PackagedSceneObject::getCompoundChildren () {
     
 SceneObjectsWorld::AlifePairType PackagedSceneObject::getAlifePair()const {
     return SceneObjectsWorld::AlifePairType (
-            reinterpret_cast<IHeliumObjectsWorld::ObjectsIdType>(heliumAlife->getModel()),
-            heliumAlife );
+            reinterpret_cast<IHeliumObjectsWorld::ObjectsIdType>(heliumObject->getModel()),
+            heliumObject );
 }
     
 IHeliumObjectsWorld::ObjectsIdType PackagedSceneObject::getId()const {
-    return reinterpret_cast<IHeliumObjectsWorld::ObjectsIdType>(heliumAlife->getModel());
+    return reinterpret_cast<IHeliumObjectsWorld::ObjectsIdType>(heliumObject->getModel());
 }
     
 Polycode::SceneEntity* PackagedSceneObject::getModel()const {
-    return heliumAlife->getModel();
+    return heliumObject->getModel();
 }
 
