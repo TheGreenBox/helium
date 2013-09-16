@@ -16,7 +16,7 @@
 typedef enum {
     PREPARED_3D_UNKNOWN = 0,
     PREPARED_3D_LAST
-} HeliumPrepared3D; 
+} HeliumPreparedSceneObjects; 
 
 
 struct HeliumTestBarrel : public PackagedSceneObject {
@@ -34,6 +34,52 @@ struct HeliumTestBox : public PackagedSceneObject {
     HeliumTestBox( double size_x, double size_y, double size_z,
                    double pos_x, double pos_y, double pos_z ); 
     ~HeliumTestBox() {}
+};
+
+class HeliumSceneArchitecktHand : public SceneObject {
+public:
+    HeliumSceneArchitecktHand( PackagedSceneObject*); 
+    HeliumSceneArchitecktHand( HeliumPreparedSceneObjects );
+    ~HeliumSceneArchitecktHand() {}
+
+    void lifeStep() {}
+    
+    /**
+    * @brief
+    */
+    void getHarm() {}
+    
+    /**
+    * @brief
+    */  
+    void mouseCursor() {}
+    
+    /**
+    * @brief
+    */  
+    void mouseClick( int button, bool upDown ) {}
+    
+    /**
+    * @brief
+    */  
+    void mousePoint( int button, bool upDown, Polycode::Vector2 mouse ) {}
+    
+    /**
+    * @brief
+    */  
+    void mouseDoubleClick() {}
+    
+private:
+    PackagedSceneObject* creatingObject;
+    
+};
+
+struct HeliumSceneArchitecktHandPack : public PackagedSceneObject {
+    HeliumSceneArchitecktHandPack(); 
+    HeliumSceneArchitecktHandPack( PackagedSceneObject* ); 
+    HeliumSceneArchitecktHandPack( HeliumPreparedSceneObjects );
+    
+    ~HeliumSceneArchitecktHandPack() {}
 };
 
 #endif // HELIUM_PREPARED_3D_OBJECTS_INCLUDED

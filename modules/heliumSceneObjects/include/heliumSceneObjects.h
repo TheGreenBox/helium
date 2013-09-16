@@ -259,7 +259,7 @@ public:
         POLY_ENTITY_PHYSICAL,     
         POLY_ENTITY_EMPTY
     } PolySceneEntityType;
-        
+    
     /**
     * @brief
     */  

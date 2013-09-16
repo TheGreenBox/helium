@@ -7,7 +7,7 @@
  * Author:       AKindyakov 
  * ========================================================
  */
-#include "heliumPrepared3DObjects.h"
+#include "heliumPreparedSceneObjects.h"
 #include "pathGlobal.h"
 
 namespace P = Polycode;
