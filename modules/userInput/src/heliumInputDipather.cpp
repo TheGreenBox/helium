@@ -67,7 +67,7 @@ void KeyboardUserInput::keyDOWN(P::InputEvent* inputEvent){
 
 MouseUserInput::MouseUserInput() 
     :   buttoninput(new MouseButtonUserInput),
-        moveInput  (new MouseMoveUserInput  ),
+        moveInput  (new MouseMoveUserInput),
         otherInput (new MouseOtherUserInput),
         wheelInput (new MouseWheelUserInput)
 {}
@@ -134,8 +134,8 @@ void MouseButtonUserInput::addLeftEventHandler(MouseKeyHandler*) {
 void MouseButtonUserInput::addButtonEventHandler(int, MouseKeyHandler*) {
 }
 
-MouseMoveUserInput::MouseMoveUserInput() {
-}
+MouseMoveUserInput::MouseMoveUserInput()
+    : cameraMove(new CameraHorisontalMove) {}
 
 void MouseMoveUserInput::setEnable(bool set) {
     HeliumGameCore* gm = HeliumGlobal::getCurrentGame();
@@ -150,11 +150,14 @@ void MouseMoveUserInput::setEnable(bool set) {
 
 void MouseMoveUserInput::handleEvent(Polycode::Event* e) {
     P::InputEvent* ie = dynamic_cast<P::InputEvent*>(e);
-    int code = ie->mouseButton;
-    
-    HeliumGameCore* gm = HeliumGlobal::getCurrentGame();
     P::Vector2 mouse = ie->getMousePosition();
     std::cout << "Mouse move: " << mouse.x << " : " << mouse.y << "\n";
+    if ( cameraMove != NULL ) {
+        cameraMove->process(mouse);
+    }
+    if ( handler != NULL ) {
+        handler -> process(mouse);
+    }
 }
 
 MouseOtherUserInput::MouseOtherUserInput() {

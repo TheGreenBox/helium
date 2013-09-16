@@ -7,11 +7,11 @@
  * Author:       AKindyakov 
  * ========================================================
  */
-
-#include  "heliumPreparedMouseHandlers.h"
+#include <iostream>
+#include "heliumPreparedMouseHandlers.h"
 #include "heliumGameGlobal.h"
 
-int CameraHorisontalMove::speed = 10;
+float CameraHorisontalMove::speed = 0.05;
 
 CameraHorisontalMove::CameraHorisontalMove() {
 }
@@ -24,18 +24,19 @@ void CameraHorisontalMove::process(Polycode::Vector2 mouse) {
     Number yres = Polycode::CoreServices::getInstance()->getCore()->getYRes();
     
     HeliumGameCore* gm = HeliumGlobal::getCurrentGame();
-    const float BORDER = 0.95;
-    if ( mouse.x > xres*BORDER ) {
-    //    setSpeed(mouse);
+    const float BORDER = 20;
+    if ( mouse.x > xres-BORDER || mouse.x < BORDER 
+         || mouse.y > yres-BORDER || mouse.y < BORDER )
+    {
+        Polycode::Vector2 mv(mouse.x-xres/2, mouse.y-yres/2);
+        mv.Normalize();
+        mv = mv*speed;
+        HeliumGameCore* gm = HeliumGlobal::getCurrentGame();
+        gm->getSceneWorldPt()->setCameraMovingDirection(mv);
     }
-    if ( mouse.x < xres*(1-BORDER) ) {
-    //
-    }
-    if ( mouse.y > xres*BORDER ) {
-    //
-    }
-    if ( mouse.y < xres*(1-BORDER) ) {
-    //
+    else
+    {
+        gm->getSceneWorldPt()->setCameraMovingDirection(Polycode::Vector2(0,0));
     }
 }
 

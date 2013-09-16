@@ -20,7 +20,7 @@ public:
     virtual ~CameraHorisontalMove();
     void process(Polycode::Vector2 mousePosition);
 
-    static int speed;
+    static float speed;
 };
 
 struct SceneObjectHorTransfer : public MouseKeyHandler {
