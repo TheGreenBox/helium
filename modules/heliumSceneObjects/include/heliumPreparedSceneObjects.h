@@ -40,46 +40,42 @@ class HeliumSceneArchitecktHand : public SceneObject {
 public:
     HeliumSceneArchitecktHand( PackagedSceneObject*); 
     HeliumSceneArchitecktHand( HeliumPreparedSceneObjects );
-    ~HeliumSceneArchitecktHand() {}
+    ~HeliumSceneArchitecktHand();
 
-    void lifeStep() {}
-    
-    /**
-    * @brief
-    */
-    void getHarm() {}
+    void lifeStep();
     
     /**
     * @brief
     */  
-    void mouseCursor() {}
+    void mouseCursor();
     
     /**
     * @brief
     */  
-    void mouseClick( int button, bool upDown ) {}
+    void mouseClick( int button, bool upDown );
     
     /**
     * @brief
     */  
-    void mousePoint( int button, bool upDown, Polycode::Vector2 mouse ) {}
+    void mousePoint( int button, bool upDown, Polycode::Vector2 mouse );
     
     /**
     * @brief
     */  
-    void mouseDoubleClick() {}
+    void mouseDoubleClick();
     
 private:
     PackagedSceneObject* creatingObject;
     
 };
 
-struct HeliumSceneArchitecktHandPack : public PackagedSceneObject {
+class HeliumSceneArchitecktHandPack : public PackagedSceneObject {
+public:
     HeliumSceneArchitecktHandPack(); 
     HeliumSceneArchitecktHandPack( PackagedSceneObject* ); 
     HeliumSceneArchitecktHandPack( HeliumPreparedSceneObjects );
     
-    ~HeliumSceneArchitecktHandPack() {}
+    ~HeliumSceneArchitecktHandPack();
 };
 
 #endif // HELIUM_PREPARED_3D_OBJECTS_INCLUDED

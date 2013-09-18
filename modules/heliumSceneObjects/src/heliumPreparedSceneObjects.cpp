@@ -7,6 +7,9 @@
  * Author:       AKindyakov 
  * ========================================================
  */
+
+#include <iostream>
+#include "heliumGameGlobal.h"
 #include "heliumPreparedSceneObjects.h"
 #include "pathGlobal.h"
 
@@ -32,10 +35,7 @@ HeliumTestBarrel::HeliumTestBarrel( double radius, double hight,
     alife = 1;
     entityType = POLY_ENTITY_PHYSICAL;
     shapeType = P::PhysicsSceneEntity::SHAPE_CYLINDER;
-    
     mass = 1;
-    friction = 1;
-    restitution = 0;
 }
 
 HeliumTestFloor::HeliumTestFloor( double size_x, double size_y ) 
@@ -48,10 +48,6 @@ HeliumTestFloor::HeliumTestFloor( double size_x, double size_y )
     alife = 1;
     entityType = POLY_ENTITY_PHYSICAL;
     shapeType = P::PhysicsSceneEntity::SHAPE_PLANE;
-    
-    mass = 0.0;
-    friction = 1;
-    restitution = 0;
 }
 
 HeliumTestBox::HeliumTestBox( double size_x, double size_y, double size_z,
@@ -65,10 +61,66 @@ HeliumTestBox::HeliumTestBox( double size_x, double size_y, double size_z,
     heliumObject = new SceneObject(box);
     alife = 1;
     entityType = POLY_ENTITY_PHYSICAL;
- 
-   shapeType = P::PhysicsSceneEntity::SHAPE_BOX;
-    
+    shapeType = P::PhysicsSceneEntity::SHAPE_BOX;
     mass = 0.5;
-    friction = 1;
-    restitution = 0;
 }
+
+HeliumSceneArchitecktHand::HeliumSceneArchitecktHand( PackagedSceneObject* pack )
+    :   SceneObject(pack->getModel()),
+        creatingObject(pack) {
+    //model->applyClone(pack->getModel()->Clone(true, true), true, true);
+    //model->loadTexture(g_helium_resource_path + "/flame1.png");
+}
+
+HeliumSceneArchitecktHand::HeliumSceneArchitecktHand( HeliumPreparedSceneObjects id)
+    :   SceneObject(NULL),
+        creatingObject(NULL) {
+}
+
+HeliumSceneArchitecktHand::~HeliumSceneArchitecktHand() {
+}
+
+void HeliumSceneArchitecktHand::lifeStep() {
+    HeliumGameCore* gm = HeliumGlobal::getCurrentGame();
+    Polycode::Vector2 mouse = gm->getEngineCorePt()->getInput()->getMousePosition();
+    Polycode::RayTestResult rayRez = gm->getSceneWorldPt()->rayTest(mouse);
+    rayRez.position.y += model->bBox.y/2;
+    model->setPosition(rayRez.position);
+}
+    
+void HeliumSceneArchitecktHand::mouseCursor() {
+}
+    
+void HeliumSceneArchitecktHand::mouseClick( int button, bool upDown ) {
+    std::cout << "HeliumSceneArchitecktHand::mouseClick()\n";
+}
+    
+void HeliumSceneArchitecktHand::mousePoint( int button, bool upDown, Polycode::Vector2 mouse ) {
+    std::cout << "HeliumSceneArchitecktHand::mousePoint()\n";
+    creatingObject->getModel()->setPosition(model->getPosition());
+    HeliumGlobal::getCurrentGame()->getSceneWorldPt()->addObject( creatingObject );
+    delete creatingObject;
+    creatingObject = NULL;
+    HeliumGlobal::getCurrentGame()->getSceneWorldPt()->delayedSignOut( this->getId() );
+}
+    
+void HeliumSceneArchitecktHand::mouseDoubleClick() {
+}
+
+HeliumSceneArchitecktHandPack::HeliumSceneArchitecktHandPack() {
+    heliumObject = new HeliumSceneArchitecktHand( new HeliumTestBox( 2, 2, 2, 0, 5, 0) );
+    alife = 1;
+    entityType = POLY_ENTITY_IMMATERIAL;
+    shapeType = P::PhysicsSceneEntity::SHAPE_BOX;
+    addToMousePointQueue = true;
+}
+
+HeliumSceneArchitecktHandPack::HeliumSceneArchitecktHandPack( PackagedSceneObject* ) {
+}
+
+HeliumSceneArchitecktHandPack::HeliumSceneArchitecktHandPack( HeliumPreparedSceneObjects ) {
+}
+
+HeliumSceneArchitecktHandPack::~HeliumSceneArchitecktHandPack() {
+}
+

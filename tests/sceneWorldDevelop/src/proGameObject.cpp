@@ -67,6 +67,9 @@ ProGameObject::ProGameObject( P::Core* _core )
     
     HeliumExitScreenButton exitBt(this);
     this->getScreenWorldPt()->addObject( &exitBt );
+    
+    HeliumSceneArchitecktHandPack hand;
+    this->getSceneWorldPt()->addObject( &hand );
 }
 
 ProGameObject::~ProGameObject(){

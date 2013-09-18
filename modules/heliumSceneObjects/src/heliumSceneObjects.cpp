@@ -17,6 +17,10 @@ namespace P = Polycode;
 SceneObject::SceneObject( P::SceneEntity* _model ) 
     : model(_model) {}
 
+IHeliumObjectsWorld::ObjectsIdType SceneObject::getId() const {
+    return reinterpret_cast<IHeliumObjectsWorld::ObjectsIdType>(model);
+}
+
 SceneObjectsWorld::SceneObjectsWorld()
     : engineScene(new P::PhysicsScene()) {
     engineScene->clearColor = P::Color(1,1,1,1);
@@ -42,6 +46,7 @@ SceneObjectsWorld::~SceneObjectsWorld() {
 }
 
 void SceneObjectsWorld::lifeStep() {
+    checkDelayedSignOutObject();
     P::Vector3 pos = engineScene->getDefaultCamera()->getPosition();
     pos.x += horisontalVectorMove.x;
     pos.z += horisontalVectorMove.y;
@@ -63,26 +68,44 @@ P::RayTestResult SceneObjectsWorld::rayTest(P::Vector2 mouse) {
     return engineScene->getFirstEntityInRay(engineScene->getDefaultCamera()->getPosition(), dir * 100);               
 }
 
-bool SceneObjectsWorld::mouseClick( int button, bool upDown, P::Vector2 mouse ) {
-    
+void SceneObjectsWorld::addObjectToMousePointQueue(IHeliumObjectsWorld::ObjectsIdType id) {
+    if ( id != 0 ) {
+        queueToMousePoint.insert(id);
+    }
+}  
+
+bool SceneObjectsWorld::checkQueueToMousePointClick( int button, bool upDown, P::Vector2 mouse ) {
     if ( ! queueToMousePoint.empty() ) {
-        for ( std::set< SceneObject* >::iterator it = queueToMousePoint.begin();
+        for ( ObjectIterator it = queueToMousePoint.begin();
                 it != queueToMousePoint.end(); ++it ) {
-            (*it)->mousePoint( button, upDown, mouse );
+            AlifeIterator ait = alifeObjects.find(*it);
+            if (ait != alifeObjects.end() ) {
+                ait->second->mousePoint( button, upDown, mouse );
+            }
+            queueToMousePoint.erase(it);
         }
         return true;
     }
+    else {
+        return false;
+    }
+}
+
+bool SceneObjectsWorld::mouseClick( int button, bool upDown, P::Vector2 mouse ) {
+    if ( checkQueueToMousePointClick(button, upDown, mouse) ) {
+        return true;
+    }
+    
     P::RayTestResult res = SceneObjectsWorld::rayTest(mouse);
     if (res.entity) {
-        std::cout << "yes! ";
+        std::cout << "yes!\n";
     }
     IHeliumObjectsWorld::ObjectsIdType id = 
         reinterpret_cast< IHeliumObjectsWorld::ObjectsIdType >(res.entity);
     std::cout << id << ' ';
-    SceneObjectsWorld::AlifeIterator ait = alifeObjects.find(id);
+    AlifeIterator ait = alifeObjects.find(id);
     if (ait != alifeObjects.end() ) {
-        //ait->second->mouseClick(upDown);
-        std::cout << "Hit it!\n";
+        ait->second->mouseClick(button, upDown);
         return true;
     }
     std::cout << "You miss! Keep to try!\n";
@@ -112,10 +135,13 @@ SceneObjectsWorld::addObject( PackagedSceneObject* obj ) {
     }
     
     if ( obj->isAlife() != 0 ) {
-        alifeObjects.insert( obj->getAlifePair() );
+        alifeObjects.insert(obj->getAlifePair());
     }
     else {
-        objects.insert( obj->getId() );
+        objects.insert(obj->getId());
+    }
+    if ( obj->getToMousePointQueue() ) {
+        addObjectToMousePointQueue(obj->getId());  
     }
     return obj->getId();
 }
@@ -150,12 +176,33 @@ void SceneObjectsWorld::signOutObject( IHeliumObjectsWorld::ObjectsIdType id ) {
     }
 }
 
+void SceneObjectsWorld::delayedSignOut( IHeliumObjectsWorld::ObjectsIdType id ) {
+    delayedSignOutObjects.push_back(id);
+}
+
+void SceneObjectsWorld::checkDelayedSignOutObject() {
+    if ( !delayedSignOutObjects.empty() ) {
+        for ( std::list< IHeliumObjectsWorld::ObjectsIdType >::iterator it =
+               delayedSignOutObjects.begin(); it != delayedSignOutObjects.end(); ++it ) {
+            signOutObject( *it );
+        }
+    }
+}
+
 void SceneObjectsWorld::cameraHorizonMovingDirection(Polycode::Vector2 dir) {
     P::Vector3 spaceMove(dir.x, 0, dir.y);
     P::Quaternion quat = engineScene->getDefaultCamera()->getRotationQuat();
     spaceMove = quat.applyTo(spaceMove);
     horisontalVectorMove.x = spaceMove.x;
     horisontalVectorMove.y = spaceMove.z;
+}
+
+PackagedSceneObject::PackagedSceneObject()
+    :   heliumObject(NULL),  alife(0),
+        mass(0),  friction(1),
+        restitution(0),  group(1),
+        compoundChildren(false),
+        addToMousePointQueue(false) {
 }
 
 int PackagedSceneObject::isAlife()const {
@@ -197,10 +244,14 @@ SceneObjectsWorld::AlifePairType PackagedSceneObject::getAlifePair()const {
 }
     
 IHeliumObjectsWorld::ObjectsIdType PackagedSceneObject::getId()const {
-    return reinterpret_cast<IHeliumObjectsWorld::ObjectsIdType>(heliumObject->getModel());
+    return heliumObject->getId();
 }
     
 Polycode::SceneEntity* PackagedSceneObject::getModel()const {
     return heliumObject->getModel();
+}
+
+bool PackagedSceneObject::getToMousePointQueue()const {
+    return addToMousePointQueue;
 }
 

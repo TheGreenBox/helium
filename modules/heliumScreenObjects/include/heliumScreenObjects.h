@@ -104,6 +104,12 @@ public:
     void signOutObject( IHeliumObjectsWorld::ObjectsIdType );
     
     /**
+    * @brief Delete object from scene and from memory
+    * @param Object index
+    */
+    void delayedSignOut( IHeliumObjectsWorld::ObjectsIdType ){}
+    
+    /**
     *
     */  
     IHeliumObjectsWorld::ObjectsIdType addObject( PackagedScreenObject* );
