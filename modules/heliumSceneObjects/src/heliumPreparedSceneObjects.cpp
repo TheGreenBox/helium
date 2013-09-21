@@ -66,9 +66,9 @@ HeliumTestBox::HeliumTestBox( double size_x, double size_y, double size_z,
 }
 
 HeliumSceneArchitecktHand::HeliumSceneArchitecktHand( PackagedSceneObject* pack )
-    :   SceneObject(pack->getModel()),
+    :   SceneObject(pack->getModel()->Clone()),
         creatingObject(pack) {
-    //model->applyClone(pack->getModel()->Clone(true, true), true, true);
+    //model = pack->getModel()->Clone(true, true);
     //model->loadTexture(g_helium_resource_path + "/flame1.png");
 }
 
@@ -108,7 +108,9 @@ void HeliumSceneArchitecktHand::mouseDoubleClick() {
 }
 
 HeliumSceneArchitecktHandPack::HeliumSceneArchitecktHandPack() {
+    std::cout << "here ->\n";
     heliumObject = new HeliumSceneArchitecktHand( new HeliumTestBox( 2, 2, 2, 0, 5, 0) );
+    std::cout << "\t-> and here\n";
     alife = 1;
     entityType = POLY_ENTITY_IMMATERIAL;
     shapeType = P::PhysicsSceneEntity::SHAPE_BOX;
