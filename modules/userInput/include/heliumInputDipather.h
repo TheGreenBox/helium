@@ -59,13 +59,10 @@ public:
     virtual ~MouseMoveUserInput() {}
     
     void handleEvent(Polycode::Event*);
-    // not KeyHandler
-    void addEventHandler(MouseKeyHandler*){};
     void setCameraMoving(bool){};
     void setEnable(bool);
 private:
     MouseKeyHandler* cameraMove;
-    MouseKeyHandler* handler;
 };
 
 class MouseOtherUserInput : public Polycode::EventHandler {

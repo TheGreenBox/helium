@@ -67,10 +67,9 @@ HeliumTestBox::HeliumTestBox( double size_x, double size_y, double size_z,
 
 HeliumSceneArchitecktHand::HeliumSceneArchitecktHand( PackagedSceneObject* pack )
     :   SceneObject(pack->getModel()->Clone()),
-        creatingObject(pack) {
-    //model = pack->getModel()->Clone(true, true);
-    //model->loadTexture(g_helium_resource_path + "/flame1.png");
-}
+        creatingObject(pack) {}
+//    :   SceneObject( new P::ScenePrimitive( P::ScenePrimitive::TYPE_BOX,1,1,1 )),
+//        creatingObject(pack) {}
 
 HeliumSceneArchitecktHand::HeliumSceneArchitecktHand( HeliumPreparedSceneObjects id)
     :   SceneObject(NULL),
@@ -81,11 +80,13 @@ HeliumSceneArchitecktHand::~HeliumSceneArchitecktHand() {
 }
 
 void HeliumSceneArchitecktHand::lifeStep() {
+    std::cout << "HeliumSceneArchitecktHand::lifeStep()\n";
     HeliumGameCore* gm = HeliumGlobal::getCurrentGame();
     Polycode::Vector2 mouse = gm->getEngineCorePt()->getInput()->getMousePosition();
     Polycode::RayTestResult rayRez = gm->getSceneWorldPt()->rayTest(mouse);
     rayRez.position.y += model->bBox.y/2;
     model->setPosition(rayRez.position);
+    std::cout << rayRez.position.x << ' ' << rayRez.position.y << ' ' << rayRez.position.z << '\n';
 }
     
 void HeliumSceneArchitecktHand::mouseCursor() {

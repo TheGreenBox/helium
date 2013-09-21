@@ -155,9 +155,6 @@ void MouseMoveUserInput::handleEvent(Polycode::Event* e) {
     if ( cameraMove != NULL ) {
         cameraMove->process(mouse);
     }
-    if ( handler != NULL ) {
-        handler -> process(mouse);
-    }
 }
 
 MouseOtherUserInput::MouseOtherUserInput() {

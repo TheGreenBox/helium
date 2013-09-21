@@ -9,6 +9,7 @@
  */
 
 #include <iostream> 
+#include <exception> 
 
 #include <Polycode.h>
 #include "PolycodeView.h"
@@ -33,9 +34,15 @@ APP_MAIN_FINCTION
     
     std::cout << "Keys test start...\n"; 
     
-//    while (game->update()) { }
+    try { 
     game->game();  
-    
+    }
+    catch (std::exception e) {
+        std::cout << "Exception: " << e.what() << '\n';
+    }
+    catch (...) {
+        std::cout << "Unknoun exception\n";
+    }
     std::cout << "Keys test finished!\n"; 
     return 0;
 }
