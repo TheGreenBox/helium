@@ -27,7 +27,7 @@ APP_MAIN_FINCTION
     enableDebugTools();
 
     using namespace Polycode;
-    PolycodeView*  view = new POLYCODE_VIEW_CREATOR("key test");
+    PolycodeView* view = new POLYCODE_VIEW_CREATOR("key test");
     Core* core = new POLYCODE_CORE(view, 640, 480, false, false, 0, 0, 90);
 
     ProGameObject* game = new ProGameObject( core );

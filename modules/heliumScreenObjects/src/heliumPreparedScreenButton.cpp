@@ -51,27 +51,48 @@ HeliumExitScreenButton::HeliumExitScreenButton(HeliumGameCore* gm) {
 
 HeliumExitScreenButton::~HeliumExitScreenButton() {}
 
-HeliumTextScreenButton::HeliumTextScreenButton(HeliumGameCore* gm, P::String textLabel, int t_size, P::String font, int b_x_size, int b_y_size, int x_pos, int y_pos) {
-    // const int b_size = 50;
+    /**
+    * Creates a button with a text in the center of it.
+    * @param gm Standart Helium Game Core.
+    * @param textValue A text string to be displayed on the button.
+    * @param b_x_size Button width (in pixels).
+    * @param b_y_size Button height (in pixels).
+    * @param x_pos Position of button's center point on x-Axis.
+    * @param y_pos Position of button's center point on y-Axis.
+    * @param font String name of a wanted font (handled by Polycode FontManager).
+    * @param f_size Font height (in pixels).
+    */
+HeliumTextScreenButton::HeliumTextScreenButton(HeliumGameCore* gm, P::String textValue,
+                                               KeyHandler* buttonHandler,
+                                               int b_x_size = 50, int b_y_size = 100,
+                                               int x_pos = 0, int y_pos = 0,
+                                               P::String font = "sans", int f_size = 10) {
+
+    const int defaultAntiAliasMode      = P::Label::ANTIALIAS_FULL;
+    const bool defaultPremultiplyAlpha  = false;
+
     int xRes = gm->getEngineCorePt()->getXRes();
     int yRes = gm->getEngineCorePt()->getYRes();
 
-    if (x_pos > xRes - b_x_size / 2) {
+    if ( (x_pos > xRes - b_x_size / 2) || (x_pos == 0) ) {
         x_pos = xRes / 2;
     }
-    if (y_pos > yRes - b_y_size / 2) {
+    if ( (y_pos > yRes - b_y_size / 2) || (y_pos == 0) ) {
         y_pos = yRes / 2;
     }
 
     P::ScreenShape* shape = new P::ScreenShape( P::ScreenShape::SHAPE_RECT,
-                                                b_x_size, b_y_size);
-    P::ScreenLabel* buttonText = new ScreenLabel(textLabel, t_size, font, 0, false);
+                                                b_y_size, b_x_size);
+    P::ScreenLabel* textObject = new P::ScreenLabel(textValue, f_size, font,
+                                                    defaultAntiAliasMode, defaultPremultiplyAlpha);
 
-    shape->addChild(buttonText);
+    textObject->setPositionMode(P::ScreenLabel::POSITION_CENTER);
+
+    shape->addChild(textObject);
     shape->setPosition(x_pos, y_pos);
-    shape->loadTexture( g_helium_resource_path + "/dark_wood.jpg" );
+    shape->loadTexture( g_helium_resource_path + "/dark_gray_button.png" );
 
-    heliumAlife = new ScreenButton( shape, new EscapeGame(), NULL );
+    heliumAlife = new ScreenButton( shape, buttonHandler, NULL );
 
     entityType = PackagedScreenObject::ENTITY_COLLISION_ONLY;
     entityShapeType = P::PhysicsScreenEntity::ENTITY_RECT;

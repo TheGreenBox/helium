@@ -27,7 +27,7 @@ struct HeliumExitScreenButton : public PackagedScreenObject {
 };
 
 struct HeliumTextScreenButton : public PackagedScreenObject {
-    HeliumTextScreenButton ( HeliumGameCore*, P::String textLabel, int t_size, P::String font, int b_x_size, int b_y_size, int x_pos, int y_pos);
+    HeliumTextScreenButton ( HeliumGameCore*, P::String textValue, KeyHandler* buttonHandler, int b_x_size, int b_y_size, int x_pos, int y_pos, P::String font, int t_size);
     virtual ~HeliumTextScreenButton();
 };
 
