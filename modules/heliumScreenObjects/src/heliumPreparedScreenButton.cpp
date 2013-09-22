@@ -55,6 +55,7 @@ HeliumExitScreenButton::~HeliumExitScreenButton() {}
     * Creates a button with a text in the center of it.
     * @param gm Standart Helium Game Core.
     * @param textValue A text string to be displayed on the button.
+    * @param buttonHandler Pointer to Helium KeyHandler.
     * @param b_x_size Button width (in pixels).
     * @param b_y_size Button height (in pixels).
     * @param x_pos Position of button's center point on x-Axis.
