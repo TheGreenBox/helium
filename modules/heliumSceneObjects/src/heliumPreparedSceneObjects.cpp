@@ -65,63 +65,65 @@ HeliumTestBox::HeliumTestBox( double size_x, double size_y, double size_z,
     mass = 0.5;
 }
 
-HeliumSceneArchitecktHand::HeliumSceneArchitecktHand( PackagedSceneObject* pack )
-    :   SceneObject(pack->getModel()->Clone()),
-        creatingObject(pack) {}
-//    :   SceneObject( new P::ScenePrimitive( P::ScenePrimitive::TYPE_BOX,1,1,1 )),
-//        creatingObject(pack) {}
+Helium556BulletBox::Helium556BulletBox(double pos_x, double pos_y, double pos_z, double size ) 
+{   
+    P::ScenePrimitive* box = new P::ScenePrimitive( P::ScenePrimitive::TYPE_BOX, 
+                                                       size*5, size*3, size*3 );
 
-HeliumSceneArchitecktHand::HeliumSceneArchitecktHand( HeliumPreparedSceneObjects id)
-    :   SceneObject(NULL),
-        creatingObject(NULL) {
+    box->loadTexture(g_helium_resource_path + "/556bullet_box.png");
+	box->setPosition(pos_x, pos_z, pos_y);
+    heliumObject = new SceneObject(box);
+    alife = 1;
+    entityType = POLY_ENTITY_PHYSICAL;
+    shapeType = P::PhysicsSceneEntity::SHAPE_BOX;
+    mass = size;
 }
+
+HeliumSceneArchitecktHand::HeliumSceneArchitecktHand(IHeliumObjectsWorld::ObjectsIdType id)
+    :   SceneObject(new P::ScenePrimitive(P::ScenePrimitive::TYPE_SPHERE, 0.25, 5, 5 )),
+        creatingObject(id) {}
 
 HeliumSceneArchitecktHand::~HeliumSceneArchitecktHand() {
 }
 
 void HeliumSceneArchitecktHand::lifeStep() {
-    std::cout << "HeliumSceneArchitecktHand::lifeStep()\n";
     HeliumGameCore* gm = HeliumGlobal::getCurrentGame();
     Polycode::Vector2 mouse = gm->getEngineCorePt()->getInput()->getMousePosition();
     Polycode::RayTestResult rayRez = gm->getSceneWorldPt()->rayTest(mouse);
-    rayRez.position.y += model->bBox.y/2;
+    
+    gm->getSceneWorldPt()->warpTo(creatingObject, rayRez.position);
+    // rayRez.position.y += model->bBox.y/2;
     model->setPosition(rayRez.position);
-    std::cout << rayRez.position.x << ' ' << rayRez.position.y << ' ' << rayRez.position.z << '\n';
-}
-    
-void HeliumSceneArchitecktHand::mouseCursor() {
-}
-    
-void HeliumSceneArchitecktHand::mouseClick( int button, bool upDown ) {
-    std::cout << "HeliumSceneArchitecktHand::mouseClick()\n";
+    std::cout << rayRez.position.x << ' '
+                << rayRez.position.y << ' '
+                << rayRez.position.z << '\n';
 }
     
 void HeliumSceneArchitecktHand::mousePoint( int button, bool upDown, Polycode::Vector2 mouse ) {
     std::cout << "HeliumSceneArchitecktHand::mousePoint()\n";
-    creatingObject->getModel()->setPosition(model->getPosition());
-    HeliumGlobal::getCurrentGame()->getSceneWorldPt()->addObject( creatingObject );
-    delete creatingObject;
-    creatingObject = NULL;
-    HeliumGlobal::getCurrentGame()->getSceneWorldPt()->delayedSignOut( this->getId() );
+    
+    if( creatingObject ) {
+        creatingObject = 0;
+        //HeliumGlobal::getCurrentGame()->getSceneWorldPt()->delayedSignOut( this->getId() );
+    }
+    else {
+        HeliumGameCore* gm = HeliumGlobal::getCurrentGame();
+        Polycode::Vector2 mouse = gm->getEngineCorePt()->getInput()->getMousePosition();
+        Polycode::RayTestResult rayRez = gm->getSceneWorldPt()->rayTest(mouse);
+        creatingObject = gm->getSceneWorldPt()->getObjectIdByEntity(rayRez.entity);
+    }
 }
     
 void HeliumSceneArchitecktHand::mouseDoubleClick() {
 }
 
-HeliumSceneArchitecktHandPack::HeliumSceneArchitecktHandPack() {
-    std::cout << "here ->\n";
-    heliumObject = new HeliumSceneArchitecktHand( new HeliumTestBox( 2, 2, 2, 0, 5, 0) );
-    std::cout << "\t-> and here\n";
+HeliumSceneArchitecktHandPack::HeliumSceneArchitecktHandPack( 
+                                    IHeliumObjectsWorld::ObjectsIdType id) {
+    heliumObject = new HeliumSceneArchitecktHand(id);
     alife = 1;
     entityType = POLY_ENTITY_IMMATERIAL;
     shapeType = P::PhysicsSceneEntity::SHAPE_BOX;
     addToMousePointQueue = true;
-}
-
-HeliumSceneArchitecktHandPack::HeliumSceneArchitecktHandPack( PackagedSceneObject* ) {
-}
-
-HeliumSceneArchitecktHandPack::HeliumSceneArchitecktHandPack( HeliumPreparedSceneObjects ) {
 }
 
 HeliumSceneArchitecktHandPack::~HeliumSceneArchitecktHandPack() {

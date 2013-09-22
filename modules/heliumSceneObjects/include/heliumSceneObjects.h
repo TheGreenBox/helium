@@ -200,9 +200,19 @@ public:
     Polycode::RayTestResult rayTest(Polycode::Vector2);
     
     /**
+    *
+    */
+    IHeliumObjectsWorld::ObjectsIdType getObjectIdByEntity(Polycode::SceneEntity* entity)const;
+    
+    /**
     * @brief add id of object to queue of mouse point click
     */
     void addObjectToMousePointQueue(IHeliumObjectsWorld::ObjectsIdType);  
+    
+    /**
+    * @brief warp object to point, if it exist of course
+    */
+    void warpTo(IHeliumObjectsWorld::ObjectsIdType, Polycode::Vector3, bool resetRotation=true);  
     
 protected:
     Polycode::PhysicsScene* engineScene;
@@ -219,12 +229,20 @@ protected:
     
     std::set< IHeliumObjectsWorld::ObjectsIdType > queueToMousePoint;
     std::list< IHeliumObjectsWorld::ObjectsIdType > delayedSignOutObjects;
-    
+
+private:    
     /**
     * @return True - if the queue in mot empty, otherwise False 
     */
     bool checkQueueToMousePointClick( int button, bool upDown, Polycode::Vector2 mouse );
     void checkDelayedSignOutObject();
+    
+    /**
+    * @param 
+    */
+    void addPackagedToEngineScene( PackagedSceneObject* obj );
+    
+    void engineSceneWarpTo( Polycode::SceneEntity* obj, Polycode::Vector3 point, bool resetRotation );
 };
 
 /**

@@ -15,6 +15,7 @@
 
 typedef enum {
     PREPARED_3D_UNKNOWN = 0,
+    PREPARED_3D_HELIUM_556_BULLET_BOX = 1,
     PREPARED_3D_LAST
 } HeliumPreparedSceneObjects; 
 
@@ -36,23 +37,22 @@ struct HeliumTestBox : public PackagedSceneObject {
     ~HeliumTestBox() {}
 };
 
+struct Helium556BulletBox : public PackagedSceneObject {
+    Helium556BulletBox( double pos_x, double pos_y, double pos_z, double size );
+};
+
 class HeliumSceneArchitecktHand : public SceneObject {
 public:
-    HeliumSceneArchitecktHand( PackagedSceneObject*); 
-    HeliumSceneArchitecktHand( HeliumPreparedSceneObjects );
+    
+    /**
+    * @brief Create null hand and if click - > object will be picked up from the scene
+    */
+    HeliumSceneArchitecktHand(IHeliumObjectsWorld::ObjectsIdType id=0);
+    
+    
     ~HeliumSceneArchitecktHand();
 
     void lifeStep();
-    
-    /**
-    * @brief
-    */  
-    void mouseCursor();
-    
-    /**
-    * @brief
-    */  
-    void mouseClick( int button, bool upDown );
     
     /**
     * @brief
@@ -65,15 +65,14 @@ public:
     void mouseDoubleClick();
     
 private:
-    PackagedSceneObject* creatingObject;
+    IHeliumObjectsWorld::ObjectsIdType creatingObject;
     
 };
 
 class HeliumSceneArchitecktHandPack : public PackagedSceneObject {
 public:
-    HeliumSceneArchitecktHandPack(); 
-    HeliumSceneArchitecktHandPack( PackagedSceneObject* ); 
-    HeliumSceneArchitecktHandPack( HeliumPreparedSceneObjects );
+
+    HeliumSceneArchitecktHandPack( IHeliumObjectsWorld::ObjectsIdType id=0);
     
     ~HeliumSceneArchitecktHandPack();
 };

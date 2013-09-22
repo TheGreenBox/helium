@@ -68,6 +68,11 @@ P::RayTestResult SceneObjectsWorld::rayTest(P::Vector2 mouse) {
     return engineScene->getFirstEntityInRay(engineScene->getDefaultCamera()->getPosition(), dir * 100);               
 }
 
+IHeliumObjectsWorld::ObjectsIdType
+SceneObjectsWorld::getObjectIdByEntity(P::SceneEntity* entity)const { 
+    return reinterpret_cast<IHeliumObjectsWorld::ObjectsIdType>(entity);
+}
+
 void SceneObjectsWorld::addObjectToMousePointQueue(IHeliumObjectsWorld::ObjectsIdType id) {
     if ( id != 0 ) {
         queueToMousePoint.insert(id);
@@ -112,27 +117,33 @@ bool SceneObjectsWorld::mouseClick( int button, bool upDown, P::Vector2 mouse ) 
     return false;
 }
 
-IHeliumObjectsWorld::ObjectsIdType 
-SceneObjectsWorld::addObject( PackagedSceneObject* obj ) { 
-    switch ( obj->getEntityType() ) {
+void SceneObjectsWorld::addPackagedToEngineScene( PackagedSceneObject* obj ) {
+    if( obj->getModel() ) { 
+        switch ( obj->getEntityType() ) {
         case PackagedSceneObject::POLY_ENTITY_IMMATERIAL:
             engineScene->addChild(obj->getModel());
         break;
-        
+
         case PackagedSceneObject::POLY_ENTITY_COLLISION_ONLY:
             engineScene->addCollisionChild( obj->getModel(),   
                                             obj->getShapeType() ); 
         break;
-        
+
         case PackagedSceneObject::POLY_ENTITY_PHYSICAL:
             engineScene->addPhysicsChild( obj->getModel(), obj->getShapeType(),
                                           obj->getMass(), obj->getFriction(),
                                           obj->getRestitution() );
         break;
+
         default:
             throw "Addition secene child without idetificator";
-        break;
-    }
+        }
+    }   
+}
+
+IHeliumObjectsWorld::ObjectsIdType SceneObjectsWorld::addObject( PackagedSceneObject* obj ) { 
+    
+    addPackagedToEngineScene(obj);
     
     if ( obj->isAlife() != 0 ) {
         alifeObjects.insert(obj->getAlifePair());
@@ -143,7 +154,12 @@ SceneObjectsWorld::addObject( PackagedSceneObject* obj ) {
     if ( obj->getToMousePointQueue() ) {
         addObjectToMousePointQueue(obj->getId());  
     }
-    return obj->getId();
+    
+    IHeliumObjectsWorld::ObjectsIdType id = obj->getId();
+    delete obj;
+    obj = NULL;
+    
+    return id;
 }
 
 void SceneObjectsWorld::setPause(bool set) {
@@ -195,6 +211,36 @@ void SceneObjectsWorld::cameraHorizonMovingDirection(Polycode::Vector2 dir) {
     spaceMove = quat.applyTo(spaceMove);
     horisontalVectorMove.x = spaceMove.x;
     horisontalVectorMove.y = spaceMove.z;
+}
+
+void SceneObjectsWorld::warpTo( IHeliumObjectsWorld::ObjectsIdType id, Polycode::Vector3 point, bool resetRotation) {
+    P::SceneEntity* pObj = NULL;
+    
+    ObjectIterator it = objects.find(id);
+    if ( it != objects.end() ) {
+        pObj = reinterpret_cast<P::SceneEntity*>(id);
+    }
+    else {
+        AlifeIterator ait = alifeObjects.find(id);
+        if (ait != alifeObjects.end() ) {
+            pObj = reinterpret_cast<P::SceneEntity*>(id);
+        }
+    }
+    engineSceneWarpTo(pObj, point, resetRotation);
+}
+
+void SceneObjectsWorld::engineSceneWarpTo( P::SceneEntity* obj, Polycode::Vector3 point, bool resetRotation ) {
+    if( obj ) {
+        P::PhysicsSceneEntity *physicsEntity = engineScene->getPhysicsEntityBySceneEntity(obj);
+        
+        if(physicsEntity) {
+            physicsEntity->rigidBody->setActivationState(DISABLE_DEACTIVATION); 
+            physicsEntity->warpTo(point, resetRotation);
+        }
+        else {
+            obj->setPosition(point);
+        }
+    }
 }
 
 PackagedSceneObject::PackagedSceneObject()

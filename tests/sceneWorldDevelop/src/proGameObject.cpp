@@ -56,20 +56,23 @@ ProGameObject::ProGameObject( P::Core* _core )
     keyboardInput->addEventHandler( P::KEY_w, new XCameraMove());
     keyboardInput->addEventHandler( P::KEY_s, new XNegativeCameraMove());
     
-    HeliumTestFloor floor( 20.0, 20.0 );
-    this->getSceneWorldPt()->addObject( &floor );
+    HeliumTestFloor* floor = new HeliumTestFloor( 20.0, 20.0 );
+    this->getSceneWorldPt()->addObject( floor );
     
-    HeliumTestBarrel barrel( 1, 3, 0, 0, 6 );
-    this->getSceneWorldPt()->addObject( &barrel );
+    HeliumTestBarrel* barrel = new HeliumTestBarrel( 1, 3, 0, 0, 6 );
+    this->getSceneWorldPt()->addObject( barrel );
 
-    HeliumTestBox box( 2, 2, 2, 2, 2, 5); 
-    this->getSceneWorldPt()->addObject( &box );
+    HeliumTestBox* box = new HeliumTestBox( 2, 2, 2, 2, 2, 5); 
+    this->getSceneWorldPt()->addObject( box );
     
-    HeliumExitScreenButton exitBt(this);
-    this->getScreenWorldPt()->addObject( &exitBt );
+    HeliumExitScreenButton* exitBt = new HeliumExitScreenButton(this);
+    this->getScreenWorldPt()->addObject( exitBt );
     
-    HeliumSceneArchitecktHandPack hand;
-    this->getSceneWorldPt()->addObject( &hand );
+    Helium556BulletBox* buletBox = new Helium556BulletBox(-2, -2, 5, 1); 
+    this->getSceneWorldPt()->addObject( buletBox );
+    
+    HeliumSceneArchitecktHandPack* hand = new HeliumSceneArchitecktHandPack();
+    this->getSceneWorldPt()->addObject( hand );
 }
 
 ProGameObject::~ProGameObject(){
