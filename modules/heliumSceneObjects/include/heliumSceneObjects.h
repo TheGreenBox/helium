@@ -11,6 +11,7 @@
 #ifndef HELIUM_SCENE_OBJECTS_INCLUDED
 #define HELIUM_SCENE_OBJECTS_INCLUDED
 
+#include <list>
 #include <set>
 #include <map>
 
@@ -102,7 +103,12 @@ public:
     /**
     * @brief
     */  
-    virtual void mouseClick( bool upDown ) {}
+    virtual void mouseClick( int button, bool upDown ) {}
+    
+    /**
+    * @brief
+    */  
+    virtual void mousePoint( int button, bool upDown, Polycode::Vector2 mouse ) {}
     
     /**
     * @brief
@@ -115,6 +121,11 @@ public:
     Polycode::SceneEntity* getModel() {
         return model;
     }
+    
+    /**
+    * @brief
+    */  
+    IHeliumObjectsWorld::ObjectsIdType getId()const;
     
 protected:
     Polycode::SceneEntity* model;
@@ -158,10 +169,16 @@ public:
     
     
     /**
-    * @brief Delete object from scene and from memory
+    * @brief Immediately delete helium scene object from scene and from memory
     * @param Object index
     */
     void signOutObject( IHeliumObjectsWorld::ObjectsIdType );
+    
+    /**
+    * @brief Delete object from scene and from memory
+    * @param Object index
+    */
+    void delayedSignOut( IHeliumObjectsWorld::ObjectsIdType );
     
     /**
     * @brief add helium scene object to sceneWorld
@@ -173,14 +190,29 @@ public:
     typedef std::pair< IHeliumObjectsWorld::ObjectsIdType, SceneObject* > AlifePairType;
 
     /**
-    *
+    * 
     */
-    void setCameraMovingDirection(Polycode::Vector2 dir);
+    void cameraHorizonMovingDirection(Polycode::Vector2 dir);
     
     /**
     *
     */
     Polycode::RayTestResult rayTest(Polycode::Vector2);
+    
+    /**
+    *
+    */
+    IHeliumObjectsWorld::ObjectsIdType getObjectIdByEntity(Polycode::SceneEntity* entity)const;
+    
+    /**
+    * @brief add id of object to queue of mouse point click
+    */
+    void addObjectToMousePointQueue(IHeliumObjectsWorld::ObjectsIdType);  
+    
+    /**
+    * @brief warp object to point, if it exist of course
+    */
+    void warpTo(IHeliumObjectsWorld::ObjectsIdType, Polycode::Vector3, bool resetRotation=true);  
     
 protected:
     Polycode::PhysicsScene* engineScene;
@@ -193,6 +225,24 @@ protected:
     //!> container of alife objects, have reactions and posible have behavior
     std::map< IHeliumObjectsWorld::ObjectsIdType, SceneObject* > alifeObjects;
     typedef std::map< IHeliumObjectsWorld::ObjectsIdType, SceneObject* >::iterator AlifeIterator;
+    
+    
+    std::set< IHeliumObjectsWorld::ObjectsIdType > queueToMousePoint;
+    std::list< IHeliumObjectsWorld::ObjectsIdType > delayedSignOutObjects;
+
+private:    
+    /**
+    * @return True - if the queue in mot empty, otherwise False 
+    */
+    bool checkQueueToMousePointClick( int button, bool upDown, Polycode::Vector2 mouse );
+    void checkDelayedSignOutObject();
+    
+    /**
+    * @param 
+    */
+    void addPackagedToEngineScene( PackagedSceneObject* obj );
+    
+    void engineSceneWarpTo( Polycode::SceneEntity* obj, Polycode::Vector3 point, bool resetRotation );
 };
 
 /**
@@ -200,7 +250,7 @@ protected:
 */
 class PackagedSceneObject {
 public:
-    PackagedSceneObject() {}
+    PackagedSceneObject();
     virtual ~PackagedSceneObject(){};
 
     /**
@@ -247,7 +297,7 @@ public:
         POLY_ENTITY_PHYSICAL,     
         POLY_ENTITY_EMPTY
     } PolySceneEntityType;
-        
+    
     /**
     * @brief
     */  
@@ -264,13 +314,18 @@ public:
     IHeliumObjectsWorld::ObjectsIdType getId()const;
     
     /**
-    * @brief
+    * @return Polycode::SceneEntity pointer
     */  
     Polycode::SceneEntity* getModel()const;
-
+    
+    /**
+    * @return necessary to add to mouse point queue by default
+    */
+    bool getToMousePointQueue()const;
+    
 protected:
     //!> Pointer to PolySceneObject helium wrap
-    SceneObject* heliumAlife;
+    SceneObject* heliumObject;
     
     int alife;
     PolySceneEntityType entityType;
@@ -281,6 +336,8 @@ protected:
     Number restitution;
     int    group;
     bool   compoundChildren;
+    
+    bool   addToMousePointQueue;
 };
 
 /**

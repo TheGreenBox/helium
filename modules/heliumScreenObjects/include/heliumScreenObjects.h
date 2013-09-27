@@ -104,12 +104,23 @@ public:
     void signOutObject( IHeliumObjectsWorld::ObjectsIdType );
     
     /**
+    * @brief Delete object from scene and from memory
+    * @param Object index
+    */
+    void delayedSignOut( IHeliumObjectsWorld::ObjectsIdType ){}
+    
+    /**
     *
     */  
     IHeliumObjectsWorld::ObjectsIdType addObject( PackagedScreenObject* );
     
     //!> 
     typedef std::pair< IHeliumObjectsWorld::ObjectsIdType, ScreenObject* > AlifePairType;
+    
+    /**   
+    *
+    */ 
+    void cursorMove(Polycode::Vector2){}
     
 private:
     Polycode::PhysicsScreen* engineScreen;

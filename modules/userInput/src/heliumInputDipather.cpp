@@ -67,7 +67,7 @@ void KeyboardUserInput::keyDOWN(P::InputEvent* inputEvent){
 
 MouseUserInput::MouseUserInput() 
     :   buttoninput(new MouseButtonUserInput),
-        moveInput  (new MouseMoveUserInput  ),
+        moveInput  (new MouseMoveUserInput),
         otherInput (new MouseOtherUserInput),
         wheelInput (new MouseWheelUserInput)
 {}
@@ -134,8 +134,8 @@ void MouseButtonUserInput::addLeftEventHandler(MouseKeyHandler*) {
 void MouseButtonUserInput::addButtonEventHandler(int, MouseKeyHandler*) {
 }
 
-MouseMoveUserInput::MouseMoveUserInput() {
-}
+MouseMoveUserInput::MouseMoveUserInput()
+    : cameraMove(new CameraHorisontalMove) {}
 
 void MouseMoveUserInput::setEnable(bool set) {
     HeliumGameCore* gm = HeliumGlobal::getCurrentGame();
@@ -150,11 +150,11 @@ void MouseMoveUserInput::setEnable(bool set) {
 
 void MouseMoveUserInput::handleEvent(Polycode::Event* e) {
     P::InputEvent* ie = dynamic_cast<P::InputEvent*>(e);
-    int code = ie->mouseButton;
-    
-    HeliumGameCore* gm = HeliumGlobal::getCurrentGame();
     P::Vector2 mouse = ie->getMousePosition();
-    std::cout << "Mouse move: " << mouse.x << " : " << mouse.y << "\n";
+    //std::cout << "Mouse move: " << mouse.x << " : " << mouse.y << "\n";
+    if ( cameraMove != NULL ) {
+        cameraMove->process(mouse);
+    }
 }
 
 MouseOtherUserInput::MouseOtherUserInput() {
@@ -176,7 +176,7 @@ void MouseOtherUserInput::setEnable(bool set) {
 }
 
 void MouseOtherUserInput::handleEvent(Polycode::Event* e) {
-    std::cout << "Mouse other\n";
+    //std::cout << "Mouse other\n";
 }
 
 MouseWheelUserInput::MouseWheelUserInput () {
@@ -198,13 +198,13 @@ void MouseWheelUserInput::setEnable(bool set) {
 void MouseWheelUserInput::handleEvent(Polycode::Event* e) {
     switch(e->getEventCode()) {
         case P::InputEvent::EVENT_MOUSEWHEEL_UP:
-            std::cout << "Mouse wheel up\n";
+            //std::cout << "Mouse wheel up\n";
             if ( wheelUp != NULL ) {
                 wheelUp->process();
             }
         break;
         case P::InputEvent::EVENT_MOUSEWHEEL_DOWN:
-            std::cout << "Mouse wheel down\n";
+            //std::cout << "Mouse wheel down\n";
             if ( wheelDown != NULL ) {
                 wheelDown->process();
             }

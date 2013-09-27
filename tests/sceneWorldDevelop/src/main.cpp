@@ -9,6 +9,7 @@
  */
 
 #include <iostream> 
+#include <exception> 
 
 #include <Polycode.h>
 #include "PolycodeView.h"
@@ -27,15 +28,21 @@ APP_MAIN_FINCTION
     enableDebugTools();
     using namespace Polycode;
 	PolycodeView*  view = new POLYCODE_VIEW_CREATOR("key test");
-    Core* core = new POLYCODE_CORE(view, 640, 480, false, false, 0, 0, 90);
+    Core* core = new POLYCODE_CORE(view, 1024, 768, false, false, 0, 0, 90);
     
     ProGameObject* game = new ProGameObject( core );
     
     std::cout << "Keys test start...\n"; 
     
-//    while (game->update()) { }
+    try { 
     game->game();  
-    
+    }
+    catch (std::exception e) {
+        std::cout << "Exception: " << e.what() << '\n';
+    }
+    catch (...) {
+        std::cout << "Unknoun exception\n";
+    }
     std::cout << "Keys test finished!\n"; 
     return 0;
 }
