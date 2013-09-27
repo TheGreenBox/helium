@@ -11,7 +11,7 @@
 #ifndef HELIUM_PATH_GLOBAL_INCLUDED
 #define HELIUM_PATH_GLOBAL_INCLUDED
 
-#include <Polycode.h>
+#include "Polycode.h"
 
 static const Polycode::String g_helium_resource_path("helium_resource");
 

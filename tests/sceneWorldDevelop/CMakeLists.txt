@@ -43,8 +43,8 @@ TARGET_LINK_LIBRARIES ( sceneWorldDevelop
                         heliumGameCore
                         heliumUserInput
                         heliumUtil
-                        heliumScreenObjects
-                        heliumSceneObjects
+                        helium_2D_Object
+                        helium_3D_Object
                       )
 
 INSTALL ( TARGETS sceneWorldDevelop

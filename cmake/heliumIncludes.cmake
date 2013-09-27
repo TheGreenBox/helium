@@ -53,10 +53,10 @@ ENDIF( )
 
 INCLUDE_DIRECTORIES ( ${HELIUM_MODULES_DIR}/heliumGameCore/include
                       ${HELIUM_MODULES_DIR}/heliumMainMenu/include
-                      ${HELIUM_MODULES_DIR}/heliumSceneObjects/include
-                      ${HELIUM_MODULES_DIR}/heliumScreenObjects/include
-                      ${HELIUM_MODULES_DIR}/util/include
-                      ${HELIUM_MODULES_DIR}/userInput/include
+                      ${HELIUM_MODULES_DIR}/helium_3D_Object/include
+                      ${HELIUM_MODULES_DIR}/helium_2D_Object/include
+                      ${HELIUM_MODULES_DIR}/heliumUtil/include
+                      ${HELIUM_MODULES_DIR}/heliumUserInput/include
                       ${POLYCODE_CORE_INCLUDE_DIR}
                       ${POLYCODE_MODULES_INCLUDE_DIR}
                       ${SDL_INCLUDE_DIR}
@@ -65,10 +65,10 @@ INCLUDE_DIRECTORIES ( ${HELIUM_MODULES_DIR}/heliumGameCore/include
 
 LINK_DIRECTORIES ( ${HELIUM_MODULES_DIR}/heliumGameCore )
 LINK_DIRECTORIES ( ${HELIUM_MODULES_DIR}/heliumMainMenu )
-LINK_DIRECTORIES ( ${HELIUM_MODULES_DIR}/heliumSceneObjects )
-LINK_DIRECTORIES ( ${HELIUM_MODULES_DIR}/heliumScreenObjects )
-LINK_DIRECTORIES ( ${HELIUM_MODULES_DIR}/util )
-LINK_DIRECTORIES ( ${HELIUM_MODULES_DIR}/userInput )
+LINK_DIRECTORIES ( ${HELIUM_MODULES_DIR}/helium_3D_Object )
+LINK_DIRECTORIES ( ${HELIUM_MODULES_DIR}/helium_2D_Object )
+LINK_DIRECTORIES ( ${HELIUM_MODULES_DIR}/heliumUtil )
+LINK_DIRECTORIES ( ${HELIUM_MODULES_DIR}/heliumUserInput )
 
 ADD_DEFINITIONS(-DUNICODE -D_UNICODE)
 

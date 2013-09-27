@@ -1,6 +1,6 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
 
-MESSAGE(STATUS "\"FIRST KEY CONTROL TEST\" GENERATING")
+MESSAGE(STATUS "TEST: <<firstKeyControl>> GENERATING")
 
 PROJECT( firstKeyControl )
 
@@ -29,12 +29,13 @@ ADD_EXECUTABLE ( firstKeyControl
                )
 
 IF(WIN32)
-    set_target_properties( firstKeyControl PROPERTIES LINK_FLAGS_DEBUG "/SUBSYSTEM:windows")
+    set_target_properties( firstKeyControl PROPERTIES LINK_FLAGS_DEBUG          "/SUBSYSTEM:windows")
     set_target_properties( firstKeyControl PROPERTIES COMPILE_DEFINITIONS_DEBUG "_WINDOWS")
     set_target_properties( firstKeyControl PROPERTIES LINK_FLAGS_RELWITHDEBINFO "/SUBSYSTEM:windows")
     set_target_properties( firstKeyControl PROPERTIES COMPILE_DEFINITIONS_RELWITHDEBINFO "_WINDOWS")
-    set_target_properties( firstKeyControl PROPERTIES LINK_FLAGS_RELEASE "/SUBSYSTEM:windows")
+    set_target_properties( firstKeyControl PROPERTIES LINK_FLAGS_RELEASE    "/SUBSYSTEM:windows")
     set_target_properties( firstKeyControl PROPERTIES LINK_FLAGS_MINSIZEREL "/SUBSYSTEM:windows")
+    
     SET_TARGET_PROPERTIES( firstKeyControl PROPERTIES COMPILE_DEFINITIONS _UNICODE,UNICODE)
 ENDIF(WIN32)
 
@@ -43,8 +44,8 @@ TARGET_LINK_LIBRARIES ( firstKeyControl
                         heliumGameCore
                         heliumUserInput
                         heliumUtil
-                        heliumScreenObjects
-                        heliumSceneObjects
+                        helium_2D_Object
+                        helium_3D_Object
                       )
 
 INSTALL ( TARGETS firstKeyControl

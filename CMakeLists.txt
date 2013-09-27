@@ -13,12 +13,12 @@ INCLUDE( heliumResourceIncludes )
 # -------------------------------------------------------------------
 # ------ modules building -------
 
-ADD_SUBDIRECTORY ( ${HELIUM_MODULES_DIR}/util                )
-ADD_SUBDIRECTORY ( ${HELIUM_MODULES_DIR}/userInput           )
-ADD_SUBDIRECTORY ( ${HELIUM_MODULES_DIR}/heliumSceneObjects  )
-ADD_SUBDIRECTORY ( ${HELIUM_MODULES_DIR}/heliumScreenObjects )
-ADD_SUBDIRECTORY ( ${HELIUM_MODULES_DIR}/heliumGameCore      )
-ADD_SUBDIRECTORY ( ${HELIUM_MODULES_DIR}/heliumMainMenu      )
+ADD_SUBDIRECTORY ( ${HELIUM_MODULES_DIR}/heliumUtil        )
+ADD_SUBDIRECTORY ( ${HELIUM_MODULES_DIR}/heliumUserInput   )
+ADD_SUBDIRECTORY ( ${HELIUM_MODULES_DIR}/helium_3D_Object  )
+ADD_SUBDIRECTORY ( ${HELIUM_MODULES_DIR}/helium_2D_Object  )
+ADD_SUBDIRECTORY ( ${HELIUM_MODULES_DIR}/heliumGameCore    )
+ADD_SUBDIRECTORY ( ${HELIUM_MODULES_DIR}/heliumMainMenu    )
 
 # -------------------------------------------------------------------
 
