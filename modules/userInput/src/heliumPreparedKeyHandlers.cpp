@@ -1,10 +1,10 @@
 /* ========================================================
  * Organization: The Green Box
- * 
+ *
  * Project name: Helium
- * File name:  keyboardHandler.cpp 
+ * File name:  keyboardHandler.cpp
  * Description:
- * Author:  AKindyakov 
+ * Author:  AKindyakov
  * ========================================================
  */
 
@@ -42,7 +42,7 @@ void SetVirtualGame::process() {
 //    if ( gm->getSceneWorldPt()->getEngineScenePt()->isVirtual() ) {
 //        gm->getSceneWorldPt()->getEngineScenePt()->setVirtual(false);
 //    }
-//    else {    
+//    else {
 //        gm->getSceneWorldPt()->getEngineScenePt()->setVirtual(true);
 //    }
 }
