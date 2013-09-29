@@ -3,42 +3,43 @@
  *
  * Project name: Helium
  * File name:  heliumScreenConsole.h
- * Description: ScreenConsole Class
- * Author:  AKindyakov
+ * Description: heliumMultilineText Class
+ * Author:
  * ========================================================
  */
 
-#ifndef HELIUM_SCREEN_CONSOLE_INCLUDED
-#define HELIUM_SCREEN_CONSOLE_INCLUDED
+#ifndef HELIUM_MULTILINE_TEXT_INCLUDED
+#define HELIUM_MULTILINE_TEXT_INCLUDED
 
 #include <list>
 #include <Polycode.h>
 
 #include "heliumScreenObjects.h"
+#include "pathGlobal.h"
 
-class ScreenConsole {
+class heliumMultilineText : public PackagedScreenObject {
 public:
 
     /**
-    * Create ScreenConsole
+    * Create heliumMultilineText
     * @param _textSize
     * @param _maxVisibleLines
     * @param _stackSize
     * @param _lineSpacing
     * @param _defaultColor
     */
-    ScreenConsole( int _textSize,
+    heliumMultilineText( int _textSize,
              int _maxVisibleLines,
              int _stackSize,
              double _lineSpacing = 0.0,
              Polycode::Vector3 _defaultColor = Polycode::Vector3(0,0,0) );
 
-    virtual ~ScreenConsole();
+    virtual ~heliumMultilineText();
 
     /**
     *
     */
-    void setPosition( Polycode::Vector3 _defaultColor = Polycode::Vector3(0,0,0) ){};
+    // void setPosition( Polycode::Vector3 _defaultColor = Polycode::Vector3(0,0,0) ){};
 
     /**
     *
@@ -53,22 +54,22 @@ public:
     *        if numToRemove < 0 - remove from the bottom of history
     *        if no arguements   - remove all history
     */
-    void clear(int linesToRemove);
-    void clear();
+    int clear(int linesToRemove);
+    int clear();
 
     /**
-    * Add new line to the ScreenConsole
+    * Add new line to the heliumMultilineText
     */
     void newLine();
 
     /**
     *
     */
-    void scroll(int);
+    // void scroll(int n);
 
 private:
     std::list< Polycode::ScreenLabel* > lines;
-    Polycode::Screen* screen;
+    Polycode::ScreenShape* shape;
 
     double lineSpacing;
     int    textSize;
@@ -80,5 +81,5 @@ private:
     int visible_lines;
 };
 
-#endif // HELIUM_SCREEN_CONSOLE_INCLUDED
+#endif // HELIUM_MULTILINE_TEXT_INCLUDED
 

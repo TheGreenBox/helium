@@ -3,20 +3,23 @@
  *
  * Project name: Helium
  * File name:  heliumScreenConsole.cpp
- * Description: MultilineText Class
- * Author:  AKindyakov
+ * Description: heliumMultilineText Class
+ * Author:
  * ========================================================
  */
 
 #include <iostream>
 #include <list>
 
-#include "heliumMultilineTxt.h"
+#include "Polycode2DPhysics.h"
+
+#include "heliumPreparedScreenButton.h"
+#include "heliumMultilineText.h"
 
 namespace P = Polycode;
 
-MultilineText::MultilineText(int _textSize, int _maxVisibleLines, int _stackSize, double _lineSpacing, P::Vector3 _defaultColor)
-    : screen(new P::Screen()),
+heliumMultilineText::heliumMultilineText(int _textSize, int _maxVisibleLines, int _stackSize, double _lineSpacing, P::Vector3 _defaultColor)
+    :   shape(new P::ScreenShape(P::ScreenShape::SHAPE_RECT, 300, 100) ),
         lines_count(0),
         visible_lines(0),
         lineSpacing(_lineSpacing),
@@ -24,46 +27,61 @@ MultilineText::MultilineText(int _textSize, int _maxVisibleLines, int _stackSize
         maxVisibleLines(_maxVisibleLines),
         maxLines(_stackSize),
         defaultColor(_defaultColor) {
+
+    shape->loadTexture(g_helium_resource_path + "window_background.png");
+    shape->setPosition(100, 100);
+
+    this->heliumAlife = new ScreenButton( shape, new EscapeGame(), NULL );
+    this->entityType = PackagedScreenObject::ENTITY_COLLISION_ONLY;
+    this->entityShapeType = P::PhysicsScreenEntity::ENTITY_RECT;
+    this->alife = 1;
+
     this->newLine();
-    this->add("Helium MultilineText :");
+    this->add("I am heliumMultilineText! Now love me!");
     this->newLine();
 }
 
-MultilineText::~MultilineText() {
+heliumMultilineText::~heliumMultilineText() {
     this->clear();
 }
 
-void MultilineText::add(const char* str) {
+void heliumMultilineText::add(const char* str) {
     lines.back()->setText(lines.back()->getText() + str);
 }
 
-void MultilineText::add(const Polycode::String& str) {
+void heliumMultilineText::add(const Polycode::String& str) {
     lines.back()->setText(lines.back()->getText() + str);
 }
 
-void MultilineText::clear(int linesToRemove) {
+int heliumMultilineText::clear(int linesToRemove) {
     if (linesToRemove > 0) {
         for ( ; linesToRemove != 0; --linesToRemove ) {
-            screen->removeChild(lines.front());
-            // delete lines.front();
+            shape->removeChild(lines.front());
+            delete lines.front();
             lines.pop_front();
         }
     }
     else {
         for ( ; linesToRemove != 0; ++linesToRemove) {
-            screen->removeChild(lines.back());
-            // delete lines.back();
+            shape->removeChild(lines.back());
+            delete lines.back();
             lines.pop_back();
         }
     }
-}
-
-void MultilineText::clear() {
-    lines.clear();
     return 0;
 }
 
-void MultilineText::newLine() {
+int heliumMultilineText::clear() {
+    while (! lines.empty() ) {
+        shape->removeChild(lines.back());
+        delete lines.back();
+        lines.pop_back();
+    }
+    // lines.clear();
+    return 0;
+}
+
+void heliumMultilineText::newLine() {
     //P::String lineBegin = P::String::IntToString(lines_count);
     //lineBegin += " : ";
     //P::ScreenLabel* label = new P::ScreenLabel(lineBegin, textSize, "mono");
@@ -75,24 +93,24 @@ void MultilineText::newLine() {
                      defaultColor.z, 1 );
 
     label->setPosition(4, static_cast<double>(lines_count*textSize)*(lineSpacing+1) );
-    screen->addChild(label);
+    shape->addChild(label);
 
     lines.push_back(label);
     ++lines_count;
-    if ( visible_lines >= maxVisibleLines ) {
-        scroll(-1);
-    }
-    else {
-        ++visible_lines;
-    }
+    // if ( visible_lines >= maxVisibleLines ) {
+    //     scroll(-1);
+    // }
+    // else {
+    //     ++visible_lines;
+    // }
     if ( lines_count > maxLines ) {
         this->clear(1);
     }
 
 }
 
-void MultilineText::scroll(int n) {
-    double offset = static_cast<double>((lines_count-visible_lines+n)*textSize) * (lineSpacing+1);
-    screen->setScreenOffset(0, -offset);
-    visible_lines += n;
-}
+// void heliumMultilineText::scroll(int n) {
+//     double offset = static_cast<double>((lines_count-visible_lines+n)*textSize) * (lineSpacing+1);
+//     shape->setScreenOffset(0, -offset);
+//     visible_lines += n;
+// }

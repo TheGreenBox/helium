@@ -16,6 +16,7 @@
 #include "heliumGameGlobal.h"
 #include "heliumPreparedScreenButton.h"
 #include "heliumPreparedSceneObjects.h"
+#include "heliumMultilineText.h"
 
 namespace P = Polycode;
 
@@ -131,6 +132,10 @@ ProGameObject::ProGameObject( P::Core* _core )
 
     HeliumTextScreenButton textBt(this, "I am a text", new EscapeGame(), 50, 100, 0, 0, "sans", 12);
     this->getScreenWorldPt()->addObject( &textBt );
+
+    heliumMultilineText multilineTxt(10, 20, 20, 15, P::Vector3(0));
+    this->getScreenWorldPt()->addObject( &multilineTxt );
+
 }
 
 ProGameObject::~ProGameObject(){
