@@ -2,47 +2,49 @@
  * Organization: The Green Box
  * 
  * Project name: Helium
- * File name:    modules/heliumScreenObjects/src/heliumScreenButton.cpp 
+ * File name:    helium_2D_Button.cpp 
  * Description:
  * Author:       AKindyakov 
- * ========================================================
+ * =======================================================
  */
 #include <iostream>
-#include <Polycode.h>
-#include "heliumScreenButton.h"
+
+#include "Polycode.h"
+
+#include "helium_2D_Button.h"
 #include "heliumUserInputHandler.h"
 
-ScreenButton::ScreenButton( Polycode::ScreenEntity* _model,
+HeliumButton::HeliumButton( Polycode::ScreenEntity* _model,
                             KeyHandler* _mouseClickEvent,
                             KeyHandler* _mouseDoubleClickEvent )
-    :   ScreenObject(_model),
+    :   Helium_2D_Object(_model),
         mouseClickEvent(_mouseClickEvent),
         mouseDoubleClickEvent(_mouseDoubleClickEvent) {}
 
-void ScreenButton::lifeStep() {
+void HeliumButton::lifeStep() {
 }
     
-void ScreenButton::mouseCursor() {
+void HeliumButton::mouseCursor() {
     cursorAnimation();
 }
 
-void ScreenButton::mouseClick(bool upDown) {
+void HeliumButton::mouseClick(bool upDown) {
     clickAnimation(upDown);
     if ( upDown && mouseClickEvent != NULL ) {
         mouseClickEvent->process();
     }
 }
 
-void ScreenButton::mouseDoubleClick() {
+void HeliumButton::mouseDoubleClick() {
     if ( mouseDoubleClickEvent != NULL ) {
-    //    mouseDoubleClickEvent->process();
+        mouseDoubleClickEvent->process();
     }
 }
 
-void ScreenButton::cursorAnimation() {
+void HeliumButton::cursorAnimation() {
 }
 
-void ScreenButton::clickAnimation(bool upDown) {
+void HeliumButton::clickAnimation(bool upDown) {
     if ( upDown ) {
         this->getModel()->setColor(1.0, 1.0, 1.0, 1.0);
     }

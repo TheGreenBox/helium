@@ -11,9 +11,9 @@ header=$(echo "/* ========================================================\n"\
 " * Author:      " "$userName" "\n"\
 " * ========================================================\n"\
 " */\n"\
-"#ifndef " $1 "\n"\
-"#define " $1 "\n"\
-"#endif //"  $1 "\n" )
+"#ifndef " $1 "_included\n"\
+"#define " $1 "_included\n\n"\
+"#endif //"  $1 "_included\n" )
 
 if [ -f "$1" ] ; then
     echo "file " "$1" " already exist"

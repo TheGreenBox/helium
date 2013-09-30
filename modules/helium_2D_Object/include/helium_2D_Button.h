@@ -2,25 +2,26 @@
  * Organization: The Green Box
  * 
  * Project name: Helium
- * File name:    modules/heliumScreenObjects/include/heliumScreenButton.h 
+ * File name:    helium_2D_Button.h 
  * Description:
  * Author:       AKindyakov 
  * ========================================================
  */
-#ifndef  HELIUM_SCREEN_BUTTON_INCLUDED
-#define  HELIUM_SCREEN_BUTTON_INCLUDED
 
-#include <Polycode.h>
+#ifndef  HELIUM__2D__BUTTON_INCLUDED
+#define  HELIUM__2D__BUTTON_INCLUDED
+
+#include "Polycode.h"
 #include "heliumUserInputHandler.h"
-#include "heliumScreenObjects.h"
+#include "helium_2D_Object.h"
 
-class ScreenButton : public ScreenObject {
+class HeliumButton : public Helium_2D_Object {
 public:
-    ScreenButton( Polycode::ScreenEntity* _model,
+    HeliumButton( Polycode::ScreenEntity* _model,
                   KeyHandler*             mouseClickEvent,
                   KeyHandler*             mouseDoubleClickEvent );
     
-    virtual ~ScreenButton() {}
+    virtual ~HeliumButton() {}
     
     void lifeStep();
     
@@ -36,5 +37,5 @@ private:
     KeyHandler* mouseDoubleClickEvent;
 };
 
-#endif // HELIUM_SCREEN_BUTTON_INCLUDED
+#endif // HELIUM__2D__BUTTON_INCLUDED
 

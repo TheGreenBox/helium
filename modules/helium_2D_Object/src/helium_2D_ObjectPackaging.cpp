@@ -2,13 +2,11 @@
  * Organization: The Green Box
  * 
  * Project name: Helium
- * File name:    helium_2D_PreparedObject.h 
+ * File name:    helium_2D_ObjectPackaging.cpp 
  * Description:
  * Author:       AKindyakov 
  * ========================================================
  */
-#ifndef  HELIUM_2D_PREPAREDOBJECT_INCLUDED
-#define  HELIUM_2D_PREPAREDOBJECT_INCLUDED
-
-#endif // HELIUM_2D_PREPAREDOBJECT_INCLUDED
+ 
+#include "helium_2D_ObjectPackaging.h"
 

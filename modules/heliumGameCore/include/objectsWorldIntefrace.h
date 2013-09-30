@@ -42,21 +42,6 @@ public:
     * @brief Check pause state of object world
     */
     virtual bool getPause()=0;
-    
-    //!> Helium internal type for object index
-    typedef unsigned long long int ObjectsIdType;
-    
-    /**
-    * @brief Delete object from scene and from memory
-    * @param Object index
-    */
-    virtual void signOutObject( ObjectsIdType )=0;
-    
-    /**
-    * @brief Delete object from scene and from memory
-    * @param Object index
-    */
-    virtual void delayedSignOut( ObjectsIdType )=0;
 };
 
 #endif // HELIUM_OBJECTS_WORLD_INTEFRACE_INCLUDED 

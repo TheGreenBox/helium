@@ -10,7 +10,7 @@
 
 #include "heliumPreparedKeyHandlers.h"
 
-#include "heliumPreparedScreenButton.h"
+#include "helium_2D_PreparedButton.h"
 #include "heliumGameGlobal.h"
 
 void EscapeGame::process() {
@@ -20,7 +20,7 @@ void EscapeGame::process() {
 
 PauseGame::PauseGame() {}
 
-IHeliumObjectsWorld::ObjectsIdType PauseGame::button = 0;
+Helium_2D_World::ObjectId PauseGame::button = 0;
 
 PauseGame::~PauseGame() {}
 
@@ -28,7 +28,7 @@ void PauseGame::process() {
     HeliumGameCore* gm = HeliumGlobal::getCurrentGame();
     if ( gm->getSceneWorldPt()->getPause() ) {
         gm->getSceneWorldPt()->setPause(false);
-        HeliumPauseScreenButton container(gm);
+        HeliumPause_2D_Button container(gm);
         button = gm->getScreenWorldPt()->addObject( &container );
     }
     else {

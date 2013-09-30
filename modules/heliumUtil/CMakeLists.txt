@@ -1,6 +1,6 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
 
-MESSAGE(STATUS "MODULE: << heliumUtil >>")
+MESSAGE(STATUS "HELIUM MODULE: << heliumUtil >>")
 
 PROJECT( heliumUtil )
 

@@ -2,15 +2,16 @@
  * Organization: The Green Box
  * 
  * Project name: Helium
- * File name:    modules/heliumSceneObjects/src/heliumPrepared3DObjects.cpp 
+ * File name:    helium_3D_PreparedObjects.cpp
  * Description:
  * Author:       AKindyakov 
  * ========================================================
  */
 
 #include <iostream>
+
+#include "helium_3D_PreparedObjects.h"
 #include "heliumGameGlobal.h"
-#include "heliumPreparedSceneObjects.h"
 #include "pathGlobal.h"
 
 namespace P = Polycode;
@@ -79,7 +80,7 @@ Helium556BulletBox::Helium556BulletBox(double pos_x, double pos_y, double pos_z,
     mass = size;
 }
 
-HeliumSceneArchitecktHand::HeliumSceneArchitecktHand(IHeliumObjectsWorld::ObjectsIdType id)
+HeliumSceneArchitecktHand::HeliumSceneArchitecktHand(Polycode::SceneEntity* mod)
     :   SceneObject(new P::ScenePrimitive(P::ScenePrimitive::TYPE_SPHERE, 0.25, 5, 5 )),
         creatingObject(id) {}
 
@@ -104,7 +105,6 @@ void HeliumSceneArchitecktHand::mousePoint( int button, bool upDown, Polycode::V
     
     if( creatingObject ) {
         creatingObject = 0;
-        //HeliumGlobal::getCurrentGame()->getSceneWorldPt()->delayedSignOut( this->getId() );
     }
     else {
         HeliumGameCore* gm = HeliumGlobal::getCurrentGame();
@@ -118,7 +118,7 @@ void HeliumSceneArchitecktHand::mouseDoubleClick() {
 }
 
 HeliumSceneArchitecktHandPack::HeliumSceneArchitecktHandPack( 
-                                    IHeliumObjectsWorld::ObjectsIdType id) {
+                                    Polycode:SceneEntity* id) {
     heliumObject = new HeliumSceneArchitecktHand(id);
     alife = 1;
     entityType = POLY_ENTITY_IMMATERIAL;

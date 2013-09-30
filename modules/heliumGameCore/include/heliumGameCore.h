@@ -15,8 +15,8 @@
 #include "PolycodeView.h"
 
 #include "heliumUserInput.h"
-#include "heliumScreenObjects.h"
-#include "heliumSceneObjects.h"
+#include "helium_3D.h"
+#include "helium_2D.h"
 
 class HeliumGameCore {
 public:    
@@ -25,11 +25,11 @@ public:
     void game();
     void makeSelfMainChief();
 
-    SceneObjectsWorld* getSceneWorldPt() { 
+    Helium_3D_World* getSceneWorldPt() { 
         return &solidWorld; 
     }
     
-    ScreenObjectsWorld* getScreenWorldPt() { 
+    Helium_2D_World* getScreenWorldPt() { 
         return &flatWorld; 
     }
     
@@ -38,9 +38,10 @@ public:
     }
     
 protected:
-    Polycode::Core*     engineCore;
-    SceneObjectsWorld   solidWorld;
-    ScreenObjectsWorld  flatWorld; 
+    Polycode::Core*  engineCore;
+    
+    Helium_3D_World  solidWorld;
+    Helium_2D_World  flatWorld; 
     
     KeyboardUserInput*  keyboardInput;
     MouseUserInput*     mouseInput;

@@ -11,9 +11,11 @@
 #ifndef HELIUM_KEYBOARD_HANDLER_INCLUDED
 #define HELIUM_KEYBOARD_HANDLER_INCLUDED
 
-#include "heliumObjectsWorldIntefrace.h"
+#include "Polycode.h"
+
+#include "helium_2D_World.h"
 #include "heliumUserInputHandler.h"
-#include "heliumScreenButton.h"
+#include "helium_2D_Button.h"
 
 struct EscapeGame : public KeyHandler {
     void process();
@@ -24,8 +26,9 @@ public:
     PauseGame();
     virtual ~PauseGame();
     void process();
+
 private:
-    static IHeliumObjectsWorld::ObjectsIdType button;
+    static Helium_2D_World::ObjectId button;
 };
 
 struct SetVirtualGame : public KeyHandler {

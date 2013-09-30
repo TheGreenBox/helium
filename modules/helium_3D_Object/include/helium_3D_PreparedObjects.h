@@ -11,7 +11,7 @@
 #ifndef HELIUM_PREPARED_3D_OBJECTS_INCLUDED
 #define HELIUM_PREPARED_3D_OBJECTS_INCLUDED
 
-#include "heliumSceneObjects.h"
+#include "helium_3D_Character.h"
 
 typedef enum {
     PREPARED_3D_UNKNOWN = 0,
@@ -20,35 +20,34 @@ typedef enum {
 } HeliumPreparedSceneObjects; 
 
 
-struct HeliumTestBarrel : public PackagedSceneObject {
+struct HeliumTestBarrel : public Packaged_3D_Object {
     HeliumTestBarrel( double radius, double hight,
                       double position_x, double position_z, double position_y);
     ~HeliumTestBarrel() {}
 };
 
-struct HeliumTestFloor : public PackagedSceneObject {
+struct HeliumTestFloor : public Packaged_3D_Object {
     HeliumTestFloor( double size_x, double size_y );
     ~HeliumTestFloor() {}
 };
 
-struct HeliumTestBox : public PackagedSceneObject {
+struct HeliumTestBox : public Packaged_3D_Object {
     HeliumTestBox( double size_x, double size_y, double size_z,
                    double pos_x, double pos_y, double pos_z ); 
     ~HeliumTestBox() {}
 };
 
-struct Helium556BulletBox : public PackagedSceneObject {
+struct Helium556BulletBox : public Packaged_3D_Object {
     Helium556BulletBox( double pos_x, double pos_y, double pos_z, double size );
 };
 
-class HeliumSceneArchitecktHand : public SceneObject {
+class HeliumSceneArchitecktHand : public HeliumCharacter {
 public:
     
     /**
     * @brief Create null hand and if click - > object will be picked up from the scene
     */
-    HeliumSceneArchitecktHand(IHeliumObjectsWorld::ObjectsIdType id=0);
-    
+    HeliumSceneArchitecktHand(Polycode::SceneEntity*);
     
     ~HeliumSceneArchitecktHand();
 
@@ -65,15 +64,13 @@ public:
     void mouseDoubleClick();
     
 private:
-    IHeliumObjectsWorld::ObjectsIdType creatingObject;
+    Polycode::SceneEntity*  creatingObject;
     
 };
 
-class HeliumSceneArchitecktHandPack : public PackagedSceneObject {
+class HeliumSceneArchitecktHandPack : public Packaged_3D_Object {
 public:
-
-    HeliumSceneArchitecktHandPack( IHeliumObjectsWorld::ObjectsIdType id=0);
-    
+    HeliumSceneArchitecktHandPack( Polycode::SceneEntity* );
     ~HeliumSceneArchitecktHandPack();
 };
 

@@ -1,6 +1,6 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
 
-MESSAGE(STATUS "HELIUM MODULE: SCREEN OBJECTS")
+MESSAGE(STATUS "HELIUM MODULE: << helium_2D_Object >>")
 
 PROJECT( helium_2D_Object )
 
@@ -8,23 +8,24 @@ INCLUDE( heliumIncludes )
 
 SET( HELIUM_2D_OBJECT_DIR ${HELIUM_MODULES_DIR}/helium_2D_Object )
 
-SET ( heliumScreenObjects_SRCS
-        ${HELIUM_2D_OBJECT_DIR}/src/heliumScreenConsole.cpp
-        ${HELIUM_2D_OBJECT_DIR}/src/heliumScreenObjects.cpp
-        ${HELIUM_2D_OBJECT_DIR}/src/heliumScreenButton.cpp 
-        ${HELIUM_2D_OBJECT_DIR}/src/heliumPreparedScreenButton.cpp
+SET ( helium_2d_SRCS
+        ${HELIUM_2D_OBJECT_DIR}/src/helium_2D_Button.cpp
+        ${HELIUM_2D_OBJECT_DIR}/src/helium_2D_ObjectPackaging.cpp
+        ${HELIUM_2D_OBJECT_DIR}/src/helium_2D_PreparedButton.cpp
+        ${HELIUM_2D_OBJECT_DIR}/src/helium_2D_World.cpp
     )
 
-SET ( heliumScreenObjects_HDRS
-        ${HELIUM_2D_OBJECT_DIR}/include/heliumScreenConsole.h
-        ${HELIUM_2D_OBJECT_DIR}/include/heliumScreenObjects.h
-        ${HELIUM_2D_OBJECT_DIR}/include/heliumScreenButton.h
-        ${HELIUM_2D_OBJECT_DIR}/include/heliumPreparedScreenButton.h
+SET ( helium_2d_HDRS
+        ${HELIUM_2D_OBJECT_DIR}/include/helium_2D.h
+        ${HELIUM_2D_OBJECT_DIR}/include/helium_2D_Button.h
+        ${HELIUM_2D_OBJECT_DIR}/include/helium_2D_ObjectPackaging.h
+        ${HELIUM_2D_OBJECT_DIR}/include/helium_2D_PreparedButton.h
+        ${HELIUM_2D_OBJECT_DIR}/include/helium_2D_World.h
     ) 
 
 ADD_LIBRARY ( helium_2D_Object STATIC
-                    ${heliumScreenObjects_SRCS}
-                    ${heliumScreenbjects_HDRS} 
+                    ${helium_2d_SRCS}
+                    ${helium_2d_HDRS} 
             )
 
 TARGET_LINK_LIBRARIES ( helium_2D_Object

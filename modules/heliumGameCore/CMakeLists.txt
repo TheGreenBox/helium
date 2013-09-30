@@ -1,7 +1,7 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
 
-MESSAGE(STATUS "HELIUM MODULE: ")
-
+MESSAGE(STATUS "HELIUM MODULE: << heliumGameCore >>")
+ 
 PROJECT( heliumGameCore )
 
 INCLUDE( heliumIncludes )
