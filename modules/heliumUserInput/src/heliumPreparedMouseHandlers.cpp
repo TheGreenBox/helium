@@ -32,11 +32,11 @@ void CameraHorisontalMove::process(Polycode::Vector2 mouse) {
         mv.Normalize();
         mv = mv*speed;
         HeliumGameCore* gm = HeliumGlobal::getCurrentGame();
-        gm->getSceneWorldPt()->cameraHorizonMovingDirection(mv);
+        gm->getSceneWorldPt()->setCameraHorizonMoving(mv);
     }
     else
     {
-        gm->getSceneWorldPt()->cameraHorizonMovingDirection(Polycode::Vector2(0,0));
+        gm->getSceneWorldPt()->setCameraHorizonMoving(Polycode::Vector2(0,0));
     }
 }
 
@@ -47,8 +47,8 @@ SceneObjectHorTransfer::~SceneObjectHorTransfer() {
 }
 
 void SceneObjectHorTransfer::process(Polycode::Vector2 mouse) {
-    HeliumGameCore* gm = HeliumGlobal::getCurrentGame();
-    Polycode::RayTestResult test = gm->getSceneWorldPt()->rayTest(mouse);
-    model->setPosition(test.position);
+//    HeliumGameCore* gm = HeliumGlobal::getCurrentGame();
+//    Polycode::RayTestResult test = gm->getSceneWorldPt()->rayTest(mouse);
+//    model->setPosition(test.position);
 }
 

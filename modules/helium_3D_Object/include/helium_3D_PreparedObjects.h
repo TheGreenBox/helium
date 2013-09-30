@@ -2,7 +2,7 @@
  * Organization: The Green Box
  * 
  * Project name: Helium
- * File name:    heliumPrepared3DObjects.h 
+ * File name:    helium_3D_PreparedObjects.h 
  * Description:
  * Author:       AKindyakov 
  * ========================================================
@@ -12,6 +12,7 @@
 #define HELIUM_PREPARED_3D_OBJECTS_INCLUDED
 
 #include "helium_3D_Character.h"
+#include "helium_3D_ObjectPackaging.h"
 
 typedef enum {
     PREPARED_3D_UNKNOWN = 0,

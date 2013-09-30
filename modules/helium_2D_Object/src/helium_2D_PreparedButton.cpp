@@ -13,6 +13,7 @@
 
 #include "helium_2D_PreparedButton.h"
 #include "heliumPreparedKeyHandlers.h"
+#include "heliumGameCore.h"
 #include "pathGlobal.h"
 
 namespace P = Polycode;

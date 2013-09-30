@@ -10,14 +10,14 @@
 #ifndef  HELIUM_OBJECTS_PACKAGING_INCLUDED 
 #define  HELIUM_OBJECTS_PACKAGING_INCLUDED 
 
-#include <Polycode.h>
-
 /**
 * @brief Interface for the different Helium Object packaging
 *        pure virtual class
 */
 class IHeliumPackaging {
 public:
+
+    IHeliumPackaging() {}
     
     virtual ~IHeliumPackaging (){}
     

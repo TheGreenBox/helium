@@ -1,6 +1,6 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
 
-MESSAGE(STATUS "TEST: << sceneWorldDevelop >> GENERATING")
+MESSAGE(STATUS "TEST: << sceneWorldDevelop >>")
 
 PROJECT( sceneWorldDevelop )
 

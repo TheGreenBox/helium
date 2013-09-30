@@ -11,13 +11,10 @@
 #ifndef HELIUM_SCENE_OBJECTS_INCLUDED
 #define HELIUM_SCENE_OBJECTS_INCLUDED
 
-#include <list>
-#include <set>
-#include <map>
-
-#include <Polycode.h>
+#include "Polycode.h"
 #include "Polycode3DPhysics.h"
 
+#include "helium_3D_Character.h"
 #include "objectPackagingInterface.h"
 
 /**
@@ -73,7 +70,7 @@ public:
     /**
     * @return Polycode::SceneEntity pointer
     */  
-    Polycode::SceneEntity* getModel()const;
+    Polycode::SceneEntity* getModel();
     
 protected:
     //!> Pointer to PolySceneObject helium wrap

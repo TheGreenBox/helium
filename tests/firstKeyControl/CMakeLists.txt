@@ -1,6 +1,6 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
 
-MESSAGE(STATUS "TEST: << firstKeyControl >> GENERATING")
+MESSAGE(STATUS "TEST: << firstKeyControl >>")
 
 PROJECT( firstKeyControl )
 

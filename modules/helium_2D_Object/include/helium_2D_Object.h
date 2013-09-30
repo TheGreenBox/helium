@@ -21,7 +21,7 @@ public:
     /**
     *
     */  
-    Helium_2D_Object( Polycode::ScreenEntity* );
+    Helium_2D_Object( Polycode::ScreenEntity* ) {}
     
     virtual ~Helium_2D_Object() {}
     

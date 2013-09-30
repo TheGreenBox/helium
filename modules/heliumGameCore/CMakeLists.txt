@@ -14,6 +14,8 @@ SET ( heliumGameCore_SRCS
 SET ( heliumGameCore_HDRS
         ${HELIUM_MODULES_DIR}/heliumGameCore/include/heliumGameCore.h
         ${HELIUM_MODULES_DIR}/heliumGameCore/include/heliumGameGlobal.h
+        ${HELIUM_MODULES_DIR}/heliumGameCore/include/objectPackagingInterface.h
+        ${HELIUM_MODULES_DIR}/heliumGameCore/include/objectsWorldIntefrace.h
     ) 
 
 ADD_LIBRARY ( heliumGameCore STATIC

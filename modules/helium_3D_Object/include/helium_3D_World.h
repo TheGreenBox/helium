@@ -70,7 +70,7 @@ public:
     /**
     * 
     */
-    void setCameraHorizonMoving( Polycode::Vector2 dir );
+    void setCameraHorizonMoving( const Polycode::Vector2& dir );
     
     /**
     * @brief warp object to point, if it exist of course
@@ -81,21 +81,24 @@ public:
     //!> short name for SceneEntity pointer 
     typedef typename Polycode::SceneEntity* ObjectId;
     
+    Polycode::RayTestResult rayTest( Polycode::Vector2 );
+    
 protected:
     Polycode::PhysicsScene* engineScene;
     
 private:    
-    void engineSceneWarpTo( Polycode::SceneEntity* obj, 
-                            Polycode::Vector3 point, 
-                            bool resetRotation );
-    
-    Polycode::RayTestResult rayTest( Polycode::Vector2 );
-    inline void cameraStep();
-    
     //!> container of char, have reactions and posible have behavior
     HeliumCharacterContainer characters;
     
     Polycode::Vector2 horisontalVectorMove;
+    
+    void engineSceneWarpTo( Polycode::SceneEntity* obj, 
+                            Polycode::Vector3 point, 
+                            bool resetRotation );
+    
+    inline void cameraStep();
+    void addPackagedToEngineScene( Packaged_3D_Object* obj );
+    
 };
 
 #endif // HELIUM_3D_WORLD_INCLUDED

@@ -10,16 +10,17 @@
  
 #include "helium_3D_CharVitals.h"
 
-struct Vitals {
-    int health;
-    int armor;
-    int morality;
+Vitals::Vitals( int _health, int _armor, int _morality )
+    : health(_health),
+      armor(_armor),
+      morality(_morality)
+{}
 
-CharacterVitals::CharacterVitals( int maxHealth,
-                                  int maxArmor    =0,
-                                  int maxMorality =1 )
+CharacterVitals::CharacterVitals( int _maxHealth,
+                                  int _maxArmor,
+                                  int _maxMorality )
     :   Vitals( maxHealth, maxArmor, maxMorality ),
-        this->maxHealth(maxHealth),      
-        this->maxArmor(maxArmor), 
-        this->maxMorality(maxMorality) 
+        maxHealth(_maxHealth),      
+        maxArmor(_maxArmor), 
+        maxMorality(_maxMorality) 
 {}

@@ -29,22 +29,28 @@ public:
     /**
     *
     */  
-    Polycode::ScreenEntity* getModel()const;
+    Polycode::ScreenEntity* getModel()const {
+        return object->getModel();
+    }
     
     /**
     *
     */  
-    typename Helium_2D_ObjectContainer::ObjectPairType getObjectPair()const;
+    Helium_2D_ObjectContainer::ObjectPairType getObjectPair()const;
     
     /**
     *
     */  
-    ObjectEntityType getEntityType()const;
+    ObjectEntityType getEntityType()const {
+        return entityType;
+    }
     
     /**
     *
     */  
-    int getShapeType()const;
+    int getShapeType()const {
+        return entityShapeType;
+    }
     
 protected:
     Helium_2D_Object* object;

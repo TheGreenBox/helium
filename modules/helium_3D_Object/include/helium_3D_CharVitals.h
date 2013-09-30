@@ -24,7 +24,9 @@ struct CharacterHarm {
 /**
 *
 */  
-struct Vitals {
+class Vitals {
+public:
+    Vitals( int health, int armor, int morality );
     int health;
     int armor;
     int morality;

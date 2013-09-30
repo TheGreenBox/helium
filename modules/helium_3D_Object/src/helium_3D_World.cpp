@@ -7,10 +7,13 @@
  * Author:       AKindyakov 
  * ========================================================
  */
- 
+
+#include <iostream> 
 #include "helium_3D_World.h"
 
-Helium_3D_World::SceneObjectsWorld()
+namespace P = Polycode;
+
+Helium_3D_World::Helium_3D_World()
     : engineScene(new P::PhysicsScene()) {
     engineScene->clearColor = P::Color(1,1,1,1);
     engineScene->useClearColor = true;
@@ -18,7 +21,7 @@ Helium_3D_World::SceneObjectsWorld()
     engineScene->getDefaultCamera()->lookAt(P::Vector3(0,0,0));
 }
 
-Helium_3D_World::~SceneObjectsWorld() {
+Helium_3D_World::~Helium_3D_World() {
     delete engineScene;
 }
 
@@ -61,19 +64,19 @@ bool Helium_3D_World::mouseClick( int button, bool upDown, P::Vector2 mouse ) {
     return false;
 }
 
-void Helium_3D_World::addPackagedToEngineScene( PackagedSceneObject* obj ) {
+void Helium_3D_World::addPackagedToEngineScene( Packaged_3D_Object* obj ) {
     if( obj->getModel() ) { 
         switch ( obj->getEntityType() ) {
-        case PackagedSceneObject::POLY_ENTITY_IMMATERIAL:
+        case IHeliumPackaging::ENTITY_IMMATERIAL:
             engineScene->addChild(obj->getModel());
         break;
 
-        case PackagedSceneObject::POLY_ENTITY_COLLISION_ONLY:
+        case IHeliumPackaging::ENTITY_COLLISION_ONLY:
             engineScene->addCollisionChild( obj->getModel(),   
                                             obj->getShapeType() ); 
         break;
 
-        case PackagedSceneObject::POLY_ENTITY_PHYSICAL:
+        case IHeliumPackaging::ENTITY_PHYSICAL:
             engineScene->addPhysicsChild( obj->getModel(), obj->getShapeType(),
                                           obj->getMass(), obj->getFriction(),
                                           obj->getRestitution() );
@@ -85,25 +88,18 @@ void Helium_3D_World::addPackagedToEngineScene( PackagedSceneObject* obj ) {
     }   
 }
 
-Polycode::SceneEntity Helium_3D_World::addObject( Packaged_3D_Object* obj ) { 
+Polycode::SceneEntity* Helium_3D_World::addObject( Packaged_3D_Object* obj ) { 
     
     addPackagedToEngineScene(obj);
     
-    if ( obj->isAlife() != 0 ) {
-        alifeObjects.insert(obj->getAlifePair());
-    }
-    else {
-        objects.insert(obj->getId());
-    }
-    if ( obj->getToMousePointQueue() ) {
-        addObjectToMousePointQueue(obj->getId());  
-    }
-    
-    IHeliumObjectsWorld::ObjectsIdType id = obj->getId();
-    delete obj;
-    obj = NULL;
-    
-    return id;
+   // if ( obj->isAlife() != 0 ) {
+   //     alifeObjects.insert(obj->getAlifePair());
+   // }
+   // else {
+   //     objects.insert(obj->getId());
+   // }
+    #warning fix me //FIXME
+    return obj->getModel();
 }
 
 void Helium_3D_World::setPause(bool set) {
@@ -114,8 +110,8 @@ bool Helium_3D_World::getPause() {
     return engineScene->isEnabled();
 }
 
-void Helium_3D_World::signOutObject( IHeliumObjectsWorld::ObjectsIdType id ) {
-    ObjectIterator it = objects.find(id);
+void Helium_3D_World::signOutObject( Polycode::SceneEntity* id ) {
+/*    ObjectIterator it = objects.find(id);
     if ( it != objects.end() ) {
         P::SceneEntity* pObj = reinterpret_cast<P::SceneEntity*>(id);
             
@@ -133,23 +129,10 @@ void Helium_3D_World::signOutObject( IHeliumObjectsWorld::ObjectsIdType id ) {
             delete ait->second;
             alifeObjects.erase(ait);
         }
-    }
+    }*/
 }
 
-void Helium_3D_World::delayedSignOut( IHeliumObjectsWorld::ObjectsIdType id ) {
-    delayedSignOutObjects.push_back(id);
-}
-
-void Helium_3D_World::checkDelayedSignOutObject() {
-    if ( !delayedSignOutObjects.empty() ) {
-        for ( std::list< IHeliumObjectsWorld::ObjectsIdType >::iterator it =
-               delayedSignOutObjects.begin(); it != delayedSignOutObjects.end(); ++it ) {
-            signOutObject( *it );
-        }
-    }
-}
-
-void Helium_3D_World::cameraHorizonMovingDirection(Polycode::Vector2 dir) {
+void Helium_3D_World::setCameraHorizonMoving( const Polycode::Vector2& dir ) {
     P::Vector3 spaceMove(dir.x, 0, dir.y);
     P::Quaternion quat = engineScene->getDefaultCamera()->getRotationQuat();
     spaceMove = quat.applyTo(spaceMove);
@@ -157,8 +140,8 @@ void Helium_3D_World::cameraHorizonMovingDirection(Polycode::Vector2 dir) {
     horisontalVectorMove.y = spaceMove.z;
 }
 
-void Helium_3D_World::warpTo( IHeliumObjectsWorld::ObjectsIdType id, Polycode::Vector3 point, bool resetRotation) {
-    P::SceneEntity* pObj = NULL;
+void Helium_3D_World::warpTo( Polycode::SceneEntity* entity, Polycode::Vector3 point, bool resetRotation) {
+    /*P::SceneEntity* pObj = NULL;
     
     ObjectIterator it = objects.find(id);
     if ( it != objects.end() ) {
@@ -170,7 +153,8 @@ void Helium_3D_World::warpTo( IHeliumObjectsWorld::ObjectsIdType id, Polycode::V
             pObj = reinterpret_cast<P::SceneEntity*>(id);
         }
     }
-    engineSceneWarpTo(pObj, point, resetRotation);
+    engineSceneWarpTo(pObj, point, resetRotation);*/
+    #warning fix me //FIXME
 }
 
 void Helium_3D_World::engineSceneWarpTo( P::SceneEntity* obj, Polycode::Vector3 point, bool resetRotation ) {

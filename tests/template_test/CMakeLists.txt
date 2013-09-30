@@ -11,7 +11,7 @@ SET( TEST_NAME "template" )
 
 
 # test speach to building log
-MESSAGE(STATUS "TEMPLATE TEST GENERATING")
+MESSAGE(STATUS "TEST: << template >>")
 
 # test name
 PROJECT( ${TEST_NAME} )

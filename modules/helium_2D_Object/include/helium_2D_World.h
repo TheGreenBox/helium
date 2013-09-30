@@ -33,6 +33,9 @@ public:
     Helium_2D_World();
     virtual ~Helium_2D_World();
     
+    //!> short name for ScreenEntity pointer 
+    typedef typename Polycode::ScreenEntity* ObjectId;
+    
     /**
     *
     */  
@@ -56,15 +59,12 @@ public:
     /**
     *
     */  
-    void signOutObject( Polycode::ScreenEntity* );
+    void signOutObject( ObjectId );
     
     /**
     *
     */  
-    Polycode::ScreenEntity* addObject( Packaged_2D_Object* );
-    
-    //!> short name for ScreenEntity pointer 
-    typedef typename Polycode::ScreenEntity* ObjectId;
+    ObjectId addObject( Packaged_2D_Object* );
     
 protected:
     Polycode::PhysicsScreen* engineScreen;

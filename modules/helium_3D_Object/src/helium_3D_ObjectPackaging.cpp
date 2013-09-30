@@ -15,61 +15,42 @@
 
 namespace P = Polycode;
 
-PackagedSceneObject::PackagedSceneObject()
-    :   heliumObject(NULL),  alife(0),
+Packaged_3D_Object::Packaged_3D_Object()
+    :   character(NULL),
         mass(0),  friction(1),
         restitution(0),  group(1),
-        compoundChildren(false),
-        addToMousePointQueue(false) {
-}
+        compoundChildren(false) 
+{}
 
-int PackagedSceneObject::isAlife()const {
-    return alife;
-}
-
-PackagedSceneObject::PolySceneEntityType PackagedSceneObject::getEntityType()const {
+IHeliumPackaging::ObjectEntityType Packaged_3D_Object::getEntityType()const {
     return entityType;
 }
 
-int PackagedSceneObject::getShapeType () {
+int Packaged_3D_Object::getShapeType () {
     return shapeType;
 }
     
-Number PackagedSceneObject::getMass () {
+Number Packaged_3D_Object::getMass () {
     return mass;
 }
     
-Number PackagedSceneObject::getFriction () {
+Number Packaged_3D_Object::getFriction () {
     return friction;
 }
     
-Number PackagedSceneObject::getRestitution () {
+Number Packaged_3D_Object::getRestitution () {
     return restitution;
 }
 
-int PackagedSceneObject::getGroup () {
+int Packaged_3D_Object::getGroup () {
     return group;
 }
 
-bool PackagedSceneObject::getCompoundChildren () {
+bool Packaged_3D_Object::getCompoundChildren () {
     return compoundChildren;
 }
     
-//SceneObjectsWorld::AlifePairType PackagedSceneObject::getAlifePair()const {
-//    return SceneObjectsWorld::AlifePairType (
-//            reinterpret_cast<IHeliumObjectsWorld::ObjectsIdType>(heliumObject->getModel()),
-//            heliumObject );
-//}
-    
-IHeliumObjectsWorld::ObjectsIdType PackagedSceneObject::getId()const {
-    return heliumObject->getId();
-}
-    
-Polycode::SceneEntity* PackagedSceneObject::getModel()const {
-    return heliumObject->getModel();
-}
-
-bool PackagedSceneObject::getToMousePointQueue()const {
-    return addToMousePointQueue;
+Polycode::SceneEntity* Packaged_3D_Object::getModel() {
+    return character->getModel();
 }
 

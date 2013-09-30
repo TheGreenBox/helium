@@ -1,6 +1,6 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
 
-MESSAGE(STATUS "TEST: << first3dTest >> GENERATING")
+MESSAGE(STATUS "TEST: << first3dTest >>")
 
 PROJECT( first3dTest )
 

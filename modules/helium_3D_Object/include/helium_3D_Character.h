@@ -36,12 +36,18 @@ public:
     */  
     void pulse();
     
+    Polycode::SceneEntity* getModel() {
+        return model;
+    }
+    
 private:
     CharacterVitals vitals;
     CharacterWeapon weapon;
+    Polycode::SceneEntity* model;
 };
 
 class HeliumCharacterContainer {
+public:
     HeliumCharacterContainer() {}
     ~HeliumCharacterContainer() {}
     

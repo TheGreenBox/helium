@@ -12,9 +12,11 @@
 
 #include "Polycode.h"
 #include "helium_2D_Button.h"
-#include "heliumGameCore.h"
+#include "helium_2D_ObjectPackaging.h"
 
 namespace P = Polycode;
+
+class HeliumGameCore;
 
 struct HeliumPause_2D_Button : public Packaged_2D_Object {
     HeliumPause_2D_Button ( HeliumGameCore* gm );
