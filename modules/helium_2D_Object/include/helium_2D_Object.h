@@ -57,16 +57,23 @@ protected:
 
 };
 
+/**
+* @brief 2D_Objects container for intellectuals 2d_objects
+*/
 class Helium_2D_ObjectContainer {
 public:
     Helium_2D_ObjectContainer() {}
-    ~Helium_2D_ObjectContainer() {}
-
+    virtual ~Helium_2D_ObjectContainer() {}
+    
     //!> 
-    typedef std::pair< Polycode::ScreenEntity*, Helium_2D_Object* > ObjectPairType;
+    typedef typename std::pair< Polycode::ScreenEntity*, Helium_2D_Object* > ObjectPairType;
+    
+    Polycode::ScreenEntity* addObject( ObjectPairType ) {}
+    void removeObject( Polycode::ScreenEntity* ) {}
+    
 private:
-    std::map< Polycode::ScreenEntity, Helium_2D_Object* > alifeObjects;
-    typedef std::map< Polycode::ScreenEntity, Helium_2D_Object* >::iterator souls;
+    std::map< Polycode::ScreenEntity*, Helium_2D_Object* > souls;
+    typedef typename std::map< Polycode::ScreenEntity*, Helium_2D_Object* >::iterator SoulIteratirType;
     
 };
 
